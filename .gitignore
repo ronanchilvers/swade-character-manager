@@ -1,0 +1,26 @@
+# Logs
+logs
+*.log
+.phpunit.cache
+
+# Dependencies
+vendor
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.codex
+.zed
+
+# Configuration files
+.env.php
+.claude
+.codex
+.phpunit.cache/
