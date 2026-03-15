@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-use Twig\Environment;
-use flight\Container;
-use flight\net\Request;
-use App\Http\CorsPolicy;
+use App\Controller\Character;
 use App\Controller\Home;
+use flight\Container;
+use Twig\Environment;
 
 require '../vendor/autoload.php';
 $settings = include '../config/settings.php';
@@ -25,5 +24,9 @@ Flight::registerContainerHandler([$container, 'get']);
 
 // Configure routing
 Flight::route('GET /', [Home::class, 'index']);
+
+// Characters
+Flight::route('GET /create', [Character::class, 'index']);
+Flight::route('POST /create', [Character::class, 'create']);
 
 Flight::start();

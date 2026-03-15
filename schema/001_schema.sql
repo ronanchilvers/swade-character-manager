@@ -1,0 +1,19 @@
+SET NAMES utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `characters` (
+    character_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    character_name VARCHAR(128),
+    character_concept VARCHAR(2048),
+    character_created DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    character_updated DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (character_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- CREATE TABLE IF NOT EXISTS sessions (
+--     session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+--     session_name VARCHAR(128) NOT NULL,
+--     session_joining_enabled TINYINT(1) NOT NULL DEFAULT 1,
+--     session_created DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+--     session_updated DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+--     PRIMARY KEY (session_id)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

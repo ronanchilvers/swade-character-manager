@@ -6,6 +6,7 @@ declare(strict_types=1);
 // - $container - A flightphp/Container instance
 // - $settings - The application configuration array
 
+use App\Entity\Factory\Character;
 use flight\database\SimplePdo;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -30,6 +31,7 @@ $container->set(
     }
 );
 
+// Twig
 $container->set(
     Environment::class,
     function () use ($settings) {
@@ -40,4 +42,10 @@ $container->set(
             $settings['twig']
         );
     }
+);
+
+// Database factories
+$container->set(
+    Character::class,
+    Character::class
 );

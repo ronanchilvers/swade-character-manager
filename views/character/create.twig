@@ -1,0 +1,20 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<form class="form" method="post" action="/create">
+
+    <div class="field">
+        <label class="field__label">Your character concept</label>
+        <div class="field__inner">
+            <textarea class="field__input" rows="5" name="concept"></textarea>
+        </div>
+    </div>
+
+    <div class="form__buttons">
+        <button class="button button--primary" type="submit">Next</button>
+    </div>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block page_title %}SCM{% if page_title|length > 0 %} - {{ page_title }}{% endif %}{% endblock %}</title>
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="/css/form.css">
+        <link rel="stylesheet" href="/css/buttons.css">
+    </head>
+
+    <body>
+        {% include 'partials/topbar.twig' %}
+        <main>
+            <h1>{% if (title is defined) and (title|length > 0) %}{{ title }}{% else %}{{ page_title }}{% endif %}</h1>
+            {% block content %}{% endblock %}
+        </main>
+    </body>
+</html>

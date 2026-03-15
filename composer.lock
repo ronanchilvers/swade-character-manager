@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3b9eb2853406945a5e7275f75081201",
+    "content-hash": "e22950ebef7729e129c7b02e62e8947f",
     "packages": [
         {
             "name": "flightphp/container",
@@ -181,6 +181,50 @@
                 "source": "https://github.com/php-fig/container/tree/2.0.2"
             },
             "time": "2021-11-05T16:47:00+00:00"
+        },
+        {
+            "name": "ronanchilvers/utility",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ronanchilvers/utility.git",
+                "reference": "81a6c9c62cade6b8368c5e6b85cecdf971d54032"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ronanchilvers/utility/zipball/81a6c9c62cade6b8368c5e6b85cecdf971d54032",
+                "reference": "81a6c9c62cade6b8368c5e6b85cecdf971d54032",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "php-parallel-lint/php-parallel-lint": "^1.3",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ronanchilvers\\Utility\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ronan Chilvers",
+                    "email": "ronan@thelittledot.com"
+                }
+            ],
+            "description": "Handy utility classes for PHP",
+            "support": {
+                "issues": "https://github.com/ronanchilvers/utility/issues",
+                "source": "https://github.com/ronanchilvers/utility/tree/2.0"
+            },
+            "time": "2022-11-25T18:37:24+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",

@@ -10,6 +10,8 @@ class Home
 {
     public function index(): void
     {
-        Flight::render('foo.tpl', ['name' => 'ronan']);
+        Flight::render('home/index.twig', [
+            'page_title' => 'Characters',
+        ]);
     }
 }

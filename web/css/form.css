@@ -1,0 +1,30 @@
+/** Form Styling **/
+
+.form {
+
+    .form__buttons {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.field {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    .field__label,
+    .field__inner,
+    .field__input {
+        width: 100%;
+    }
+
+    .field__label {
+        margin-bottom: 0.5rem;
+    }
+    .field__input {
+        padding: 1rem;
+    }
+}

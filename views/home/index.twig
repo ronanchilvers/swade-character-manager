@@ -1,0 +1,12 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+{#% if characters is defined and characters|length > 0 %#}
+{% for character in characters %}
+CHARACTER LIST
+{% else %}
+<p>No characters found - <a href="/create">Create one now</a></p>
+{% endfor %}
+
+{% endblock %}
