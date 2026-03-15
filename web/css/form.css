@@ -1,4 +1,11 @@
 /** Form Styling **/
+:root {
+    --field-color: inherit;
+    --field-color-error: #cc3333;
+    --field-input-border-color: inherit;
+    --field-input-border-color-error: #cc3333;
+}
+
 
 .form {
 
@@ -19,6 +26,7 @@
     .field__inner,
     .field__input {
         width: 100%;
+        color: var(--field-color);
     }
 
     .field__label {
@@ -26,5 +34,22 @@
     }
     .field__input {
         padding: 1rem;
+        border-color: var(--field-input-border-color);
+    }
+    .field__error {
+        color: var(--field-color-error);
+        display: none;
+    }
+
+    &.field--error {
+        .field__label {
+            color: var(--field-color-error);
+        }
+        .field__input {
+            border-color: var(--field-input-border-color-error);
+        }
+        .field__error {
+            display: block;
+        }
     }
 }

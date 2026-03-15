@@ -13,22 +13,25 @@ class Character
     {
     }
 
-    public function index(): void
+    public function create(): void
     {
-        Flight::render(
-            'character/create.twig',
-            [
-                'page_title' => 'Create a Character'
-            ]
-        );
+        Flight::render('character/create.twig', [
+            'page_title' => 'Create a Character'
+        ]);
     }
 
-    public function create(): void
+    public function createPost(): void
     {
         $data = [
            'concept' => htmlspecialchars(strip_tags($_POST['concept'])),
         ];
-        $this->factory->insert($data);
+        if ($errors = $this->factory->validate($data) || !$this->factory->insert($data)) {
+            Flight::render('character/create.twig', [
+                'page_title' => 'Create a Character',
+                'errors' => $errors,
+            ]);
+            return;
+        }
 
         Flight::redirect('/');
     }

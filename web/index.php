@@ -26,7 +26,7 @@ Flight::registerContainerHandler([$container, 'get']);
 Flight::route('GET /', [Home::class, 'index']);
 
 // Characters
-Flight::route('GET /create', [Character::class, 'index']);
-Flight::route('POST /create', [Character::class, 'create']);
+Flight::route('GET /create', [Character::class, 'create']);
+Flight::route('POST /create', [Character::class, 'createPost']);
 
 Flight::start();

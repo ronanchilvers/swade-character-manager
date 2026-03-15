@@ -2,11 +2,10 @@
 
 {% block content %}
 
-{#% if characters is defined and characters|length > 0 %#}
 {% for character in characters %}
-CHARACTER LIST
+    <p>{{ character.id }} - {{ character.concept }}</p>
 {% else %}
-<p>No characters found - <a href="/create">Create one now</a></p>
+    <p>No characters found - <a href="/create">Create one now</a></p>
 {% endfor %}
 
 {% endblock %}

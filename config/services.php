@@ -45,7 +45,9 @@ $container->set(
 );
 
 // Database factories
-$container->set(
+$classes = [
     Character::class,
-    Character::class
-);
+];
+foreach ($classes as $class) {
+    $container->set($class, $class);
+}
