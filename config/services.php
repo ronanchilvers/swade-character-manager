@@ -7,6 +7,8 @@ declare(strict_types=1);
 // - $settings - The application configuration array
 
 use flight\database\SimplePdo;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 /* @param $settings array */
 /* @param $container \flight\Container */
@@ -24,6 +26,18 @@ $container->set(
             ),
             $settings["database"]["username"],
             $settings["database"]["password"]
+        );
+    }
+);
+
+$container->set(
+    Environment::class,
+    function () use ($settings) {
+        $loader = new FilesystemLoader(__DIR__ . "/../views/");
+
+        return new Environment(
+            $loader,
+            $settings['twig']
         );
     }
 );

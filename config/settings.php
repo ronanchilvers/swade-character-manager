@@ -13,7 +13,9 @@ $settings = [
         "password" => null,
         "name" => null,
     ],
-    "cors" => [],
+    "twig" => [
+        "cache" => false,
+    ],
 ];
 
 if (file_exists(__DIR__ . "/../.env.php")) {
