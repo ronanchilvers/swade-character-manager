@@ -2,11 +2,13 @@ SET NAMES utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `characters` (
     character_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    character_hash VARCHAR(32),
     character_name VARCHAR(128),
     character_concept VARCHAR(2048),
     character_created DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     character_updated DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
-    PRIMARY KEY (character_id)
+    PRIMARY KEY (character_id),
+    INDEX idx_hash (character_hash)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- CREATE TABLE IF NOT EXISTS sessions (

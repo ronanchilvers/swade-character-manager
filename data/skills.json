@@ -1,0 +1,478 @@
+{
+  "schema_version": "1.0",
+  "source_pdf": "Savage Worlds Adventure Edition v5.pdf",
+  "entry_type": "skill",
+  "schema": {
+    "requirements": {
+      "type": "rank | trait | edge | wild_card | arcane_background | hindrance_any_of | special",
+      "target": "thing being required",
+      "value": "required value"
+    },
+    "effects": {
+      "level": "minor | major | base | null",
+      "type": "modifier | resource | reroll | restriction | grant | damage | action | status | special",
+      "polarity": "benefit | penalty | mixed | neutral",
+      "target": "normalized rules target",
+      "operator": "add | subtract | set | ignore | grant | reroll | draw | recover | replace | double | halve | fail | break",
+      "value": "number | string | boolean | null",
+      "conditions": [
+        "optional condition tags"
+      ],
+      "details": "human-readable clarification"
+    }
+  },
+  "entries": [
+    {
+      "id": "academics",
+      "name": "Academics",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Knowledge of liberal arts, social sciences, literature, history, and similar subjects.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "athletics",
+      "name": "Athletics",
+      "linked_attribute": "Agility",
+      "core_skill": true,
+      "arcane_background": null,
+      "summary": "General athletic coordination and ability.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Covers climbing, jumping, balancing, wrestling, skiing, swimming, throwing, and catching."
+      ],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "battle",
+      "name": "Battle",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Knowledge of strategy, tactics, and military operations.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "A key skill in Mass Battles."
+      ],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "boating",
+      "name": "Boating",
+      "linked_attribute": "Agility",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Ability to sail or pilot boats, ships, and other watercraft.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "common_knowledge",
+      "name": "Common Knowledge",
+      "linked_attribute": "Smarts",
+      "core_skill": true,
+      "arcane_background": null,
+      "summary": "General knowledge of the character’s world and culture.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "driving",
+      "name": "Driving",
+      "linked_attribute": "Agility",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "The ability to control, steer, and operate ground vehicles.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "electronics",
+      "name": "Electronics",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Use of electronic devices and systems.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "faith",
+      "name": "Faith",
+      "linked_attribute": "Spirit",
+      "core_skill": false,
+      "arcane_background": "Miracles",
+      "summary": "Arcane skill used by Arcane Background (Miracles).",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "fighting",
+      "name": "Fighting",
+      "linked_attribute": "Agility",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Skill in armed and unarmed combat.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Focus",
+      "linked_attribute": "Spirit",
+      "core_skill": false,
+      "arcane_background": "Gifted",
+      "summary": "Arcane skill used by Arcane Background (Gifted).",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "gambling",
+      "name": "Gambling",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Skill and familiarity with games of chance.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "hacking",
+      "name": "Hacking",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Coding, programming, and breaking into computer systems.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "healing",
+      "name": "Healing",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Treating and healing Wounds and disease, and reading forensic evidence.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "intimidation",
+      "name": "Intimidation",
+      "linked_attribute": "Spirit",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Threatening others into doing what the character wants.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "language",
+      "name": "Language",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Knowledge and fluency in a specific language.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "notice",
+      "name": "Notice",
+      "linked_attribute": "Smarts",
+      "core_skill": true,
+      "arcane_background": null,
+      "summary": "General awareness and perception.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "occult",
+      "name": "Occult",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Knowledge of supernatural creatures, events, history, and related lore.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "performance",
+      "name": "Performance",
+      "linked_attribute": "Spirit",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Singing, dancing, acting, and other public expression.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "persuasion",
+      "name": "Persuasion",
+      "linked_attribute": "Spirit",
+      "core_skill": true,
+      "arcane_background": null,
+      "summary": "Convincing others through reason, charm, deception, or incentives.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "piloting",
+      "name": "Piloting",
+      "linked_attribute": "Agility",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Operating vehicles that move in three dimensions, such as aircraft and spacecraft.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "psionics",
+      "name": "Psionics",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": "Psionics",
+      "summary": "Arcane skill used by Arcane Background (Psionics).",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "repair",
+      "name": "Repair",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Fixing mechanical and electrical gadgets, vehicles, weapons, and simple devices.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Finding written information from books, records, or other sources.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "riding",
+      "name": "Riding",
+      "linked_attribute": "Agility",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Mounting, controlling, and riding trained beasts.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "science",
+      "name": "Science",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Knowledge of scientific disciplines such as biology, chemistry, geology, and engineering.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "shooting",
+      "name": "Shooting",
+      "linked_attribute": "Agility",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Precision with ranged weapons.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "spellcasting",
+      "name": "Spellcasting",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": "Magic",
+      "summary": "Arcane skill used by Arcane Background (Magic).",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "stealth",
+      "name": "Stealth",
+      "linked_attribute": "Agility",
+      "core_skill": true,
+      "arcane_background": null,
+      "summary": "Sneaking, hiding, and avoiding detection.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "survival",
+      "name": "Survival",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Finding food, water, and shelter, and tracking in the wild.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "taunt",
+      "name": "Taunt",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Insulting or belittling others, usually as a Test.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "thievery",
+      "name": "Thievery",
+      "linked_attribute": "Agility",
+      "core_skill": false,
+      "arcane_background": null,
+      "summary": "Sleight of hand, pickpocketing, lockpicking, and related shady skills.",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    },
+    {
+      "id": "weird_science",
+      "name": "Weird Science",
+      "linked_attribute": "Smarts",
+      "core_skill": false,
+      "arcane_background": "Weird Science",
+      "summary": "Arcane skill used by Arcane Background (Weird Science).",
+      "requirements": [],
+      "effects": [],
+      "notes": [],
+      "source_pages": [
+        60
+      ]
+    }
+  ]
+}

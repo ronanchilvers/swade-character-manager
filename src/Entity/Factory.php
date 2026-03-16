@@ -92,13 +92,14 @@ abstract class Factory
         return $result;
     }
 
-    public function insert($data): bool
+    public function insert($data): ?string
     {
-        $prefix = $this->getPrefix();
         $values = [];
         foreach ($data as $key => $value) {
-            $values[$prefix . $key] = $value;
+            $values[$this->prefix($key)] = $value;
         }
+        $hash = Str::token(32);
+        $values[$this->prefix('hash')] = $hash;
 
         try {
             $this->pdo->insert(
@@ -106,9 +107,9 @@ abstract class Factory
                 $values
             );
 
-            return true;
+            return (string) $hash;
         } catch (\Exception $e) {
-            return false;
+            return null;
         }
     }
 }

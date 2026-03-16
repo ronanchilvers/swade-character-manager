@@ -15,24 +15,34 @@ class Character
 
     public function create(): void
     {
-        Flight::render('character/create.twig', [
-            'page_title' => 'Create a Character'
-        ]);
-    }
-
-    public function createPost(): void
-    {
-        $data = [
-           'concept' => htmlspecialchars(strip_tags($_POST['concept'])),
-        ];
-        if ($errors = $this->factory->validate($data) || !$this->factory->insert($data)) {
-            Flight::render('character/create.twig', [
-                'page_title' => 'Create a Character',
-                'errors' => $errors,
-            ]);
-            return;
+        $errors = [];
+        if ("POST" == Flight::request()->getMethod()) {
+            $data = [
+               'concept' => htmlspecialchars(strip_tags($_POST['concept'])),
+            ];
+            if (
+                !($errors = $this->factory->validate($data)) &&
+                ($id = $this->factory->insert($data))
+            ) {
+                Flight::redirect(sprintf('/hindrances/%s', $id));
+                return;
+            }
         }
 
-        Flight::redirect('/');
+        Flight::render('character/create.twig', [
+            'page_title' => 'Create a Character',
+            'errors' => $errors,
+        ]);
+        return;
+    }
+
+    public function hindrances(string $hash): void
+    {
+        $errors = [];
+        Flight::render('character/hindrances.twig', [
+            'page_title' => 'Choose Hindrances',
+            'errors' => $errors,
+        ]);
+        return;
     }
 }

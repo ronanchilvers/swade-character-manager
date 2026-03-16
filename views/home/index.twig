@@ -3,7 +3,7 @@
 {% block content %}
 
 {% for character in characters %}
-    <p>{{ character.id }} - {{ character.concept }}</p>
+    <p>{{ character.id }} - {{ character.concept }} - <a href="/hindrances/{{ character.hash }}">Edit</a></p>
 {% else %}
     <p>No characters found - <a href="/create">Create one now</a></p>
 {% endfor %}

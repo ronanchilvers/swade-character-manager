@@ -1,0 +1,1702 @@
+{
+  "schema_version": "1.0",
+  "source_pdf": "Savage Worlds Adventure Edition v5.pdf",
+  "entry_type": "hindrance",
+  "schema": {
+    "requirements": {
+      "type": "rank | trait | edge | wild_card | arcane_background | hindrance_any_of | special",
+      "target": "thing being required",
+      "value": "required value"
+    },
+    "effects": {
+      "level": "minor | major | base | null",
+      "type": "modifier | resource | reroll | restriction | grant | damage | action | status | special",
+      "polarity": "benefit | penalty | mixed | neutral",
+      "target": "normalized rules target",
+      "operator": "add | subtract | set | ignore | grant | reroll | draw | recover | replace | double | halve | fail | break",
+      "value": "number | string | boolean | null",
+      "conditions": [
+        "optional condition tags"
+      ],
+      "details": "human-readable clarification"
+    }
+  },
+  "entries": [
+    {
+      "id": "all_thumbs",
+      "name": "All Thumbs",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero is bad with mechanical or electrical devices.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.using_mechanical_or_electrical_device",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Applies to Trait rolls made while using mechanical or electrical devices."
+        },
+        {
+          "level": "minor",
+          "type": "special",
+          "polarity": "penalty",
+          "target": "device.used_by_character",
+          "operator": "break",
+          "value": true,
+          "conditions": [
+            "on_critical_failure"
+          ],
+          "details": "A critical failure can break the device."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        24
+      ]
+    },
+    {
+      "id": "anemic",
+      "name": "Anemic",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero is especially vulnerable to fatigue and related hazards.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.vigor_resist_fatigue",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Vigor rolls made to resist Fatigue."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        24
+      ]
+    },
+    {
+      "id": "arrogant",
+      "name": "Arrogant",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero believes they are the best and wants to prove it.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that pushes the character to challenge the greatest threat and dominate opponents."
+      ],
+      "source_pages": [
+        24
+      ]
+    },
+    {
+      "id": "bad_eyes",
+      "name": "Bad Eyes",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "Poor eyesight reduces performance on vision-dependent tasks.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.vision_dependent",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Subtract 1 from any Trait roll dependent on vision."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.vision_dependent",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from any Trait roll dependent on vision."
+        },
+        {
+          "level": "minor",
+          "type": "status",
+          "polarity": "penalty",
+          "target": "status.distracted",
+          "operator": "grant",
+          "value": true,
+          "conditions": [
+            "if_corrective_glasses_lost_or_broken",
+            "until_end_of_next_turn"
+          ],
+          "details": "If glasses are lost or broken in a setting where they exist, the character is Distracted."
+        },
+        {
+          "level": "major",
+          "type": "status",
+          "polarity": "penalty",
+          "target": "status.vulnerable",
+          "operator": "grant",
+          "value": true,
+          "conditions": [
+            "if_corrective_glasses_lost_or_broken",
+            "until_end_of_next_turn"
+          ],
+          "details": "If glasses are lost or broken in a setting where they exist, the character is also Vulnerable."
+        }
+      ],
+      "notes": [
+        "Glasses negate the vision penalty when worn in settings where they are available."
+      ],
+      "source_pages": [
+        24
+      ]
+    },
+    {
+      "id": "bad_luck",
+      "name": "Bad Luck",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero begins each session with less luck than normal.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "resource",
+          "polarity": "penalty",
+          "target": "resource.bennies.start_session",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "The character gets one fewer Benny per session than normal."
+        }
+      ],
+      "notes": [
+        "A character cannot have both Bad Luck and the Luck Edge."
+      ],
+      "source_pages": [
+        24
+      ]
+    },
+    {
+      "id": "big_mouth",
+      "name": "Big Mouth",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero has trouble keeping secrets.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that causes plans or private information to be revealed at bad times."
+      ],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "blind",
+      "name": "Blind",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero is completely blind.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "physical_task.vision_dependent",
+          "operator": "subtract",
+          "value": 6,
+          "conditions": [],
+          "details": "Subtract 6 from all physical tasks that require sight."
+        },
+        {
+          "level": "major",
+          "type": "grant",
+          "polarity": "benefit",
+          "target": "character.edge_choice",
+          "operator": "grant",
+          "value": 1,
+          "conditions": [],
+          "details": "Gain one free Edge as compensation."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "bloodthirsty",
+      "name": "Bloodthirsty",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero does not take prisoners unless strictly supervised.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that creates enemies, loses information, and causes trouble with allies or authorities."
+      ],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "cant_swim",
+      "name": "Can't Swim",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero is especially poor at swimming.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.athletics_swimming",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Athletics when swimming."
+        },
+        {
+          "level": "minor",
+          "type": "special",
+          "polarity": "penalty",
+          "target": "movement.water_cost_per_inch",
+          "operator": "set",
+          "value": 3,
+          "conditions": [],
+          "details": "Each inch moved in water costs 3 inches of Pace."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "cautious",
+      "name": "Cautious",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero avoids rash action and overplans.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance focused on restraint and careful planning."
+      ],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "clueless",
+      "name": "Clueless",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero misses obvious facts and surroundings.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.common_knowledge",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Subtract 1 from Common Knowledge rolls."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.notice",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Subtract 1 from Notice rolls."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "clumsy",
+      "name": "Clumsy",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero is badly uncoordinated.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.athletics",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Athletics rolls."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.stealth",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Stealth rolls."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "code_of_honor",
+      "name": "Code of Honor",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero follows a strict moral code.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance centered on keeping one’s word and avoiding cruel or dishonorable conduct."
+      ],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "curious",
+      "name": "Curious",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero must investigate secrets and mysteries.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that pushes the character to explore dangerous unknowns."
+      ],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "death_wish",
+      "name": "Death Wish",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero will take extreme risks in pursuit of a noble but deadly goal.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance; not suicidal, but willing to risk everything for the goal."
+      ],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "delusional",
+      "name": "Delusional",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero strongly believes something bizarre or false.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Delusions are mostly private or harmless.",
+        "Major Delusions are voiced openly and can create danger."
+      ],
+      "source_pages": [
+        25
+      ]
+    },
+    {
+      "id": "doubting_thomas",
+      "name": "Doubting Thomas",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero rationalizes away the supernatural.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that makes the character slow to accept supernatural danger even after seeing it."
+      ],
+      "source_pages": [
+        26
+      ]
+    },
+    {
+      "id": "driven",
+      "name": "Driven",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero is consumed by a personal ambition.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Drive shapes decisions but is infrequent or fairly harmless.",
+        "Major Drive is overriding and regularly creates danger."
+      ],
+      "source_pages": [
+        26
+      ]
+    },
+    {
+      "id": "elderly",
+      "name": "Elderly",
+      "levels": [
+        "major"
+      ],
+      "summary": "Age slows the hero physically but grants extra learned skill.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "derived.pace",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Reduce Pace by 1."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "movement.running_total",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Subtract 1 from running rolls, minimum 1."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "attribute.agility",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "rolls_only"
+          ],
+          "details": "Subtract 1 from Agility rolls, but not linked skills."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "attribute.strength",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "rolls_only"
+          ],
+          "details": "Subtract 1 from Strength rolls and Strength-based damage, but not linked skills."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "attribute.vigor",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "rolls_only"
+          ],
+          "details": "Subtract 1 from Vigor rolls, but not linked skills."
+        },
+        {
+          "level": "major",
+          "type": "grant",
+          "polarity": "benefit",
+          "target": "character.skill_points",
+          "operator": "grant",
+          "value": 5,
+          "conditions": [
+            "smarts_linked_skills_only"
+          ],
+          "details": "Gain 5 extra skill points for Smarts-linked skills."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        26
+      ]
+    },
+    {
+      "id": "enemy",
+      "name": "Enemy",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "A foe wants the hero ruined, imprisoned, or dead.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Severity depends on how powerful and active the enemy is.",
+        "If the enemy is defeated permanently, the GM should replace it or the Hindrance may be bought off with an Advance."
+      ],
+      "source_pages": [
+        26
+      ]
+    },
+    {
+      "id": "greedy",
+      "name": "Greedy",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero covets wealth and possessions.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Greed causes constant arguments over treasure.",
+        "Major Greed can lead to serious harm over wealth or unfairness."
+      ],
+      "source_pages": [
+        26
+      ]
+    },
+    {
+      "id": "habit",
+      "name": "Habit",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero has a compulsion or addiction.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "special",
+          "polarity": "penalty",
+          "target": "fatigue.addiction_withdrawal",
+          "operator": "grant",
+          "value": 1,
+          "conditions": [
+            "every_24_hours_without_fix",
+            "on_failed_vigor_roll"
+          ],
+          "details": "An addict who goes without the habit must make a Vigor roll every 24 hours or take a level of Fatigue."
+        }
+      ],
+      "notes": [
+        "A Healing roll with proper medicine can remove one withdrawal Fatigue level for four hours, after which it returns unless the character gets the addictive substance."
+      ],
+      "source_pages": [
+        26
+      ]
+    },
+    {
+      "id": "hard_of_hearing",
+      "name": "Hard of Hearing",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero has serious hearing loss or is deaf.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "notice.hearing_based",
+          "operator": "subtract",
+          "value": 4,
+          "conditions": [],
+          "details": "Subtract 4 from all Notice rolls made to hear, including waking from noise."
+        },
+        {
+          "level": "major",
+          "type": "special",
+          "polarity": "penalty",
+          "target": "notice.hearing_based",
+          "operator": "fail",
+          "value": true,
+          "conditions": [],
+          "details": "The character is deaf and automatically fails all hearing-based Notice rolls."
+        }
+      ],
+      "notes": [
+        "Hearing aids reduce the penalty by 2 but can fall out on trauma."
+      ],
+      "source_pages": [
+        26
+      ]
+    },
+    {
+      "id": "heroic",
+      "name": "Heroic",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero always comes to the aid of those in need.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that consistently pushes the character into dangerous rescue situations."
+      ],
+      "source_pages": [
+        26,
+        27
+      ]
+    },
+    {
+      "id": "hesitant",
+      "name": "Hesitant",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero falters in stressful situations.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "action",
+          "polarity": "penalty",
+          "target": "combat.action_cards_drawn",
+          "operator": "draw",
+          "value": 2,
+          "conditions": [
+            "use_lowest_card",
+            "joker_ignores_penalty_for_round"
+          ],
+          "details": "Draw two Action Cards and act on the lower one."
+        },
+        {
+          "level": "minor",
+          "type": "restriction",
+          "polarity": "penalty",
+          "target": "edge_access",
+          "operator": "set",
+          "value": false,
+          "conditions": [
+            "edge:Quick",
+            "edge:Level Headed"
+          ],
+          "details": "Characters with Hesitant cannot take Quick or Level Headed."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "illiterate",
+      "name": "Illiterate",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero cannot properly read or write.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Cannot read or write any language, regardless of languages spoken."
+      ],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "impulsive",
+      "name": "Impulsive",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero acts before thinking things through.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that favors hasty action."
+      ],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "jealous",
+      "name": "Jealous",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero envies others and resents being outshined.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Jealousy centers on one subject.",
+        "Major Jealousy is broad and often becomes sabotage or slander."
+      ],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "loyal",
+      "name": "Loyal",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero stands by friends and risks much for them.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that prioritizes allies over personal safety."
+      ],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "mean",
+      "name": "Mean",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero is disagreeable and struggles to be kind.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.persuasion",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Subtract 1 from Persuasion rolls."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "mild_mannered",
+      "name": "Mild Mannered",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero has trouble appearing threatening.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.intimidation",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Intimidation rolls."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "mute",
+      "name": "Mute",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero cannot speak.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "The character must communicate through writing, sign language, or other visual methods."
+      ],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "obese",
+      "name": "Obese",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero carries excess weight in a way that hinders mobility.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "mixed",
+          "target": "derived.size",
+          "operator": "add",
+          "value": 1,
+          "conditions": [],
+          "details": "Increase Size by 1, which also increases Toughness by 1."
+        },
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "derived.pace",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Reduce Pace by 1."
+        },
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "movement.running_die",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "die_step",
+            "minimum_d4"
+          ],
+          "details": "Reduce the running die by one die type, minimum d4."
+        },
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "attribute.strength_for_armor_and_worn_gear",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "die_step",
+            "minimum_d4"
+          ],
+          "details": "Treat Strength as one die type lower for armor and worn gear, but not weapons."
+        }
+      ],
+      "notes": [
+        "Cannot be combined with Brawny.",
+        "This Hindrance cannot raise Size above +3."
+      ],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "obligation",
+      "name": "Obligation",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero has a recurring responsibility that consumes time.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "A Minor Obligation takes about 20 hours most weeks.",
+        "A Major Obligation takes 40 or more hours most weeks."
+      ],
+      "source_pages": [
+        27
+      ]
+    },
+    {
+      "id": "one_arm",
+      "name": "One Arm",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero has only one usable arm.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "task.requires_two_hands",
+          "operator": "subtract",
+          "value": 4,
+          "conditions": [],
+          "details": "Subtract 4 from tasks that require two hands, such as some Athletics rolls or using a two-handed weapon."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "one_eye",
+      "name": "One Eye",
+      "levels": [
+        "major"
+      ],
+      "summary": "Depth perception is impaired by the loss of one eye.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.vision_dependent",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [
+            "target_more_than_5_inches_away"
+          ],
+          "details": "Subtract 2 from vision-dependent Trait rolls against targets more than 5 inches away."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "outsider",
+      "name": "Outsider",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero is an obvious social outsider.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.persuasion",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [
+            "when_influencing_those_not_of_your_kind"
+          ],
+          "details": "Subtract 2 from Persuasion rolls against those outside the hero’s own kind."
+        }
+      ],
+      "notes": [
+        "The Major version also means the hero has few or no legal rights in the main campaign area."
+      ],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "overconfident",
+      "name": "Overconfident",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero believes they can overcome any challenge.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance that discourages retreat and pushes the character into risks."
+      ],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "pacifist",
+      "name": "Pacifist",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero avoids harming others, especially living foes.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Pacifists fight only when forced and forbid killing helpless victims.",
+        "Major Pacifists do not fight living, sapient beings except in defense and with nonlethal methods."
+      ],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "phobia",
+      "name": "Phobia",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "An irrational fear undermines the hero in its presence.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.all",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "in_presence_of_phobia"
+          ],
+          "details": "Subtract 1 from all Trait rolls when confronted by the phobia."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.all",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [
+            "in_presence_of_phobia"
+          ],
+          "details": "Subtract 2 from all Trait rolls when confronted by the phobia."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "poverty",
+      "name": "Poverty",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero starts poor and struggles to keep money.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "resource",
+          "polarity": "penalty",
+          "target": "resource.starting_funds",
+          "operator": "halve",
+          "value": 0.5,
+          "conditions": [],
+          "details": "Start with half the usual setting funds."
+        },
+        {
+          "level": "minor",
+          "type": "resource",
+          "polarity": "penalty",
+          "target": "resource.total_funds",
+          "operator": "halve",
+          "value": 0.5,
+          "conditions": [
+            "every_game_week"
+          ],
+          "details": "In general, total funds are halved every game week."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "quirk",
+      "name": "Quirk",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero has a small but troublesome personal foible.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Usually roleplaying-focused, though the quirk should sometimes create complications."
+      ],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "ruthless",
+      "name": "Ruthless",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero will go very far to achieve a goal.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Ruthlessness stops short of serious harm except against direct opposition.",
+        "Major Ruthlessness harms anyone who stands in the way."
+      ],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "secret",
+      "name": "Secret",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero is hiding something dangerous or damaging.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "If the secret becomes public, it should typically become a different Hindrance such as Enemy, Shamed, or Wanted."
+      ],
+      "source_pages": [
+        28
+      ]
+    },
+    {
+      "id": "shamed",
+      "name": "Shamed",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero bears a disgrace from the past.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Shame is private and internal.",
+        "Major Shame is known to others and can be used against the hero."
+      ],
+      "source_pages": [
+        29
+      ]
+    },
+    {
+      "id": "slow",
+      "name": "Slow",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero’s mobility is reduced by disability or past injury.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "derived.pace",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Reduce Pace by 1."
+        },
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "movement.running_die",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "die_step",
+            "if_already_d4_reduce_to_d4_minus_1"
+          ],
+          "details": "Reduce the running die one step."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "derived.pace",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Reduce Pace by 2."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "movement.running_die",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "die_step"
+          ],
+          "details": "Reduce the running die one step."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.athletics",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Athletics rolls."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "trait.resist_athletics",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from rolls to resist Athletics-based effects such as Tests or Grappling."
+        },
+        {
+          "level": "major",
+          "type": "restriction",
+          "polarity": "penalty",
+          "target": "edge_access",
+          "operator": "set",
+          "value": false,
+          "conditions": [
+            "edge:Fleet-Footed"
+          ],
+          "details": "Slow characters may not take Fleet-Footed."
+        }
+      ],
+      "notes": [
+        "A Minor Slow character may have a prosthesis; if it is lost, treat them as Major Slow.",
+        "Wheelchair options are available in later-tech settings."
+      ],
+      "source_pages": [
+        29
+      ]
+    },
+    {
+      "id": "small",
+      "name": "Small",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero is especially small or frail.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "derived.size",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "minimum_negative_1"
+          ],
+          "details": "Reduce Size by 1."
+        },
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "derived.toughness",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Reduce Toughness by 1, even if Size cannot go below −1."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        29
+      ]
+    },
+    {
+      "id": "stubborn",
+      "name": "Stubborn",
+      "levels": [
+        "minor"
+      ],
+      "summary": "The hero refuses to yield or admit mistakes.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Roleplaying Hindrance centered on insisting on one’s own way."
+      ],
+      "source_pages": [
+        29,
+        30
+      ]
+    },
+    {
+      "id": "suspicious",
+      "name": "Suspicious",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero distrusts others.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "support_rolls_targeting_character",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Support rolls made to aid the character are made at −2."
+        }
+      ],
+      "notes": [
+        "Minor Suspicion is mostly roleplaying-driven distrust and paranoia."
+      ],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "thin_skinned",
+      "name": "Thin Skinned",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "Personal attacks hit the hero especially hard.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "resist.taunt",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 when resisting Taunt attacks."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "resist.taunt",
+          "operator": "subtract",
+          "value": 4,
+          "conditions": [],
+          "details": "Subtract 4 when resisting Taunt attacks."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "timid",
+      "name": "Timid",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero is squeamish and easily cowed.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "resist.fear",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Fear checks."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "resist.intimidation",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 when resisting Intimidation."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "tongue_tied",
+      "name": "Tongue-Tied",
+      "levels": [
+        "major"
+      ],
+      "summary": "The hero routinely says the wrong thing.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.intimidation",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "speech_based"
+          ],
+          "details": "Subtract 1 from speech-based Intimidation rolls."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.performance",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "speech_based"
+          ],
+          "details": "Subtract 1 from speech-based Performance rolls."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.persuasion",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "speech_based"
+          ],
+          "details": "Subtract 1 from speech-based Persuasion rolls."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.taunt",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [
+            "speech_based"
+          ],
+          "details": "Subtract 1 from speech-based Taunt rolls."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "ugly",
+      "name": "Ugly",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero’s appearance makes social influence harder.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.persuasion",
+          "operator": "subtract",
+          "value": 1,
+          "conditions": [],
+          "details": "Subtract 1 from Persuasion rolls."
+        },
+        {
+          "level": "major",
+          "type": "modifier",
+          "polarity": "penalty",
+          "target": "skill.persuasion",
+          "operator": "subtract",
+          "value": 2,
+          "conditions": [],
+          "details": "Subtract 2 from Persuasion rolls."
+        }
+      ],
+      "notes": [],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "vengeful",
+      "name": "Vengeful",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero always seeks payback.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Minor Vengefulness usually seeks lawful or limited revenge.",
+        "Major Vengefulness escalates until the character feels fully satisfied."
+      ],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "vow",
+      "name": "Vow",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero has sworn an oath that makes demands on time and risk.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Severity depends on how dangerous and demanding the oath is."
+      ],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "wanted",
+      "name": "Wanted",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "Authorities are looking for the hero over a crime.",
+      "requirements": [],
+      "effects": [],
+      "notes": [
+        "Severity depends on the seriousness of the crime and how active the pursuit is."
+      ],
+      "source_pages": [
+        30
+      ]
+    },
+    {
+      "id": "young",
+      "name": "Young",
+      "levels": [
+        "minor",
+        "major"
+      ],
+      "summary": "The hero is notably young, with fewer starting points but more luck.",
+      "requirements": [],
+      "effects": [
+        {
+          "level": "minor",
+          "type": "resource",
+          "polarity": "penalty",
+          "target": "character.attribute_points",
+          "operator": "set",
+          "value": 4,
+          "conditions": [
+            "during_character_creation"
+          ],
+          "details": "A Young hero gets 4 attribute points instead of 5."
+        },
+        {
+          "level": "minor",
+          "type": "resource",
+          "polarity": "penalty",
+          "target": "character.skill_points",
+          "operator": "set",
+          "value": 10,
+          "conditions": [
+            "during_character_creation"
+          ],
+          "details": "A Young hero gets 10 skill points instead of 12."
+        },
+        {
+          "level": "minor",
+          "type": "resource",
+          "polarity": "benefit",
+          "target": "resource.bennies.start_session",
+          "operator": "add",
+          "value": 1,
+          "conditions": [],
+          "details": "A Young hero draws one extra Benny at the start of each session."
+        },
+        {
+          "level": "major",
+          "type": "resource",
+          "polarity": "penalty",
+          "target": "character.attribute_points",
+          "operator": "set",
+          "value": 3,
+          "conditions": [
+            "during_character_creation"
+          ],
+          "details": "A Very Young hero gets 3 attribute points instead of 5."
+        },
+        {
+          "level": "major",
+          "type": "resource",
+          "polarity": "penalty",
+          "target": "character.skill_points",
+          "operator": "set",
+          "value": 10,
+          "conditions": [
+            "during_character_creation"
+          ],
+          "details": "A Very Young hero gets 10 skill points."
+        },
+        {
+          "level": "major",
+          "type": "grant",
+          "polarity": "penalty",
+          "target": "hindrance.small",
+          "operator": "grant",
+          "value": true,
+          "conditions": [],
+          "details": "A Very Young hero also has the Small Hindrance."
+        },
+        {
+          "level": "major",
+          "type": "resource",
+          "polarity": "benefit",
+          "target": "resource.bennies.start_session",
+          "operator": "add",
+          "value": 2,
+          "conditions": [],
+          "details": "A Very Young hero draws two extra Bennies at the start of each session."
+        }
+      ],
+      "notes": [
+        "Young heroes may also face setting-specific legal restrictions such as driving or weapon ownership.",
+        "Most Minor Young characters should also take Small, but it is not mandatory."
+      ],
+      "source_pages": [
+        30
+      ]
+    }
+  ]
+}
