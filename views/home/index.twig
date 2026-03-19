@@ -3,9 +3,9 @@
 {% block content %}
 {{ session.user.firstname }}
 {% for character in characters %}
-    <p>{{ character.id }} - {{ character.concept }} - <a href="/hindrances/{{ character.hash }}">Edit</a></p>
+    <p>{{ character.id }} - {{ character.concept }} - <a href="{{ get_url('characters_hindrances', {hash: character.hash}) }}">Edit</a></p>
 {% else %}
-    <p>No characters found - <a href="/create">Create one now</a></p>
+    <p>No characters found - <a href="{{ get_url('characters_create') }}">Create one now</a></p>
 {% endfor %}
 
 {% endblock %}

@@ -64,20 +64,29 @@ abstract class Factory
         return str_replace($prefix, '', $string);
     }
 
-    public function validate(array $data): array
+    public function validate(Entity $entity): array
     {
+        $data = $entity->toArray();
+
         return $this->validator->validate(
             $data,
             $this->getValidationRules(),
         );
     }
 
-    public function all(): array
+    public function find(?string $where = null, array $params = []): array
     {
-        $data = $this->pdo->fetchAll(sprintf(
-            "select * from %s",
+        $sql = sprintf(
+            "SELECT * FROM %s",
             $this->getTableName(),
-        ));
+        );
+        if (!is_null($where)) {
+            $sql .= " WHERE {$where}";
+        }
+        $data = $this->pdo->fetchAll(
+            $sql,
+            $params
+        );
         if (empty($data)) {
             return [];
         }
@@ -117,9 +126,9 @@ abstract class Factory
 
     public function insert(Entity $entity): bool
     {
+        $this->beforeInsert($entity);
         $data = $entity->toArray();
         $values = [];
-        $this->beforeInsert($entity);
         foreach ($data as $key => $value) {
             $values[$this->prefix($key)] = $value;
         }

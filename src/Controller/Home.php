@@ -15,7 +15,10 @@ class Home
 
     public function index(): void
     {
-        $characters = $this->factory->all();
+        $characters = $this->factory->find(
+            "character_user = ?",
+            [Flight::session()->user->id],
+        );
         Flight::render('home/index.twig', [
             'page_title' => 'Characters',
             'characters' => $characters,

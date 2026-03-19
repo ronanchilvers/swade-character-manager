@@ -1,12 +1,12 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-<form class="form" method="post" action="/create">
+<form class="form" method="post" action="">
 
     <div class="field {% if errors|length > 0 %}field--error{% endif %}">
         <label class="field__label">Write a very brief character concept - who they are, what they're good at, etc</label>
         <div class="field__inner">
-            <textarea class="field__input" rows="5" name="concept"></textarea>
+            <textarea class="field__input" rows="5" name="concept">{{ entity.concept }}</textarea>
         </div>
         <p class="field__error">This field is required</p>
     </div>
@@ -16,5 +16,4 @@
     </div>
 
 </form>
-
 {% endblock %}

@@ -1,12 +1,12 @@
 <header class="topbar">
     <h1>SCM</h1>
     <nav class="main-nav">
-        <a href="/" class="main-nav__item">Home</a>
-        <a href="/characters/create" class="main-nav__item">Create a character</a>
+        <a href="{{ get_url('home_page') }}" class="main-nav__item">Home</a>
+        <a href="{{ get_url('characters_create') }}" class="main-nav__item">Create a character</a>
         {% if session.has('user') %}
-        <a href="/auth/logout" class="main-nav__item">Logout</a>
+        <a href="{{ get_url('auth_logout') }}" class="main-nav__item">Logout</a>
         {% else %}
-        <a href="/auth" class="main-nav__item">Login</a>
+        <a href="{{ get_url('auth_login') }}" class="main-nav__item">Login</a>
         {% endif %}
     </nav>
 </header>

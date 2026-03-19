@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 use App\Entity\Factory\Character;
 use App\Entity\Factory\User;
+use App\Twig\FlightExtension;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
@@ -58,6 +59,7 @@ $container->singleton(
             $loader,
             $settings['twig']
         );
+        $twig->addExtension(new FlightExtension());
         $twig->addGlobal('session', $container->get(Session::class));
 
         return $twig;
