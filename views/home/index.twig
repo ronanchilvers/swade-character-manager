@@ -1,7 +1,7 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-{{ session.name }}
+{{ session.user.firstname }}
 {% for character in characters %}
     <p>{{ character.id }} - {{ character.concept }} - <a href="/hindrances/{{ character.hash }}">Edit</a></p>
 {% else %}

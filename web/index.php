@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+use App\Controller\Auth;
 use App\Controller\Character;
 use App\Controller\Home;
 use App\Http\Response;
-use App\Http\Session;
+use App\Middleware\Auth as MiddlewareAuth;
 use flight\Container;
-use Twig\Environment;
 
 if (PHP_SAPI == 'cli-server') {
     $url  = parse_url($_SERVER['REQUEST_URI']);
@@ -24,31 +24,35 @@ $settings = include '../config/settings.php';
 $container = new Container();
 include '../config/events.php';
 include '../config/services.php';
+include '../config/maps.php';
 
-// Overrides
+// Setup
+Flight::registerContainerHandler([$container, 'get']);
 Flight::register('response', Response::class);
 
-// Mapped methods
-Flight::map('session', function () use ($container) {
-    return $container->get(Session::class);
-});
-Flight::map('render', function ($template, array $data = []) use ($container) {
-    Flight::response()
-        ->write(
-            $container->get(Environment::class)->render($template, $data)
-        );
-});
-Flight::registerContainerHandler([$container, 'get']);
-
 // Routing
-Flight::route('GET /', [Home::class, 'index']);
+Flight::route('GET /', [Home::class, 'index'])
+    ->addMiddleware(MiddlewareAuth::class);
 
-// Auth
-// Flight::route('GET /', [Auth::class, 'index']);
+// Authentication
+Flight::group('/auth', function () {
+    Flight::route('GET /', [Auth::class, 'index']);
+    Flight::route('GET /return', [Auth::class, 'return']);
+    Flight::route('GET /logout', [Auth::class, 'logout']);
+});
 
 // Characters
-Flight::route('GET|POST /create', [Character::class, 'create']);
-Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Character::class, 'hindrances']);
+Flight::group('/characters', function () {
+    Flight::route('GET|POST /create', [Character::class, 'create']);
+    Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Character::class, 'hindrances']);
+}, [ MiddlewareAuth::class ]);
+
+// $user = $container->get(\App\Entity\Factory\User::class)->one(
+//     "user_email = ?",
+//     ['ronan@thelittledot.com']
+// );
+// var_dump(__METHOD__, $user);
+// exit;
 
 // Start the framework
 Flight::start();

@@ -9,6 +9,10 @@
     --button-background-color-danger: #ff7777;
     --button-background-color-text-danger: #ffeeee;
     --button-border-color-danger: #7c2424;
+
+    --button-background-color-google: #f96161;
+    --button-background-color-text-google: #ffffff;
+    --button-border-color-google: #ef3434;
 }
 
 .button {
@@ -28,5 +32,12 @@
         border: 1px solid var(--button-border-color-danger);
         background-color: var(--button-background-color-danger);
         color: var(--button-background-color-text-danger);
+    }
+
+    /** Login Buttons **/
+    &.button--google {
+        border: 1px solid var(--button-border-color-google);
+        background-color: var(--button-background-color-google);
+        color: var(--button-background-color-text-google);
     }
 }

@@ -31,8 +31,8 @@ $settings = [
         "google" => [
             "clientId" => null,
             "clientSecret" => null,
-            "redirectUri" => "http://localhost:8080",
-            "hostedDomain" => "localhost"
+            "redirectUri" => "http://localhost:8080/auth/return",
+            "hostedDomain" => null,
         ],
     ],
 ];

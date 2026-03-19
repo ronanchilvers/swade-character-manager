@@ -15,7 +15,6 @@ use flight\net\Request;
 Flight::onEvent(
     'flight.request.received',
     function (Request $request) use ($container) {
-        // echo 'flight.request.received<br>';
         $container
             ->get(Session::class)
             ->initialise($request);
@@ -24,7 +23,6 @@ Flight::onEvent(
 Flight::onEvent(
     'flight.response.headers.before',
     function () use ($container) {
-        // echo 'flight.response.headers.before<br>';
         $container
             ->get(Session::class)
             ->shutdown();

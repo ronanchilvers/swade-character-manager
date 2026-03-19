@@ -7,10 +7,9 @@ declare(strict_types=1);
 // - $settings - The application configuration array
 
 use App\Entity\Factory\Character;
-use App\Http\Middleware\Session as MiddlewareSession;
+use App\Entity\Factory\User;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
-use App\Http\Session\NativeStorage;
 use App\Http\Session\StorageInterface;
 use flight\database\SimplePdo;
 use League\OAuth2\Client\Provider\Google;
@@ -76,6 +75,7 @@ $container->singleton(
 // Database factories
 $classes = [
     Character::class,
+    User::class,
 ];
 foreach ($classes as $class) {
     $container->singleton($class, $class);

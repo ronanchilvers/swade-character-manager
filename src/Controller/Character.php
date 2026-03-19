@@ -22,9 +22,9 @@ class Character
             ];
             if (
                 !($errors = $this->factory->validate($data)) &&
-                ($id = $this->factory->insert($data))
+                ($values = $this->factory->insert($data))
             ) {
-                Flight::redirect(sprintf('/hindrances/%s', $id));
+                Flight::redirect(sprintf('/hindrances/%s', $values['hash']));
                 return;
             }
         }

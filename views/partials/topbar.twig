@@ -2,6 +2,11 @@
     <h1>SCM</h1>
     <nav class="main-nav">
         <a href="/" class="main-nav__item">Home</a>
-        <a href="/create" class="main-nav__item">Create a character</a>
+        <a href="/characters/create" class="main-nav__item">Create a character</a>
+        {% if session.has('user') %}
+        <a href="/auth/logout" class="main-nav__item">Logout</a>
+        {% else %}
+        <a href="/auth" class="main-nav__item">Login</a>
+        {% endif %}
     </nav>
 </header>

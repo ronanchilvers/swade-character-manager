@@ -1,7 +1,6 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-{{ session.name }}
 <form class="form" method="post" action="/create">
 
     <div class="field {% if errors|length > 0 %}field--error{% endif %}">

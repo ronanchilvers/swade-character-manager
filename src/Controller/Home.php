@@ -15,8 +15,6 @@ class Home
 
     public function index(): void
     {
-        Flight::session()->name = uniqid();
-
         $characters = $this->factory->all();
         Flight::render('home/index.twig', [
             'page_title' => 'Characters',
