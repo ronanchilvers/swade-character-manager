@@ -7,15 +7,21 @@ declare(strict_types=1);
 // - $settings - The application configuration array
 
 use App\Entity\Factory\Character;
+use App\Http\Middleware\Session as MiddlewareSession;
+use App\Http\Session;
+use App\Http\Session\CookieStorage;
+use App\Http\Session\NativeStorage;
+use App\Http\Session\StorageInterface;
 use flight\database\SimplePdo;
+use League\OAuth2\Client\Provider\Google;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-/* @param $settings array */
-/* @param $container \flight\Container */
+/* @var $settings array */
+/* @var $container \flight\Container */
 
 // The SimplePdo database connection
-$container->set(
+$container->singleton(
     SimplePdo::class,
     function () use ($settings) {
         return new SimplePdo(
@@ -31,16 +37,39 @@ $container->set(
     }
 );
 
-// Twig
-$container->set(
-    Environment::class,
+// Session
+$container->singleton(
+    StorageInterface::class,
     function () use ($settings) {
+        return new CookieStorage($settings["session"]);
+    }
+);
+$container->singleton(
+    Session::class,
+    Session::class
+);
+
+// Twig
+$container->singleton(
+    Environment::class,
+    function () use ($container, $settings) {
         $loader = new FilesystemLoader(__DIR__ . "/../views/");
 
-        return new Environment(
+        $twig = new Environment(
             $loader,
             $settings['twig']
         );
+        $twig->addGlobal('session', $container->get(Session::class));
+
+        return $twig;
+    }
+);
+
+// Authentication
+$container->singleton(
+    Google::class,
+    function () use ($settings) {
+        return new Google($settings['auth']['google']);
     }
 );
 
@@ -49,5 +78,5 @@ $classes = [
     Character::class,
 ];
 foreach ($classes as $class) {
-    $container->set($class, $class);
+    $container->singleton($class, $class);
 }

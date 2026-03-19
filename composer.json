@@ -7,7 +7,9 @@
     "flightphp/container": "^1.3",
     "twig/twig": "^3.23",
     "ronanchilvers/utility": "^2.0",
-    "respect/validation": "^3.1"
+    "respect/validation": "^3.1",
+    "league/oauth2-google": "^4.2",
+    "defuse/php-encryption": "^2.4"
   },
   "autoload": {
     "psr-4": {
