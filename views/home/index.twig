@@ -1,7 +1,6 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-{{ session.user.firstname }}
 {% for character in characters %}
     <p>{{ character.id }} - {{ character.concept }} - <a href="{{ get_url('characters_hindrances', {hash: character.hash}) }}">Edit</a></p>
 {% else %}
