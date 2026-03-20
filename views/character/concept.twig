@@ -2,7 +2,6 @@
 
 {% block content %}
 <form class="form" method="post" action="">
-
     <div class="field {% if field_has_error('name', errors) %}field--error{% endif %}">
         <label class="field__label">Your character's name</label>
         <div class="field__inner">
@@ -11,16 +10,9 @@
         <p class="field__error">This field is required</p>
     </div>
 
-    <div class="field {% if field_has_error('concept', errors) %}field--error{% endif %}">
-        <label class="field__label">Write a very brief character concept - who they are, what they're good at, etc</label>
-        <div class="field__inner">
-            <textarea class="field__input" rows="5" name="concept">{{ entity.concept }}</textarea>
-        </div>
-        <p class="field__error">This field is required</p>
-    </div>
-
     <div class="form__buttons">
-        <button class="button button--primary" type="submit">Next</button>
+        <a class="button" href="{{ get_url('home_page') }}">Cancel</a>
+        <button class="button button--primary" type="submit">Save and Continue...</button>
     </div>
 
 </form>

@@ -19,9 +19,9 @@ class FlightExtension extends \Twig\Extension\AbstractExtension
         ];
     }
 
-    public function fieldHasError(string $field, ?array $errors): bool
+    public function fieldHasError(string $field, array $errors): bool
     {
-        return isset($errors[$field]);
+        return in_array($field, $errors);
     }
 
     public function getUrl(string $routeName, array $params = [])

@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `characters` (
     character_hash VARCHAR(32),
     character_user INT(11),
     character_name VARCHAR(128),
-    character_concept VARCHAR(2048),
     character_created DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     character_updated DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (character_id),
