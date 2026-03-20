@@ -3,9 +3,22 @@
 {% block content %}
 <form class="form" method="post" action="/create">
 
-    hindrances
+    <div class="field">
+        <label class="field__label">Choose up to 4 points of hindrances</label>
+        {% for i in 1..10 %}
+        <div class="field__inner">
+            <input class="field__checkbox" id="option_{{ i }}" type="checkbox" value="" />
+            <label for="option_{{ i }}">Hindrance {{ i }}</label>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="field">
+        <label class="field__label">Points Left</label>
+        <input class="field__input" type="text" value="4" readonly />
+    </div>
 
     <div class="form__buttons">
+        <a class="button" href="{{ get_url('characters_concept', {hash: entity.hash}) }}">Previous</a>
         <button class="button button--primary" type="submit">Save and Continue...</button>
     </div>
 

@@ -36,10 +36,19 @@ class Character
 
     public function hindrances(string $hash): void
     {
+        $entity = $this->factory->forHash($hash);
+        if (!$entity instanceof Entity) {
+            Flight::session()->flash(
+                'Unable to find character',
+                'error'
+            );
+            Flight::redirect(Flight::getUrl('home_page'));
+        }
         $errors = [];
         Flight::render('character/hindrances.twig', [
             'page_title' => 'Choose Hindrances',
             'errors' => $errors,
+            'entity' => $entity,
         ]);
         return;
     }
