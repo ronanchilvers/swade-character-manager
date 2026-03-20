@@ -2,7 +2,7 @@
 :root {
     --field-color: inherit;
     --field-color-error: #cc3333;
-    --field-input-border-color: inherit;
+    --field-input-border-color: #666;
     --field-input-border-color-error: #cc3333;
 }
 
@@ -27,6 +27,7 @@
     .field__input {
         width: 100%;
         color: var(--field-color);
+        font-size:  1.1rem;
     }
 
     .field__label {
@@ -34,7 +35,7 @@
     }
     .field__input {
         padding: 1rem;
-        border-color: var(--field-input-border-color);
+        border: 1px solid var(--field-input-border-color);
     }
     .field__error {
         color: var(--field-color-error);

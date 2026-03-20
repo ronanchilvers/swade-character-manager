@@ -47,20 +47,24 @@ class Auth
         }
 
         // Check for errors
+        /* @var $error string */
         if (!empty($error)) {
             var_dump(__METHOD__, 'error(1): ' . $error);
             exit;
         }
 
         // Check the state is valid
+        /* @var $state string */
         if (empty($state) || $session->oauth2state !== $state) {
             var_dump(__METHOD__, 'error(2): state mismatch');
             exit;
         }
+        unset($session->oauth2state);
 
         // Retrieve user data
         try {
             $google = Flight::google();
+            /* @var $code string */
             $token = $google->getAccessToken('authorization_code', [
                 'code' => $code,
             ]);

@@ -29,6 +29,8 @@ Flight::group('/auth', function () {
 Flight::group('/characters', function () {
     Flight::route('GET|POST /create', [Character::class, 'create'])
         ->setAlias('characters_create');
+    Flight::route('GET|POST /concept/@hash:[a-z0-9]{32}', [Character::class, 'concept'])
+        ->setAlias('characters_concept');
     Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Character::class, 'hindrances'])
         ->setAlias('characters_hindrances');
 }, [ MiddlewareAuth::class ]);

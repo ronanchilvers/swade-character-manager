@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
+use App\Filter;
 use Flight;
 
 class Character
@@ -16,10 +17,38 @@ class Character
 
     public function create(): void
     {
+        $this->createOrConcept(new Entity());
+    }
+
+    public function concept(string $hash): void
+    {
+        $entity = $this->factory->forHash($hash);
+        if (!$entity instanceof Entity) {
+            Flight::session()->flash(
+                'Unable to find character',
+                'error'
+            );
+            Flight::redirect(Flight::getUrl('home_page'));
+        }
+
+        $this->createOrConcept($entity);
+    }
+
+    public function hindrances(string $hash): void
+    {
         $errors = [];
-        $entity = new Entity();
+        Flight::render('character/hindrances.twig', [
+            'page_title' => 'Choose Hindrances',
+            'errors' => $errors,
+        ]);
+        return;
+    }
+
+    protected function createOrConcept(Entity $entity): void
+    {
+        $errors = [];
         if ("POST" == Flight::request()->getMethod()) {
-            $entity->concept = htmlspecialchars(strip_tags($_POST['concept']));
+            $entity->concept = Filter::noTags($_POST['concept']);
             if (
                 !($errors = $this->factory->validate($entity)) &&
                 $this->factory->insert($entity)
@@ -31,19 +60,9 @@ class Character
             }
         }
 
-        Flight::render('character/create.twig', [
+        Flight::render('character/concept.twig', [
             'page_title' => 'Create a Character',
             'entity' => $entity,
-            'errors' => $errors,
-        ]);
-        return;
-    }
-
-    public function hindrances(string $hash): void
-    {
-        $errors = [];
-        Flight::render('character/hindrances.twig', [
-            'page_title' => 'Choose Hindrances',
             'errors' => $errors,
         ]);
         return;

@@ -16,13 +16,13 @@ class Filter
         return (string) preg_replace("/[^A-z0-9]/", "", $input);
     }
 
-    public static function number(mixed $input): int
-    {
-        return (int) preg_replace('/[^0-9]', "", $input);
-    }
-
     public static function noTags(mixed $input): string
     {
         return (string) strip_tags($input);
+    }
+
+    public static function number(mixed $input): int
+    {
+        return (int) preg_replace('/[^0-9]', "", $input);
     }
 }

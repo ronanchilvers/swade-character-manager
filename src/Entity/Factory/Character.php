@@ -12,6 +12,22 @@ use Ronanchilvers\Utility\Str;
 
 class Character extends Factory
 {
+    public function forUser(int $id)
+    {
+        return $this->find(
+            $this->prefix('user') . ' = ?',
+            [$id],
+        );
+    }
+
+    public function forHash(string $hash)
+    {
+        return $this->one(
+            $this->prefix('hash') . ' = ?',
+            [$hash],
+        );
+    }
+
     public function getValidationRules(): array
     {
         return [

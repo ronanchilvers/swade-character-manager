@@ -136,6 +136,11 @@ class Session
         return $this->has($key);
     }
 
+    public function __unset($key)
+    {
+        $this->delete($key);
+    }
+
     /**
      * Set a flash message
      *
