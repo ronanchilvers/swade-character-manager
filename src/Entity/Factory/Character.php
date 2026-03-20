@@ -33,7 +33,7 @@ class Character extends Factory
         return [
             'hash' => v::not(v::blank()),
             'user' => v::intVal()->greaterThan(0),
-            // 'name' => v::not(v::blank()),
+            'name' => v::not(v::blank()),
             'concept' => v::not(v::blank()),
         ];
     }

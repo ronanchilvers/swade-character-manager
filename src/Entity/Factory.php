@@ -146,7 +146,47 @@ abstract class Factory
         }
     }
 
+    public function update(Entity $entity): bool
+    {
+        $this->beforeUpdate($entity);
+        $id = $entity->id;
+        $data = $entity->toArray();
+        $values = [];
+        foreach ($data as $key => $value) {
+            if ('id' == $key) {
+                continue;
+            }
+            $values[$this->prefix($key)] = $value;
+        }
+
+        try {
+            $id = $this->pdo->update(
+                $this->getTableName(),
+                $values,
+                $this->prefix('id') . ' = ?',
+                [$id]
+            );
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public function upsert(Entity $entity)
+    {
+        if (isset($entity->id)) {
+            return $this->update($entity);
+        }
+
+        return $this->insert($entity);
+    }
+
     protected function beforeInsert(Entity $entity): void
+    {
+    }
+
+    protected function beforeUpdate(Entity $entity): void
     {
     }
 }

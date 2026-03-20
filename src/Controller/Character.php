@@ -48,10 +48,11 @@ class Character
     {
         $errors = [];
         if ("POST" == Flight::request()->getMethod()) {
+            $entity->name = Filter::noTags($_POST['name']);
             $entity->concept = Filter::noTags($_POST['concept']);
             if (
                 !($errors = $this->factory->validate($entity)) &&
-                $this->factory->insert($entity)
+                $this->factory->upsert($entity)
             ) {
                 Flight::redirect(
                     Flight::getUrl('characters_hindrances', ['hash' => $entity->hash])
