@@ -16,7 +16,7 @@ class Home
     public function index(): void
     {
         $characters = $this->factory->forUser(
-            Flight::session()->user->id
+            (int) Flight::session()->user->id
         );
         Flight::render('home/index.twig', [
             'page_title' => 'Characters',

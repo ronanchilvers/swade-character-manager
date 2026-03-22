@@ -23,4 +23,4 @@ vendor
 .env.php
 .claude
 .codex
-.phpunit.cache/
+.phpunit.result.cache

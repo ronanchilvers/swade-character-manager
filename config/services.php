@@ -7,7 +7,12 @@ declare(strict_types=1);
 // - $settings - The application configuration array
 
 use App\Entity\Factory\Character;
+use App\Entity\Factory\Edge;
+use App\Entity\Factory\Hindrance;
+use App\Entity\Factory\Skill;
 use App\Entity\Factory\User;
+use App\Service\CharacterHindrances;
+use App\Service\GameData;
 use App\Twig\FlightExtension;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
@@ -78,7 +83,16 @@ $container->singleton(
 $classes = [
     Character::class,
     User::class,
+    Hindrance::class,
+    Skill::class,
+    Edge::class,
+    CharacterHindrances::class,
 ];
 foreach ($classes as $class) {
     $container->singleton($class, $class);
 }
+
+$container->singleton(
+    GameData::class,
+    fn() => new GameData(__DIR__ . '/../data')
+);

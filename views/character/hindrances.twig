@@ -1,20 +1,69 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-<form class="form" method="post" action="/create">
+<form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
+
+    {% if errors %}
+    <div class="field field--error">
+        <p class="field__error">Please correct the following:</p>
+        {% for error in errors %}
+        <p class="field__error">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <div class="field">
-        <label class="field__label">Choose up to 4 points of hindrances</label>
-        {% for i in 1..10 %}
+        <label class="field__label">Choose up to {{ max_points }} points of hindrances</label>
+        {% for hindrance in hindrances %}
         <div class="field__inner">
-            <input class="field__checkbox" id="option_{{ i }}" type="checkbox" value="" />
-            <label for="option_{{ i }}">Hindrance {{ i }}</label>
+            <div>
+                <strong>{{ hindrance.name }}</strong>
+                {% if hindrance.summary %}
+                <p>{{ hindrance.summary }}</p>
+                {% endif %}
+                {% if hindrance.effects %}
+                    {% for effect in hindrance.effects %}
+                    <p>{{ effect.level|title }}: {{ effect.details }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {% if hindrance.levels|length == 1 %}
+            <div>
+                <input
+                    class="field__checkbox"
+                    id="hindrance_{{ hindrance.id }}"
+                    type="checkbox"
+                    name="hindrances[{{ hindrance.id }}]"
+                    value="{{ hindrance.levels[0] }}"
+                    {% if selected[hindrance.id] is defined %}checked{% endif %}
+                />
+                <label for="hindrance_{{ hindrance.id }}">
+                    Select {{ hindrance.levels[0]|title }}
+                </label>
+            </div>
+            {% else %}
+            <div>
+                {% for level in hindrance.levels %}
+                <label for="hindrance_{{ hindrance.id }}_{{ level }}">
+                    <input
+                        id="hindrance_{{ hindrance.id }}_{{ level }}"
+                        type="radio"
+                        name="hindrances[{{ hindrance.id }}]"
+                        value="{{ level }}"
+                        {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
+                    />
+                    {{ level|title }}
+                </label>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
     <div class="field">
         <label class="field__label">Points Left</label>
-        <input class="field__input" type="text" value="4" readonly />
+        <input class="field__input" type="text" value="{{ remaining_points }}" readonly />
     </div>
 
     <div class="form__buttons">

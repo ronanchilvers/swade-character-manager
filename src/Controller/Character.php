@@ -7,12 +7,17 @@ namespace App\Controller;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Filter;
+use App\Service\CharacterHindrances;
+use App\Service\GameData;
 use Flight;
 
 class Character
 {
-    public function __construct(private FactoryCharacter $factory)
-    {
+    public function __construct(
+        private FactoryCharacter $factory,
+        private CharacterHindrances $characterHindrances,
+        private GameData $gameData,
+    ) {
     }
 
     public function create(): void
@@ -38,19 +43,37 @@ class Character
     {
         $entity = $this->factory->forHash($hash);
         if (!$entity instanceof Entity) {
-            Flight::session()->flash(
-                'Unable to find character',
-                'error'
-            );
+            Flight::session()->flash('Unable to find character', 'error');
             Flight::redirect(Flight::getUrl('home_page'));
+            return;
         }
-        $errors = [];
+        if ('POST' === Flight::request()->getMethod()) {
+            $result = $this->characterHindrances->processSubmission(
+                (int) $entity->id,
+                $_POST['hindrances'] ?? []
+            );
+
+            if (empty($result['errors'])) {
+                Flight::redirect(Flight::getUrl('characters_hindrances', ['hash' => $entity->hash]));
+                return;
+            }
+
+            $selected = $result['selected'];
+            $errors = $result['errors'];
+        } else {
+            $selected = $this->characterHindrances->selectedForCharacter((int) $entity->id);
+            $errors = [];
+        }
+
         Flight::render('character/hindrances.twig', [
             'page_title' => 'Choose Hindrances',
+            'entity'     => $entity,
+            'hindrances' => $this->gameData->allHindrances(),
+            'selected'   => $selected,
             'errors' => $errors,
-            'entity' => $entity,
+            'remaining_points' => $this->characterHindrances->remainingPoints($selected),
+            'max_points' => $this->characterHindrances->maxPoints(),
         ]);
-        return;
     }
 
     protected function createOrConcept(Entity $entity): void
