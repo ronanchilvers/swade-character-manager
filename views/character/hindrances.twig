@@ -1,5 +1,8 @@
 {% extends 'base.twig' %}
 
+{% do add_stylesheet('/css/cards.css') %}
+{% do add_script('/javascript/hindrances.js') %}
+
 {% block content %}
 {% include "partials/character-bar.twig" %}
 <form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
@@ -15,11 +18,11 @@
 
     <div class="field">
         <label class="field__label">Choose up to {{ max_points }} points of hindrances. You have used:</label>
-        <input class="field__input" type="text" value="{{ remaining_points }}" readonly />
+        <input class="field__input js-points" type="text" value="{{ remaining_points }}" readonly />
     </div>
     <div class="cards">
             {% for hindrance in hindrances %}
-            <div class="field cards__card">
+            <div class="field cards__card js-hindrance">
                 <label class="field__label">{{ hindrance.name }}</label>
                 <div class="field__inner">
                     <div>
@@ -33,27 +36,13 @@
                         {% endif %}
                     </div>
 
-                    {% if hindrance.levels|length == 1 %}
-                    <div>
-                        <input
-                            class="field__checkbox"
-                            id="hindrance_{{ hindrance.id }}"
-                            type="checkbox"
-                            name="hindrances[{{ hindrance.id }}]"
-                            value="{{ hindrance.levels[0] }}"
-                            {% if selected[hindrance.id] is defined %}checked{% endif %}
-                        />
-                        <label for="hindrance_{{ hindrance.id }}">
-                            Select {{ hindrance.levels[0]|title }}
-                        </label>
-                    </div>
-                    {% else %}
                     <div>
                         {% for level in hindrance.levels %}
                         <label for="hindrance_{{ hindrance.id }}_{{ level }}">
                             <input
+                                class="js-checkbox"
                                 id="hindrance_{{ hindrance.id }}_{{ level }}"
-                                type="radio"
+                                type="checkbox"
                                 name="hindrances[{{ hindrance.id }}]"
                                 value="{{ level }}"
                                 {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
@@ -62,7 +51,6 @@
                         </label>
                         {% endfor %}
                     </div>
-                    {% endif %}
                 </div>
             </div>
             {% endfor %}
