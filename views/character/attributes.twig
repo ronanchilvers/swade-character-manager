@@ -1,6 +1,7 @@
 {% extends 'base.twig' %}
 
 {% block content %}
+{% include "partials/character-bar.twig" %}
 <form class="form" method="post" action="{{ get_url('characters_attributes', {hash: entity.hash}) }}">
 
     {% if form_errors %}
