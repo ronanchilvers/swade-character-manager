@@ -36,6 +36,7 @@
     .field__input {
         padding: 1rem;
         border: 1px solid var(--field-input-border-color);
+        border-radius: 0.5rem;
     }
     .field__error {
         color: var(--field-color-error);
