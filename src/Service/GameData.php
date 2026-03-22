@@ -7,6 +7,7 @@ namespace App\Service;
 class GameData
 {
     private const ENTRY_KEY = 'entries';
+    private const DETAIL_SEPARATOR = ' ';
 
     private array $hindrances;
     private array $skills;
@@ -14,9 +15,20 @@ class GameData
 
     public function __construct(string $dataDir)
     {
-        $this->hindrances = $this->load($dataDir . '/hindrances.json');
+        $this->hindrances = $this->loadHindrances($dataDir . '/hindrances.json');
         $this->skills     = $this->load($dataDir . '/skills.json');
         $this->edges      = $this->load($dataDir . '/edges.json');
+    }
+
+    private function loadHindrances(string $path): array
+    {
+        $hindrances = $this->load($path);
+
+        foreach ($hindrances as $id => $hindrance) {
+            $hindrances[$id] = $this->mergeEffectsByLevel($hindrance);
+        }
+
+        return $hindrances;
     }
 
     private function load(string $path): array
@@ -32,6 +44,60 @@ class GameData
             $indexed[$item['id']] = $item;
         }
         return $indexed;
+    }
+
+    private function mergeEffectsByLevel(array $hindrance): array
+    {
+        $groupedDetails = [];
+
+        foreach ($hindrance['effects'] ?? [] as $effect) {
+            $level = trim((string) ($effect['level'] ?? ''));
+            $details = trim((string) ($effect['details'] ?? ''));
+
+            if ($level === '' || $details === '') {
+                continue;
+            }
+
+            if (!isset($groupedDetails[$level])) {
+                $groupedDetails[$level] = [];
+            }
+
+            $groupedDetails[$level][] = $details;
+        }
+
+        $orderedLevels = [];
+        foreach ($hindrance['levels'] ?? [] as $level) {
+            $level = trim((string) $level);
+            if ($level === '' || in_array($level, $orderedLevels, true)) {
+                continue;
+            }
+
+            $orderedLevels[] = $level;
+        }
+
+        foreach (array_keys($groupedDetails) as $level) {
+            if (in_array($level, $orderedLevels, true)) {
+                continue;
+            }
+
+            $orderedLevels[] = $level;
+        }
+
+        $mergedEffects = [];
+        foreach ($orderedLevels as $level) {
+            if (!isset($groupedDetails[$level])) {
+                continue;
+            }
+
+            $mergedEffects[] = [
+                'level' => $level,
+                'details' => implode(self::DETAIL_SEPARATOR, $groupedDetails[$level]),
+            ];
+        }
+
+        $hindrance['effects'] = $mergedEffects;
+
+        return $hindrance;
     }
 
     public function hindrance(string $id): ?array

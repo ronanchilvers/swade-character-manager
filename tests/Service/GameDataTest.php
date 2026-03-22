@@ -17,6 +17,12 @@ class GameDataTest extends TestCase
 
         self::assertNotNull($hindrance);
         self::assertSame('All Thumbs', $hindrance['name']);
+        self::assertSame([
+            [
+                'level' => 'minor',
+                'details' => 'Applies to Trait rolls made while using mechanical or electrical devices. A critical failure can break the device.',
+            ],
+        ], $hindrance['effects']);
     }
 
     public function testReturnsNullForUnknownHindranceKey(): void
@@ -33,5 +39,28 @@ class GameDataTest extends TestCase
         self::assertTrue($service->hindranceSupportsLevel('bad_eyes', 'minor'));
         self::assertTrue($service->hindranceSupportsLevel('bad_eyes', 'major'));
         self::assertFalse($service->hindranceSupportsLevel('all_thumbs', 'major'));
+    }
+
+    public function testMergesInterleavedEffectsByLevelOrder(): void
+    {
+        $service = new GameData(__DIR__ . '/../../data');
+
+        self::assertSame([
+            [
+                'level' => 'minor',
+                'details' => 'Subtract 1 from any Trait roll dependent on vision. If glasses are lost or broken in a setting where they exist, the character is Distracted.',
+            ],
+            [
+                'level' => 'major',
+                'details' => 'Subtract 2 from any Trait roll dependent on vision. If glasses are lost or broken in a setting where they exist, the character is also Vulnerable.',
+            ],
+        ], $service->hindrance('bad_eyes')['effects']);
+    }
+
+    public function testKeepsEmptyEffectsForRoleplayingHindrances(): void
+    {
+        $service = new GameData(__DIR__ . '/../../data');
+
+        self::assertSame([], $service->hindrance('arrogant')['effects']);
     }
 }
