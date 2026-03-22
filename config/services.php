@@ -11,13 +11,15 @@ use App\Entity\Factory\Edge;
 use App\Entity\Factory\Hindrance;
 use App\Entity\Factory\Skill;
 use App\Entity\Factory\User;
-use App\Service\CharacterAttributes;
-use App\Service\CharacterHindrances;
-use App\Service\GameData;
-use App\Twig\FlightExtension;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
+use App\Service\CharacterAttributes;
+use App\Service\CharacterHindrances;
+use App\Service\GameData;
+use App\Twig\AssetExtension;
+use App\Twig\FieldExtension;
+use App\Twig\RoutingExtension;
 use flight\database\SimplePdo;
 use League\OAuth2\Client\Provider\Google;
 use Twig\Environment;
@@ -65,7 +67,9 @@ $container->singleton(
             $loader,
             $settings['twig']
         );
-        $twig->addExtension(new FlightExtension());
+        $twig->addExtension(new RoutingExtension());
+        $twig->addExtension(new FieldExtension());
+        $twig->addExtension(new AssetExtension());
         $twig->addGlobal('session', $container->get(Session::class));
 
         return $twig;
