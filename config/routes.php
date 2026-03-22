@@ -33,4 +33,6 @@ Flight::group('/characters', function () {
         ->setAlias('characters_concept');
     Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Character::class, 'hindrances'])
         ->setAlias('characters_hindrances');
+    Flight::route('GET|POST /attributes/@hash:[a-z0-9]{32}', [Character::class, 'attributes'])
+        ->setAlias('characters_attributes');
 }, [ MiddlewareAuth::class ]);

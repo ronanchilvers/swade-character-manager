@@ -4,7 +4,7 @@
   "entry_type": "skill",
   "schema": {
     "requirements": {
-      "type": "rank | trait | edge | wild_card | arcane_background | hindrance_any_of | special",
+      "type": "rank | attribute | trait | edge | wild_card | arcane_background | hindrance_any_of | special",
       "target": "thing being required",
       "value": "required value"
     },

@@ -23,6 +23,6 @@ class Filter
 
     public static function number(mixed $input): int
     {
-        return (int) preg_replace('/[^0-9]', "", $input);
+        return (int) preg_replace('/[^0-9]/', "", (string) $input);
     }
 }

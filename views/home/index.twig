@@ -2,7 +2,11 @@
 
 {% block content %}
 {% for character in characters %}
-    <p>{{ character.id }} - {{ character.name }} - <a href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a></p>
+    <p>{{ character.id }} - {{ character.name }}
+        - <a href="{{ get_url('characters_concept', {hash: character.hash}) }}">Basics</a>
+        - <a href="{{ get_url('characters_hindrances', {hash: character.hash}) }}">Hindrances</a>
+        - <a href="{{ get_url('characters_attributes', {hash: character.hash}) }}">Attributes</a>
+    </p>
 {% else %}
     <p>No characters found - <a href="{{ get_url('characters_create') }}">Create one now</a></p>
 {% endfor %}

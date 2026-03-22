@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Service;
 
+use App\Entity;
 use App\Entity\Factory\Hindrance;
 use App\Service\CharacterHindrances;
 use App\Service\GameData;
@@ -71,5 +72,32 @@ class CharacterHindrancesTest extends TestCase
             'all_thumbs' => 'minor',
             'bad_eyes' => 'major',
         ]));
+    }
+
+    public function testSelectedPointsForCharacterSumsMinorAndMajorRows(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $factory = $this->createMock(Hindrance::class);
+        $factory->expects(self::once())
+            ->method('forCharacter')
+            ->with(10)
+            ->willReturn([
+                new Entity([
+                    'key' => 'all_thumbs',
+                    'level' => 'minor',
+                ]),
+                new Entity([
+                    'key' => 'bad_eyes',
+                    'level' => 'major',
+                ]),
+            ]);
+
+        $service = new CharacterHindrances(
+            $pdo,
+            new GameData(__DIR__ . '/../../data'),
+            $factory
+        );
+
+        self::assertSame(3, $service->selectedPointsForCharacter(10));
     }
 }

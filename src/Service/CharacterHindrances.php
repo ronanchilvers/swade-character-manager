@@ -67,6 +67,11 @@ class CharacterHindrances
         return max(0, self::MAX_HINDRANCE_POINTS - $this->pointsUsed($selected));
     }
 
+    public function selectedPointsForCharacter(int $characterId): int
+    {
+        return $this->pointsUsed($this->selectedForCharacter($characterId));
+    }
+
     private function normalizeSelectionMap(array $submitted): array
     {
         $selected = [];

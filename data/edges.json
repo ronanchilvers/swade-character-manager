@@ -4,7 +4,7 @@
   "entry_type": "edge",
   "schema": {
     "requirements": {
-      "type": "rank | trait | edge | wild_card | arcane_background | hindrance_any_of | special",
+      "type": "rank | attribute | trait | edge | wild_card | arcane_background | hindrance_any_of | special",
       "target": "thing being required",
       "value": "required value"
     },
@@ -63,7 +63,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -128,7 +128,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -259,7 +259,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d6+"
         }
@@ -439,7 +439,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d6+"
         }
@@ -483,12 +483,12 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Strength",
           "value": "d6+"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d6+"
         }
@@ -534,12 +534,12 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Strength",
           "value": "d6+"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d6+"
         }
@@ -583,7 +583,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -619,7 +619,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -740,7 +740,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d8+"
         }
@@ -776,7 +776,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d6+"
         }
@@ -820,7 +820,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d6+"
         }
@@ -917,7 +917,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -1122,12 +1122,12 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Strength",
           "value": "d8+"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d8+"
         }
@@ -1215,7 +1215,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d8+"
         }
@@ -1398,7 +1398,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -1514,7 +1514,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -1616,7 +1616,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -1689,7 +1689,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -1899,7 +1899,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d6+"
         }
@@ -1933,7 +1933,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d8+"
         }
@@ -1977,7 +1977,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d8+"
         }
@@ -2272,7 +2272,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d8+"
         }
@@ -2478,7 +2478,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -2522,7 +2522,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Strength",
           "value": "d8+"
         },
@@ -2692,7 +2692,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -2728,7 +2728,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -2764,7 +2764,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d6+"
         }
@@ -2834,7 +2834,7 @@
           "value": "Veteran"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         },
@@ -2873,7 +2873,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d8+"
         },
@@ -2948,7 +2948,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         },
@@ -2987,7 +2987,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d8+"
         },
@@ -3459,7 +3459,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d6+"
         },
@@ -3621,7 +3621,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         }
@@ -3665,7 +3665,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         },
@@ -3746,7 +3746,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         },
@@ -3790,7 +3790,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d8+"
         },
@@ -3841,7 +3841,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d10+"
         }
@@ -3877,7 +3877,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d6+"
         },
@@ -4010,12 +4010,12 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Strength",
           "value": "d6+"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d6+"
         }
@@ -4063,7 +4063,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Agility",
           "value": "d8+"
         },
@@ -4131,7 +4131,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d6+"
         },
@@ -4182,7 +4182,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4223,7 +4223,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4403,7 +4403,7 @@
           "value": "Seasoned"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4440,7 +4440,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4512,7 +4512,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Smarts",
           "value": "d6+"
         }
@@ -4558,7 +4558,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4633,7 +4633,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4736,7 +4736,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4774,7 +4774,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         },
@@ -4886,7 +4886,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Spirit",
           "value": "d8+"
         }
@@ -4920,7 +4920,7 @@
           "value": "Novice"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d8+"
         }
@@ -5195,7 +5195,7 @@
           "value": "Legendary"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d8+"
         }
@@ -5234,7 +5234,7 @@
           "value": "Tough as Nails"
         },
         {
-          "type": "trait",
+          "type": "attribute",
           "target": "Vigor",
           "value": "d12+"
         }

@@ -11,6 +11,7 @@ use App\Entity\Factory\Edge;
 use App\Entity\Factory\Hindrance;
 use App\Entity\Factory\Skill;
 use App\Entity\Factory\User;
+use App\Service\CharacterAttributes;
 use App\Service\CharacterHindrances;
 use App\Service\GameData;
 use App\Twig\FlightExtension;
@@ -86,6 +87,7 @@ $classes = [
     Hindrance::class,
     Skill::class,
     Edge::class,
+    CharacterAttributes::class,
     CharacterHindrances::class,
 ];
 foreach ($classes as $class) {

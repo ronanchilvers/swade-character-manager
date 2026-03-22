@@ -34,6 +34,11 @@ class Character extends Factory
             'hash' => v::not(v::blank()),
             'user' => v::intVal()->greaterThan(0),
             'name' => v::not(v::blank()),
+            'agility' => v::intVal()->in([4, 6, 8, 10, 12]),
+            'smarts' => v::intVal()->in([4, 6, 8, 10, 12]),
+            'spirit' => v::intVal()->in([4, 6, 8, 10, 12]),
+            'strength' => v::intVal()->in([4, 6, 8, 10, 12]),
+            'vigor' => v::intVal()->in([4, 6, 8, 10, 12]),
         ];
     }
 
