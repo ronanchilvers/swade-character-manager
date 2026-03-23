@@ -12,6 +12,8 @@ use Ronanchilvers\Utility\Str;
 
 class Character extends Factory
 {
+    const DEFAULT_PACE = 6;
+
     public function forUser(int $id)
     {
         return $this->find(
@@ -46,5 +48,11 @@ class Character extends Factory
     {
         $entity->user = Flight::session()->user->id;
         $entity->hash = Str::token(32);
+    }
+
+    protected function beforeUpdate(Entity $entity): void
+    {
+        $entity->pace = static::DEFAULT_PACE;
+        $entity->toughness = ceil($entity->vigor / 2);
     }
 }
