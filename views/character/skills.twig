@@ -1,0 +1,75 @@
+{% extends 'base.twig' %}
+
+{% do add_stylesheet('/css/cards.css') %}
+{% do add_script('/javascript/skills.js') %}
+
+{% block content %}
+{% include "partials/character-bar.twig" %}
+<form class="form" method="post" action="{{ get_url('characters_skills', {hash: entity.hash}) }}">
+
+    {% if form_errors %}
+    <div class="field field--error">
+        <p class="field__error">Please correct the following:</p>
+        {% for error in form_errors %}
+        <p class="field__error">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="field js-skills-summary" data-total="{{ allocation.skill_points_total }}">
+        <label class="field__label">Skill Point Summary</label>
+        <div class="field__inner">
+            <p>Each character has {{ allocation.skill_points_total }} skill points.</p>
+            <p>Athletics, Common Knowledge, Notice, Persuasion, and Stealth start at d4 for free.</p>
+            <p>Each skill step costs 1 point up to the linked attribute, then 2 points per step after that.</p>
+            <p>Skill points: <span class="js-skill-points-spent">{{ allocation.skill_points_spent }}</span> / <span class="js-skill-points-total">{{ allocation.skill_points_total }}</span></p>
+            <p>Skill points remaining: <span class="js-skill-points-remaining">{{ allocation.skill_points_remaining }}</span></p>
+        </div>
+    </div>
+
+    {% for group in skill_groups %}
+    <div class="field">
+        <label class="field__label">{{ group.attribute }} (d{{ group.attribute_die }})</label>
+        <div class="cards">
+            {% for skill in group.skills %}
+            <div class="field cards__card {% if field_has_error(skill.id, errors) %}field--error{% endif %}">
+                <label class="field__label" for="skill_{{ skill.id }}">{{ skill.name }}</label>
+                <div class="field__inner">
+                    {% if skill.summary %}
+                    <p>{{ skill.summary }}</p>
+                    {% endif %}
+                    {% if skill.core_skill %}
+                    <p>Core skill: starts at d4 for free.</p>
+                    {% endif %}
+                    <select
+                        class="field__input js-skill-die"
+                        id="skill_{{ skill.id }}"
+                        name="skills[{{ skill.id }}]"
+                        data-linked-attribute-die="{{ group.attribute_die }}"
+                        data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
+                    >
+                        {% for value in skill.options %}
+                        <option value="{{ value }}" {% if skill.selected_die == value %}selected{% endif %}>
+                            {% if value == 0 %}
+                            Untrained
+                            {% else %}
+                            d{{ value }}
+                            {% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <p class="field__error">Choose a valid die type.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="form__buttons">
+        <a class="button" href="{{ get_url('characters_attributes', {hash: entity.hash}) }}">Previous</a>
+        <button class="button button--primary" type="submit">Save Skills</button>
+    </div>
+
+</form>
+{% endblock %}

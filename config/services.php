@@ -16,6 +16,7 @@ use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
 use App\Service\CharacterAttributes;
 use App\Service\CharacterHindrances;
+use App\Service\CharacterSkills;
 use App\Service\GameData;
 use App\Twig\AssetExtension;
 use App\Twig\FieldExtension;
@@ -93,6 +94,7 @@ $classes = [
     Edge::class,
     CharacterAttributes::class,
     CharacterHindrances::class,
+    CharacterSkills::class,
 ];
 foreach ($classes as $class) {
     $container->singleton($class, $class);
