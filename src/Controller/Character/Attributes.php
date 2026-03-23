@@ -6,9 +6,6 @@ namespace App\Controller\Character;
 
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
-use App\Service\CharacterAttributes;
-use App\Service\CharacterHindrances;
-use App\Service\CharacterSkills;
 use App\Service\GameData;
 use Flight;
 
@@ -16,9 +13,6 @@ class Attributes
 {
     public function __construct(
         private FactoryCharacter $factory,
-        private CharacterHindrances $characterHindrances,
-        private CharacterAttributes $characterAttributes,
-        private CharacterSkills $characterSkills,
         private GameData $gameData,
     ) {
     }

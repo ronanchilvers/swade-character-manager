@@ -25,7 +25,8 @@ $settings = [
         "encryption.key" => null,
     ],
     "twig" => [
-        "cache" => false,
+        "cache" => true,
+        "debug" => false,
     ],
     "auth" => [
         "google" => [

@@ -47,7 +47,7 @@
                                 value="{{ level }}"
                                 {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
                             />
-                            {{ level|title }}
+                            {{ level|title }} {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
                         </label>
                         {% endfor %}
                     </div>

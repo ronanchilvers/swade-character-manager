@@ -6,9 +6,8 @@ namespace App\Controller\Character;
 
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
-use App\Service\CharacterAttributes;
-use App\Service\CharacterHindrances;
-use App\Service\CharacterSkills;
+use App\Entity\Factory\Hindrance;
+use App\Filter;
 use App\Service\GameData;
 use Flight;
 
@@ -16,9 +15,7 @@ class Hindrances
 {
     public function __construct(
         private FactoryCharacter $factory,
-        private CharacterHindrances $characterHindrances,
-        private CharacterAttributes $characterAttributes,
-        private CharacterSkills $characterSkills,
+        private Hindrance $hindranceFactory,
         private GameData $gameData,
     ) {
     }
@@ -31,22 +28,24 @@ class Hindrances
             Flight::redirect(Flight::getUrl('home_page'));
             return;
         }
+        $errors = [];
         if ('POST' === Flight::request()->getMethod()) {
-            $result = $this->characterHindrances->processSubmission(
-                (int) $entity->id,
-                $_POST['hindrances'] ?? []
+            $selected = Filter::alphaArray($_POST['hindrances']);
+            $result = $this->hindranceFactory->syncForCharacter(
+                $entity,
+                $selected
             );
-
-            if (empty($result['errors'])) {
+            if ($result->isOk()) {
                 Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
                 return;
             }
-
-            $selected = $result['selected'];
-            $errors = $result['errors'];
+            $errors = $result->errors();
         } else {
-            $selected = $this->characterHindrances->selectedForCharacter((int) $entity->id);
-            $errors = [];
+            $characterHindrances = $this->hindranceFactory->forCharacter($entity);
+            $selected = [];
+            foreach ($characterHindrances as $hindrance) {
+                $selected[$hindrance->key] = $hindrance->level;
+            }
         }
 
         Flight::render('character/hindrances.twig', [
@@ -55,8 +54,7 @@ class Hindrances
             'hindrances' => $this->gameData->allHindrances(),
             'selected'   => $selected,
             'errors' => $errors,
-            'remaining_points' => $this->characterHindrances->remainingPoints($selected),
-            'max_points' => $this->characterHindrances->maxPoints(),
+            'max_points' => Hindrance::MAX_POINTS,
         ]);
     }
 }
