@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use Flight;
-
 class AssetExtension extends \Twig\Extension\AbstractExtension
 {
     private array $scripts = [];

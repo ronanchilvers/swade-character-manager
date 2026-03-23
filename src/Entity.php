@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use Serializable;
-
 class Entity
 {
     public function __construct(protected array $data = [])
