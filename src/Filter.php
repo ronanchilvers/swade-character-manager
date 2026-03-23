@@ -6,6 +6,16 @@ namespace App;
 
 class Filter
 {
+    public static function numberArray(array $input)
+    {
+        $output = [];
+        foreach ($input as $key => $value) {
+            $output = static::number($value);
+        }
+
+        return $output;
+    }
+
     public static function alpha(mixed $input): string
     {
         return (string) preg_replace("/[^A-z]/", "", $input);
