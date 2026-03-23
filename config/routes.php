@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 use App\Controller\Auth;
-use App\Controller\Character;
+use App\Controller\Character\Base;
+use App\Controller\Character\Hindrances;
+use App\Controller\Character\Attributes;
+use App\Controller\Character\Skills;
 use App\Controller\Home;
 use App\Middleware\Auth as MiddlewareAuth;
 
@@ -27,14 +30,14 @@ Flight::group('/auth', function () {
 
 // Characters
 Flight::group('/characters', function () {
-    Flight::route('GET|POST /create', [Character::class, 'create'])
+    Flight::route('GET|POST /create', [Base::class, 'create'])
         ->setAlias('characters_create');
-    Flight::route('GET|POST /concept/@hash:[a-z0-9]{32}', [Character::class, 'concept'])
+    Flight::route('GET|POST /concept/@hash:[a-z0-9]{32}', [Base::class, 'index'])
         ->setAlias('characters_concept');
-    Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Character::class, 'hindrances'])
+    Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Hindrances::class, 'index'])
         ->setAlias('characters_hindrances');
-    Flight::route('GET|POST /attributes/@hash:[a-z0-9]{32}', [Character::class, 'attributes'])
+    Flight::route('GET|POST /attributes/@hash:[a-z0-9]{32}', [Attributes::class, 'index'])
         ->setAlias('characters_attributes');
-    Flight::route('GET|POST /skills/@hash:[a-z0-9]{32}', [Character::class, 'skills'])
+    Flight::route('GET|POST /skills/@hash:[a-z0-9]{32}', [Skills::class, 'index'])
         ->setAlias('characters_skills');
 }, [ MiddlewareAuth::class ]);
