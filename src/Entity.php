@@ -19,9 +19,21 @@ class Entity
         return null;
     }
 
+    public function get(string $key): mixed
+    {
+        return $this->__get($key);
+    }
+
     public function __set(string $key, mixed $value): void
     {
         $this->data[$key] = $value;
+    }
+
+    public function set(string $key, mixed $value): static
+    {
+        $this->__set($key, $value);
+
+        return $this;
     }
 
     public function __isset(string $key): bool

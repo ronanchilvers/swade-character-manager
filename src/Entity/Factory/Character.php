@@ -12,7 +12,19 @@ use Ronanchilvers\Utility\Str;
 
 class Character extends Factory
 {
-    const DEFAULT_PACE = 6;
+    private const ATTRIBUTE_FIELDS = [
+        'agility' => 'Agility',
+        'smarts' => 'Smarts',
+        'spirit' => 'Spirit',
+        'strength' => 'Strength',
+        'vigor' => 'Vigor',
+    ];
+    private const DEFAULT_PACE = 6;
+
+    public function attributeFields(): array
+    {
+        return static::ATTRIBUTE_FIELDS;
+    }
 
     public function forUser(int $id)
     {

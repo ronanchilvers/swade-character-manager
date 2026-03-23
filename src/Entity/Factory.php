@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity;
+use App\Entity\Factory\Result;
 use flight\database\SimplePdo;
 use Ronanchilvers\Utility\Str;
 
@@ -124,7 +125,7 @@ abstract class Factory
         }
     }
 
-    public function insert(Entity $entity): bool
+    public function insert(Entity $entity): Result
     {
         $this->beforeInsert($entity);
         $data = $entity->toArray();
@@ -140,13 +141,13 @@ abstract class Factory
             );
             $entity->id = $id;
 
-            return true;
-        } catch (\Exception $e) {
-            return false;
+            return new Result();
+        } catch (\Exception $ex) {
+            return new Result()->addError($ex->getMessage());
         }
     }
 
-    public function update(Entity $entity): bool
+    public function update(Entity $entity): Result
     {
         $this->beforeUpdate($entity);
         $id = $entity->id;
@@ -167,13 +168,13 @@ abstract class Factory
                 [$id]
             );
 
-            return true;
-        } catch (\Exception $e) {
-            return false;
+            return new Result();
+        } catch (\Exception $ex) {
+            return new Result()->addError($ex->getMessage());
         }
     }
 
-    public function upsert(Entity $entity)
+    public function upsert(Entity $entity): Result
     {
         if (isset($entity->id)) {
             return $this->update($entity);

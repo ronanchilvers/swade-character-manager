@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
+use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
+use App\Filter;
 use App\Service\GameData;
 use Flight;
 
@@ -26,25 +28,27 @@ class Attributes
             return;
         }
 
+        $sizes = Dice::validSizes();
+        $errors = [];
         if ('POST' === Flight::request()->getMethod()) {
-            $result = $this->characterAttributes->processSubmission($entity, $_POST);
-
-            if (empty($result['errors']) && empty($result['form_errors'])) {
-                Flight::redirect(Flight::getUrl('characters_skills', ['hash' => $entity->hash]));
+            $attributes = Filter::numberArray($_POST['attributes'], $sizes);
+            foreach ($attributes as $key => $value) {
+                $entity->set($key, $value);
+            }
+            $result = $this->factory->update($entity);
+            if ($result->isSuccess()) {
+                Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
                 return;
             }
-        } else {
-            $result = $this->characterAttributes->viewData($entity);
+            $errors = $result->errors();
         }
 
         Flight::render('character/attributes.twig', [
             'page_title' => 'Choose Attributes',
-            'entity' => $result['entity'],
-            'errors' => $result['errors'],
-            'form_errors' => $result['form_errors'],
-            'attribute_fields' => $result['attribute_fields'],
-            'attribute_options' => $result['attribute_options'],
-            'allocation' => $result['allocation'],
+            'entity' => $entity,
+            'errors' => $errors,
+            'attribute_options' => $sizes,
+            'attribute_fields' => $this->factory->attributeFields(),
         ]);
     }
 }

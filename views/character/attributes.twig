@@ -31,7 +31,7 @@
     <div class="field {% if field_has_error(field, errors) %}field--error{% endif %}">
         <label class="field__label" for="attribute_{{ field }}">{{ label }}</label>
         <div class="field__inner">
-            <select class="field__input" id="attribute_{{ field }}" name="{{ field }}">
+            <select class="field__input" id="attribute_{{ field }}" name="attributes[{{ field }}]">
                 {% for value in attribute_options %}
                 <option value="{{ value }}" {% if attribute(entity, field) == value %}selected{% endif %}>d{{ value }}</option>
                 {% endfor %}

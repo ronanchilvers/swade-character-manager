@@ -11,7 +11,7 @@ class Result
     ) {
     }
 
-    public function isOk(): bool
+    public function isSuccess(): bool
     {
         return 0 == count($this->errors);
     }

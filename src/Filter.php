@@ -11,7 +11,7 @@ class Filter
         return (string) preg_replace("/[^A-z]/", "", $input);
     }
 
-    public static function alphaArray(array $input)
+    public static function alphaArray(array $input): string
     {
         $output = [];
         foreach ($input as $key => $value) {
@@ -36,11 +36,15 @@ class Filter
         return (int) preg_replace('/[^0-9]/', "", (string) $input);
     }
 
-    public static function numberArray(array $input)
+    public static function numberArray(array $input, array $valid = []): array
     {
         $output = [];
         foreach ($input as $key => $value) {
-            $output[$key] = static::number($value);
+            $value = static::number($value);
+            if (!empty($valid) && !in_array($value, $valid)) {
+                continue;
+            }
+            $output[$key] = $value;
         }
 
         return $output;

@@ -35,7 +35,7 @@ class Hindrances
                 $entity,
                 $selected
             );
-            if ($result->isOk()) {
+            if ($result->isSuccess()) {
                 Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
                 return;
             }
