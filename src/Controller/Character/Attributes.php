@@ -37,7 +37,7 @@ class Attributes
             }
             $result = $this->factory->update($entity);
             if ($result->isSuccess()) {
-                Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
+                Flight::redirect(Flight::getUrl('characters_skills', ['hash' => $entity->hash]));
                 return;
             }
             $errors = $result->errors();
