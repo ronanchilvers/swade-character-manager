@@ -25,8 +25,9 @@ class Skill extends Factory
         $result = new Result();
         try {
             $this->pdo->transaction(function (SimplePdo $pdo) use ($character, $selected) {
-                $pdo->runQuery(
-                    'DELETE FROM skills WHERE skill_character_id = ?',
+                $pdo->delete(
+                    $this->getTableName(),
+                    'skill_character_id = ?',
                     [$character->id]
                 );
 

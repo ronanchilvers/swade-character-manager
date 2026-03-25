@@ -27,24 +27,21 @@ class Hindrance extends Factory
         $result = new Result();
         try {
             $this->pdo->transaction(function (SimplePdo $pdo) use ($character, $selected) {
-                $pdo->runQuery(
-                    'DELETE FROM hindrances WHERE hindrance_character_id = ?',
+                $num = $pdo->delete(
+                    $this->getTableName(),
+                    'hindrance_character_id = ?',
                     [$character->id]
                 );
-
                 $rows = [];
                 foreach ($selected as $key => $level) {
-                    $entity = new Entity([
-                        'character_id' => $character->id,
-                        'key' => $key,
-                        'level' => $level,
-                    ]);
-                    if (!empty($this->validate($entity))) {
-                        throw new \RuntimeException('Invalid hindrance row');
-                    }
-                    if (!$this->insert($entity)) {
-                        throw new \RuntimeException('Unable to insert hindrance row');
-                    }
+                    $rows[] = [
+                        $this->prefix('character_id') => $character->id,
+                        $this->prefix('key') => $key,
+                        $this->prefix('level') => $level,
+                    ];
+                }
+                if (!$pdo->insert($this->getTableName(), $rows)) {
+                    throw new \RuntimeException('Unable to update character hindrances');
                 }
             });
 
