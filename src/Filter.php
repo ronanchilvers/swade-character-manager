@@ -11,7 +11,7 @@ class Filter
         return (string) preg_replace("/[^A-z]/", "", $input);
     }
 
-    public static function alphaArray(array $input): string
+    public static function alphaArray(array $input): array
     {
         $output = [];
         foreach ($input as $key => $value) {

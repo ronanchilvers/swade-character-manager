@@ -93,7 +93,6 @@ $classes = [
     Hindrance::class,
     Skill::class,
     Edge::class,
-    CharacterSkills::class,
 ];
 foreach ($classes as $class) {
     $container->singleton($class, $class);

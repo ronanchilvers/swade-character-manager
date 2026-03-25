@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
+use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
+use App\Entity\Factory\Skill as FactorySkill;
+use App\Filter;
 use App\Service\GameData;
 use Flight;
 
@@ -13,6 +16,7 @@ class Skills
 {
     public function __construct(
         private FactoryCharacter $factory,
+        private FactorySkill $skillFactory,
         private GameData $gameData,
     ) {
     }
@@ -26,24 +30,35 @@ class Skills
             return;
         }
 
-        if ('POST' === Flight::request()->getMethod()) {
-            $result = $this->characterSkills->processSubmission($entity, $_POST['skills'] ?? []);
+        $errors = [];
 
-            if (empty($result['errors']) && empty($result['form_errors'])) {
+        if ('POST' === Flight::request()->getMethod()) {
+            $selected = Filter::numberArray($_POST['skills']);
+            $selected = array_filter($selected);
+            $result = $this->skillFactory->syncForCharacter($entity, $selected);
+
+            if ($result->isSuccess()) {
                 Flight::redirect(Flight::getUrl('characters_skills', ['hash' => $entity->hash]));
                 return;
             }
         } else {
-            $result = $this->characterSkills->viewData($entity);
+            $characterSkills = $this->skillFactory->forCharacter($entity);
+            $selected = [];
+            foreach ($characterSkills as $skill) {
+                $selected[$skill->key] = $skill->die;
+            }
         }
+        $skills = $this->gameData->allSkills();
+        $diceOptions = Dice::validSizes();
+        array_unshift($diceOptions, 0);
 
         Flight::render('character/skills.twig', [
             'page_title' => 'Choose Skills',
-            'entity' => $result['entity'],
-            'errors' => $result['errors'],
-            'form_errors' => $result['form_errors'],
-            'skill_groups' => $result['skill_groups'],
-            'allocation' => $result['allocation'],
+            'entity' => $entity,
+            'errors' => $errors,
+            'selected' => $selected,
+            'skills' => $skills,
+            'dice_options' => $diceOptions,
         ]);
     }
 }
