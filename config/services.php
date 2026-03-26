@@ -14,7 +14,6 @@ use App\Entity\Factory\User;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
-use App\Service\CharacterSkills;
 use App\Service\GameData;
 use App\Twig\AssetExtension;
 use App\Twig\FieldExtension;
