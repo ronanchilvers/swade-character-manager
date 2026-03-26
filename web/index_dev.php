@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Http\Response;
 use Tracy\Debugger;
 use flight\Container;
-use flight\database\SimplePdo;
 use flight\debug\tracy\TracyExtensionLoader;
 
 if (PHP_SAPI == 'cli-server') {
