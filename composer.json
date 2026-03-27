@@ -23,9 +23,9 @@
     }
   ],
   "require-dev": {
+    "flightphp/tracy-extensions": "^0.2.7",
     "phpunit/phpunit": "^13.0",
-    "tracy/tracy": "^2.11",
-    "flightphp/tracy-extensions": "^0.2.7"
+    "tracy/tracy": "^2.11"
   },
   "scripts": {
     "serve": "cd web && /opt/homebrew/bin/php -S 127.0.0.1:8080 index_dev.php"
