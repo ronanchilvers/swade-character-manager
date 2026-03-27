@@ -6,6 +6,6 @@ namespace App\Service\Data;
 
 use App\Service\Data;
 
-class Hindrances extends Data
+class Edges extends Data
 {
 }

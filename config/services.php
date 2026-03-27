@@ -14,7 +14,9 @@ use App\Entity\Factory\User;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
+use App\Service\Data\Edges;
 use App\Service\Data\Hindrances;
+use App\Service\Data\Skills;
 use App\Service\Data\Manager;
 use App\Service\GameData;
 use App\Twig\AssetExtension;
@@ -108,7 +110,9 @@ $container->singleton(
     Manager::class,
     function () {
         $manager = new Manager(__DIR__ . '/../data');
+        $manager->addType(Edges::class);
         $manager->addType(Hindrances::class);
+        $manager->addType(Skills::class);
 
         return $manager;
     }

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Factory\Character;
-use App\Service\Data\Hindrances;
-use App\Service\Data\Manager;
 use Flight;
 
 class Home

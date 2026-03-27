@@ -11,13 +11,11 @@ abstract class Data
 
     public function __construct(string $dataDir)
     {
-        $filename = rtrim($dataDir, '/') . '/' . $this->filename;
-        $this->data = json_decode(
-            (string) file_get_contents($filename),
-            true,
-            512,
-            JSON_THROW_ON_ERROR
-        );
+        $filename = rtrim($dataDir, '/') .
+            '/' .
+            strtolower(str_replace(__NAMESPACE__ . '\\Data\\', '', static::class)) .
+            '.php';
+        $this->data = require $filename;
     }
 
     public function all(): array
