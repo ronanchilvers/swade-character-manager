@@ -8,7 +8,8 @@ use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Entity\Factory\Hindrance;
 use App\Filter;
-use App\Service\GameData;
+use App\Service\Data\Manager;
+use App\Service\Data\Hindrances as HindrancesData;
 use Flight;
 
 class Hindrances
@@ -16,7 +17,7 @@ class Hindrances
     public function __construct(
         private FactoryCharacter $factory,
         private Hindrance $hindranceFactory,
-        private GameData $gameData,
+        private Manager $manager,
     ) {
     }
 
@@ -51,7 +52,7 @@ class Hindrances
         Flight::render('character/hindrances.twig', [
             'page_title' => 'Choose Hindrances',
             'entity'     => $entity,
-            'hindrances' => $this->gameData->allHindrances(),
+            'hindrances' => $this->manager->getType(HindrancesData::class)->all(),
             'selected'   => $selected,
             'errors' => $errors,
             'max_points' => Hindrance::MAX_POINTS,

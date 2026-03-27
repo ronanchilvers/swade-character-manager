@@ -31,6 +31,7 @@
     "serve": "cd web && /opt/homebrew/bin/php -S 127.0.0.1:8080 index_dev.php"
   },
   "config": {
-      "process-timeout" : 0
+      "process-timeout" : 0,
+      "sort-packages": true
   }
 }

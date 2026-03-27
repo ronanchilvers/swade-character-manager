@@ -14,6 +14,8 @@ use App\Entity\Factory\User;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
+use App\Service\Data\Hindrances;
+use App\Service\Data\Manager;
 use App\Service\GameData;
 use App\Twig\AssetExtension;
 use App\Twig\FieldExtension;
@@ -100,4 +102,14 @@ foreach ($classes as $class) {
 $container->singleton(
     GameData::class,
     fn() => new GameData(__DIR__ . '/../data')
+);
+
+$container->singleton(
+    Manager::class,
+    function () {
+        $manager = new Manager(__DIR__ . '/../data');
+        $manager->addType(Hindrances::class);
+
+        return $manager;
+    }
 );
