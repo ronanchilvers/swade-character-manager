@@ -52,7 +52,7 @@ class Base
         }
 
         Flight::render('character/concept.twig', [
-            'page_title' => 'Character Concept',
+            'page_title' => 'The Basics',
             'entity' => $entity,
             'errors' => $errors,
         ]);

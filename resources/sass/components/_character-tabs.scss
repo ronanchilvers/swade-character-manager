@@ -1,0 +1,31 @@
+.character-tabs {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    background-color: var(--c-black);
+    color: var(--c-white);
+
+    &__link {
+        display: block;
+        padding: 0.4rem 1rem;
+        text-decoration: none;
+        border-top: 1px solid var(--c-black);
+        border-top-left-radius: var(--border-radius-default);
+        border-top-right-radius: var(--border-radius-default);
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &--disabled {
+            color: var(--c-dark-grey);
+        }
+        &--active {
+            /* border-bottom: 5px solid var(--c-red); */
+            background-color: var(--c-white);
+            color: var(--c-black);
+        }
+    }
+}

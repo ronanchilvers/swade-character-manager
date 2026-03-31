@@ -1,0 +1,29 @@
+.dropdown {
+    /* overflow: hidden; */
+    position: relative;
+    .dropdown__menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--c-white);
+        display: none;
+        width: auto;
+        padding: 1rem 1.5rem;
+        border: 1px solid var(--c-black);
+        border-radius: var(--border-radius-default);
+    }
+    .dropdown__menu__item {
+        display: block;
+        white-space: nowrap;
+        margin-bottom: 0.5rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    &:hover {
+        cursor: pointer;
+        .dropdown__menu {
+            display: block;
+        }
+    }
+}

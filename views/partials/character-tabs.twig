@@ -1,0 +1,20 @@
+{% set tabs = {
+    characters_concept: "The Basics",
+    characters_hindrances: "Hindrances",
+    characters_attributes: "Attributes",
+    characters_skills: "Skills",
+} %}
+
+<nav class="character-tabs">
+{% for route,title in tabs %}
+    {% if entity.id %}
+        {% set url = get_url(route, { hash: entity.hash }) %}
+        <a  class="character-tabs__link{% if request.url == url %} character-tabs__link--active{% endif %}"
+            {% if url %}href="{{ get_url(route, { hash: entity.hash }) }}"{% endif %}
+            >{{ loop.index }}. {{ title }}</a>
+    {% else %}
+        <a  class="character-tabs__link {% if loop.first %}character-tabs__link--active{% else %}character-tabs__link--disabled{% endif %}"
+            >{{ title }}</a>
+    {% endif %}
+{% endfor %}
+</nav>

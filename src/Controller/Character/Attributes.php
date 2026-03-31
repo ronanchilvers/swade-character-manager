@@ -44,7 +44,7 @@ class Attributes
         }
 
         Flight::render('character/attributes.twig', [
-            'page_title' => 'Choose Attributes',
+            'page_title' => 'Attributes',
             'entity' => $entity,
             'errors' => $errors,
             'attribute_options' => $sizes,

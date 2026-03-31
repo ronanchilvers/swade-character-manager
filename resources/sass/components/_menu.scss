@@ -1,0 +1,20 @@
+.menu {
+    /* outline: 1px dotted blue; */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &__item {
+        margin-right: 1rem;
+    }
+    &__item:last-child {
+        margin-right: 0;
+    }
+
+    &__item--user {
+        height: 25px;
+        width: 25px;
+    }
+}

@@ -1,0 +1,54 @@
+/** Form Styling **/
+:root {
+  --field-color: inherit;
+  --field-color-error: #cc3333;
+  --field-input-border-color: #666;
+  --field-input-border-color-error: #cc3333;
+}
+
+.form {
+  .form__buttons {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.field {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  .field__label,
+  .field__inner,
+  .field__input {
+    width: 100%;
+    color: var(--field-color);
+    font-size: 1.1rem;
+  }
+  .field__label {
+    margin-bottom: 0.5rem;
+  }
+  .field__input {
+    padding: 1rem;
+    border: 1px solid var(--field-input-border-color);
+    border-radius: 0.5rem;
+  }
+  .field__error {
+    color: var(--field-color-error);
+    display: none;
+  }
+  &.field--error {
+    .field__label {
+      color: var(--field-color-error);
+    }
+    .field__input {
+      border-color: var(--field-input-border-color-error);
+    }
+    .field__error {
+      display: block;
+    }
+  }
+}
+
+/*# sourceMappingURL=form.css.map */

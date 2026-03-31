@@ -1,0 +1,28 @@
+/** Header **/
+:root {
+    --topbar-border-colour: #cccccc;
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var(--c-white);
+    z-index: 10;
+
+    .topbar__section {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+            align-items: flex-start;
+        }
+    }
+}

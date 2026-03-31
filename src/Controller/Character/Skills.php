@@ -53,7 +53,7 @@ class Skills
         array_unshift($diceOptions, 0);
 
         Flight::render('character/skills.twig', [
-            'page_title' => 'Choose Skills',
+            'page_title' => 'Skills',
             'entity' => $entity,
             'errors' => $errors,
             'selected' => $selected,

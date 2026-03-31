@@ -1,7 +1,9 @@
 {% extends 'base.twig' %}
 
+{% do add_stylesheet("/css/characters.css") %}
+
 {% block content %}
-{% include "partials/character-bar.twig" %}
+{% include "partials/character-tabs.twig" %}
 <form class="form" method="post" action="">
     <div class="field {% if field_has_error('name', errors) %}field--error{% endif %}">
         <label class="field__label">Your character's name</label>

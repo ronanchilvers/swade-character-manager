@@ -1,13 +1,36 @@
 <header class="topbar">
-    <h1>SCM</h1>
-    <nav class="main-nav">
-    {% if session.user %}
-        <span class="main-nav__item">{{ session.user.firstname }} {{ session.user.lastname }}</span>
-        <a href="{{ get_url('home_page') }}" class="main-nav__item">Home</a>
-        <a href="{{ get_url('characters_create') }}" class="main-nav__item">Create a character</a>
-    {% endif %}
+    <div class="topbar__section">
+        <h1>
+            SCM :
+            {% if (title is defined) and (title|length > 0) %}{{ title }}{% else %}{{ page_title }}{% endif %}
+        </h1>
+        <nav class="menu">
         {% if session.has('user') %}
-        <a href="{{ get_url('auth_logout') }}" class="main-nav__item">Logout</a>
+            <a href="{{ get_url('home_page') }}" class="menu__item">Your Characters</a>
+            <a href="{{ get_url('characters_create') }}" class="menu__item">Create a character</a>
+            <a href="{{ get_url('auth_logout') }}" class="dropdown__menu__item">Logout</a>
+            {#
+            <div class="menu__item menu__item--user dropdown">
+                <img src="/images/icons/settings.svg" />
+                <div class="dropdown__menu">
+                    <span class="dropdown__menu__item">{{ session.user.firstname }} {{ session.user.lastname }}</span>
+                    <a href="{{ get_url('auth_logout') }}" class="dropdown__menu__item">Logout</a>
+                </div>
+            <div>
+            #}
         {% endif %}
-    </nav>
+        </nav>
+    </div>
+
+{% if session.has('user') %}
+    <div class="topbar__section topbar__section--bottom">
+        <div class="data-panel">
+            <p>Points: #</p>
+            <p>Points: #</p>
+        </div>
+        <div class="data-panel">
+            <p>Points: #</p>
+        </div>
+    </div>
+{% endif %}
 </header>

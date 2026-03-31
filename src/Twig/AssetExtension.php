@@ -7,12 +7,7 @@ namespace App\Twig;
 class AssetExtension extends \Twig\Extension\AbstractExtension
 {
     private array $scripts = [];
-    private array $stylesheets = [
-        "/css/reset.css",
-        "/css/app.css",
-        "/css/form.css",
-        "/css/buttons.css",
-    ];
+    private array $stylesheets = [];
 
     public function getFunctions()
     {

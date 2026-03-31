@@ -72,10 +72,11 @@ $container->singleton(
         $twig->addExtension(new RoutingExtension());
         $twig->addExtension(new FieldExtension());
         $twig->addExtension(new AssetExtension());
-        $twig->addGlobal('session', $container->get(Session::class));
         if ($settings['twig']['debug']) {
             $twig->addExtension(new \Twig\Extension\DebugExtension());
         }
+        $twig->addGlobal('session', $container->get(Session::class));
+        $twig->addGlobal('request', Flight::request());
 
         return $twig;
     }

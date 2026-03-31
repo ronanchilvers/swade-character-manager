@@ -50,7 +50,7 @@ class Hindrances
         }
 
         Flight::render('character/hindrances.twig', [
-            'page_title' => 'Choose Hindrances',
+            'page_title' => 'Hindrances',
             'entity'     => $entity,
             'hindrances' => $this->manager->getType(HindrancesData::class)->all(),
             'selected'   => $selected,

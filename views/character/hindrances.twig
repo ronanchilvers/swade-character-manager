@@ -1,10 +1,10 @@
 {% extends 'base.twig' %}
 
-{% do add_stylesheet('/css/cards.css') %}
+{% do add_stylesheet("/css/characters.css") %}
 {% do add_script('/javascript/hindrances.js') %}
 
 {% block content %}
-{% include "partials/character-bar.twig" %}
+{% include "partials/character-tabs.twig" %}
 <form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
 
     {% if errors %}

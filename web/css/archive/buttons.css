@@ -1,0 +1,41 @@
+/** Button styles **/
+:root {
+  --button-background-color: #cccccc;
+  --button-background-color-text: #333333;
+  --button-border-color: #666666;
+  --button-background-color-primary: #39a0ef;
+  --button-background-color-text-primary: #ffffff;
+  --button-border-color-primary: #1079c9;
+  --button-background-color-danger: #ff7777;
+  --button-background-color-text-danger: #ffeeee;
+  --button-border-color-danger: #7c2424;
+  --button-background-color-google: #f96161;
+  --button-background-color-text-google: #ffffff;
+  --button-border-color-google: #ef3434;
+}
+
+.button {
+  padding: 0.25rem 1.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--button-border-color);
+  background-color: var(--button-background-color);
+  color: var(--button-background-color-text);
+  &.button--primary {
+    border: 1px solid var(--button-border-color-primary);
+    background-color: var(--button-background-color-primary);
+    color: var(--button-background-color-text-primary);
+  }
+  &.button--danger {
+    border: 1px solid var(--button-border-color-danger);
+    background-color: var(--button-background-color-danger);
+    color: var(--button-background-color-text-danger);
+  }
+  /** Login Buttons **/
+  &.button--google {
+    border: 1px solid var(--button-border-color-google);
+    background-color: var(--button-background-color-google);
+    color: var(--button-background-color-text-google);
+  }
+}
+
+/*# sourceMappingURL=buttons.css.map */
