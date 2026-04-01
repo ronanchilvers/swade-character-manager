@@ -1,5 +1,11 @@
 {% extends "base.twig" %}
 
+{% do add_stylesheet('/css/auth.css') %}
+
 {% block content %}
-<a class="button button--google" href="{{ url }}">Login With Google</a>
+<main>
+    <div class="auth-form">
+        <a class="button button--google button--full" href="{{ url }}">Login With Google</a>
+    </div>
+<main>
 {% endblock %}

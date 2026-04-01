@@ -9,6 +9,7 @@ main {
     min-width: var(--page-min-width);
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: 1rem;
 
     @include breakpoints.at(laptop) {
         margin: 0 2rem;

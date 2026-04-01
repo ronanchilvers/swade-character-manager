@@ -1,7 +1,7 @@
 /** Base Stylesheet **/
 /** Settings **/
 :root {
-  --page-min-width: 400px;
+  --page-min-width: 470px;
   /** Borders **/
   --border-radius-default: 5px;
 }
@@ -118,6 +118,7 @@ main {
   min-width: var(--page-min-width);
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 1rem;
 }
 @media (max-width: 1199px) {
   main {
@@ -158,7 +159,6 @@ main {
 }
 .topbar .topbar__section:last-child {
   margin-bottom: 0;
-  align-items: flex-start;
 }
 @media (max-width: 999px) {
   .topbar .topbar__section {
@@ -182,14 +182,6 @@ main {
 .menu__item--user {
   height: 25px;
   width: 25px;
-}
-
-.data-panel {
-  outline: 1px dotted red;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 .dropdown {
@@ -301,14 +293,21 @@ main {
   --button-border-color-google: #ef3434;
   --button-border-radius-default: 5px;
   --button-padding-default: 0.5rem 1.5rem;
+  --button-margin-default: 0.5rem;
 }
 
 .button {
   padding: var(--button-padding-default);
+  margin-right: var(--button-margin-default);
+  display: block;
+  text-align: center;
   border-radius: var(--button-border-radius-default);
   border: 1px solid var(--button-border-color);
   background-color: var(--button-background-color);
   color: var(--button-background-color-text);
+  &:last-child {
+    margin-right: 0;
+  }
   &.button--primary {
     border: 1px solid var(--button-border-color-primary);
     background-color: var(--button-background-color-primary);
@@ -324,6 +323,9 @@ main {
     border: 1px solid var(--button-border-color-google);
     background-color: var(--button-background-color-google);
     color: var(--button-background-color-text-google);
+  }
+  &.button--full {
+    width: 100%;
   }
 }
 

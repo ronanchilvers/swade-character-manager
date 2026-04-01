@@ -27,7 +27,6 @@
 
         &:last-child {
             margin-bottom: 0;
-            align-items: flex-start;
         }
 
         @include breakpoints.at(tablet) {

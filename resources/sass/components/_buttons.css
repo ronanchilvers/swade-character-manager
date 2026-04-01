@@ -16,14 +16,22 @@
 
     --button-border-radius-default: 5px;
     --button-padding-default: 0.5rem 1.5rem;
+    --button-margin-default: 0.5rem;
 }
 
 .button {
     padding: var(--button-padding-default);
+    margin-right: var(--button-margin-default);
+    display: block;
+    text-align: center;
     border-radius: var(--button-border-radius-default);
     border: 1px solid var(--button-border-color);
     background-color: var(--button-background-color);
     color: var(--button-background-color-text);
+
+    &:last-child {
+        margin-right: 0;
+    }
 
     &.button--primary {
         border: 1px solid var(--button-border-color-primary);
@@ -42,5 +50,9 @@
         border: 1px solid var(--button-border-color-google);
         background-color: var(--button-background-color-google);
         color: var(--button-background-color-text-google);
+    }
+
+    &.button--full {
+        width: 100%;
     }
 }

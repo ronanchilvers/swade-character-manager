@@ -1,0 +1,25 @@
+/** Characters Stylesheet **/
+/** Settings **/
+:root {
+  --page-min-width: 470px;
+  /** Borders **/
+  --border-radius-default: 5px;
+}
+
+:root {
+  --c-white: #ffffff;
+  --c-light-grey: #cccccc;
+  --c-medium-grey: #999999;
+  --c-dark-grey: #666666;
+  --c-black: #000000;
+  --c-red: #ff0000;
+  --c-green: #00ff00;
+  --c-blue: #0000ff;
+}
+
+/** Components **/
+.auth-form {
+  max-width: 20rem;
+}
+
+/*# sourceMappingURL=auth.css.map */
