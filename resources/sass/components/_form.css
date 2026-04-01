@@ -1,5 +1,7 @@
 /** Form Styling **/
 :root {
+    --form-buttons-background: #ffffff;
+
     --field-color: inherit;
     --field-color-error: #cc3333;
     --field-input-border-color: #666;
@@ -13,6 +15,16 @@
         padding: 0.5rem;
         display: flex;
         justify-content: flex-end;
+    }
+    .form__buttons--floating {
+        outline: 1px dotted red;
+
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background-color: var(--form-buttons-background);
     }
 }
 

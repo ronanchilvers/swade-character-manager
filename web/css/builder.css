@@ -17,6 +17,21 @@
 }
 
 /** Components **/
+.builder-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (max-width: 1200px) {
+  .builder-page {
+    margin: 0 2rem;
+  }
+}
+@media (max-width: 680px) {
+  .builder-page {
+    margin: 0 1rem;
+  }
+}
+
 .character-tabs {
   position: sticky;
   display: flex;
@@ -45,4 +60,4 @@
   color: var(--c-black);
 }
 
-/*# sourceMappingURL=characters.css.map */
+/*# sourceMappingURL=builder.css.map */

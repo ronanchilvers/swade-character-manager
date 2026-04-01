@@ -1,9 +1,6 @@
-{% extends 'base.twig' %}
+{% extends 'layouts/character/builder.twig' %}
 
-{% do add_stylesheet("/css/characters.css") %}
-
-{% block content %}
-{% include "partials/character-tabs.twig" %}
+{% block page %}
 <form class="form" method="post" action="{{ get_url('characters_attributes', {hash: entity.hash}) }}">
 
     {% if form_errors %}
@@ -43,7 +40,7 @@
     </div>
     {% endfor %}
 
-    <div class="form__buttons">
+    <div class="form__buttons form__buttons--floating">
         <a class="button" href="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">Previous</a>
         <button class="button button--primary" type="submit">Save and Continue...</button>
     </div>

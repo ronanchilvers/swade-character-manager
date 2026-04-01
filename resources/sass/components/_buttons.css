@@ -2,7 +2,7 @@
 :root {
     --button-background-color: #cccccc;
     --button-background-color-text: #333333;
-    --button-border-color: #666666;
+    --button-border-color: #bbbbbb;
     --button-background-color-primary: #39a0ef;
     --button-background-color-text-primary: #ffffff;
     --button-border-color-primary: #1079c9;
@@ -13,11 +13,14 @@
     --button-background-color-google: #f96161;
     --button-background-color-text-google: #ffffff;
     --button-border-color-google: #ef3434;
+
+    --button-border-radius-default: 5px;
+    --button-padding-default: 0.5rem 1.5rem;
 }
 
 .button {
-    padding: 0.25rem 1.5rem;
-    border-radius: 5px;
+    padding: var(--button-padding-default);
+    border-radius: var(--button-border-radius-default);
     border: 1px solid var(--button-border-color);
     background-color: var(--button-background-color);
     color: var(--button-background-color-text);

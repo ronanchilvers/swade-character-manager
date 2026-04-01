@@ -1,0 +1,13 @@
+@import "../tools/breakpoints";
+
+.builder-page {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @include breakpoint(laptop) {
+        margin: 0 2rem;
+    }
+    @include breakpoint(phablet) {
+        margin: 0 1rem;
+    }
+}

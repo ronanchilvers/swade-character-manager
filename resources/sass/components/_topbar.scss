@@ -1,4 +1,5 @@
-/** Header **/
+@import "../tools/breakpoints";
+
 :root {
     --topbar-border-colour: #cccccc;
 }
@@ -23,6 +24,10 @@
         &:last-child {
             margin-bottom: 0;
             align-items: flex-start;
+        }
+
+        @include breakpoint(tablet) {
+            flex-direction: column;
         }
     }
 }
