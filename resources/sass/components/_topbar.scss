@@ -1,4 +1,4 @@
-@import "../tools/breakpoints";
+@use "../tools/breakpoints";
 
 :root {
     --topbar-border-colour: #cccccc;
@@ -7,12 +7,16 @@
 .topbar {
     position: sticky;
     top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     padding: 1rem;
     background-color: var(--c-white);
     z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: var(--page-min-width);
 
     .topbar__section {
         display: flex;
@@ -26,7 +30,7 @@
             align-items: flex-start;
         }
 
-        @include breakpoint(tablet) {
+        @include breakpoints.at(tablet) {
             flex-direction: column;
         }
     }

@@ -1,6 +1,7 @@
 /** Characters Stylesheet **/
 /** Settings **/
 :root {
+  --page-min-width: 400px;
   /** Borders **/
   --border-radius-default: 5px;
 }
@@ -17,21 +18,6 @@
 }
 
 /** Components **/
-.builder-page {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-@media (max-width: 1200px) {
-  .builder-page {
-    margin: 0 2rem;
-  }
-}
-@media (max-width: 680px) {
-  .builder-page {
-    margin: 0 1rem;
-  }
-}
-
 .character-tabs {
   position: sticky;
   display: flex;
@@ -39,6 +25,8 @@
   margin-bottom: 1rem;
   background-color: var(--c-black);
   color: var(--c-white);
+  overflow: hidden;
+  overflow-x: auto;
 }
 .character-tabs__link {
   display: block;
@@ -47,6 +35,7 @@
   border-top: 1px solid var(--c-black);
   border-top-left-radius: var(--border-radius-default);
   border-top-right-radius: var(--border-radius-default);
+  white-space: nowrap;
 }
 .character-tabs__link:hover {
   text-decoration: none;
@@ -58,6 +47,26 @@
   /* border-bottom: 5px solid var(--c-red); */
   background-color: var(--c-white);
   color: var(--c-black);
+}
+
+/** Cards **/
+:root {
+  --cards-gutter: 1rem;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .cards__card {
+    flex: 1 1;
+    min-width: 20rem;
+    border: 1px solid #CCC;
+    border-radius: 0.5rem;
+    margin: var(--cards-gutter);
+    padding: 1rem 1.2rem;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  }
 }
 
 /*# sourceMappingURL=builder.css.map */

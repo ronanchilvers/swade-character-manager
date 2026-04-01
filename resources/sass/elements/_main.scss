@@ -1,7 +1,19 @@
+@use "../tools/breakpoints";
+
 main {
     flex-grow: 1;
     padding: 1rem auto;
     padding-bottom: 6rem;
     z-index: 0;
     background-color: var(--c-white);
+    min-width: var(--page-min-width);
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @include breakpoints.at(laptop) {
+        margin: 0 2rem;
+    }
+    @include breakpoints.at(phablet) {
+        margin: 0 1rem;
+    }
 }

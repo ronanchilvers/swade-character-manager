@@ -1,6 +1,7 @@
 {% extends 'base.twig' %}
 
 {% block content %}
+<main>
 {% for character in characters %}
     <p>{{ character.id }} - {{ character.name }}
         - <a href="{{ get_url('characters_concept', {hash: character.hash}) }}">Concept</a>
@@ -11,5 +12,5 @@
 {% else %}
     <p>No characters found - <a href="{{ get_url('characters_create') }}">Create one now</a></p>
 {% endfor %}
-
+</main>
 {% endblock %}

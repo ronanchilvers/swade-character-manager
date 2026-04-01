@@ -4,6 +4,7 @@
 
 {% block content %}
     {% include "partials/character-tabs.twig" %}
-
-    <section class="builder-page">{% block page %}{% endblock %}</section>
+    <main>
+    {% block page %}{% endblock %}
+    </main>
 {% endblock %}

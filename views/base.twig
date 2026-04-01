@@ -12,7 +12,7 @@
 
     <body>
         {% include 'partials/topbar.twig' %}
-        <main>{% block content %}{% endblock %}</main>
+        {% block content %}{% endblock %}
     </body>
     {% for script in get_scripts() %}
         <script src="{{ script }}"></script>
