@@ -5,15 +5,13 @@
 {% block page %}
 <form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
 
-    <div class="field">
-        <label class="field__label">Choose up to {{ max_points }} points of hindrances. You have used:</label>
-        <input class="field__input js-points" type="text" value="{{ remaining_points }}" readonly />
-    </div>
+    <p>Choose up to {{ max_points }} points of hindrances. You have <strong><span class="js-points">{{ remaining_points }}</span></strong> left.</p>
+
     <div class="cards">
             {% for hindrance in hindrances %}
-            <div class="field cards__card js-hindrance">
-                <label class="field__label">{{ hindrance.name }}</label>
-                <div class="field__inner">
+            <div class="card js-hindrance">
+                <div class="card__title">{{ hindrance.name }}</div>
+                <div class="card__content">
                     <div>
                         {% if hindrance.summary %}
                         <p>{{ hindrance.summary }}</p>
@@ -24,7 +22,8 @@
                             {% endfor %}
                         {% endif %}
                     </div>
-
+                </div>
+                <div class="card__footer">
                     <div>
                         {% for level in hindrance.levels %}
                         <label for="hindrance_{{ hindrance.id }}_{{ level }}">

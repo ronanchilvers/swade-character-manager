@@ -16,7 +16,7 @@
     </div>
     {% endif %}
 
-    <div class="field js-skills-summary" data-total="{{ allocation.skill_points_total }}">
+    <!--<div class="field js-skills-summary" data-total="{{ allocation.skill_points_total }}">
         <label class="field__label">Skill Point Summary</label>
         <div class="field__inner">
             <p>Each character has {{ allocation.skill_points_total }} skill points.</p>
@@ -25,19 +25,21 @@
             <p>Skill points: <span class="js-skill-points-spent">{{ allocation.skill_points_spent }}</span> / <span class="js-skill-points-total">{{ allocation.skill_points_total }}</span></p>
             <p>Skill points remaining: <span class="js-skill-points-remaining">{{ allocation.skill_points_remaining }}</span></p>
         </div>
-    </div>
+    </div>-->
 
     <div class="cards">
         {% for skill in skills %}
-        <div class="field cards__card {% if field_has_error(skill.id, errors) %}field--error{% endif %}">
-            <label class="field__label" for="skill_{{ skill.id }}">{{ skill.name }} ({{ skill.linked_attribute }})</label>
-            <div class="field__inner">
+        <div class="card">
+            <div class="card__title" for="skill_{{ skill.id }}">{{ skill.name }} ({{ skill.linked_attribute }})</div>
+            <div class="card__content">
                 {% if skill.summary %}
                 <p>{{ skill.summary }}</p>
                 {% endif %}
                 {% if skill.core_skill %}
                 <p>Core skill: starts at d4 for free.</p>
                 {% endif %}
+            </div>
+            <div class="card__footer">
                 <select
                     class="field__input js-skill-die"
                     id="skill_{{ skill.id }}"
@@ -60,7 +62,6 @@
                 {% endfor %}
                 </select>
             </div>
-            <p class="field__error">Choose a valid die type.</p>
         </div>
         {% endfor %}
     </div>

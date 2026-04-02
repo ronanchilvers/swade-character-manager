@@ -1,0 +1,81 @@
+@use "sass:color";
+@use "sass:map";
+
+$types: (
+    'default': (
+        "background-color": #cccccc,
+        "text-color": #000000,
+    ),
+    'primary': (
+        "background-color": #39a0ef,
+        "text-color": #ffffff,
+    ),
+    'danger': (
+        "background-color": #ff7777,
+        "text-color": #ffeeee,
+    ),
+    'google': (
+        "background-color": #f96161,
+        "text-color": #ffffff,
+    ),
+);
+
+/** Button styles **/
+$button-border-radius-default: 5px;
+$button-padding-default: 0.5rem 1.5rem;
+$button-margin-default: 0.5rem;
+
+.button {
+    padding: $button-padding-default;
+    margin-right: $button-margin-default;
+    display: block;
+    text-align: center;
+    border-radius: $button-border-radius-default;
+    line-height: 1;
+    cursor: pointer;
+
+    &:active,
+    &:visited,
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+.button--full {
+    width: 100%;
+}
+@each $type, $attributes in $types {
+    $type_modifier: "";
+    @if $type != "default" {
+        $type_modifier: "--#{$type}";
+    }
+    .button#{$type_modifier} {
+        $background_color: map.get($attributes, "background-color");
+        $text_color: map.get($attributes, "text-color");
+        border: 1px solid color.adjust($background_color, $lightness: -15%);
+        background: linear-gradient(
+            to bottom,
+            color.adjust($background_color, $lightness: 0%),
+            color.adjust($background_color, $lightness: -10%)
+        );
+        color: $text_color;
+
+        &:hover {
+            background: linear-gradient(
+                to bottom,
+                color.adjust($background_color, $lightness: 5%),
+                color.adjust($background_color, $lightness: -5%)
+            );
+        }
+        &:active {
+            background: linear-gradient(
+                to bottom,
+                color.adjust($background_color, $lightness: 0%),
+                color.adjust($background_color, $lightness: 10%)
+            );
+        }
+    }
+}

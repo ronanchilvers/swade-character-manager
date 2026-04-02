@@ -17,7 +17,7 @@ function updatePointSpend() {
     }
   });
   document.querySelectorAll(".js-points").forEach((el) => {
-    el.value = points;
+    el.textContent = points;
   });
 }
 

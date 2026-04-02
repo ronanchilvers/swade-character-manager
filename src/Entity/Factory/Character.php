@@ -13,11 +13,36 @@ use Ronanchilvers\Utility\Str;
 class Character extends Factory
 {
     private const ATTRIBUTE_FIELDS = [
-        'agility' => 'Agility',
-        'smarts' => 'Smarts',
-        'spirit' => 'Spirit',
-        'strength' => 'Strength',
-        'vigor' => 'Vigor',
+        'agility' => [
+            'name' => 'Agility',
+            'description' => 'A measure of a character’s nimbleness,
+            dexterity, and general coordination.'
+        ],
+        'smarts' => [
+            'name' => 'Smarts',
+            'description' => 'Measures raw intelligence, mental
+            acuity, and how fast a heroine thinks on her
+            feet. '
+        ],
+        'spirit' => [
+            'name' => 'Spirit',
+            'description' => 'Self-confidence, backbone, and
+            willpower, used to resist social attacks and fear.'
+        ],
+        'strength' => [
+            'name' => 'Strength',
+            'description' => 'Physical power and fitness. It’s
+            also used as the basis of a warrior’s damage in
+            hand-to-hand combat, and to determine how
+            much he can wear or carry'
+        ],
+        'vigor' => [
+            'name' => 'Vigor',
+            'description' => 'An individual’s endurance,
+            resistance to disease, poison, or toxins, and
+            how much physical damage she can take
+            before she can’t go on'
+        ],
     ];
     private const DEFAULT_PACE = 6;
 
