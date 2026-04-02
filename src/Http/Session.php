@@ -61,7 +61,7 @@ class Session
      * @param mixed $value
      * @author Ronan Chilvers <ronan@d3r.com>
      */
-    public function set($key, $value)
+    public function set(string $key, mixed $value): void
     {
         $this->data[$key] = $value;
     }
@@ -73,7 +73,7 @@ class Session
      * @param mixed $value
      * @author Ronan Chilvers <ronan@thelittledot.com>
      */
-    public function __set($key, $value)
+    public function __set(string $key, mixed $value): void
     {
         $this->set($key, $value);
     }
@@ -86,7 +86,7 @@ class Session
      * @return mixed
      * @author Ronan Chilvers <ronan@d3r.com>
      */
-    public function get($key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         if (isset($this->data[$key])) {
             return $this->data[$key];
@@ -102,7 +102,7 @@ class Session
      * @return mixed
      * @author Ronan Chilvers <ronan@thelittledot.com>
      */
-    public function __get($key)
+    public function __get(string $key): mixed
     {
         return $this->get($key);
     }
@@ -112,7 +112,7 @@ class Session
      *
      * @author Ronan Chilvers <ronan@d3r.com>
      */
-    public function delete($key)
+    public function delete(string $key): void
     {
         if ($this->has($key)) {
             unset($this->data[$key]);
@@ -126,17 +126,17 @@ class Session
      * @return boolean
      * @author Ronan Chilvers <ronan@d3r.com>
      */
-    public function has($key)
+    public function has(string $key): bool
     {
         return isset($this->data[$key]);
     }
 
-    public function __isset($key)
+    public function __isset(string $key): bool
     {
         return $this->has($key);
     }
 
-    public function __unset($key)
+    public function __unset(string $key): void
     {
         $this->delete($key);
     }
@@ -146,36 +146,32 @@ class Session
      *
      * @author Ronan Chilvers <ronan@d3r.com>
      */
-    public function flash($message, $type = 'info')
+    public function flash(string $message, string $type = 'info'): void
     {
         if (!isset($this->data['flash'])) {
             $this->data['flash'] = [];
         }
-        if (!isset($this->data['flash'][$type])) {
-            $this->data['flash'][$type] = [];
-        }
-        $this->data['flash'][$type][] = $message;
+        $this->data['flash'][] = [ 'type' => $type, 'message' => $message ];
     }
 
-    /**
-     * Get a set of flash messages for a given type
-     *
-     * @param string $type
-     * @return mixed
-     * @author Ronan Chilvers <ronan@d3r.com>
-     */
-    public function getFlash($type)
+    public function success(string $message): void
     {
-        if (!isset($this->data['flash'], $this->data['flash'][$type])) {
-            return null;
-        }
-        if (empty($this->data['flash'][$type])) {
-            return null;
-        }
-        $messages = $this->data['flash'][$type];
-        unset($this->data['flash'][$type]);
+        $this->flash($message, 'success');
+    }
 
-        return $messages;
+    public function info(string $message): void
+    {
+        $this->flash($message, 'info');
+    }
+
+    public function warning(string $message): void
+    {
+        $this->flash($message, 'warning');
+    }
+
+    public function error(string $message): void
+    {
+        $this->flash($message, 'error');
     }
 
     /**
@@ -184,7 +180,7 @@ class Session
      * @return array
      * @author Ronan Chilvers <ronan@d3r.com>
      */
-    public function getFlashes()
+    public function getFlashes(): ?array
     {
         if (!isset($this->data['flash'])) {
             return null;

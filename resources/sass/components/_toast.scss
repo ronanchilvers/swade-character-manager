@@ -1,0 +1,96 @@
+@use "sass:color";
+@use "../tools/breakpoints";
+
+:root {
+    --toast-background-colour: rgb(255,255,255,1);
+    --toast-colour: var(--c-black);
+
+    --toast-accent-default: var(--c-medium-grey);
+    --toast-accent-pale-default: var(--c-light-grey);
+    --toast-accent-success: #19c62b;
+    --toast-accent-pale-success: #{color.adjust( #19c62b, $lightness: 45%)};
+    --toast-accent-info: #4f5fef;
+    --toast-accent-pale-info: #{color.adjust(#4f5fef, $lightness: 30%)};
+    --toast-accent-warning: #f7c204;
+    --toast-accent-pale-warning: #{color.adjust(#f7c204, $lightness: 45%)};
+    --toast-accent-error: #f44933;
+    --toast-accent-pale-error: #{color.adjust(#f44933, $lightness: 35%)};
+    --toast-colour-success: #{color.adjust(#19c62b, $lightness: -20%)};
+    --toast-colour-info: #{color.adjust(#4f5fef, $lightness: -20%)};
+    --toast-colour-warning: #{color.adjust(#f7c204, $lightness: -20%)};
+    --toast-colour-error: #{color.adjust(#f44933, $lightness: -20%)};
+}
+
+.toast__container {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 20;
+    min-width: 10rem;
+    max-width: 30rem;
+    @include breakpoints.at(tablet) {
+        min-width: auto;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.toast {
+    position: relative;
+    padding: 0;
+    border: 1px solid var(--toast-accent-default);
+    border-left: 15px solid var(--toast-accent-default);
+    background-color: var(--toast-accent-pale-default);
+    border-radius: var(--border-radius-default);
+    color: var(--toast-colour);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    white-space: wrap;
+    margin-bottom: 1rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .toast__close {
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .toast__heading {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.5rem 1rem 0.25rem 1rem;
+    }
+    .toast__message {
+        font-size: 1.1rem;
+        padding: 0.25rem 1rem 0.5rem 1rem;
+    }
+
+    &--success {
+        border-color: var(--toast-accent-success);
+        background-color: var(--toast-accent-pale-success);
+        color: var(--toast-colour-success);
+    }
+    &--info {
+        border-color: var(--toast-accent-info);
+        background-color: var(--toast-accent-pale-info);
+        color: var(--toast-colour-info);
+    }
+    &--warning {
+        border-color: var(--toast-accent-warning);
+        background-color: var(--toast-accent-pale-warning);
+        color: var(--toast-colour-warning);
+    }
+    &--error {
+        border-color: var(--toast-accent-error);
+        background-color: var(--toast-accent-pale-error);
+        color: var(--toast-colour-error);
+    }
+}

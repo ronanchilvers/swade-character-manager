@@ -25,7 +25,7 @@ class Skills
     {
         $entity = $this->factory->forHash($hash);
         if (!$entity instanceof Entity) {
-            Flight::session()->flash('Unable to find character', 'error');
+            Flight::session()->error('Unable to find character');
             Flight::redirect(Flight::getUrl('home_page'));
             return;
         }
@@ -38,9 +38,15 @@ class Skills
             $result = $this->skillFactory->syncForCharacter($entity, $selected);
 
             if ($result->isSuccess()) {
+                Flight::session()->success(
+                    sprintf('Saved character %s successfully', $entity->name)
+                );
                 Flight::redirect(Flight::getUrl('characters_skills', ['hash' => $entity->hash]));
                 return;
             }
+            Flight::session()->error(
+                'Sorry! There was a problem!'
+            );
         } else {
             $characterSkills = $this->skillFactory->forCharacter($entity);
             $selected = [];

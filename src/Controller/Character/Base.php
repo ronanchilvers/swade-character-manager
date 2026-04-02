@@ -20,9 +20,8 @@ class Base
     {
         $entity = $this->factory->forHash($hash);
         if (!$entity instanceof Entity) {
-            Flight::session()->flash(
-                'Unable to find character',
-                'error'
+            Flight::session()->error(
+                'Unable to find character'
             );
             Flight::redirect(Flight::getUrl('home_page'));
         }
@@ -44,11 +43,17 @@ class Base
                 !($errors = $this->factory->validate($entity)) &&
                 $this->factory->upsert($entity)
             ) {
+                Flight::session()->success(
+                    sprintf('Saved character %s successfully', $entity->name)
+                );
                 Flight::redirect(
                     Flight::getUrl('characters_hindrances', ['hash' => $entity->hash])
                 );
                 return;
             }
+            Flight::session()->error(
+                sprintf('Sorry! There was a problem!')
+            );
         }
 
         Flight::render('character/concept.twig', [

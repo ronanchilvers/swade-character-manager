@@ -23,7 +23,7 @@ class Attributes
     {
         $entity = $this->factory->forHash($hash);
         if (!$entity instanceof Entity) {
-            Flight::session()->flash('Unable to find character', 'error');
+            Flight::session()->error('Unable to find character');
             Flight::redirect(Flight::getUrl('home_page'));
             return;
         }
@@ -37,10 +37,16 @@ class Attributes
             }
             $result = $this->factory->update($entity);
             if ($result->isSuccess()) {
+                Flight::session()->success(
+                    sprintf('Saved character %s successfully', $entity->name)
+                );
                 Flight::redirect(Flight::getUrl('characters_skills', ['hash' => $entity->hash]));
                 return;
             }
             $errors = $result->errors();
+            Flight::session()->error(
+                'Sorry! There was a problem!',
+            );
         }
 
         Flight::render('character/attributes.twig', [

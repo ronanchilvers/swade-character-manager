@@ -5,15 +5,6 @@
 {% block page %}
 <form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
 
-    {% if errors %}
-    <div class="field field--error">
-        <p class="field__error">Please correct the following:</p>
-        {% for error in errors %}
-        <p class="field__error">{{ error }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
-
     <div class="field">
         <label class="field__label">Choose up to {{ max_points }} points of hindrances. You have used:</label>
         <input class="field__input js-points" type="text" value="{{ remaining_points }}" readonly />

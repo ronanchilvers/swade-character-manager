@@ -329,4 +329,98 @@ main {
   }
 }
 
+:root {
+  --toast-background-colour: rgb(255,255,255,1);
+  --toast-colour: var(--c-black);
+  --toast-accent-default: var(--c-medium-grey);
+  --toast-accent-pale-default: var(--c-light-grey);
+  --toast-accent-success: #19c62b;
+  --toast-accent-pale-success: rgb(203.9461883408, 248.5538116592, 208.5874439462);
+  --toast-accent-info: #4f5fef;
+  --toast-accent-pale-info: rgb(219.25, 222.5, 251.75);
+  --toast-accent-warning: #f7c204;
+  --toast-accent-pale-warning: rgb(254.5298804781, 248.3007968127, 225.9701195219);
+  --toast-accent-error: #f44933;
+  --toast-accent-pale-error: rgb(253.1325581395, 224.1023255814, 220.3674418605);
+  --toast-colour-success: rgb(13.5650224215, 107.4349775785, 23.331838565);
+  --toast-colour-info: #1224c6;
+  --toast-colour-warning: rgb(146.625498008, 115.1633466135, 2.374501992);
+  --toast-colour-error: rgb(183.1255813953, 29.623255814, 9.8744186047);
+}
+
+.toast__container {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 20;
+  min-width: 10rem;
+  max-width: 30rem;
+}
+@media (max-width: 999px) {
+  .toast__container {
+    min-width: auto;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+  }
+}
+.toast__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.toast {
+  position: relative;
+  padding: 0;
+  border: 1px solid var(--toast-accent-default);
+  border-left: 15px solid var(--toast-accent-default);
+  background-color: var(--toast-accent-pale-default);
+  border-radius: var(--border-radius-default);
+  color: var(--toast-colour);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  white-space: wrap;
+  margin-bottom: 1rem;
+}
+.toast:last-child {
+  margin-bottom: 0;
+}
+.toast .toast__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.toast .toast__heading {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem 0.25rem 1rem;
+}
+.toast .toast__message {
+  font-size: 1.1rem;
+  padding: 0.25rem 1rem 0.5rem 1rem;
+}
+.toast--success {
+  border-color: var(--toast-accent-success);
+  background-color: var(--toast-accent-pale-success);
+  color: var(--toast-colour-success);
+}
+.toast--info {
+  border-color: var(--toast-accent-info);
+  background-color: var(--toast-accent-pale-info);
+  color: var(--toast-colour-info);
+}
+.toast--warning {
+  border-color: var(--toast-accent-warning);
+  background-color: var(--toast-accent-pale-warning);
+  color: var(--toast-colour-warning);
+}
+.toast--error {
+  border-color: var(--toast-accent-error);
+  background-color: var(--toast-accent-pale-error);
+  color: var(--toast-colour-error);
+}
+
 /*# sourceMappingURL=styles.css.map */
