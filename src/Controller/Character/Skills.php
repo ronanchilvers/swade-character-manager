@@ -9,7 +9,8 @@ use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Entity\Factory\Skill as FactorySkill;
 use App\Filter;
-use App\Service\GameData;
+use App\Service\Data\Manager;
+use App\Service\Data\Skills as SkillsData;
 use Flight;
 
 class Skills
@@ -17,7 +18,7 @@ class Skills
     public function __construct(
         private FactoryCharacter $factory,
         private FactorySkill $skillFactory,
-        private GameData $gameData,
+        private Manager $manager,
     ) {
     }
 
@@ -54,7 +55,7 @@ class Skills
                 $selected[$skill->key] = $skill->die;
             }
         }
-        $skills = $this->gameData->allSkills();
+        $skills = $this->manager->getType(SkillsData::class)->all();
         $diceOptions = Dice::validSizes();
         array_unshift($diceOptions, 0);
 

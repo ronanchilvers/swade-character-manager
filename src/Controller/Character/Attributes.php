@@ -8,14 +8,12 @@ use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Filter;
-use App\Service\GameData;
 use Flight;
 
 class Attributes
 {
     public function __construct(
         private FactoryCharacter $factory,
-        private GameData $gameData,
     ) {
     }
 

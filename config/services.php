@@ -18,7 +18,6 @@ use App\Service\Data\Edges;
 use App\Service\Data\Hindrances;
 use App\Service\Data\Skills;
 use App\Service\Data\Manager;
-use App\Service\GameData;
 use App\Twig\AssetExtension;
 use App\Twig\FieldExtension;
 use App\Twig\RoutingExtension;
@@ -101,11 +100,6 @@ $classes = [
 foreach ($classes as $class) {
     $container->singleton($class, $class);
 }
-
-$container->singleton(
-    GameData::class,
-    fn() => new GameData(__DIR__ . '/../data')
-);
 
 $container->singleton(
     Manager::class,

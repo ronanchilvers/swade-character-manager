@@ -40,6 +40,9 @@ class Hindrance extends Factory
                         $this->prefix('level') => $level,
                     ];
                 }
+                if (empty($rows)) {
+                    return;
+                }
                 if (!$pdo->insert($this->getTableName(), $rows)) {
                     throw new \RuntimeException('Unable to update character hindrances');
                 }

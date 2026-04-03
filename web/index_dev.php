@@ -19,13 +19,13 @@ require '../vendor/autoload.php';
 $settings = include '../config/settings.php';
 
 // Debugging support
-Debugger::enable();
-Debugger::$logDirectory = __DIR__ . "/../tmp/logs/";
-Debugger::$strictMode = true;
-if (Debugger::$showBar) {
-    Flight::app()->set('flight.content_length', false);
-    new TracyExtensionLoader(Flight::app());
-}
+// Debugger::enable();
+// Debugger::$logDirectory = __DIR__ . "/../tmp/logs/";
+// Debugger::$strictMode = true;
+// if (Debugger::$showBar) {
+//     Flight::app()->set('flight.content_length', false);
+//     new TracyExtensionLoader(Flight::app());
+// }
 
 // Configure the container
 $container = new Container();

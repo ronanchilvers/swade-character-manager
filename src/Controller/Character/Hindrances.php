@@ -31,8 +31,9 @@ class Hindrances
             return;
         }
         $errors = [];
+        $points = Hindrance::MAX_POINTS;
         if ('POST' === Flight::request()->getMethod()) {
-            $selected = Filter::alphaArray($_POST['hindrances']);
+            $selected = Filter::alphaArray($_POST['hindrances'] ?? []);
             $result = $this->hindranceFactory->syncForCharacter(
                 $entity,
                 $selected
@@ -51,7 +52,6 @@ class Hindrances
         } else {
             $characterHindrances = $this->hindranceFactory->forCharacter($entity);
             $selected = [];
-            $points = Hindrance::MAX_POINTS;
             foreach ($characterHindrances as $hindrance) {
                 $selected[$hindrance->key] = $hindrance->level;
                 $points -= "major" == $hindrance->level ? 2 : 1;

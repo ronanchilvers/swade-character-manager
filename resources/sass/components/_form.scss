@@ -6,7 +6,7 @@ $field-color: inherit;
 $field-color-error: #cc3333;
 $field-input-border-color: #666;
 $field-input-border-color-error: #cc3333;
-
+$field-input-border: 1px solid #666;
 
 .form {
 
@@ -26,6 +26,18 @@ $field-input-border-color-error: #cc3333;
     }
 }
 
+.field__input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: vars.$border-radius-default;
+    border: $field-input-border;
+
+    @at-root select#{&} {
+    }
+}
+
+
+/*
 .field {
     padding: 0.5rem;
     display: flex;
@@ -64,4 +76,4 @@ $field-input-border-color-error: #cc3333;
             display: block;
         }
     }
-}
+} */

@@ -7,7 +7,8 @@ namespace Tests\Service;
 use App\Entity;
 use App\Entity\Factory\Skill;
 use App\Service\CharacterSkills;
-use App\Service\GameData;
+use App\Service\Data\Manager;
+use App\Service\Data\Skills;
 use flight\database\SimplePdo;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,10 @@ class CharacterSkillsTest extends TestCase
             ->with(10)
             ->willReturn([]);
 
-        $service = new CharacterSkills($pdo, new GameData(__DIR__ . '/../../data'), $factory);
+        $manager = new Manager(__DIR__ . '/../../data');
+        $manager->addType(Skills::class);
+
+        $service = new CharacterSkills($pdo, $manager, $factory);
         $result = $service->viewData(new Entity([
             'id' => 10,
             'agility' => 6,
@@ -51,7 +55,10 @@ class CharacterSkillsTest extends TestCase
                 ]),
             ]);
 
-        $service = new CharacterSkills($pdo, new GameData(__DIR__ . '/../../data'), $factory);
+        $manager = new Manager(__DIR__ . '/../../data');
+        $manager->addType(Skills::class);
+
+        $service = new CharacterSkills($pdo, $manager, $factory);
         $result = $service->viewData(new Entity([
             'id' => 10,
             'agility' => 8,
@@ -77,7 +84,10 @@ class CharacterSkillsTest extends TestCase
                 ]),
             ]);
 
-        $service = new CharacterSkills($pdo, new GameData(__DIR__ . '/../../data'), $factory);
+        $manager = new Manager(__DIR__ . '/../../data');
+        $manager->addType(Skills::class);
+
+        $service = new CharacterSkills($pdo, $manager, $factory);
         $result = $service->viewData(new Entity([
             'id' => 10,
             'agility' => 4,
@@ -97,7 +107,10 @@ class CharacterSkillsTest extends TestCase
         $factory = $this->createMock(Skill::class);
         $factory->expects(self::never())->method('insert');
 
-        $service = new CharacterSkills($pdo, new GameData(__DIR__ . '/../../data'), $factory);
+        $manager = new Manager(__DIR__ . '/../../data');
+        $manager->addType(Skills::class);
+
+        $service = new CharacterSkills($pdo, $manager, $factory);
         $result = $service->processSubmission(new Entity([
             'id' => 10,
             'agility' => 6,
@@ -118,7 +131,10 @@ class CharacterSkillsTest extends TestCase
         $factory = $this->createMock(Skill::class);
         $factory->expects(self::never())->method('insert');
 
-        $service = new CharacterSkills($pdo, new GameData(__DIR__ . '/../../data'), $factory);
+        $manager = new Manager(__DIR__ . '/../../data');
+        $manager->addType(Skills::class);
+
+        $service = new CharacterSkills($pdo, $manager, $factory);
         $result = $service->processSubmission(new Entity([
             'id' => 10,
             'agility' => 4,
@@ -159,7 +175,10 @@ class CharacterSkillsTest extends TestCase
                 return true;
             });
 
-        $service = new CharacterSkills($pdo, new GameData(__DIR__ . '/../../data'), $factory);
+        $manager = new Manager(__DIR__ . '/../../data');
+        $manager->addType(Skills::class);
+
+        $service = new CharacterSkills($pdo, $manager, $factory);
         $result = $service->processSubmission(new Entity([
             'id' => 10,
             'agility' => 8,
@@ -199,7 +218,10 @@ class CharacterSkillsTest extends TestCase
                 ]),
             ]);
 
-        $service = new CharacterSkills($pdo, new GameData(__DIR__ . '/../../data'), $factory);
+        $manager = new Manager(__DIR__ . '/../../data');
+        $manager->addType(Skills::class);
+
+        $service = new CharacterSkills($pdo, $manager, $factory);
         $result = $service->viewData(new Entity([
             'id' => 10,
             'agility' => 4,
