@@ -22,7 +22,7 @@
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/images/backgrounds/pa-5.png") center/cover no-repeat;
 }
 .login-form__section {
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: var(--c-light-grey);
   box-shadow: 0 0 0.2rem rgb(255, 255, 255);
   padding: 3rem;

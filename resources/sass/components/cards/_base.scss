@@ -1,0 +1,68 @@
+@use "../../settings/css-variables" as vars;
+@use "../../tools/breakpoints";
+
+$card-border: 1px solid #CCC;
+$card-title-background: linear-gradient(
+    to bottom,
+    #fcfcfc,
+    #fff
+);
+
+/** Cards **/
+.cards {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 0.5rem -0.5rem;
+}
+
+.card {
+    flex: 1 1;
+    min-width: 20rem;
+    max-width: calc(100% / 3);
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+
+    @include breakpoints.at(laptop) {
+        max-width: 50%;
+    }
+    @include breakpoints.at(phablet) {
+        max-width: 100%;
+    }
+
+    .card__inner {
+        flex: 1;
+        border: $card-border;
+        border-radius: vars.$border-radius-default;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: var(--c-white);
+    }
+
+    .card__title,
+    .card__content,
+    .card__footer {
+        padding: 1rem 1rem;
+    }
+
+    .card__title {
+        flex: 0 0 auto;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-bottom: $card-border;
+        background: $card-title-background;
+    }
+    .card__content {
+        flex: 1 1 auto;
+        margin-top: 1rem;
+    }
+    .card__footer {
+        flex: 0 0 auto;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-top: 1rem;
+        /* background-color: var(--c-light-grey); */
+    }
+}

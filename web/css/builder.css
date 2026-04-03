@@ -27,8 +27,8 @@
   padding: 0.4rem 1rem;
   text-decoration: none;
   border-top: 1px solid var(--c-black);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   white-space: nowrap;
 }
 .character-tabs__link:hover {

@@ -129,7 +129,7 @@ body {
   color: var(--c-black);
   background-color: var(--c-white);
   min-height: 100vh;
-  background-color: #eee;
+  background-color: #fcfcfc;
 }
 
 main {
@@ -157,9 +157,10 @@ main {
   margin: 0 auto;
   margin-bottom: 5rem;
 }
-@media (max-width: 1199px) {
+@media (max-width: 1022px) {
   #wrapper__inner {
     margin: 0 2rem;
+    margin-bottom: 5rem;
   }
 }
 @media (max-width: 999px) {
@@ -193,7 +194,7 @@ main {
 .topbar .topbar__section:last-child {
   margin-bottom: 0;
 }
-@media (max-width: 999px) {
+@media (max-width: 767px) {
   .topbar .topbar__section {
     flex-direction: column;
   }
@@ -230,7 +231,7 @@ main {
   width: auto;
   padding: 1rem 1.5rem;
   border: 1px solid var(--c-black);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .dropdown .dropdown__menu__item {
   display: block;
@@ -302,9 +303,8 @@ main {
 .button {
   padding: 0.5rem 1.5rem;
   margin-right: 0.5rem;
-  display: block;
+  /* display: block; */
   text-align: center;
-  border-radius: 5px;
   line-height: 1;
   cursor: pointer;
 }
@@ -320,51 +320,123 @@ main {
 }
 
 .button {
-  border: 1px solid rgb(165.75, 165.75, 165.75);
-  background: linear-gradient(to bottom, #cccccc, rgb(178.5, 178.5, 178.5));
-  color: #000000;
+  border: none;
+  background: none;
+  border-radius: 3px;
+  /* border: 1px solid color.adjust($background_color, $lightness: -15%);
+  background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 0%),
+      color.adjust($background_color, $lightness: -10%)
+  ); */
+  color: #333333;
 }
 .button:hover {
-  background: linear-gradient(to bottom, rgb(216.75, 216.75, 216.75), rgb(191.25, 191.25, 191.25));
+  background: #eeeeee;
+  /* background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 5%),
+      color.adjust($background_color, $lightness: -5%)
+  ); */
 }
-.button:active {
-  background: linear-gradient(to bottom, #cccccc, rgb(229.5, 229.5, 229.5));
+.button {
+  /* &:active {
+      background: linear-gradient(
+          to bottom,
+          color.adjust($background_color, $lightness: 0%),
+          color.adjust($background_color, $lightness: 10%)
+      );
+  } */
 }
 
 .button--primary {
-  border: 1px solid rgb(16.4112149533, 122.058411215, 203.0887850467);
-  background: linear-gradient(to bottom, #39a0ef, rgb(18.3177570093, 136.238317757, 226.6822429907));
-  color: #ffffff;
+  border: none;
+  background: none;
+  border-radius: 3px;
+  /* border: 1px solid color.adjust($background_color, $lightness: -15%);
+  background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 0%),
+      color.adjust($background_color, $lightness: -10%)
+  ); */
+  color: #333333;
 }
 .button--primary:hover {
-  background: linear-gradient(to bottom, rgb(80.5934579439, 171.3200934579, 240.9065420561), rgb(33.4065420561, 148.6799065421, 237.0934579439));
+  background: #e8eff4;
+  /* background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 5%),
+      color.adjust($background_color, $lightness: -5%)
+  ); */
 }
-.button--primary:active {
-  background: linear-gradient(to bottom, #39a0ef, rgb(104.1869158879, 182.6401869159, 242.8130841121));
+.button--primary {
+  /* &:active {
+      background: linear-gradient(
+          to bottom,
+          color.adjust($background_color, $lightness: 0%),
+          color.adjust($background_color, $lightness: 10%)
+      );
+  } */
 }
 
 .button--danger {
-  border: 1px solid rgb(255, 42.5, 42.5);
-  background: linear-gradient(to bottom, #ff7777, #ff4444);
-  color: #ffeeee;
+  border: none;
+  background: none;
+  border-radius: 3px;
+  /* border: 1px solid color.adjust($background_color, $lightness: -15%);
+  background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 0%),
+      color.adjust($background_color, $lightness: -10%)
+  ); */
+  color: #ff7777;
 }
 .button--danger:hover {
-  background: linear-gradient(to bottom, rgb(255, 144.5, 144.5), rgb(255, 93.5, 93.5));
+  background: #ffeeee;
+  /* background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 5%),
+      color.adjust($background_color, $lightness: -5%)
+  ); */
 }
-.button--danger:active {
-  background: linear-gradient(to bottom, #ff7777, #ffaaaa);
+.button--danger {
+  /* &:active {
+      background: linear-gradient(
+          to bottom,
+          color.adjust($background_color, $lightness: 0%),
+          color.adjust($background_color, $lightness: 10%)
+      );
+  } */
 }
 
 .button--google {
-  border: 1px solid rgb(246.2012195122, 23.2987804878, 23.2987804878);
-  background: linear-gradient(to bottom, #f96161, rgb(247.1341463415, 47.8658536585, 47.8658536585));
-  color: #ffffff;
+  border: none;
+  background: none;
+  border-radius: 3px;
+  /* border: 1px solid color.adjust($background_color, $lightness: -15%);
+  background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 0%),
+      color.adjust($background_color, $lightness: -10%)
+  ); */
+  color: #f96161;
 }
 .button--google:hover {
-  background: linear-gradient(to bottom, rgb(249.9329268293, 121.5670731707, 121.5670731707), rgb(248.0670731707, 72.4329268293, 72.4329268293));
+  background: #ffffff;
+  /* background: linear-gradient(
+      to bottom,
+      color.adjust($background_color, $lightness: 5%),
+      color.adjust($background_color, $lightness: -5%)
+  ); */
 }
-.button--google:active {
-  background: linear-gradient(to bottom, #f96161, rgb(250.8658536585, 146.1341463415, 146.1341463415));
+.button--google {
+  /* &:active {
+      background: linear-gradient(
+          to bottom,
+          color.adjust($background_color, $lightness: 0%),
+          color.adjust($background_color, $lightness: 10%)
+      );
+  } */
 }
 
 .toast__container {
@@ -395,7 +467,7 @@ main {
   border: 1px solid var(--c-medium-grey);
   border-left: 15px solid var(--c-medium-grey);
   background-color: var(--c-light-grey);
-  border-radius: 5px;
+  border-radius: 3px;
   color: var(--c-black);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   white-space: wrap;
@@ -442,42 +514,52 @@ main {
   color: rgb(183.1255813953, 29.623255814, 9.8744186047);
 }
 
-.cards--character {
-  max-width: 1024px;
-}
-
 /** Cards **/
 .cards {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin: 0 -0.5rem;
+  margin: 0.5rem -0.5rem;
 }
 
 .card {
   flex: 1 1;
   min-width: 20rem;
-  max-width: 30rem;
+  max-width: 33.3333333333%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+@media (max-width: 1022px) {
+  .card {
+    max-width: 50%;
+  }
+}
+@media (max-width: 767px) {
+  .card {
+    max-width: 100%;
+  }
+}
+.card .card__inner {
+  flex: 1;
   border: 1px solid #CCC;
-  border-radius: 0.5rem;
-  margin: 0.5rem;
+  border-radius: 3px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: var(--c-white);
 }
-.card--narrow {
-  min-width: 10rem;
-}
 .card .card__title,
 .card .card__content,
 .card .card__footer {
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
 }
 .card .card__title {
   flex: 0 0 auto;
+  font-size: 1.1rem;
   font-weight: 600;
-  background-color: var(--c-light-grey);
+  border-bottom: 1px solid #CCC;
+  background: linear-gradient(to bottom, #fcfcfc, #fff);
 }
 .card .card__content {
   flex: 1 1 auto;
@@ -485,8 +567,26 @@ main {
 }
 .card .card__footer {
   flex: 0 0 auto;
+  flex-direction: row;
+  justify-content: flex-start;
   margin-top: 1rem;
-  background-color: var(--c-light-grey);
+  /* background-color: var(--c-light-grey); */
+}
+
+.cards--character {
+  width: 1024px;
+  margin: 0 auto;
+}
+@media (max-width: 1022px) {
+  .cards--character {
+    width: auto;
+  }
+}
+.cards--character .card {
+  /* background: #eee; */
+}
+.cards--character .card__footer {
+  /* background: #fff; */
 }
 
 .panel {
@@ -494,15 +594,15 @@ main {
   flex-direction: column;
   overflow: hidden;
   border: 1px solid #CCC;
-  border-radius: 5px;
+  border-radius: 3px;
   background: var(--c-white);
 }
 .panel .panel__title {
-  padding: 0.5rem 1rem;
-  background: #ccc;
+  padding: 1rem 1rem 0.5rem 1rem;
+  border-bottom: 1px solid #CCC;
 }
 .panel .panel__content {
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

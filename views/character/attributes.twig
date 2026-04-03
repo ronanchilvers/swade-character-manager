@@ -1,44 +1,35 @@
 {% extends 'layouts/character/builder.twig' %}
 
 {% block page %}
-<form class="form" method="post" action="{{ get_url('characters_attributes', {hash: entity.hash}) }}">
-
-    {% if form_errors %}
-    <div class="field field--error">
-        <p class="field__error">Please correct the following:</p>
-        {% for error in form_errors %}
-        <p class="field__error">{{ error }}</p>
-        {% endfor %}
+<div class="panel">
+    <h2 class="panel__title">Attributes</h2>
+    <div class="panel__content">
+    <p>Mauris congue, ante eu feugiat facilisis, nunc felis sagittis dui,
+    vitae maximus ante eros sed quam. Suspendisse consequat, risus eget
+    commodo tincidunt, diam mauris luctus mi, eu dapibus erat dolor sit
+    amet felis. Quisque vitae mollis tellus, a mattis risus. Ut ullamcorper
+    dolor ut placerat volutpat. Curabitur luctus cursus ligula, ut fringilla
+    erat placerat eget.</p>
     </div>
-    {% endif %}
+</div>
 
-    <!--<div class="field">
-        <label class="field__label">Attribute Point Summary</label>
-        <div class="field__inner">
-            <p>Each attribute starts at d4.</p>
-            <p>The first 5 die steps cost attribute points.</p>
-            <p>Each extra attribute step costs 2 hindrance points.</p>
-            <p>Attribute points: {{ allocation.attribute_points_spent }} / {{ allocation.attribute_points_total }}</p>
-            <p>Attribute points remaining: {{ allocation.attribute_points_remaining }}</p>
-            <p>Hindrance points available: {{ allocation.hindrance_points_available }}</p>
-            <p>Hindrance points spent on attributes: {{ allocation.hindrance_points_spent }}</p>
-            <p>Hindrance points remaining: {{ allocation.hindrance_points_remaining }}</p>
-        </div>
-    </div>-->
+<form class="form" method="post" action="{{ get_url('characters_attributes', {hash: entity.hash}) }}">
 
     <div class="cards">
         {% for field, attribute in attribute_fields %}
-        <div class="card card--narrow">
-            <div class="card__title">{{ attribute.name }}</div>
-            <div class="card__content">
-                {{ attribute.description }}
-            </div>
-            <div class="card__footer">
-                <select class="field__input" id="attribute_{{ field }}" name="attributes[{{ field }}]">
-                    {% for value in attribute_options %}
-                    <option value="{{ value }}" {% if attribute(entity, field) == value %}selected{% endif %}>d{{ value }}</option>
-                    {% endfor %}
-                </select>
+        <div class="card card--nar2row">
+            <div class="card__inner">
+                <div class="card__title">{{ attribute.name }}</div>
+                <div class="card__content">
+                    {{ attribute.description }}
+                </div>
+                <div class="card__footer">
+                    <select class="field__input" id="attribute_{{ field }}" name="attributes[{{ field }}]">
+                        {% for value in attribute_options %}
+                        <option value="{{ value }}" {% if attribute(entity, field) == value %}selected{% endif %}>d{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
         </div>
     {% endfor %}

@@ -28,7 +28,7 @@ $topbar-border-colour: #cccccc;
             margin-bottom: 0;
         }
 
-        @include breakpoints.at(tablet) {
+        @include breakpoints.at(phablet) {
             flex-direction: column;
         }
     }

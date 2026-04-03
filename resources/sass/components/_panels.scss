@@ -13,10 +13,10 @@ $panel-title-background: #ccc;
     background: var(--c-white);
 
     .panel__title {
-        padding: 0.5rem 1rem;
-        background: $panel-title-background;
+        padding: 1rem 1rem 0.5rem 1rem;
+        border-bottom: $panel-border;
     }
     .panel__content {
-        padding: 0.5rem 1rem;
+        padding: 1rem 1rem;
     }
 }

@@ -1,5 +1,18 @@
 @use "../../settings/css-variables" as vars;
+@use "../../tools/breakpoints";
 
 .cards--character {
-    max-width: 1024px;
+    width: 1024px;
+    margin: 0 auto;
+
+    @include breakpoints.at(laptop) {
+        width: auto;
+    }
+
+    .card {
+        /* background: #eee; */
+    }
+    .card__footer {
+        /* background: #fff; */
+    }
 }

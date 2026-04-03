@@ -5,62 +5,57 @@
 {% set selected_keys = selected|keys %}
 
 {% block page %}
-<form class="form" method="post" action="{{ get_url('characters_skills', {hash: entity.hash}) }}">
 
-    {% if form_errors %}
-    <div class="field field--error">
-        <p class="field__error">Please correct the following:</p>
-        {% for error in form_errors %}
-        <p class="field__error">{{ error }}</p>
-        {% endfor %}
+<div class="panel">
+    <h2 class="panel__title">Skills</h2>
+    <div class="panel__content">
+    <p>Mauris congue, ante eu feugiat facilisis, nunc felis sagittis dui,
+    vitae maximus ante eros sed quam. Suspendisse consequat, risus eget
+    commodo tincidunt, diam mauris luctus mi, eu dapibus erat dolor sit
+    amet felis. Quisque vitae mollis tellus, a mattis risus. Ut ullamcorper
+    dolor ut placerat volutpat. Curabitur luctus cursus ligula, ut fringilla
+    erat placerat eget.</p>
     </div>
-    {% endif %}
+</div>
 
-    <!--<div class="field js-skills-summary" data-total="{{ allocation.skill_points_total }}">
-        <label class="field__label">Skill Point Summary</label>
-        <div class="field__inner">
-            <p>Each character has {{ allocation.skill_points_total }} skill points.</p>
-            <p>Athletics, Common Knowledge, Notice, Persuasion, and Stealth start at d4 for free.</p>
-            <p>Each skill step costs 1 point up to the linked attribute, then 2 points per step after that.</p>
-            <p>Skill points: <span class="js-skill-points-spent">{{ allocation.skill_points_spent }}</span> / <span class="js-skill-points-total">{{ allocation.skill_points_total }}</span></p>
-            <p>Skill points remaining: <span class="js-skill-points-remaining">{{ allocation.skill_points_remaining }}</span></p>
-        </div>
-    </div>-->
+<form class="form" method="post" action="{{ get_url('characters_skills', {hash: entity.hash}) }}">
 
     <div class="cards">
         {% for skill in skills %}
         <div class="card">
-            <div class="card__title" for="skill_{{ skill.id }}">{{ skill.name }} ({{ skill.linked_attribute }})</div>
-            <div class="card__content">
-                {% if skill.summary %}
-                <p>{{ skill.summary }}</p>
-                {% endif %}
-                {% if skill.core_skill %}
-                <p>Core skill: starts at d4 for free.</p>
-                {% endif %}
-            </div>
-            <div class="card__footer">
-                <select
-                    class="field__input js-skill-die"
-                    id="skill_{{ skill.id }}"
-                    name="skills[{{ skill.id }}]"
-                    data-linked-attribute-die="{{ group.attribute_die }}"
-                    data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
-                >
-                    {% set isSelected = skill.id in selected_keys %}
-                {% for value in dice_options %}
-                    {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
-                    {% else %}
-                    <option value="{{ value }}" {% if selected[skill.id] and selected[skill.id] == value %}selected{% endif %}>
-                        {% if value == 0 %}
-                        Untrained
-                        {% else %}
-                        d{{ value }}
-                        {% endif %}
-                    </option>
+            <div class="card__inner">
+                <div class="card__title" for="skill_{{ skill.id }}">{{ skill.name }} ({{ skill.linked_attribute }})</div>
+                <div class="card__content">
+                    {% if skill.summary %}
+                    <p>{{ skill.summary }}</p>
                     {% endif %}
-                {% endfor %}
-                </select>
+                    {% if skill.core_skill %}
+                    <p>Core skill: starts at d4 for free.</p>
+                    {% endif %}
+                </div>
+                <div class="card__footer">
+                    <select
+                        class="field__input js-skill-die"
+                        id="skill_{{ skill.id }}"
+                        name="skills[{{ skill.id }}]"
+                        data-linked-attribute-die="{{ group.attribute_die }}"
+                        data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
+                    >
+                        {% set isSelected = skill.id in selected_keys %}
+                    {% for value in dice_options %}
+                        {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
+                        {% else %}
+                        <option value="{{ value }}" {% if selected[skill.id] and selected[skill.id] == value %}selected{% endif %}>
+                            {% if value == 0 %}
+                            Untrained
+                            {% else %}
+                            d{{ value }}
+                            {% endif %}
+                        </option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                </div>
             </div>
         </div>
         {% endfor %}

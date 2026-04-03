@@ -1,17 +1,18 @@
 {% extends 'layouts/character/builder.twig' %}
 
 {% block page %}
-<p>Mauris congue, ante eu feugiat facilisis, nunc felis sagittis dui,
-vitae maximus ante eros sed quam. Suspendisse consequat, risus eget
-commodo tincidunt, diam mauris luctus mi, eu dapibus erat dolor sit
-amet felis. Quisque vitae mollis tellus, a mattis risus. Ut ullamcorper
-dolor ut placerat volutpat. Curabitur luctus cursus ligula, ut fringilla
-erat placerat eget. Aenean tincidunt purus id maximus tincidunt. Proin
-vestibulum tincidunt mi, ac tempus urna aliquam nec. Etiam eget tortor
-sit amet ex vulputate lobortis in sit amet elit. Quisque varius, ligula
-quis tempus sollicitudin, leo ex rutrum arcu, nec luctus leo nibh vel
-odio. Cras lectus ante, scelerisque ac justo consequat, auctor pellentesque
-magna. Cras non odio tempus, dapibus lectus et, venenatis massa.</p>
+
+<div class="panel">
+    <h2 class="panel__title">Character Concept</h2>
+    <div class="panel__content">
+    <p>Mauris congue, ante eu feugiat facilisis, nunc felis sagittis dui,
+    vitae maximus ante eros sed quam. Suspendisse consequat, risus eget
+    commodo tincidunt, diam mauris luctus mi, eu dapibus erat dolor sit
+    amet felis. Quisque vitae mollis tellus, a mattis risus. Ut ullamcorper
+    dolor ut placerat volutpat. Curabitur luctus cursus ligula, ut fringilla
+    erat placerat eget.</p>
+    </div>
+</div>
 
 <form class="form" method="post" action="">
     <div class="field {% if field_has_error('name', errors) %}field--error{% endif %}">

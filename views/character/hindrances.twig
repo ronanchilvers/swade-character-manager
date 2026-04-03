@@ -6,7 +6,7 @@
 <form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
 
     <div class="panel">
-        <h2 class="panel__title">Character Hindrances</h2>
+        <h2 class="panel__title">Hindrances</h2>
         <div class="panel__content">
         <p>Hindrances are character flaws and physical handicaps that occasionally make life a little tougher for your hero. Some Hindrances have actual game effects while others are about roleplaying. They should occasionally cause her to act in ways that aren’t necessarily smart, efficient, or in the best interests of the party.</p>
         <p>There are two types of hindrance:</p>
@@ -21,34 +21,36 @@
     <div class="cards">
             {% for hindrance in hindrances %}
             <div class="card js-hindrance">
-                <div class="card__title">{{ hindrance.name }}</div>
-                <div class="card__content">
-                    <div>
-                        {% if hindrance.summary %}
-                        <p>{{ hindrance.summary }}</p>
-                        {% endif %}
-                        {% if hindrance.effects %}
-                            {% for effect in hindrance.effects %}
-                            <p>{{ effect.level|title }}: {{ effect.details }}</p>
-                            {% endfor %}
-                        {% endif %}
+                <div class="card__inner">
+                    <div class="card__title">{{ hindrance.name }}</div>
+                    <div class="card__content">
+                        <div>
+                            {% if hindrance.summary %}
+                            <p>{{ hindrance.summary }}</p>
+                            {% endif %}
+                            {% if hindrance.effects %}
+                                {% for effect in hindrance.effects %}
+                                <p>{{ effect.level|title }}: {{ effect.details }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="card__footer">
-                    <div>
-                        {% for level in hindrance.levels %}
-                        <label for="hindrance_{{ hindrance.id }}_{{ level }}">
-                            <input
-                                class="js-checkbox"
-                                id="hindrance_{{ hindrance.id }}_{{ level }}"
-                                type="checkbox"
-                                name="hindrances[{{ hindrance.id }}]"
-                                value="{{ level }}"
-                                {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
-                            />
-                            {{ level|title }}
-                        </label>
-                        {% endfor %}
+                    <div class="card__footer">
+                        <div>
+                            {% for level in hindrance.levels %}
+                            <label for="hindrance_{{ hindrance.id }}_{{ level }}">
+                                <input
+                                    class="js-checkbox"
+                                    id="hindrance_{{ hindrance.id }}_{{ level }}"
+                                    type="checkbox"
+                                    name="hindrances[{{ hindrance.id }}]"
+                                    value="{{ level }}"
+                                    {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
+                                />
+                                {{ level|title }}
+                            </label>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
