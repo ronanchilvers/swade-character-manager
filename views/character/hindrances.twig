@@ -5,7 +5,18 @@
 {% block page %}
 <form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
 
-    <p>Choose up to {{ max_points }} points of hindrances. You have <strong><span class="js-points">{{ remaining_points }}</span></strong> left.</p>
+    <div class="panel">
+        <h2 class="panel__title">Character Hindrances</h2>
+        <div class="panel__content">
+        <p>Hindrances are character flaws and physical handicaps that occasionally make life a little tougher for your hero. Some Hindrances have actual game effects while others are about roleplaying. They should occasionally cause her to act in ways that aren’t necessarily smart, efficient, or in the best interests of the party.</p>
+        <p>There are two types of hindrance:</p>
+        <ul>
+            <li>Minor - small, annoying problems. Each minor hindrance gets you <strong>1</strong> hindrance point.</li>
+            <li>Major - big, difficult problems that can really bite you. Each major hindrance gets you <strong>2</strong> hindrance points.</li>
+        </ul>
+        <p>Choose up to <strong>{{ budget.maxFor('hindrances') }}</strong> points of hindrances. You have <strong class="js-points">{{ remaining_points }}</strong> points left to choose.</p>
+        </div>
+    </div>
 
     <div class="cards">
             {% for hindrance in hindrances %}

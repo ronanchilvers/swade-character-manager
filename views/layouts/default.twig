@@ -1,0 +1,10 @@
+{% extends 'base.twig' %}
+
+{% block wrapper %}
+<div id="wrapper">
+    {% if session.has('user') %}
+        {% include "partials/topbar.twig" %}
+    {% endif %}
+    {% block content %}{% endblock %}
+</div>
+{% endblock %}

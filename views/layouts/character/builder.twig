@@ -1,10 +1,11 @@
-{% extends 'base.twig' %}
+{% extends 'layouts/default.twig' %}
 
 {% do add_stylesheet("/css/builder.css") %}
 
 {% block content %}
-    {% include "partials/character-tabs.twig" %}
-    <main>
+    {% include "partials/character/tabs.twig" %}
+    {% include "partials/character/budgets.twig" %}
+    <section id="wrapper__inner">
         {% block page %}{% endblock %}
-    </main>
+    </section>
 {% endblock %}

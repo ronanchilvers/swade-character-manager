@@ -1,7 +1,7 @@
 /** Characters Stylesheet **/
 /** Settings **/
 :root {
-  --page-min-width: 470px;
+  --page-min-width: 480px;
   /** Borders **/
   --border-radius-default: 5px;
 }
@@ -47,6 +47,29 @@
   /* border-bottom: 5px solid var(--c-red); */
   background-color: var(--c-white);
   color: var(--c-black);
+}
+
+.budgets {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
+}
+.budgets .budget__panel {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 767px) {
+  .budgets {
+    outline: 1px dotted red;
+    top: auto;
+    right: auto;
+    left: 0;
+    right: 0;
+    bottom: 4rem;
+  }
 }
 
 /*# sourceMappingURL=builder.css.map */

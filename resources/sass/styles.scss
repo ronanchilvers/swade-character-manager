@@ -12,6 +12,7 @@
 /** Elements **/
 @use "elements/document";
 @use "elements/main";
+@use "elements/wrapper";
 
 /** Components **/
 @use "components/topbar";
@@ -21,3 +22,4 @@
 @use "components/buttons";
 @use "components/toast";
 @use "components/cards";
+@use "components/panels";

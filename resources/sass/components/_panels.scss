@@ -1,0 +1,20 @@
+$panel-padding: 2rem;
+$panel-border: 1px solid #CCC;
+$panel-title-background: #ccc;
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: $panel-border;
+    border-radius: var(--border-radius-default);
+    background: var(--c-white);
+
+    .panel__title {
+        padding: 0.5rem 1rem;
+        background: $panel-title-background;
+    }
+    .panel__content {
+        padding: 0.5rem 1rem;
+    }
+}

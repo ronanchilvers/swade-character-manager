@@ -1,0 +1,8 @@
+<div class="budgets">
+    {% for id,data in budgets.all() %}
+    <div class="budget__panel">
+        <div class="budget__label">{{ data.label }}</div>
+        <div class="budget__value" data-budget="{{ id }}">{{ data.value }}</div>
+    </div>
+{% endfor %}
+</div>

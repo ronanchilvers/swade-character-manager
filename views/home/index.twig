@@ -1,7 +1,6 @@
-{% extends 'base.twig' %}
+{% extends 'layouts/default.twig' %}
 
 {% block content %}
-<main>
 {% if characters|length > 0 %}
 <div class="cards">
 {% for character in characters %}
@@ -20,7 +19,7 @@
 {% endfor %}
 </div>
 {% else %}
-    <p>No characters found - <a href="{{ get_url('characters_create') }}">Create one now</a></p>
+    <p>No characters found<p>
+    <p><a class="button button--primary" href="{{ get_url('characters_create') }}">Create one now</a></p>
 {% endif %}
-</main>
 {% endblock %}

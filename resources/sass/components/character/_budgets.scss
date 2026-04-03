@@ -1,0 +1,27 @@
+@use "../../tools/breakpoints";
+
+$points-background: #ffffff;
+$points-border-radius: 5px;
+
+.budgets {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: row;
+    z-index: 10;
+
+    .budget__panel {
+        display: flex;
+        flex-direction: row;
+    }
+
+    @include breakpoints.at(phablet) {
+        outline: 1px dotted red;
+        top: auto;
+        right: auto;
+        left: 0;
+        right: 0;
+        bottom: 4rem;
+    }
+}

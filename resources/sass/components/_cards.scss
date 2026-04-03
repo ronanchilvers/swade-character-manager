@@ -12,6 +12,7 @@
 .card {
     flex: 1 1;
     min-width: 20rem;
+    max-width: 30rem;
     border: 1px solid #CCC;
     border-radius: 0.5rem;
     margin: var(--cards-gutter);
@@ -19,6 +20,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: var(--c-white);
 
     &--narrow {
         min-width: 10rem;

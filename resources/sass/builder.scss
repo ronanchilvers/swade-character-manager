@@ -5,4 +5,5 @@
 @use "settings/colours";
 
 /** Components **/
-@use "components/character-tabs";
+@use "components/character/tabs";
+@use "components/character/budgets";

@@ -16,7 +16,7 @@
     background-color: var(--c-white);
     z-index: 10;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-width: var(--page-min-width);
+    /* min-width: var(--page-min-width); */
 
     .topbar__section {
         display: flex;

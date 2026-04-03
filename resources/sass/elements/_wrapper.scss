@@ -1,0 +1,21 @@
+@use "../tools/breakpoints";
+
+#wrapper {
+    flex-grow: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#wrapper__inner {
+    max-width: 1190px;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+
+    @include breakpoints.at(laptop) {
+        margin: 0 2rem;
+    }
+    @include breakpoints.at(tablet) {
+        margin-bottom: 8rem;
+    }
+}

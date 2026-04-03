@@ -1,5 +1,10 @@
 body {
-    font-family: sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 a {
     color: inherit;
@@ -8,4 +13,13 @@ a {
     &:hover {
         text-decoration: underline;
     }
+}
+@for $level from 1 through 4 {
+    h#{$level} {
+        font-size: 1.8rem - (($level - 1) * 0.2rem);
+        font-family: "Special Elite", system-ui;
+    }
+}
+p,ul,ol,dl {
+    margin-bottom: 0.5rem;
 }
