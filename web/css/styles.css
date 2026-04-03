@@ -314,7 +314,6 @@ main {
 .button {
   padding: 0.5rem 1.5rem;
   margin-right: 0.5rem;
-  /* display: block; */
   text-align: center;
   line-height: 1;
   cursor: pointer;
@@ -332,7 +331,7 @@ main {
 
 .button {
   border: none;
-  background: none;
+  background: #eeeeee;
   border-radius: 3px;
   /* border: 1px solid color.adjust($background_color, $lightness: -15%);
   background: linear-gradient(
@@ -362,7 +361,7 @@ main {
 
 .button--primary {
   border: none;
-  background: none;
+  background: #e8eff4;
   border-radius: 3px;
   /* border: 1px solid color.adjust($background_color, $lightness: -15%);
   background: linear-gradient(
@@ -392,7 +391,7 @@ main {
 
 .button--danger {
   border: none;
-  background: none;
+  background: #ffeeee;
   border-radius: 3px;
   /* border: 1px solid color.adjust($background_color, $lightness: -15%);
   background: linear-gradient(
@@ -422,7 +421,7 @@ main {
 
 .button--google {
   border: none;
-  background: none;
+  background: #ffffff;
   border-radius: 3px;
   /* border: 1px solid color.adjust($background_color, $lightness: -15%);
   background: linear-gradient(
@@ -629,7 +628,7 @@ main {
   background-color: #f9f9f9;
 }
 .cards--hindrances .card__footer input[type=checkbox]:checked + .card__option {
-  background-color: #dbe5da;
+  background-color: #e7f2e6;
 }
 
 .panel {

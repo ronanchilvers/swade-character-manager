@@ -29,7 +29,6 @@ $button-margin-default: 0.5rem;
 .button {
     padding: $button-padding-default;
     margin-right: $button-margin-default;
-    /* display: block; */
     text-align: center;
     line-height: 1;
     cursor: pointer;
@@ -56,7 +55,7 @@ $button-margin-default: 0.5rem;
         $background_color: map.get($attributes, "background-color");
         $text_color: map.get($attributes, "text-color");
         border: none;
-        background: none;
+        background: $background_color;
         border-radius: $button-border-radius-default;
         /* border: 1px solid color.adjust($background_color, $lightness: -15%);
         background: linear-gradient(
