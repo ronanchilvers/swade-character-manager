@@ -1,3 +1,5 @@
+@use "../settings/css-variables" as vars;
+
 $panel-padding: 2rem;
 $panel-border: 1px solid #CCC;
 $panel-title-background: #ccc;
@@ -7,7 +9,7 @@ $panel-title-background: #ccc;
     flex-direction: column;
     overflow: hidden;
     border: $panel-border;
-    border-radius: var(--border-radius-default);
+    border-radius: vars.$border-radius-default;
     background: var(--c-white);
 
     .panel__title {

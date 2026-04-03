@@ -1,3 +1,5 @@
+@use "../../settings/css-variables" as vars;
+
 .character-tabs {
     position: sticky;
     display: flex;
@@ -13,8 +15,8 @@
         padding: 0.4rem 1rem;
         text-decoration: none;
         border-top: 1px solid var(--c-black);
-        border-top-left-radius: var(--border-radius-default);
-        border-top-right-radius: var(--border-radius-default);
+        border-top-left-radius: vars.$border-radius-default;
+        border-top-right-radius: vars.$border-radius-default;
         white-space: nowrap;
 
         &:hover {

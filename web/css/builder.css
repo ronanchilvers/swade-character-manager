@@ -1,12 +1,6 @@
 /** Characters Stylesheet **/
 /** Settings **/
 :root {
-  --page-min-width: 480px;
-  /** Borders **/
-  --border-radius-default: 5px;
-}
-
-:root {
   --c-white: #ffffff;
   --c-light-grey: #cccccc;
   --c-medium-grey: #999999;
@@ -33,8 +27,8 @@
   padding: 0.4rem 1rem;
   text-decoration: none;
   border-top: 1px solid var(--c-black);
-  border-top-left-radius: var(--border-radius-default);
-  border-top-right-radius: var(--border-radius-default);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   white-space: nowrap;
 }
 .character-tabs__link:hover {

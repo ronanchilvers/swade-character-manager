@@ -1,12 +1,11 @@
-/** Form Styling **/
-:root {
-    --form-buttons-background: #ffffff;
+@use "../settings/css-variables" as vars;
 
-    --field-color: inherit;
-    --field-color-error: #cc3333;
-    --field-input-border-color: #666;
-    --field-input-border-color-error: #cc3333;
-}
+/** Form Styling **/
+$form-buttons-background: #ffffff;
+$field-color: inherit;
+$field-color-error: #cc3333;
+$field-input-border-color: #666;
+$field-input-border-color-error: #cc3333;
 
 
 .form {
@@ -22,7 +21,7 @@
         left: 0;
         right: 0;
         padding: 1rem;
-        background-color: var(--form-buttons-background);
+        background-color: $form-buttons-background;
         box-shadow: 0 -0.1rem 0.2rem rgba(0, 0, 0, 0.1);
     }
 }
@@ -37,7 +36,7 @@
     .field__inner,
     .field__input {
         width: 100%;
-        color: var(--field-color);
+        color: $field-color;
         font-size:  1.1rem;
     }
 
@@ -46,20 +45,20 @@
     }
     .field__input {
         padding: 1rem;
-        border: 1px solid var(--field-input-border-color);
+        border: 1px solid $field-input-border-color;
         border-radius: 0.5rem;
     }
     .field__error {
-        color: var(--field-color-error);
+        color: $field-color-error;
         display: none;
     }
 
     &.field--error {
         .field__label {
-            color: var(--field-color-error);
+            color: $field-color-error;
         }
         .field__input {
-            border-color: var(--field-input-border-color-error);
+            border-color: $field-input-border-color-error;
         }
         .field__error {
             display: block;

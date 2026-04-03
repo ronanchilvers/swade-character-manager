@@ -1,12 +1,6 @@
 /** Base Stylesheet **/
 /** Settings **/
 :root {
-  --page-min-width: 480px;
-  /** Borders **/
-  --border-radius-default: 5px;
-}
-
-:root {
   --c-white: #ffffff;
   --c-light-grey: #cccccc;
   --c-medium-grey: #999999;
@@ -175,10 +169,6 @@ main {
 }
 
 /** Components **/
-:root {
-  --topbar-border-colour: #cccccc;
-}
-
 .topbar {
   position: sticky;
   top: 0;
@@ -191,7 +181,7 @@ main {
   background-color: var(--c-white);
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* min-width: var(--page-min-width); */
+  min-width: 480px;
 }
 .topbar .topbar__section {
   display: flex;
@@ -240,7 +230,7 @@ main {
   width: auto;
   padding: 1rem 1.5rem;
   border: 1px solid var(--c-black);
-  border-radius: var(--border-radius-default);
+  border-radius: 5px;
 }
 .dropdown .dropdown__menu__item {
   display: block;
@@ -258,14 +248,6 @@ main {
 }
 
 /** Form Styling **/
-:root {
-  --form-buttons-background: #ffffff;
-  --field-color: inherit;
-  --field-color-error: #cc3333;
-  --field-input-border-color: #666;
-  --field-input-border-color-error: #cc3333;
-}
-
 .form .form__buttons {
   padding: 0.5rem;
   display: flex;
@@ -277,7 +259,7 @@ main {
   left: 0;
   right: 0;
   padding: 1rem;
-  background-color: var(--form-buttons-background);
+  background-color: #ffffff;
   box-shadow: 0 -0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
@@ -291,7 +273,7 @@ main {
 .field .field__inner,
 .field .field__input {
   width: 100%;
-  color: var(--field-color);
+  color: inherit;
   font-size: 1.1rem;
 }
 .field .field__label {
@@ -299,18 +281,18 @@ main {
 }
 .field .field__input {
   padding: 1rem;
-  border: 1px solid var(--field-input-border-color);
+  border: 1px solid #666;
   border-radius: 0.5rem;
 }
 .field .field__error {
-  color: var(--field-color-error);
+  color: #cc3333;
   display: none;
 }
 .field.field--error .field__label {
-  color: var(--field-color-error);
+  color: #cc3333;
 }
 .field.field--error .field__input {
-  border-color: var(--field-input-border-color-error);
+  border-color: #cc3333;
 }
 .field.field--error .field__error {
   display: block;
@@ -385,25 +367,6 @@ main {
   background: linear-gradient(to bottom, #f96161, rgb(250.8658536585, 146.1341463415, 146.1341463415));
 }
 
-:root {
-  --toast-background-colour: rgb(255,255,255,1);
-  --toast-colour: var(--c-black);
-  --toast-accent-default: var(--c-medium-grey);
-  --toast-accent-pale-default: var(--c-light-grey);
-  --toast-accent-success: #19c62b;
-  --toast-accent-pale-success: rgb(203.9461883408, 248.5538116592, 208.5874439462);
-  --toast-accent-info: #4f5fef;
-  --toast-accent-pale-info: rgb(219.25, 222.5, 251.75);
-  --toast-accent-warning: #f7c204;
-  --toast-accent-pale-warning: rgb(254.5298804781, 248.3007968127, 225.9701195219);
-  --toast-accent-error: #f44933;
-  --toast-accent-pale-error: rgb(253.1325581395, 224.1023255814, 220.3674418605);
-  --toast-colour-success: rgb(13.5650224215, 107.4349775785, 23.331838565);
-  --toast-colour-info: #1224c6;
-  --toast-colour-warning: rgb(146.625498008, 115.1633466135, 2.374501992);
-  --toast-colour-error: rgb(183.1255813953, 29.623255814, 9.8744186047);
-}
-
 .toast__container {
   position: fixed;
   bottom: 2rem;
@@ -429,11 +392,11 @@ main {
 .toast {
   position: relative;
   padding: 0;
-  border: 1px solid var(--toast-accent-default);
-  border-left: 15px solid var(--toast-accent-default);
-  background-color: var(--toast-accent-pale-default);
-  border-radius: var(--border-radius-default);
-  color: var(--toast-colour);
+  border: 1px solid var(--c-medium-grey);
+  border-left: 15px solid var(--c-medium-grey);
+  background-color: var(--c-light-grey);
+  border-radius: 5px;
+  color: var(--c-black);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   white-space: wrap;
   margin-bottom: 1rem;
@@ -459,35 +422,36 @@ main {
   padding: 0.25rem 1rem 0.5rem 1rem;
 }
 .toast--success {
-  border-color: var(--toast-accent-success);
-  background-color: var(--toast-accent-pale-success);
-  color: var(--toast-colour-success);
+  border-color: #19c62b;
+  background-color: rgb(203.9461883408, 248.5538116592, 208.5874439462);
+  color: rgb(13.5650224215, 107.4349775785, 23.331838565);
 }
 .toast--info {
-  border-color: var(--toast-accent-info);
-  background-color: var(--toast-accent-pale-info);
-  color: var(--toast-colour-info);
+  border-color: #4f5fef;
+  background-color: rgb(219.25, 222.5, 251.75);
+  color: #1224c6;
 }
 .toast--warning {
-  border-color: var(--toast-accent-warning);
-  background-color: var(--toast-accent-pale-warning);
-  color: var(--toast-colour-warning);
+  border-color: #f7c204;
+  background-color: rgb(254.5298804781, 248.3007968127, 225.9701195219);
+  color: rgb(146.625498008, 115.1633466135, 2.374501992);
 }
 .toast--error {
-  border-color: var(--toast-accent-error);
-  background-color: var(--toast-accent-pale-error);
-  color: var(--toast-colour-error);
+  border-color: #f44933;
+  background-color: rgb(253.1325581395, 224.1023255814, 220.3674418605);
+  color: rgb(183.1255813953, 29.623255814, 9.8744186047);
+}
+
+.cards--character {
+  max-width: 1024px;
 }
 
 /** Cards **/
-:root {
-  --cards-gutter: 1rem;
-}
-
 .cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  margin: 0 -0.5rem;
 }
 
 .card {
@@ -496,8 +460,7 @@ main {
   max-width: 30rem;
   border: 1px solid #CCC;
   border-radius: 0.5rem;
-  margin: var(--cards-gutter);
-  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  margin: 0.5rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -531,7 +494,7 @@ main {
   flex-direction: column;
   overflow: hidden;
   border: 1px solid #CCC;
-  border-radius: var(--border-radius-default);
+  border-radius: 5px;
   background: var(--c-white);
 }
 .panel .panel__title {

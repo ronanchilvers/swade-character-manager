@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if characters|length > 0 %}
-<div class="cards">
+<div class="cards cards--character">
 {% for character in characters %}
     <div class="card">
         <div class="card__title">{{ character.name }}</div>
@@ -11,9 +11,6 @@
         </div>
         <div class="card__footer">
             <a class="button button--primary" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
-            <!--<a href="{{ get_url('characters_hindrances', {hash: character.hash}) }}">Hindrances</a>
-            <a href="{{ get_url('characters_attributes', {hash: character.hash}) }}">Attributes</a>
-            <a href="{{ get_url('characters_skills', {hash: character.hash}) }}">Skills</a>-->
         </div>
     </div>
 {% endfor %}

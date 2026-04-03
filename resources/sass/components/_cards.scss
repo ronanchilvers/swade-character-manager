@@ -1,12 +1,12 @@
-/** Cards **/
-:root {
-    --cards-gutter: 1rem;
-}
+@use "../settings/css-variables" as vars;
+@use "cards/character";
 
+/** Cards **/
 .cards {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    margin: 0 -0.5rem;
 }
 
 .card {
@@ -15,8 +15,7 @@
     max-width: 30rem;
     border: 1px solid #CCC;
     border-radius: 0.5rem;
-    margin: var(--cards-gutter);
-    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+    margin: 0.5rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -46,5 +45,4 @@
         margin-top: 1rem;
         background-color: var(--c-light-grey);
     }
-
 }

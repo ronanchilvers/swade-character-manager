@@ -1,3 +1,5 @@
+@use "../settings/css-variables" as vars;
+
 .dropdown {
     /* overflow: hidden; */
     position: relative;
@@ -10,7 +12,7 @@
         width: auto;
         padding: 1rem 1.5rem;
         border: 1px solid var(--c-black);
-        border-radius: var(--border-radius-default);
+        border-radius: vars.$border-radius-default;
     }
     .dropdown__menu__item {
         display: block;
