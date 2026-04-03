@@ -567,10 +567,10 @@ main {
 }
 .card .card__footer {
   flex: 0 0 auto;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   margin-top: 1rem;
-  /* background-color: var(--c-light-grey); */
 }
 
 .cards--character {
@@ -582,11 +582,43 @@ main {
     width: auto;
   }
 }
-.cards--character .card {
-  /* background: #eee; */
+.cards--character {
+  /*
+  .card {
+  }
+  .card__footer {
+  }
+  */
 }
-.cards--character .card__footer {
-  /* background: #fff; */
+
+.cards--hindrances .card__footer {
+  padding: 0;
+  border-top: 1px solid #CCC;
+}
+.cards--hindrances .card__option {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  border-right: 1px solid #CCC;
+  position: relative;
+}
+.cards--hindrances .card__option:last-child {
+  border-right: none;
+}
+.cards--hindrances input[type=checkbox] {
+  position: absolute;
+  left: -999px;
+  opacity: 0;
+}
+.cards--hindrances .card__option--disabled,
+.cards--hindrances .card__footer input[type=checkbox]:disabled + .card__option {
+  color: #ccc;
+  background-color: #f9f9f9;
+}
+.cards--hindrances .card__footer input[type=checkbox]:checked + .card__option {
+  background-color: #dbe5da;
 }
 
 .panel {

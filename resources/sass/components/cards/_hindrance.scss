@@ -1,0 +1,41 @@
+@use "../../settings/css-variables" as vars;
+@use "variables" as card_vars;
+@use "../../tools/breakpoints";
+
+$card-option-color-disabled: #ccc;
+$card-option-background-disabled: #f9f9f9;
+$card-option-background-selected: #dbe5da;
+
+.cards--hindrances {
+
+    .card__footer {
+        padding: 0;
+        border-top: card_vars.$card-border;
+    }
+    .card__option {
+        flex: 1;
+        padding: 1rem;
+        text-align: center;
+        overflow: hidden;
+        cursor: pointer;
+        border-right: card_vars.$card-border;
+        position: relative;
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+    input[type="checkbox"] {
+        position: absolute;
+        left: -999px;
+        opacity: 0;
+    }
+    .card__option--disabled,
+    .card__footer input[type="checkbox"]:disabled + .card__option {
+        color: $card-option-color-disabled;
+        background-color: $card-option-background-disabled;
+    }
+    .card__footer input[type="checkbox"]:checked + .card__option {
+        background-color: $card-option-background-selected;
+    }
+}

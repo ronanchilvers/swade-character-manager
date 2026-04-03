@@ -16,7 +16,7 @@ function updatePointSpend() {
       checkbox.disabled = disableMinor;
     }
   });
-  document.querySelectorAll(".js-points").forEach((el) => {
+  document.querySelectorAll(".js-budget").forEach((el) => {
     el.textContent = points;
   });
 }

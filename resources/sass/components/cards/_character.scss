@@ -1,4 +1,5 @@
 @use "../../settings/css-variables" as vars;
+@use "variables" as card_vars;
 @use "../../tools/breakpoints";
 
 .cards--character {
@@ -9,10 +10,10 @@
         width: auto;
     }
 
+    /*
     .card {
-        /* background: #eee; */
     }
     .card__footer {
-        /* background: #fff; */
     }
+    */
 }
