@@ -1,6 +1,7 @@
 {% extends 'layouts/character/builder.twig' %}
 
 {% do add_script('/javascript/hindrances.js') %}
+{% do add_script('/javascript/budgets.js') %}
 
 {% set levels = [ 'minor', 'major' ] %}
 
@@ -43,8 +44,8 @@
                         {% if valid %}
                         <input
                             type="checkbox"
-                            class="js-budget js-checkbox"
-                            data-budget="hindrance"
+                            class="js-budget-option js-checkbox"
+                            data-budget="hindrances"
                             data-budget-value="{{ 'major' == level ? 2 : 1 }}"
                             id="hindrance_{{ hindrance.id }}_{{ level }}"
                             name="hindrances[{{ hindrance.id }}]"

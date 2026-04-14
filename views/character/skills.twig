@@ -1,5 +1,6 @@
 {% extends 'layouts/character/builder.twig' %}
 
+{% do add_script('/javascript/budgets.js') %}
 {#% do add_script('/javascript/skills.js') %#}
 
 {% set selected_keys = selected|keys %}
@@ -35,9 +36,10 @@
                 </div>
                 <div class="card__footer">
                     <select
-                        class="field__input js-skill-die"
+                        class="field__input js-skill-die js-budget-option"
                         id="skill_{{ skill.id }}"
                         name="skills[{{ skill.id }}]"
+                        data-budget="skills"
                         data-linked-attribute-die="{{ group.attribute_die }}"
                         data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
                     >
@@ -45,7 +47,10 @@
                     {% for value in dice_options %}
                         {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
                         {% else %}
-                        <option value="{{ value }}" {% if selected[skill.id] and selected[skill.id] == value %}selected{% endif %}>
+                        <option
+                            value="{{ value }}" {% if selected[skill.id] and selected[skill.id] == value %}selected{% endif %}
+                            data-budget-value="{{ 0 == value ? 0 : 1 }}"
+                            >
                             {% if value == 0 %}
                             Untrained
                             {% else %}

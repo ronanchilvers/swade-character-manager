@@ -1,8 +1,14 @@
 <div class="budgets">
     {% for id,data in budgets.all() %}
     <div class="budget__panel">
-        <div class="budget__label">{{ data.label }}</div>
-        <div class="budget__value" data-budget="{{ id }}">{{ data.value }}</div>
+        <div class="budget__label">{{ data.label }} -</div>
+        <div class="budget__value" data-budget="{{ id }}">
+            <strong class="js-budget-spent" data-budget="{{ id }}">{{ data.value }}</strong>
+        {% if data.max %}
+            of <strong>{{ data.max }}</strong>
+        {% endif %}
+            points
+        </div>
     </div>
 {% endfor %}
 </div>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
+use App\Budget;
 use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
@@ -59,6 +60,15 @@ class Skills
         $diceOptions = Dice::validSizes();
         array_unshift($diceOptions, 0);
 
+        $budgets = (new Budget())
+            ->add(
+                'skills',
+                'Skills',
+                0,
+                12
+            )
+            ;
+
         Flight::render('character/skills.twig', [
             'page_title' => 'Skills',
             'entity' => $entity,
@@ -66,6 +76,7 @@ class Skills
             'selected' => $selected,
             'skills' => $skills,
             'dice_options' => $diceOptions,
+            'budgets' => $budgets,
         ]);
     }
 }

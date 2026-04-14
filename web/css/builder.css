@@ -52,17 +52,36 @@
   z-index: 10;
 }
 .budgets .budget__panel {
+  /* outline: 1px dotted red; */
   display: flex;
   flex-direction: row;
+  font-size: 1.1rem;
+}
+.budgets .budget__label,
+.budgets .budget__value {
+  padding: 0.25rem 0.5rem;
+}
+@media (max-width: 767px) {
+  .budgets .budget__label,
+  .budgets .budget__value {
+    padding: 0.5rem 1rem;
+  }
+}
+.budgets .budget__label {
+  padding-right: 0.1rem;
+}
+.budgets .budget__value {
+  padding-left: 0.1rem;
 }
 @media (max-width: 767px) {
   .budgets {
-    outline: 1px dotted red;
+    flex-direction: column;
+    justify-content: center;
     top: auto;
-    right: auto;
     left: 0;
     right: 0;
     bottom: 4rem;
+    background-color: #fff;
   }
 }
 

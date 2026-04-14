@@ -61,7 +61,7 @@ class Hindrances
         $budgets = (new Budget())
             ->add(
                 'hindrances',
-                'Hindrance Points',
+                'Hindrance',
                 $points,
                 Hindrance::MAX_POINTS
             )
