@@ -4,36 +4,17 @@ declare(strict_types=1);
 
 namespace App;
 
-class Budget
+abstract class Budget
 {
-    protected $data = [];
+    public protected(set) string $id;
+    public protected(set) int $value;
+    public protected(set) int $max;
+    public protected(set) string $label;
 
-    public function add(
-        string $id,
-        string $label,
-        int $value,
-        ?int $max = null
-    ): static {
-        $this->data[$id] = [
-            'label' => $label,
-            'value' => $value,
-            'max'   => $max,
-        ];
-
-        return $this;
-    }
-
-    public function maxFor(string $id): ?int
+    public function __construct(Entity $character, array $existing)
     {
-        if (!isset($this->data[$id])) {
-            return null;
-        }
-
-        return $this->data[$id]['max'];
+        $this->init($character, $existing);
     }
 
-    public function all(): array
-    {
-        return $this->data;
-    }
+    abstract protected function init(Entity $character, array $existing): void;
 }

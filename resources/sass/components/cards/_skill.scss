@@ -1,0 +1,12 @@
+.card--core {
+    .card__title {
+        position: relative;
+        padding-left: 2rem;
+        color: rgb(0,125,0);
+    }
+    .card__title::before {
+        position: absolute;
+        left: 0.75rem;
+        content: '\2731';
+    }
+}

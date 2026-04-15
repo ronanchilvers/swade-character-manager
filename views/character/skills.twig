@@ -23,9 +23,11 @@
 
     <div class="cards">
         {% for skill in skills %}
-        <div class="card">
+        {% set isSelected = skill.id in selected_keys %}
+        {% set attributeDie = entity.get(skill.linked_attribute) %}
+        <div class="card card--{{ skill.core_skill ? 'core' : 'non-core' }}">
             <div class="card__inner">
-                <div class="card__title" for="skill_{{ skill.id }}">{{ skill.name }} ({{ skill.linked_attribute }})</div>
+                <div class="card__title" for="skill_{{ skill.id }}">{{ skill.name }} ({{ skill.linked_attribute|capitalize }})</div>
                 <div class="card__content">
                     {% if skill.summary %}
                     <p>{{ skill.summary }}</p>
@@ -43,13 +45,23 @@
                         data-linked-attribute-die="{{ group.attribute_die }}"
                         data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
                     >
-                        {% set isSelected = skill.id in selected_keys %}
                     {% for value in dice_options %}
                         {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
+                        {# a core skill or a selected skill - no 'untrained' option #}
+                        {% elseif isSelected and selected[skill.id] > value %}
+                        {# a selected skill at a higher level than value - option unavailable #}
                         {% else %}
+                        {% set budget_value = 1 %}
+                        {% if 0 == value %}
+                            {% set budget_value = 0 %}
+                        {% elseif skill.core_skill and 4 == value %}
+                            {% set budget_value = 0 %}
+                        {% elseif attributeDie < value %}
+                            {% set budget_value = 2 %}
+                        {% endif %}
                         <option
                             value="{{ value }}" {% if selected[skill.id] and selected[skill.id] == value %}selected{% endif %}
-                            data-budget-value="{{ 0 == value ? 0 : 1 }}"
+                            data-budget-value="{{ budget_value }}"
                             >
                             {% if value == 0 %}
                             Untrained

@@ -6,20 +6,20 @@
    */
 
   let selectorOption = ".js-budget-option";
-  let selectorSpent = ".js-budget-spent";
+  let selectorProgress = ".js-budget-progress";
   let dataBudget = "budget";
   let dataBudgetValue = "budgetValue";
   function update(budget) {
     let budgetTotal = 0;
     document.querySelectorAll(selectorOption + "[data-budget='" + budget + "']:checked, select" + selectorOption + "[data-budget='" + budget + "']").forEach((option) => {
       let value = 0;
-      console.log(option.nodeName);
       switch (option.nodeName) {
         case "INPUT":
           value = parseInt(option.dataset[dataBudgetValue]);
           break;
         case "SELECT":
           let selectedOption = option.options[option.selectedIndex];
+          console.log(selectedOption);
           value = parseInt(selectedOption.dataset[dataBudgetValue]);
           break;
         default:
@@ -29,9 +29,9 @@
       if (!isNaN(value)) {
         budgetTotal += value;
       }
+      console.log("budgetTotal", budgetTotal);
     });
-    console.log(budgetTotal);
-    document.querySelector(selectorSpent + "[data-budget='" + budget + "']").textContent = budgetTotal;
+    document.querySelector(selectorProgress + "[data-budget='" + budget + "']").value = budgetTotal;
   }
   document.addEventListener("change", (event) => {
     target = event.target;

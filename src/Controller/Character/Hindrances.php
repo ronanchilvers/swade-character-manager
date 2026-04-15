@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Character;
 
 use App\Budget;
+use App\Budget\HindranceBudget;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Entity\Factory\Hindrance;
@@ -30,8 +31,7 @@ class Hindrances
             Flight::redirect(Flight::getUrl('home_page'));
             return;
         }
-        $errors = [];
-        $points = Hindrance::MAX_POINTS;
+        $characterHindrances = $errors = [];
         if ('POST' === Flight::request()->getMethod()) {
             $selected = Filter::alphaArray($_POST['hindrances'] ?? []);
             $result = $this->hindranceFactory->syncForCharacter(
@@ -54,18 +54,20 @@ class Hindrances
             $selected = [];
             foreach ($characterHindrances as $hindrance) {
                 $selected[$hindrance->key] = $hindrance->level;
-                $points -= "major" == $hindrance->level ? 2 : 1;
             }
         }
 
-        $budgets = (new Budget())
-            ->add(
-                'hindrances',
-                'Hindrance',
-                $points,
-                Hindrance::MAX_POINTS
-            )
-            ;
+        $budgets = [
+            new HindranceBudget($entity, $characterHindrances)
+        ];
+        // $budgets = (new Budget())
+        //     ->add(
+        //         'hindrances',
+        //         'Hindrance',
+        //         $points,
+        //         Hindrance::MAX_POINTS
+        //     )
+        //     ;
 
         Flight::render('character/hindrances.twig', [
             'page_title' => 'Hindrances',

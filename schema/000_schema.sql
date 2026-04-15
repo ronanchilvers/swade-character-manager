@@ -56,6 +56,8 @@ CREATE TABLE IF NOT EXISTS `skills` (
     skill_id           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     skill_character_id BIGINT UNSIGNED NOT NULL,
     skill_key          VARCHAR(64) NOT NULL,
+    skill_core         ENUM('yes', 'no') NOT NULL DEFAULT 'no',
+    skill_attribute    VARCHAR(20) NOT NULL,
     skill_die          TINYINT UNSIGNED NOT NULL,
     skill_created      DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     skill_updated      DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)

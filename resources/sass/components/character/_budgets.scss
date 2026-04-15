@@ -1,45 +1,43 @@
 @use "../../settings/css-variables" as vars;
 @use "../../tools/breakpoints";
 
-$points-background: #ffffff;
-$points-border-radius: 5px;
+$budgets-border: 1px solid #ccc;
+$budgets-background: #ffffff;
+$budgets-border-radius: 5px;
 
 .budgets {
     position: fixed;
     bottom: 1rem;
     left: 1rem;
+    width: 30rem;
     display: flex;
     flex-direction: row;
     z-index: 10;
-
-    .budget__panel {
-        /* outline: 1px dotted red; */
-
-        display: flex;
-        flex-direction: row;
-        font-size: 1.1rem;
-    }
-    .budget__label,
-    .budget__value {
-        padding: 0.25rem 0.5rem;
-        @include breakpoints.at(phablet) {
-            padding: 0.5rem 1rem;
-        }
-    }
-    .budget__label {
-        padding-right: 0.1rem;
-    }
-    .budget__value {
-        padding-left: 0.1rem;
-    }
+    line-height: 1;
 
     @include breakpoints.at(phablet) {
-        flex-direction: column;
         justify-content: center;
         top: auto;
         left: 0;
         right: 0;
         bottom: 4rem;
         background-color: #fff;
+    }
+
+    .budget__panel {
+        /* outline: 1px dotted red; */
+
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        font-size: 1.1rem;
+        min-width: 10rem;
+    }
+    .budget__panel--skills {
+        flex: 12 0 auto;
+    }
+    .budget__panel--hindrances {
+        flex: 4 0 auto;
     }
 }

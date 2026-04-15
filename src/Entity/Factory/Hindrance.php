@@ -22,6 +22,17 @@ class Hindrance extends Factory
         );
     }
 
+    public function pointsForCharacter(Entity $character): int
+    {
+        $hindrances = $this->forCharacter($character);
+        $points = 0;
+        foreach ($hindrances as $hindrance) {
+            $points += "major" == $hindrance->level ? 2 : 1;
+        }
+
+        return $points;
+    }
+
     public function syncForCharacter(Entity $character, array $selected): Result
     {
         $result = new Result();

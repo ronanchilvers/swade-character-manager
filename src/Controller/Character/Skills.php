@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
-use App\Budget;
+use App\Budget\HindranceBudget;
+use App\Budget\SkillBudget;
 use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
+use App\Entity\Factory\Hindrance as FactoryHindrances;
 use App\Entity\Factory\Skill as FactorySkill;
 use App\Filter;
 use App\Service\Data\Manager;
@@ -19,6 +21,7 @@ class Skills
     public function __construct(
         private FactoryCharacter $factory,
         private FactorySkill $skillFactory,
+        private FactoryHindrances $hindrancesFactory,
         private Manager $manager,
     ) {
     }
@@ -32,12 +35,16 @@ class Skills
             return;
         }
 
-        $errors = [];
-
+        $skillService = $this->manager->getType(SkillsData::class);
+        $characterSkills = $errors = [];
         if ('POST' === Flight::request()->getMethod()) {
             $selected = Filter::numberArray($_POST['skills']);
             $selected = array_filter($selected);
-            $result = $this->skillFactory->syncForCharacter($entity, $selected);
+            $result = $this->skillFactory->syncForCharacter(
+                $entity,
+                $selected,
+                $skillService
+            );
 
             if ($result->isSuccess()) {
                 Flight::session()->success(
@@ -56,25 +63,37 @@ class Skills
                 $selected[$skill->key] = $skill->die;
             }
         }
-        $skills = $this->manager->getType(SkillsData::class)->all();
+        $coreSkills = $skillService->core();
+        $nonCoreSkills = $skillService->nonCore();
         $diceOptions = Dice::validSizes();
         array_unshift($diceOptions, 0);
 
-        $budgets = (new Budget())
-            ->add(
-                'skills',
-                'Skills',
-                0,
-                12
-            )
-            ;
+        $characterHindrances = $this->hindrancesFactory->forCharacter($entity);
+        $budgets = [
+            new SkillBudget($entity, $characterSkills),
+            new HindranceBudget($entity, $characterHindrances),
+        ];
+        // $budgets = (new Budget())
+        //     ->add(
+        //         'skills',
+        //         'Skills',
+        //         0,
+        //         12
+        //     )
+        //     ->add(
+        //         'hindrances',
+        //         'Hindrances',
+        //         0,
+        //         4
+        //     )
+        //     ;
 
         Flight::render('character/skills.twig', [
             'page_title' => 'Skills',
             'entity' => $entity,
             'errors' => $errors,
             'selected' => $selected,
-            'skills' => $skills,
+            'skills' => $coreSkills + $nonCoreSkills,
             'dice_options' => $diceOptions,
             'budgets' => $budgets,
         ]);

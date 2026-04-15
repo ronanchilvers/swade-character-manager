@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /** Base Stylesheet **/
 /** Settings **/
 :root {
@@ -631,6 +632,17 @@ main {
   background-color: #e7f2e6;
 }
 
+.card--core .card__title {
+  position: relative;
+  padding-left: 2rem;
+  color: rgb(0, 125, 0);
+}
+.card--core .card__title::before {
+  position: absolute;
+  left: 0.75rem;
+  content: "✱";
+}
+
 .panel {
   display: flex;
   flex-direction: column;
@@ -645,6 +657,28 @@ main {
 }
 .panel .panel__content {
   padding: 1rem 1rem;
+}
+
+.progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.progress,
+.progress::-webkit-progress-bar {
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 15px;
+  width: 100%;
+}
+
+.progress::-moz-progress-bar {
+  background-color: red;
+}
+
+.progress::-webkit-progress-value {
+  background-color: #333;
 }
 
 /*# sourceMappingURL=styles.css.map */

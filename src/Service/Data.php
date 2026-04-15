@@ -18,6 +18,17 @@ abstract class Data
         $this->data = require $filename;
     }
 
+    public function forId(string $id): ?array
+    {
+        foreach ($this->all() as $datum) {
+            if ($datum['id'] == $id) {
+                return $datum;
+            }
+        }
+
+        return null;
+    }
+
     public function all(): array
     {
         return $this->data['entries'];
