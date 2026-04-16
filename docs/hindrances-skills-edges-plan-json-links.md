@@ -27,4 +27,4 @@ Do not assume this document’s original repository/service design exists in the
 
 1. Start from the live controller/factory/data-manager structure.
 2. Decide whether to evolve that structure or replace it with the previously planned service layer.
-3. Align tests and docs at the same time so the repository does not continue to carry planned-only APIs in committed coverage.
+3. Align tests and docs at the same time so the repository continues to test only implemented APIs.

@@ -41,21 +41,21 @@ The documented PHPUnit command is correct:
 vendor/bin/phpunit --configuration phpunit.xml.dist
 ```
 
-But the suite is currently red.
+The suite now passes cleanly against the live implementation.
 
 Verified result on 2026-04-16:
 
-- `tests/Entity/Factory/CharacterTest.php` passes.
-- `tests/Service/CharacterAttributesTest.php` fails because `App\Service\CharacterHindrances` does not exist.
-- `tests/Service/CharacterSkillsTest.php` fails because `App\Service\CharacterSkills` does not exist.
-- One service test also expects `Character::upsert()` to return `bool`, but the live factory returns `App\Entity\Factory\Result`.
+- `tests/Budget/` covers the current budget helpers.
+- `tests/Entity/Factory/` covers the live character, hindrance, and skill factories.
+- `tests/Service/Data/SkillsTest.php` covers the live skill catalog loader.
+- `vendor/bin/phpunit --configuration phpunit.xml.dist` exits successfully on the current tree.
 
-This means the test suite currently mixes live coverage with tests for a partially planned or removed service layer.
+The earlier service-layer tests that referenced missing classes were removed and replaced with coverage for the code that actually ships.
 
 ## Known Documentation-Sensitive Gaps
 - Historical docs previously referred to `schema/001_schema.sql`, but the repo currently has only `schema/000_schema.sql`.
 - Historical docs previously described a JSON-first runtime catalog service. The live app loads PHP catalog exports from `data/*.php`.
-- Historical docs previously described service-layer character workflows such as `CharacterAttributes` and `CharacterSkills`. Those classes are not present in `src/Service`; the current flow is controller/factory driven.
+- Historical docs previously described service-layer character workflows such as `CharacterAttributes` and `CharacterSkills`. Those classes are still not present in `src/Service`; the current flow remains controller/factory driven.
 
 ## Recommended Reading Order
 1. `AGENTS.md` for the working repo contract.

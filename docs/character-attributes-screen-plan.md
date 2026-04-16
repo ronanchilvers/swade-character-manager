@@ -18,7 +18,7 @@ These planned classes are not present:
 - `App\Service\CharacterAttributes`
 - `App\Service\CharacterHindrances`
 
-The live implementation keeps attribute handling in the controller plus `App\Entity\Factory\Character`, and the committed service tests currently target that unimplemented service design rather than the code that actually exists.
+The live implementation keeps attribute handling in the controller plus `App\Entity\Factory\Character`. The stale service-layer tests that previously targeted this unimplemented design have been removed in favor of tests for the live budgets and factories.
 
 ## Current Behavior
 - Attribute options are driven by `App\Dice::validSizes()`.
@@ -34,5 +34,5 @@ The live implementation keeps attribute handling in the controller plus `App\Ent
 Use this file as background only. Before implementing anything else around attributes:
 
 1. Decide whether the repo should introduce the missing service layer or keep the current controller/factory approach.
-2. Bring the tests in `tests/Service/CharacterAttributesTest.php` into alignment with that decision.
+2. Add or adjust tests only for code that actually exists in `src/`.
 3. Update `AGENTS.md` and `docs/codebase-review.md` if the architecture changes.

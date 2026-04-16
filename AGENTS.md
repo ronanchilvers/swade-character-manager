@@ -41,7 +41,7 @@ Run tests with:
 
 - `vendor/bin/phpunit --configuration phpunit.xml.dist`
 
-As of 2026-04-16, the committed PHPUnit suite is not green: `tests/Service/CharacterAttributesTest.php` and `tests/Service/CharacterSkillsTest.php` reference service classes that do not exist in `src/Service/`, while `tests/Entity/Factory/CharacterTest.php` passes. Treat the service tests as stale/planned coverage until the matching services are implemented or the tests are rewritten.
+As of 2026-04-16, the PHPUnit suite has been realigned with the live code and passes cleanly. Current coverage is centered on live factory behavior, budget calculations, and catalog loading, rather than the older planned service-layer architecture.
 
 ## Coding Style & Naming Conventions
 Follow the existing PHP style: `declare(strict_types=1);`, 4-space indentation, opening braces on the next line for classes and methods, and short array syntax. Keep namespaces PSR-4-compatible under `App\\`.
@@ -51,9 +51,9 @@ Use PascalCase for classes, camelCase for methods, and snake_case for Flight rou
 Twig templates follow feature-based naming such as `views/character/hindrances.twig` and shared partials under `views/partials/`. Sass is organized by settings/tools/base/elements/components inside `resources/sass/`.
 
 ## Testing Guidelines
-Prefer PHPUnit for new coverage, with test files named `*Test.php` under `tests/`. Current committed tests are split between `tests/Entity/Factory/` and `tests/Service/`.
+Prefer PHPUnit for new coverage, with test files named `*Test.php` under `tests/`. Current committed tests are split between `tests/Budget/`, `tests/Entity/Factory/`, and `tests/Service/Data/`.
 
-When changing behavior in the live controllers/factories, favor tests that match the implementation that actually exists in `src/`; avoid adding or preserving tests that target planned services or APIs that are not present in the tree. For Twig, JavaScript, or Sass changes, do a manual pass through the affected builder step and note what you exercised.
+When changing behavior in the live controllers/factories, favor tests that match the implementation that actually exists in `src/`; do not reintroduce tests for planned services or APIs that are not present in the tree. For Twig, JavaScript, or Sass changes, do a manual pass through the affected builder step and note what you exercised.
 
 ## Documentation Notes
 `docs/codebase-review.md` is the current high-level repository state document. The two plan docs in `docs/` are historical planning records that now include status notes; do not treat their original implementation sketches as current architecture without checking the code.

@@ -15,7 +15,7 @@ class CharacterTest extends TestCase
     public function testValidAttributeDicePassValidation(): void
     {
         $factory = new CharacterFactory(
-            $this->createMock(SimplePdo::class),
+            $this->createStub(SimplePdo::class),
             new Validator()
         );
 
@@ -36,7 +36,7 @@ class CharacterTest extends TestCase
     public function testInvalidAttributeDiceAreRejected(): void
     {
         $factory = new CharacterFactory(
-            $this->createMock(SimplePdo::class),
+            $this->createStub(SimplePdo::class),
             new Validator()
         );
 
@@ -57,7 +57,7 @@ class CharacterTest extends TestCase
     public function testConceptOnlyEntityStillValidatesWithoutAttributes(): void
     {
         $factory = new CharacterFactory(
-            $this->createMock(SimplePdo::class),
+            $this->createStub(SimplePdo::class),
             new Validator()
         );
 
