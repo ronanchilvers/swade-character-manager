@@ -2,7 +2,7 @@
 <div class="budgets">
     {% for budget in budgets %}
     <div class="budget__panel budget__panel--{{ budget.id }}">
-        <div class="budget__label">{{ budget.label }} - {{ budget.value }}/{{ budget.max }}</div>
+        <div class="budget__label"><span>{{ budget.label }}</span><span>{{ budget.value }}/{{ budget.max }}<span></div>
         <div class="budget__value">
             <progress class="progress js-budget-progress" data-budget="{{ budget.id }}" value="{{ budget.value }}" max="{{ budget.max }}"></progress>
         </div>

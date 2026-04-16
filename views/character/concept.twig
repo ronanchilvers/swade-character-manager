@@ -1,5 +1,8 @@
 {% extends 'layouts/character/builder.twig' %}
 
+{% set back_label = 'Your Characters' %}
+{% set back_url = get_url('home_page') %}
+
 {% block page %}
 
 <div class="panel">
@@ -14,19 +17,12 @@
     </div>
 </div>
 
-<form class="form" method="post" action="">
-    <div class="field {% if field_has_error('name', errors) %}field--error{% endif %}">
-        <label class="field__label">Your character's name</label>
-        <div class="field__inner">
-            <input class="field__input" type="text" name="name" value="{{ entity.name }}"/>
-        </div>
-        <p class="field__error">This field is required</p>
+<div class="field {% if field_has_error('name', errors) %}field--error{% endif %}">
+    <label class="field__label">Your character's name</label>
+    <div class="field__inner">
+        <input class="field__input" type="text" name="name" value="{{ entity.name }}"/>
     </div>
+    <p class="field__error">This field is required</p>
+</div>
 
-    <div class="form__buttons form__buttons--floating">
-        <a class="button" href="{{ get_url('home_page') }}">Cancel</a>
-        <button class="button button--primary" type="submit">Save and Continue...</button>
-    </div>
-
-</form>
 {% endblock %}

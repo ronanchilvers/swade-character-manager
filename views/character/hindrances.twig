@@ -4,70 +4,62 @@
 {% do add_script('/javascript/budgets.js') %}
 
 {% set levels = [ 'minor', 'major' ] %}
+{% set back_url = get_url('characters_concept', {hash: entity.hash}) %}
 
 {% block page %}
-<form class="form" method="post" action="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">
-
-    <div class="panel">
-        <h2 class="panel__title">Hindrances</h2>
-        <div class="panel__content">
-        <p>Hindrances are character flaws and physical handicaps that occasionally make life a little tougher for your hero. Some Hindrances have actual game effects while others are about roleplaying. They should occasionally cause her to act in ways that aren’t necessarily smart, efficient, or in the best interests of the party.</p>
-        <p>There are two types of hindrance:</p>
-        <ul>
-            <li>Minor - small, annoying problems. Each minor hindrance gets you <strong>1</strong> hindrance point.</li>
-            <li>Major - big, difficult problems that can really bite you. Each major hindrance gets you <strong>2</strong> hindrance points.</li>
-        </ul>
-        <p>Choose up to <strong>{{ budget.maxFor('hindrances') }}</strong> points of hindrances. You have <strong class="js-points">{{ remaining_points }}</strong> points left to choose.</p>
-        </div>
+<div class="panel">
+    <h2 class="panel__title">Hindrances</h2>
+    <div class="panel__content">
+    <p>Hindrances are character flaws and physical handicaps that occasionally make life a little tougher for your hero. Some Hindrances have actual game effects while others are about roleplaying. They should occasionally cause her to act in ways that aren’t necessarily smart, efficient, or in the best interests of the party.</p>
+    <p>There are two types of hindrance:</p>
+    <ul>
+        <li>Minor - small, annoying problems. Each minor hindrance gets you <strong>1</strong> hindrance point.</li>
+        <li>Major - big, difficult problems that can really bite you. Each major hindrance gets you <strong>2</strong> hindrance points.</li>
+    </ul>
+    <p>Choose up to <strong>{{ budget.maxFor('hindrances') }}</strong> points of hindrances. You have <strong class="js-points">{{ remaining_points }}</strong> points left to choose.</p>
     </div>
+</div>
 
-    <div class="cards cards--hindrances">
-            {% for hindrance in hindrances %}
-            <div class="card">
-                <div class="card__inner">
-                    <div class="card__title">{{ hindrance.name }}</div>
-                    <div class="card__content">
-                        <div>
-                            {% if hindrance.summary %}
-                            <p>{{ hindrance.summary }}</p>
-                            {% endif %}
-                            {% if hindrance.effects %}
-                                {% for effect in hindrance.effects %}
-                                <p>{{ effect.level|title }}: {{ effect.details }}</p>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="card__footer js-hindrance">
-                        {% for level in levels %}
-                        {% set valid = level in hindrance.levels %}
-                        {% if valid %}
-                        <input
-                            type="checkbox"
-                            class="js-budget-option js-checkbox"
-                            data-budget="hindrances"
-                            data-budget-value="{{ 'major' == level ? 2 : 1 }}"
-                            id="hindrance_{{ hindrance.id }}_{{ level }}"
-                            name="hindrances[{{ hindrance.id }}]"
-                            value="{{ level }}"
-                            {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
-                        />
+<div class="cards cards--hindrances">
+        {% for hindrance in hindrances %}
+        <div class="card">
+            <div class="card__inner">
+                <div class="card__title">{{ hindrance.name }}</div>
+                <div class="card__content">
+                    <div>
+                        {% if hindrance.summary %}
+                        <p>{{ hindrance.summary }}</p>
                         {% endif %}
-                        <label for="hindrance_{{ hindrance.id }}_{{ level }}" class="card__option card__option--{{ level }}{% if not valid %} card__option--disabled{% endif %}">
-                            {{ level|title }}
-                        </label>
-                        {% endfor %}
+                        {% if hindrance.effects %}
+                            {% for effect in hindrance.effects %}
+                            <p>{{ effect.level|title }}: {{ effect.details }}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
+                <div class="card__footer js-hindrance">
+                    {% for level in levels %}
+                    {% set valid = level in hindrance.levels %}
+                    {% if valid %}
+                    <input
+                        type="checkbox"
+                        class="js-budget-option js-checkbox"
+                        data-budget="hindrances"
+                        data-budget-value="{{ 'major' == level ? 2 : 1 }}"
+                        id="hindrance_{{ hindrance.id }}_{{ level }}"
+                        name="hindrances[{{ hindrance.id }}]"
+                        value="{{ level }}"
+                        {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
+                    />
+                    {% endif %}
+                    <label for="hindrance_{{ hindrance.id }}_{{ level }}" class="card__option card__option--{{ level }}{% if not valid %} card__option--disabled{% endif %}">
+                        {{ level|title }}
+                    </label>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
-    </div>
-
-    <div class="form__buttons form__buttons--floating">
-        <a class="button" href="{{ get_url('characters_concept', {hash: entity.hash}) }}">Previous</a>
-        <button class="button button--primary" type="submit">Save and Continue...</button>
-    </div>
-
-</form>
+        </div>
+        {% endfor %}
+</div>
 
 {% endblock %}

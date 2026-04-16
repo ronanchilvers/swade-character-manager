@@ -19,18 +19,19 @@
           break;
         case "SELECT":
           let selectedOption = option.options[option.selectedIndex];
-          console.log(selectedOption);
+          // console.log(selectedOption);
           value = parseInt(selectedOption.dataset[dataBudgetValue]);
           break;
         default:
           return;
       }
 
-      if (!isNaN(value)) {
+      if (!isNaN(value) && 0 < value) {
+        console.log('Budget value: ' + value);
         budgetTotal += value;
       }
-      console.log("budgetTotal", budgetTotal);
     });
+    console.log("budgetTotal", budgetTotal);
     document.querySelector(selectorProgress + "[data-budget='" + budget + "']").value = budgetTotal;
   }
   document.addEventListener("change", (event) => {

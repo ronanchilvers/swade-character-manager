@@ -16,5 +16,12 @@ abstract class Budget
         $this->init($character, $existing);
     }
 
+    public function setLabel(string $label): static
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
     abstract protected function init(Entity $character, array $existing): void;
 }

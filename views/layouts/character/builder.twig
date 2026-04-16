@@ -6,6 +6,16 @@
     {% include "partials/character/tabs.twig" %}
     {% include "partials/character/budgets.twig" %}
     <section id="wrapper__inner">
-        {% block page %}{% endblock %}
+        <form class="form" method="post" action="">
+            {% block page %}{% endblock %}
+
+            <div class="form__buttons form__buttons--floating">
+            {% if back_url %}
+                <a class="button" href="{{ back_url }}">{% if back_label %}{{ back_label }}{% else %}&laquo; Previous{% endif %}</a>
+            {% endif %}
+                <button class="button button--primary" type="submit">{% if next_label %}{{ next_label }}{% else %}Save and Continue &raquo;{% endif %}</button>
+            </div>
+
+        </form>
     </section>
 {% endblock %}

@@ -69,14 +69,23 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   min-width: 10rem;
+  margin: 0.1rem 0.2rem;
+}
+.budgets .budget__label {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem 0 0.25rem;
+}
+.budgets .budget__label span {
+  font-size: 0.8rem;
 }
 .budgets .budget__panel--skills {
   flex: 12 0 auto;
 }
 .budgets .budget__panel--hindrances {
-  flex: 4 0 auto;
+  flex: 4 0 0;
 }
 
 /*# sourceMappingURL=builder.css.map */

@@ -4,6 +4,8 @@
 {#% do add_script('/javascript/skills.js') %#}
 
 {% set selected_keys = selected|keys %}
+{% set back_url = get_url('characters_attributes', {hash: entity.hash}) %}
+{% set next_label = "Save" %}
 
 {% block page %}
 
@@ -19,73 +21,65 @@
     </div>
 </div>
 
-<form class="form" method="post" action="{{ get_url('characters_skills', {hash: entity.hash}) }}">
-
-    <div class="cards">
-        {% for skill in skills %}
-        {% set isSelected = skill.id in selected_keys %}
-        {% set attributeDie = entity.get(skill.linked_attribute) %}
-        <div class="card card--skill card--{{ skill.core_skill ? 'core' : 'non-core' }}">
-            <div class="card__inner">
-                <div class="card__title" for="skill_{{ skill.id }}">{{ skill.name }}</div>
-                <div class="card__content">
-                    {% if skill.summary %}
-                    <p>{{ skill.summary }}</p>
+<div class="cards">
+    {% for skill in skills %}
+    {% set isSelected = skill.id in selected_keys %}
+    {% set attributeDie = entity.get(skill.linked_attribute) %}
+    <div class="card card--skill card--{{ skill.core_skill ? 'core' : 'non-core' }}">
+        <div class="card__inner">
+            <div class="card__title" for="skill_{{ skill.id }}">{{ skill.name }}</div>
+            <div class="card__content">
+                {% if skill.summary %}
+                <p>{{ skill.summary }}</p>
+                {% endif %}
+                {% if skill.core_skill %}
+                <p>Core skill: starts at d4 for free.</p>
+                {% endif %}
+            </div>
+            <div class="card__footer">
+                <p><strong>{{ skill.linked_attribute|capitalize }} skill</strong> - you have {{ skill.linked_attribute|capitalize }} at d{{ attributeDie }}</p>
+                <select
+                    class="field__input js-skill-die js-budget-option"
+                    id="skill_{{ skill.id }}"
+                    name="skills[{{ skill.id }}]"
+                    data-budget="skills"
+                    data-linked-attribute-die="{{ group.attribute_die }}"
+                    data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
+                >
+                {% set multiplier = 0 %}
+                {% for value in dice_options %}
+                    {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
+                    {# a core skill or a selected skill - no 'untrained' option #}
+                    {% elseif isSelected and selected[skill.id] > value %}
+                    {# a selected skill at a higher level than value - option unavailable #}
+                    {% else %}
+                    {% set isSelectedValue = selected[skill.id] and (selected[skill.id] == value) %}
+                    {% set budget_value = 1 %}
+                    {% if 0 == value %}
+                        {% set budget_value = 0 %}
+                    {% elseif skill.core_skill and 4 == value %}
+                        {% set budget_value = 0 %}
+                    {% elseif attributeDie < value %}
+                        {% set budget_value = 2 %}
                     {% endif %}
-                    {% if skill.core_skill %}
-                    <p>Core skill: starts at d4 for free.</p>
-                    {% endif %}
-                </div>
-                <div class="card__footer">
-                    <p><strong>{{ skill.linked_attribute|capitalize }} skill</strong> - you have {{ skill.linked_attribute|capitalize }} at d{{ attributeDie }}</p>
-                    <select
-                        class="field__input js-skill-die js-budget-option"
-                        id="skill_{{ skill.id }}"
-                        name="skills[{{ skill.id }}]"
-                        data-budget="skills"
-                        data-linked-attribute-die="{{ group.attribute_die }}"
-                        data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
-                    >
-                    {% set multiplier = 0 %}
-                    {% for value in dice_options %}
-                        {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
-                        {# a core skill or a selected skill - no 'untrained' option #}
-                        {% elseif isSelected and selected[skill.id] > value %}
-                        {# a selected skill at a higher level than value - option unavailable #}
+                    <option
+                        value="{{ value }}" {% if isSelectedValue %}selected{% endif %}
+                        data-budget-value="{{ budget_value * multiplier }}"
+                        >
+                        {% if value == 0 %}
+                        Untrained
                         {% else %}
-                        {% set isSelectedValue = selected[skill.id] and (selected[skill.id] == value) %}
-                        {% set multiplier = multiplier + 1 %}
-                        {% set budget_value = 1 %}
-                        {% if 0 == value %}
-                            {% set budget_value = 0 %}
-                        {% elseif skill.core_skill and 4 == value %}
-                            {% set budget_value = 0 %}
-                        {% elseif attributeDie < value %}
-                            {% set budget_value = 2 %}
+                        d{{ value }}{% if 0 < budget_value and not isSelectedValue %} (cost +{{ budget_value * multiplier }}){% endif %}
                         {% endif %}
-                        <option
-                            value="{{ value }}" {% if isSelectedValue %}selected{% endif %}
-                            data-budget-value="{{ budget_value }}"
-                            >
-                            {% if value == 0 %}
-                            Untrained
-                            {% else %}
-                            d{{ value }}{% if 0 < budget_value and not isSelectedValue %} (cost +{{ budget_value }}){% endif %}
-                            {% endif %}
-                        </option>
-                        {% endif %}
-                    {% endfor %}
-                    </select>
-                </div>
+                    </option>
+                    {% set multiplier = multiplier + 1 %}
+                    {% endif %}
+                {% endfor %}
+                </select>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 
-    <div class="form__buttons form__buttons--floating">
-        <a class="button" href="{{ get_url('characters_attributes', {hash: entity.hash}) }}">Previous</a>
-        <button class="button button--primary" type="submit">Save Skills</button>
-    </div>
-
-</form>
 {% endblock %}

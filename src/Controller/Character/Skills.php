@@ -71,22 +71,8 @@ class Skills
         $characterHindrances = $this->hindrancesFactory->forCharacter($entity);
         $budgets = [
             new SkillBudget($entity, $characterSkills),
-            new HindranceBudget($entity, $characterHindrances),
+            new HindranceBudget($entity, $characterHindrances)->setLabel('Hindrance Points'),
         ];
-        // $budgets = (new Budget())
-        //     ->add(
-        //         'skills',
-        //         'Skills',
-        //         0,
-        //         12
-        //     )
-        //     ->add(
-        //         'hindrances',
-        //         'Hindrances',
-        //         0,
-        //         4
-        //     )
-        //     ;
 
         Flight::render('character/skills.twig', [
             'page_title' => 'Skills',
