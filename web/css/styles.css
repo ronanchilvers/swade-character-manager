@@ -632,6 +632,10 @@ main {
   background-color: #e7f2e6;
 }
 
+.card--skill .card__footer {
+  flex-direction: column;
+}
+
 .card--core .card__title {
   position: relative;
   padding-left: 2rem;

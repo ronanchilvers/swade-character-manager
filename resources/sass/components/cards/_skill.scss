@@ -1,3 +1,8 @@
+.card--skill {
+    .card__footer {
+        flex-direction: column;
+    }
+}
 .card--core {
     .card__title {
         position: relative;
