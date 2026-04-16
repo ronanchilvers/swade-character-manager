@@ -1,13 +1,10 @@
 # Claude Configuration
 
-When working on this project, Claude models should follow the guidelines specified in [@AGENTS.md](./AGENTS.md).
+When working on this project, follow [@AGENTS.md](./AGENTS.md) as the canonical repository guide.
 
-This file contains essential information about:
-- Project role and responsibilities
-- Tech stack and framework details
-- File structure and organization
-- Coding standards and conventions
-- Git workflow expectations
-- Project boundaries and constraints
+Use the docs in `docs/` with more care:
 
-Please review [@AGENTS.md](./AGENTS.md) before starting any work.
+- [`docs/codebase-review.md`](./docs/codebase-review.md) is the current repository-state summary.
+- The plan docs in `docs/` are historical design notes with status updates, not canonical architecture references.
+
+If a doc and the code disagree, trust the code and update the doc.
