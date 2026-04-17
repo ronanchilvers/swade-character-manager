@@ -28,6 +28,7 @@ return array (
       ),
       'details' => 'human-readable clarification',
     ),
+    'repeatable' => 'boolean: whether the edge may be taken more than once',
   ),
   'entries' => 
   array (
@@ -37,6 +38,7 @@ return array (
       'name' => 'Alertness',
       'category' => 'background',
       'summary' => 'The hero is exceptionally observant.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -76,6 +78,7 @@ return array (
       'name' => 'Ambidextrous',
       'category' => 'background',
       'summary' => 'The hero uses either hand equally well.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -122,6 +125,7 @@ return array (
       'name' => 'Arcane Background',
       'category' => 'background',
       'summary' => 'Grants access to an arcane tradition.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -161,6 +165,7 @@ return array (
       'name' => 'Arcane Resistance',
       'category' => 'background',
       'summary' => 'The hero resists supernatural powers.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -220,6 +225,7 @@ return array (
       'name' => 'Improved Arcane Resistance',
       'category' => 'background',
       'summary' => 'A stronger version of Arcane Resistance.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -278,6 +284,7 @@ return array (
       'name' => 'Aristocrat',
       'category' => 'background',
       'summary' => 'The hero moves comfortably among the elite.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -331,6 +338,7 @@ return array (
       'name' => 'Attractive',
       'category' => 'background',
       'summary' => 'The hero gains social leverage through appearance.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -391,6 +399,7 @@ return array (
       'name' => 'Very Attractive',
       'category' => 'background',
       'summary' => 'A stronger version of Attractive.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -451,6 +460,7 @@ return array (
       'name' => 'Berserk',
       'category' => 'background',
       'summary' => 'Physical harm can send the hero into a deadly rage.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -551,6 +561,7 @@ return array (
       'name' => 'Brave',
       'category' => 'background',
       'summary' => 'The hero handles terror better than most.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -609,6 +620,7 @@ return array (
       'name' => 'Brawny',
       'category' => 'background',
       'summary' => 'The hero is exceptionally large or fit.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -674,6 +686,7 @@ return array (
       'name' => 'Brute',
       'category' => 'background',
       'summary' => 'The hero relies on strength instead of coordination for Athletics.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -738,6 +751,7 @@ return array (
       'name' => 'Charismatic',
       'category' => 'background',
       'summary' => 'The hero is naturally persuasive.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -784,6 +798,7 @@ return array (
       'name' => 'Elan',
       'category' => 'background',
       'summary' => 'The hero gets more out of Benny-powered rerolls.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -829,6 +844,7 @@ return array (
       'name' => 'Fame',
       'category' => 'background',
       'summary' => 'The hero is a minor celebrity.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -882,6 +898,7 @@ return array (
       'name' => 'Famous',
       'category' => 'background',
       'summary' => 'The hero is widely known and paid accordingly.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -941,6 +958,7 @@ return array (
       'name' => 'Fast Healer',
       'category' => 'background',
       'summary' => 'The hero recovers naturally more effectively.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -987,6 +1005,7 @@ return array (
       'name' => 'Fleet-Footed',
       'category' => 'background',
       'summary' => 'The hero moves faster than normal.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1045,6 +1064,7 @@ return array (
       'name' => 'Linguist',
       'category' => 'background',
       'summary' => 'The hero begins play with several languages.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1090,6 +1110,7 @@ return array (
       'name' => 'Luck',
       'category' => 'background',
       'summary' => 'The hero starts each session with more Bennies.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1129,6 +1150,7 @@ return array (
       'name' => 'Great Luck',
       'category' => 'background',
       'summary' => 'The hero starts each session with even more Bennies.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1174,6 +1196,7 @@ return array (
       'name' => 'Quick',
       'category' => 'background',
       'summary' => 'The hero reacts faster than normal in combat.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1219,6 +1242,7 @@ return array (
       'name' => 'Rich',
       'category' => 'background',
       'summary' => 'The hero starts wealthier than most.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1271,6 +1295,7 @@ return array (
       'name' => 'Filthy Rich',
       'category' => 'background',
       'summary' => 'The hero is extremely wealthy.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1329,6 +1354,7 @@ return array (
       'name' => 'Block',
       'category' => 'combat',
       'summary' => 'The hero is harder to hit in melee.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1387,6 +1413,7 @@ return array (
       'name' => 'Improved Block',
       'category' => 'combat',
       'summary' => 'A stronger version of Block.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1445,6 +1472,7 @@ return array (
       'name' => 'Brawler',
       'category' => 'combat',
       'summary' => 'The hero is tougher and deadlier unarmed.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1509,6 +1537,7 @@ return array (
       'name' => 'Bruiser',
       'category' => 'combat',
       'summary' => 'The hero becomes even tougher and more dangerous unarmed.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1567,6 +1596,7 @@ return array (
       'name' => 'Calculating',
       'category' => 'combat',
       'summary' => 'The hero makes a low card count.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1613,6 +1643,7 @@ return array (
       'name' => 'Combat Reflexes',
       'category' => 'combat',
       'summary' => 'The hero recovers from stun and shock more easily.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1652,6 +1683,7 @@ return array (
       'name' => 'Counterattack',
       'category' => 'combat',
       'summary' => 'The hero punishes missed melee attacks.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1699,6 +1731,7 @@ return array (
       'name' => 'Improved Counterattack',
       'category' => 'combat',
       'summary' => 'The hero can counter multiple missed melee attacks.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1746,6 +1779,7 @@ return array (
       'name' => 'Dead Shot',
       'category' => 'combat',
       'summary' => 'A Joker can turn the first ranged hit into devastating damage.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1802,6 +1836,7 @@ return array (
       'name' => 'Dodge',
       'category' => 'combat',
       'summary' => 'The hero is harder to hit at range.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1847,6 +1882,7 @@ return array (
       'name' => 'Improved Dodge',
       'category' => 'combat',
       'summary' => 'The hero is also much better at Evasion.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1892,6 +1928,7 @@ return array (
       'name' => 'Double Tap',
       'category' => 'combat',
       'summary' => 'The hero puts two shots on target more effectively.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1952,6 +1989,7 @@ return array (
       'name' => 'Extraction',
       'category' => 'combat',
       'summary' => 'The hero can slip away from one adjacent foe safely.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -1997,6 +2035,7 @@ return array (
       'name' => 'Improved Extraction',
       'category' => 'combat',
       'summary' => 'The hero can disengage from several nearby foes.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2042,6 +2081,7 @@ return array (
       'name' => 'Feint',
       'category' => 'combat',
       'summary' => 'The hero can force a less agile defense during a Fighting Test.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2087,6 +2127,7 @@ return array (
       'name' => 'First Strike',
       'category' => 'combat',
       'summary' => 'The hero lashes out when enemies move into reach.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2134,6 +2175,7 @@ return array (
       'name' => 'Improved First Strike',
       'category' => 'combat',
       'summary' => 'The hero can exploit multiple openings when foes close in.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2180,6 +2222,7 @@ return array (
       'name' => 'Free Runner',
       'category' => 'combat',
       'summary' => 'The hero moves through obstacles and chases efficiently.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2239,6 +2282,7 @@ return array (
       'name' => 'Frenzy',
       'category' => 'combat',
       'summary' => 'The hero can unleash multiple melee strikes at once.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2285,6 +2329,7 @@ return array (
       'name' => 'Improved Frenzy',
       'category' => 'combat',
       'summary' => 'The hero can press an even more furious melee assault.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2331,6 +2376,7 @@ return array (
       'name' => 'Giant Killer',
       'category' => 'combat',
       'summary' => 'The hero hits far above their size class.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2370,6 +2416,7 @@ return array (
       'name' => 'Hard to Kill',
       'category' => 'combat',
       'summary' => 'The hero resists dying from severe wounds.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2409,6 +2456,7 @@ return array (
       'name' => 'Harder to Kill',
       'category' => 'combat',
       'summary' => 'The hero can survive apparent death.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2454,6 +2502,7 @@ return array (
       'name' => 'Improvisational Fighter',
       'category' => 'combat',
       'summary' => 'The hero makes the best of improvised weapons.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2499,6 +2548,7 @@ return array (
       'name' => 'Iron Jaw',
       'category' => 'combat',
       'summary' => 'The hero is very hard to knock cold.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2557,6 +2607,7 @@ return array (
       'name' => 'Killer Instinct',
       'category' => 'combat',
       'summary' => 'The hero excels at pressing an advantage in Tests.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2603,6 +2654,7 @@ return array (
       'name' => 'Level Headed',
       'category' => 'combat',
       'summary' => 'The hero reads the fight quickly and acts on the better card.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2643,6 +2695,7 @@ return array (
       'name' => 'Improved Level Headed',
       'category' => 'combat',
       'summary' => 'The hero evaluates several options at once in combat.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2689,6 +2742,7 @@ return array (
       'name' => 'Marksman',
       'category' => 'combat',
       'summary' => 'The hero makes a deliberate, high-quality ranged shot.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2755,6 +2809,7 @@ return array (
       'name' => 'Martial Artist',
       'category' => 'combat',
       'summary' => 'The hero is trained to make unarmed combat more effective.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2826,6 +2881,7 @@ return array (
       'name' => 'Martial Warrior',
       'category' => 'combat',
       'summary' => 'The hero is an even more formidable unarmed combatant.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2884,6 +2940,7 @@ return array (
       'name' => 'Mighty Blow',
       'category' => 'combat',
       'summary' => 'A Joker can turn the first melee hit into devastating damage.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2936,6 +2993,7 @@ return array (
       'name' => 'Nerves of Steel',
       'category' => 'combat',
       'summary' => 'The hero shrugs off pain more effectively.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -2981,6 +3039,7 @@ return array (
       'name' => 'Improved Nerves of Steel',
       'category' => 'combat',
       'summary' => 'The hero operates well even while badly hurt.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3026,6 +3085,7 @@ return array (
       'name' => 'No Mercy',
       'category' => 'combat',
       'summary' => 'The hero hits harder when spending a Benny on damage.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3065,6 +3125,7 @@ return array (
       'name' => 'Rapid Fire',
       'category' => 'combat',
       'summary' => 'The hero can pour out more bullets in one attack.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3111,6 +3172,7 @@ return array (
       'name' => 'Improved Rapid Fire',
       'category' => 'combat',
       'summary' => 'The hero can increase rate of fire on multiple attacks.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3157,6 +3219,7 @@ return array (
       'name' => 'Rock and Roll!',
       'category' => 'combat',
       'summary' => 'The hero controls automatic weapons expertly when braced.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3204,6 +3267,7 @@ return array (
       'name' => 'Steady Hands',
       'category' => 'combat',
       'summary' => 'The hero remains accurate on unstable footing.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3262,6 +3326,7 @@ return array (
       'name' => 'Sweep',
       'category' => 'combat',
       'summary' => 'The hero can strike every foe in reach with one attack.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3315,6 +3380,7 @@ return array (
       'name' => 'Improved Sweep',
       'category' => 'combat',
       'summary' => 'The hero can Sweep without striking allies.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3361,6 +3427,7 @@ return array (
       'name' => 'Trademark Weapon',
       'category' => 'combat',
       'summary' => 'The hero is especially effective with one signature weapon.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3420,6 +3487,7 @@ return array (
       'name' => 'Improved Trademark Weapon',
       'category' => 'combat',
       'summary' => 'The hero’s signature weapon bonus improves further.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3479,6 +3547,7 @@ return array (
       'name' => 'Two-Fisted',
       'category' => 'combat',
       'summary' => 'The hero can attack with two melee weapons more efficiently.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3525,6 +3594,7 @@ return array (
       'name' => 'Two-Gun Kid',
       'category' => 'combat',
       'summary' => 'The hero can fire or throw with two ranged weapons more efficiently.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3571,6 +3641,7 @@ return array (
       'name' => 'Command',
       'category' => 'leadership',
       'summary' => 'The hero improves recovery for allied Extras nearby.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3617,6 +3688,7 @@ return array (
       'name' => 'Command Presence',
       'category' => 'leadership',
       'summary' => 'The hero can direct allies from farther away.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3662,6 +3734,7 @@ return array (
       'name' => 'Fervor',
       'category' => 'leadership',
       'summary' => 'The hero inspires allied Extras to hit harder.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3713,6 +3786,7 @@ return array (
       'name' => 'Hold the Line',
       'category' => 'leadership',
       'summary' => 'The hero stiffens allied defenses.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3764,6 +3838,7 @@ return array (
       'name' => 'Inspire',
       'category' => 'leadership',
       'summary' => 'The hero can Support a whole group at once with Battle.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3810,6 +3885,7 @@ return array (
       'name' => 'Natural Leader',
       'category' => 'leadership',
       'summary' => 'The hero’s leadership works on allied Wild Cards too.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3861,6 +3937,7 @@ return array (
       'name' => 'Tactician',
       'category' => 'leadership',
       'summary' => 'The hero can improve allied timing with extra Action Cards.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3920,6 +3997,7 @@ return array (
       'name' => 'Master Tactician',
       'category' => 'leadership',
       'summary' => 'The hero can assign even more extra Action Cards.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -3967,6 +4045,7 @@ return array (
       'name' => 'Artificer',
       'category' => 'power',
       'summary' => 'The hero can create Arcane Devices.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4012,6 +4091,7 @@ return array (
       'name' => 'Channeling',
       'category' => 'power',
       'summary' => 'The hero channels power more efficiently on a raise.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4058,6 +4138,7 @@ return array (
       'name' => 'Concentration',
       'category' => 'power',
       'summary' => 'The hero can sustain powers for longer.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4103,6 +4184,7 @@ return array (
       'name' => 'Extra Effort',
       'category' => 'power',
       'summary' => 'Gifted heroes can temporarily push Focus higher.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4156,6 +4238,7 @@ return array (
       'name' => 'Gadgeteer',
       'category' => 'power',
       'summary' => 'Weird scientists can improvise devices that mimic powers.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4208,6 +4291,7 @@ return array (
       'name' => 'Holy/Unholy Warrior',
       'category' => 'power',
       'summary' => 'Miracle workers can spend Power Points to bolster Soak rolls.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4261,6 +4345,7 @@ return array (
       'name' => 'Mentalist',
       'category' => 'power',
       'summary' => 'Psionic heroes dominate opposed mental struggles.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4312,6 +4397,7 @@ return array (
       'name' => 'New Powers',
       'category' => 'power',
       'summary' => 'The hero expands their arcane repertoire.',
+      'repeatable' => true,
       'requirements' => 
       array (
         0 => 
@@ -4358,6 +4444,7 @@ return array (
       'name' => 'Power Points',
       'category' => 'power',
       'summary' => 'The hero gains a larger Power Point pool.',
+      'repeatable' => true,
       'requirements' => 
       array (
         0 => 
@@ -4405,6 +4492,7 @@ return array (
       'name' => 'Power Surge',
       'category' => 'power',
       'summary' => 'A Joker restores the hero’s Power Points.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4463,6 +4551,7 @@ return array (
       'name' => 'Rapid Recharge',
       'category' => 'power',
       'summary' => 'The hero recovers Power Points faster while resting.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4515,6 +4604,7 @@ return array (
       'name' => 'Improved Rapid Recharge',
       'category' => 'power',
       'summary' => 'The hero recharges Power Points even faster.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4561,6 +4651,7 @@ return array (
       'name' => 'Soul Drain',
       'category' => 'power',
       'summary' => 'The hero can trade Fatigue for Power Points.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4615,6 +4706,7 @@ return array (
       'name' => 'Wizard',
       'category' => 'power',
       'summary' => 'The hero can change a spell’s Trapping on the fly.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4667,6 +4759,7 @@ return array (
       'name' => 'Ace',
       'category' => 'professional',
       'summary' => 'The hero excels at operating and protecting vehicles.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4725,6 +4818,7 @@ return array (
       'name' => 'Acrobat',
       'category' => 'professional',
       'summary' => 'The hero can retry acrobatic athletic maneuvers more reliably.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4778,6 +4872,7 @@ return array (
       'name' => 'Combat Acrobat',
       'category' => 'professional',
       'summary' => 'The hero is harder to hit while moving freely in a fight.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4826,6 +4921,7 @@ return array (
       'name' => 'Assassin',
       'category' => 'professional',
       'summary' => 'The hero is especially lethal against exposed targets.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4883,6 +4979,7 @@ return array (
       'name' => 'Investigator',
       'category' => 'professional',
       'summary' => 'The hero excels at research and detailed searches.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4948,6 +5045,7 @@ return array (
       'name' => 'Jack-of-All-Trades',
       'category' => 'professional',
       'summary' => 'The hero can temporarily pick up unfamiliar skills.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -4994,6 +5092,7 @@ return array (
       'name' => 'McGyver',
       'category' => 'professional',
       'summary' => 'The hero can improvise useful devices out of scrap.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5056,6 +5155,7 @@ return array (
       'name' => 'Mr. Fix It',
       'category' => 'professional',
       'summary' => 'The hero repairs things faster and more effectively.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5115,6 +5215,7 @@ return array (
       'name' => 'Scholar',
       'category' => 'professional',
       'summary' => 'The hero is an expert in one knowledge field.',
+      'repeatable' => true,
       'requirements' => 
       array (
         0 => 
@@ -5161,6 +5262,7 @@ return array (
       'name' => 'Soldier',
       'category' => 'professional',
       'summary' => 'The hero carries loads well and endures harsh conditions.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5227,6 +5329,7 @@ return array (
       'name' => 'Thief',
       'category' => 'professional',
       'summary' => 'The hero excels at urban climbing, stealth, and thievery.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5312,6 +5415,7 @@ return array (
       'name' => 'Woodsman',
       'category' => 'professional',
       'summary' => 'The hero thrives in the wild.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5377,6 +5481,7 @@ return array (
       'name' => 'Bolster',
       'category' => 'social',
       'summary' => 'The hero can steady an ally after a Test.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5423,6 +5528,7 @@ return array (
       'name' => 'Common Bond',
       'category' => 'social',
       'summary' => 'The hero can freely pass Bennies to allies.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5474,6 +5580,7 @@ return array (
       'name' => 'Connections',
       'category' => 'social',
       'summary' => 'The hero can call on contacts for help.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5514,6 +5621,7 @@ return array (
       'name' => 'Humiliate',
       'category' => 'social',
       'summary' => 'The hero can lean on Taunt more effectively.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5560,6 +5668,7 @@ return array (
       'name' => 'Menacing',
       'category' => 'social',
       'summary' => 'The hero turns a rough reputation into social pressure.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5611,6 +5720,7 @@ return array (
       'name' => 'Provoke',
       'category' => 'social',
       'summary' => 'The hero can draw enemy attention onto themself.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5660,6 +5770,7 @@ return array (
       'name' => 'Rabble-Rouser',
       'category' => 'social',
       'summary' => 'The hero can apply a social Test to a group at once.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5707,6 +5818,7 @@ return array (
       'name' => 'Reliable',
       'category' => 'social',
       'summary' => 'The hero supports allies dependably.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5753,6 +5865,7 @@ return array (
       'name' => 'Retort',
       'category' => 'social',
       'summary' => 'The hero turns social attacks back on the attacker.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5799,6 +5912,7 @@ return array (
       'name' => 'Streetwise',
       'category' => 'social',
       'summary' => 'The hero knows how to work criminal and shady circles.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5858,6 +5972,7 @@ return array (
       'name' => 'Strong Willed',
       'category' => 'social',
       'summary' => 'The hero resists mental and social pressure better.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5903,6 +6018,7 @@ return array (
       'name' => 'Iron Will',
       'category' => 'social',
       'summary' => 'The hero’s mental resilience also applies against powers.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -5955,6 +6071,7 @@ return array (
       'name' => 'Work the Room',
       'category' => 'social',
       'summary' => 'The hero can Support two allies at once through words or performance.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6002,6 +6119,7 @@ return array (
       'name' => 'Work the Crowd',
       'category' => 'social',
       'summary' => 'The hero can Support three allies at once through words or performance.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6049,6 +6167,7 @@ return array (
       'name' => 'Beast Bond',
       'category' => 'weird',
       'summary' => 'The hero may spend Bennies on animals under their control.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6088,6 +6207,7 @@ return array (
       'name' => 'Beast Master',
       'category' => 'weird',
       'summary' => 'Animals like the hero, and one becomes a loyal companion.',
+      'repeatable' => true,
       'requirements' => 
       array (
         0 => 
@@ -6136,6 +6256,7 @@ return array (
       'name' => 'Champion',
       'category' => 'weird',
       'summary' => 'The hero is chosen to battle supernatural evil or good.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6188,6 +6309,7 @@ return array (
       'name' => 'Chi',
       'category' => 'weird',
       'summary' => 'The hero gains a mystical combat point each fight.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6236,6 +6358,7 @@ return array (
       'name' => 'Danger Sense',
       'category' => 'weird',
       'summary' => 'The hero senses trouble before it strikes.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6277,6 +6400,7 @@ return array (
       'name' => 'Healer',
       'category' => 'weird',
       'summary' => 'The hero is unusually good at healing of any kind.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6322,6 +6446,7 @@ return array (
       'name' => 'Liquid Courage',
       'category' => 'weird',
       'summary' => 'Alcohol empowers the hero before the crash hits.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6397,6 +6522,7 @@ return array (
       'name' => 'Scavenger',
       'category' => 'weird',
       'summary' => 'The hero can turn up something useful when it matters.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6444,6 +6570,7 @@ return array (
       'name' => 'Followers',
       'category' => 'legendary',
       'summary' => 'The hero attracts a small band of followers.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6489,6 +6616,7 @@ return array (
       'name' => 'Professional',
       'category' => 'legendary',
       'summary' => 'The hero pushes one Trait beyond the normal cap.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6534,6 +6662,7 @@ return array (
       'name' => 'Expert',
       'category' => 'legendary',
       'summary' => 'The hero further advances the same mastered Trait.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6579,6 +6708,7 @@ return array (
       'name' => 'Master',
       'category' => 'legendary',
       'summary' => 'The hero’s Wild Die improves for one mastered Trait.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6630,6 +6760,7 @@ return array (
       'name' => 'Sidekick',
       'category' => 'legendary',
       'summary' => 'The hero gains a Wild Card companion.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6675,6 +6806,7 @@ return array (
       'name' => 'Tough as Nails',
       'category' => 'legendary',
       'summary' => 'The hero can take more Wounds before going down.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6720,6 +6852,7 @@ return array (
       'name' => 'Tougher than Nails',
       'category' => 'legendary',
       'summary' => 'The hero can survive even more punishment.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6771,6 +6904,7 @@ return array (
       'name' => 'Weapon Master',
       'category' => 'legendary',
       'summary' => 'The hero reaches peerless mastery with melee weapons.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 
@@ -6829,6 +6963,7 @@ return array (
       'name' => 'Master of Arms',
       'category' => 'legendary',
       'summary' => 'The hero advances from weapon mastery into near perfection.',
+      'repeatable' => false,
       'requirements' => 
       array (
         0 => 

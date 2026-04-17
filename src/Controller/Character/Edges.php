@@ -6,20 +6,21 @@ namespace App\Controller\Character;
 
 use App\Budget\HindranceBudget;
 use App\Budget\SkillBudget;
-use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
+use App\Entity\Factory\Edge as FactoryEdge;
 use App\Entity\Factory\Hindrance as FactoryHindrances;
 use App\Entity\Factory\Skill as FactorySkill;
 use App\Filter;
+use App\Service\Data\Edges as DataEdges;
 use App\Service\Data\Manager;
-use App\Service\Data\Skills as SkillsData;
 use Flight;
 
-class Skills
+class Edges
 {
     public function __construct(
         private FactoryCharacter $factory,
+        private FactoryEdge $edgeFactory,
         private FactorySkill $skillFactory,
         private FactoryHindrances $hindrancesFactory,
         private Manager $manager,
@@ -35,15 +36,17 @@ class Skills
             return;
         }
 
-        $skillService = $this->manager->getType(SkillsData::class);
-        $characterSkills = $errors = [];
+        /** @var DataEdges $edgeService */
+        $edgeService = $this->manager->getType(DataEdges::class);
+        $characterEdges = $errors = [];
         if ('POST' === Flight::request()->getMethod()) {
-            $selected = Filter::numberArray($_POST['skills'] ?? []);
-            $selected = array_filter($selected);
-            $result = $this->skillFactory->syncForCharacter(
+            $selected = $this->normaliseSelected(
+                Filter::numberArray($_POST['edges'] ?? []),
+                $edgeService
+            );
+            $result = $this->edgeFactory->syncForCharacter(
                 $entity,
-                $selected,
-                $skillService
+                $selected
             );
 
             if ($result->isSuccess()) {
@@ -53,35 +56,65 @@ class Skills
                 Flight::redirect(Flight::getUrl('characters_edges', ['hash' => $entity->hash]));
                 return;
             }
+
+            $errors = $result->errors();
             Flight::session()->error(
                 'Sorry! There was a problem!'
             );
         } else {
-            $characterSkills = $this->skillFactory->forCharacter($entity);
+            $characterEdges = $this->edgeFactory->forCharacter($entity);
             $selected = [];
-            foreach ($characterSkills as $skill) {
-                $selected[$skill->key] = $skill->die;
+            foreach ($characterEdges as $edge) {
+                $selected[$edge->key] = $edge->count;
             }
         }
-        $coreSkills = $skillService->core();
-        $nonCoreSkills = $skillService->nonCore();
-        $diceOptions = Dice::validSizes();
-        array_unshift($diceOptions, 0);
 
+        $characterSkills = $this->skillFactory->forCharacter($entity);
         $characterHindrances = $this->hindrancesFactory->forCharacter($entity);
         $budgets = [
             new SkillBudget($entity, $characterSkills),
             new HindranceBudget($entity, $characterHindrances)->setLabel('Hindrance Points'),
         ];
 
-        Flight::render('character/skills.twig', [
-            'page_title' => 'Skills',
+        Flight::render('character/edges.twig', [
+            'page_title' => 'Edges',
             'entity' => $entity,
+            'edges_by_category' => $this->groupByCategory(
+                $edgeService->all()
+            ),
             'errors' => $errors,
             'selected' => $selected,
-            'skills' => $coreSkills + $nonCoreSkills,
-            'dice_options' => $diceOptions,
             'budgets' => $budgets,
         ]);
+    }
+
+    private function groupByCategory(array $edges): array
+    {
+        $grouped = [];
+        foreach ($edges as $edge) {
+            $grouped[$edge['category']][] = $edge;
+        }
+
+        return $grouped;
+    }
+
+    private function normaliseSelected(array $selected, DataEdges $edgeService): array
+    {
+        $normalised = [];
+        foreach ($selected as $key => $count) {
+            $edge = $edgeService->forId($key);
+            if (!is_array($edge)) {
+                continue;
+            }
+
+            $normalised[$key] = $edge['repeatable']
+                ? $count
+                : min(1, $count);
+        }
+
+        return array_filter(
+            $normalised,
+            static fn (int $count): bool => $count > 0
+        );
     }
 }

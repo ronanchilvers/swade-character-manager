@@ -1,6 +1,6 @@
 # Repository State Review
 
-Last verified against the repository on 2026-04-16.
+Last verified against the repository on 2026-04-17.
 
 ## Overview
 This is a small server-rendered PHP 8.5 application for building Savage Worlds characters. It uses Flight for routing and dependency injection, Twig for HTML rendering, Google OAuth for login, and an encrypted cookie-backed session layer.
@@ -11,8 +11,7 @@ The active character-builder flow is:
 2. Hindrances
 3. Attributes
 4. Skills
-
-Edges have schema and factory support but no implemented editor flow.
+5. Edges
 
 ## Verified Runtime Structure
 - `web/index.php` and `web/index_dev.php` bootstrap the app.
@@ -26,6 +25,7 @@ Edges have schema and factory support but no implemented editor flow.
 - The database schema is currently managed by a single bootstrap file: `schema/000_schema.sql`.
 - `characters`, `users`, `hindrances`, `skills`, and `edges` tables are created there.
 - Hindrances, skills, and edges store catalog references as string keys such as `hindrance_key` and `skill_key`.
+- The `edges` table now stores `edge_count` so the same catalog edge can be taken multiple times for one character without duplicating rows.
 - Runtime catalog lookups come from `App\Service\Data\Manager` plus `App\Service\Data\Hindrances`, `Skills`, and `Edges`.
 
 ## UI and Asset Pipeline
@@ -46,8 +46,8 @@ The suite now passes cleanly against the live implementation.
 Verified result on 2026-04-16:
 
 - `tests/Budget/` covers the current budget helpers.
-- `tests/Entity/Factory/` covers the live character, hindrance, and skill factories.
-- `tests/Service/Data/SkillsTest.php` covers the live skill catalog loader.
+- `tests/Entity/Factory/` covers the live character, hindrance, skill, and edge factories.
+- `tests/Service/Data/SkillsTest.php` and `tests/Service/Data/EdgesTest.php` cover the live catalog loaders.
 - `vendor/bin/phpunit --configuration phpunit.xml.dist` exits successfully on the current tree.
 
 The earlier service-layer tests that referenced missing classes were removed and replaced with coverage for the code that actually ships.
