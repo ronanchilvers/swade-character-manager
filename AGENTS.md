@@ -64,3 +64,4 @@ Keep commit messages short, specific, and sentence-case. PRs should describe use
 
 ## Agent-Specific Notes
 Read `/Users/ronan/Agents/General.AGENTS.md` and `/Users/ronan/Agents/Local.AGENTS.md` before starting new work in this repo. Do not install new Composer or Node packages without asking first.
+Ignore any `AGENTS.md` files found under `.claude/` or `.codex/`; they are tool metadata or worktree artifacts and are not authoritative for this repository.

@@ -528,6 +528,7 @@ main {
 /** Cards **/
 .cards {
   display: flex;
+  align-items: flex-start;
   justify-content: flex-start;
   flex-wrap: wrap;
   margin: 0.5rem -0.5rem;
@@ -571,6 +572,31 @@ main {
   font-weight: 600;
   border-bottom: 1px solid #CCC;
   background: linear-gradient(to bottom, #fcfcfc, #fff);
+}
+.card .card__title--collapsible {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.card .card__title--collapsible::after {
+  content: "▾";
+  font-size: 0.9rem;
+  line-height: 1;
+}
+.card .card__title--collapsible:focus-visible {
+  outline: 2px solid var(--c-black);
+  outline-offset: -2px;
+}
+.card .card__title--collapsed::after {
+  content: "▸";
+}
+.card .card__title--collapsed {
+  border-bottom: 0;
+}
+.card .card__title--collapsed ~ .card__content,
+.card .card__title--collapsed ~ .card__footer {
+  display: none;
 }
 .card .card__content {
   flex: 1 1 auto;
@@ -782,5 +808,3 @@ main {
 .progress::-webkit-progress-value {
   background-color: #333;
 }
-
-/*# sourceMappingURL=styles.css.map */
