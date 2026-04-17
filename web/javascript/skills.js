@@ -16,6 +16,23 @@ function skillCost(selectedDie, attributeDie, baselineDie) {
   return points;
 }
 
+function updateSkillTitleState(select) {
+  const card = select.closest('.card');
+  if (!card) {
+    return;
+  }
+
+  const title = card.querySelector('.card__title');
+  if (!title) {
+    return;
+  }
+
+  const selectedDie = parseInt(select.value || '0', 10);
+  const baselineDie = parseInt(select.dataset.baselineDie || '0', 10);
+
+  title.classList.toggle('card__title--selected', selectedDie > baselineDie);
+}
+
 function updateSkillSpend() {
   const summary = document.querySelector('.js-skills-summary');
   if (!summary) {
@@ -30,6 +47,7 @@ function updateSkillSpend() {
     const attributeDie = parseInt(select.dataset.linkedAttributeDie || '4', 10);
     const baselineDie = parseInt(select.dataset.baselineDie || '0', 10);
 
+    updateSkillTitleState(select);
     spent += skillCost(selectedDie, attributeDie, baselineDie);
   });
 

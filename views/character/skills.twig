@@ -26,7 +26,7 @@
     {% set attributeDie = entity.get(skill.linked_attribute) %}
     <div class="card card--skill card--{{ skill.core_skill ? 'core' : 'non-core' }}">
         <div class="card__inner">
-            <div class="card__title card__title--collapsible card__title--collapsed" for="skill_{{ skill.id }}">{{ skill.name }}</div>
+            <div class="card__title card__title--collapsible card__title--collapsed{% if isSelected %} card__title--selected{% endif %}" for="skill_{{ skill.id }}">{{ skill.name }}</div>
             <div class="card__content">
                 {% if skill.summary %}
                 <p>{{ skill.summary }}</p>

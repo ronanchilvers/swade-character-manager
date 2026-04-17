@@ -103,6 +103,6 @@
     letter-spacing: 0.04em;
 
     &.edge-toggle__button--active {
-        background: #e7f2e6;
+        background: card_vars.$card-selected-background;
     }
 }

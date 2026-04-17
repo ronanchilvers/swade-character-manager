@@ -34,6 +34,8 @@ Rebuild CSS from Sass with:
 - `npm run sass-dev`
 - `npm run sass-prod`
 
+When Sass changes modify tracked files under `web/css/`, commit those rebuilt CSS artifacts in the same change.
+
 Reset the database schema with:
 
 - `mysql ... < schema/000_schema.sql`
