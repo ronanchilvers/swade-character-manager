@@ -612,9 +612,10 @@ main {
 }
 
 .card--edge .card__footer {
-  flex-direction: column;
-  gap: 0.75rem;
+  padding: 0;
+  gap: 0;
   align-items: stretch;
+  border-top: 1px solid #CCC;
 }
 .card--edge .card__subtitle {
   margin-bottom: 0;
@@ -629,10 +630,74 @@ main {
 .card--edge .card__list:last-child {
   margin-bottom: 0;
 }
-.card--edge .card__help {
-  margin-bottom: 0;
-  color: var(--c-dark-grey);
-  font-size: 0.9rem;
+
+.edge-counter {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  width: 100%;
+}
+
+.edge-counter__button,
+.edge-counter__value {
+  min-height: 4.25rem;
+}
+
+.edge-counter__button {
+  flex: 0 0 4rem;
+  border: none;
+  border-right: 1px solid #CCC;
+  background: #f6f6f6;
+  color: var(--c-black);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.edge-counter__button:last-child {
+  border-right: none;
+  border-left: 1px solid #CCC;
+}
+.edge-counter__button:disabled {
+  color: var(--c-medium-grey);
+  cursor: default;
+}
+
+.edge-counter__value {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--c-white);
+}
+
+.edge-counter__count {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.edge-toggle {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  width: 100%;
+}
+
+.edge-toggle__button {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 4.25rem;
+  border: none;
+  background: #f6f6f6;
+  color: var(--c-black);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.edge-toggle__button.edge-toggle__button--active {
+  background: #e7f2e6;
 }
 
 .cards--hindrances .card__footer {

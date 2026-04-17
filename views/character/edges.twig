@@ -1,5 +1,7 @@
 {% extends 'layouts/character/builder.twig' %}
 
+{% do add_script('/javascript/edges.js') %}
+
 {% set back_url = get_url('characters_skills', {hash: entity.hash}) %}
 {% set next_label = "Save" %}
 
@@ -9,7 +11,7 @@
     <h2 class="panel__title">Edges</h2>
     <div class="panel__content">
         <p>Edges are the special abilities, training, and advantages that make your hero stand out. Some improve core actions, some unlock new options, and some are only available once your character meets the right prerequisites.</p>
-        <p>Set an Edge to <strong>0</strong> to remove it from the character. Increase the count when the same Edge is taken more than once and its effects stack.</p>
+        <p>One-time Edges use a single Selected toggle. Repeatable Edges use a counter so you can add or remove each additional purchase directly from the card.</p>
     </div>
 </div>
 
@@ -84,17 +86,49 @@
                     {% endif %}
                 </div>
                 <div class="card__footer">
-                    <label class="card__subtitle" for="edge_{{ edge.id }}">Times taken</label>
-                    <input
-                        class="field__input"
-                        id="edge_{{ edge.id }}"
-                        min="0"
-                        name="edges[{{ edge.id }}]"
-                        step="1"
-                        type="number"
-                        value="{{ selected[edge.id]|default(0) }}"
-                    />
-                    <p class="card__help">Use 0 to remove this Edge entirely.</p>
+                    {% if edge.repeatable %}
+                    <div class="edge-counter js-edge-counter">
+                        <input
+                            id="edge_{{ edge.id }}"
+                            name="edges[{{ edge.id }}]"
+                            type="hidden"
+                            value="{{ selected[edge.id]|default(0) }}"
+                            class="js-edge-input"
+                        />
+                        <button
+                            class="edge-counter__button js-edge-adjust"
+                            type="button"
+                            data-direction="-1"
+                            aria-label="Decrease {{ edge.name }}"
+                            {% if selected[edge.id]|default(0) <= 0 %}disabled{% endif %}
+                        >&minus;</button>
+                        <div class="edge-counter__value" aria-live="polite">
+                            <span class="edge-counter__count js-edge-value">{{ selected[edge.id]|default(0) }}</span>
+                        </div>
+                        <button
+                            class="edge-counter__button js-edge-adjust"
+                            type="button"
+                            data-direction="1"
+                            aria-label="Increase {{ edge.name }}"
+                        >+</button>
+                    </div>
+                    {% else %}
+                    <div class="edge-toggle js-edge-toggle">
+                        <input
+                            id="edge_{{ edge.id }}"
+                            name="edges[{{ edge.id }}]"
+                            type="hidden"
+                            value="{{ selected[edge.id]|default(0) > 0 ? 1 : 0 }}"
+                            class="js-edge-input"
+                        />
+                        <button
+                            class="edge-toggle__button js-edge-select{% if selected[edge.id]|default(0) > 0 %} edge-toggle__button--active{% endif %}"
+                            type="button"
+                            aria-label="Toggle {{ edge.name }}"
+                            aria-pressed="{{ selected[edge.id]|default(0) > 0 ? 'true' : 'false' }}"
+                        >Selected</button>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -36,12 +36,13 @@ class Edges
             return;
         }
 
+        /** @var DataEdges $edgeService */
+        $edgeService = $this->manager->getType(DataEdges::class);
         $characterEdges = $errors = [];
         if ('POST' === Flight::request()->getMethod()) {
-            $selected = Filter::numberArray($_POST['edges'] ?? []);
-            $selected = array_filter(
-                $selected,
-                static fn (int $count): bool => $count > 0
+            $selected = $this->normaliseSelected(
+                Filter::numberArray($_POST['edges'] ?? []),
+                $edgeService
             );
             $result = $this->edgeFactory->syncForCharacter(
                 $entity,
@@ -79,7 +80,7 @@ class Edges
             'page_title' => 'Edges',
             'entity' => $entity,
             'edges_by_category' => $this->groupByCategory(
-                $this->manager->getType(DataEdges::class)->all()
+                $edgeService->all()
             ),
             'errors' => $errors,
             'selected' => $selected,
@@ -95,5 +96,25 @@ class Edges
         }
 
         return $grouped;
+    }
+
+    private function normaliseSelected(array $selected, DataEdges $edgeService): array
+    {
+        $normalised = [];
+        foreach ($selected as $key => $count) {
+            $edge = $edgeService->forId($key);
+            if (!is_array($edge)) {
+                continue;
+            }
+
+            $normalised[$key] = $edge['repeatable']
+                ? $count
+                : min(1, $count);
+        }
+
+        return array_filter(
+            $normalised,
+            static fn (int $count): bool => $count > 0
+        );
     }
 }
