@@ -22,7 +22,7 @@
         {% for edge in edges %}
         <div class="card card--skill card--edge">
             <div class="card__inner">
-                <div class="card__title">{{ edge.name }}</div>
+                <div class="card__title card__title--collapsible card__title--collapsed">{{ edge.name }}</div>
                 <div class="card__content">
                     {% if edge.summary %}
                     <p>{{ edge.summary }}</p>

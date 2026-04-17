@@ -528,6 +528,7 @@ main {
 /** Cards **/
 .cards {
   display: flex;
+  align-items: flex-start;
   justify-content: flex-start;
   flex-wrap: wrap;
   margin: 0.5rem -0.5rem;
@@ -589,6 +590,9 @@ main {
 }
 .card .card__title--collapsed::after {
   content: "▸";
+}
+.card .card__title--collapsed {
+  border-bottom: 0;
 }
 .card .card__title--collapsed ~ .card__content,
 .card .card__title--collapsed ~ .card__footer {

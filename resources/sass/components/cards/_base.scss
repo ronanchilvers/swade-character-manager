@@ -5,6 +5,7 @@
 /** Cards **/
 .cards {
     display: flex;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
     margin: 0.5rem -0.5rem;
@@ -65,6 +66,9 @@
     }
     .card__title--collapsed::after {
         content: "▸";
+    }
+    .card__title--collapsed {
+        border-bottom: 0;
     }
     .card__title--collapsed ~ .card__content,
     .card__title--collapsed ~ .card__footer {
