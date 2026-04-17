@@ -270,6 +270,17 @@ $title-font: "Special Elite", "Courier New", monospace;
         display: flex;
         flex-direction: column;
         gap: 0.6rem;
+
+        &__name {
+            font-weight: 500;
+        }
+
+        &__count {
+            font-family: $title-font;
+            color: var(--c-sheet-heading);
+            font-size: 0.85em;
+            margin-left: 0.4rem;
+        }
     }
 
     &__advances {

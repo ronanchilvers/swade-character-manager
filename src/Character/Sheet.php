@@ -6,6 +6,7 @@ namespace App\Character;
 
 use App\Entity;
 use App\Entity\Factory\Character as CharacterFactory;
+use App\Service\Data\Edges as EdgesData;
 use App\Service\Data\Hindrances as HindrancesData;
 use App\Service\Data\Manager;
 use App\Service\Data\Skills as SkillsData;
@@ -28,7 +29,7 @@ class Sheet
             'attributes' => $this->buildAttributes($character, $characterFactory),
             'hindrances' => $this->buildHindrances($hindrances, $manager),
             'skills' => $this->buildSkills($skills, $manager),
-            'edges' => [],
+            'edges' => $this->buildEdges($edges, $manager),
         ];
     }
 
@@ -108,6 +109,28 @@ class Sheet
 
             return strcasecmp($a['name'], $b['name']);
         });
+
+        return $rows;
+    }
+
+    private function buildEdges(array $edges, Manager $manager): array
+    {
+        $catalog = $manager->getType(EdgesData::class);
+        $rows = [];
+        foreach ($edges as $edge) {
+            $key = (string) $edge->key;
+            $entry = $catalog->forId($key);
+            $count = max(1, (int) ($edge->count ?? 1));
+            $rows[] = [
+                'key' => $key,
+                'name' => $entry['name'] ?? $this->humanise($key),
+                'summary' => $entry['summary'] ?? '',
+                'category' => (string) ($entry['category'] ?? ''),
+                'count' => $count,
+            ];
+        }
+
+        usort($rows, fn (array $a, array $b): int => strcasecmp($a['name'], $b['name']));
 
         return $rows;
     }

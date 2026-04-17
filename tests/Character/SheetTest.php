@@ -149,14 +149,54 @@ class SheetTest extends TestCase
         self::assertFalse($row['is_core']);
     }
 
-    public function testEdgesReturnsEmptyArrayEvenWhenArgumentProvided(): void
+    public function testEdgesAreEnrichedFromCatalogAndSortedAlpha(): void
+    {
+        $result = $this->build(
+            character: new Entity(),
+            edges: [
+                new Entity(['key' => 'brawny', 'count' => 1]),
+                new Entity(['key' => 'alertness', 'count' => 1]),
+            ],
+        );
+
+        self::assertCount(2, $result['edges']);
+        $names = array_column($result['edges'], 'name');
+        self::assertSame(['Alertness', 'Brawny'], $names);
+        self::assertSame('background', $result['edges'][0]['category']);
+        self::assertNotSame('', $result['edges'][0]['summary']);
+    }
+
+    public function testRepeatableEdgeCountIsPreserved(): void
+    {
+        $result = $this->build(
+            character: new Entity(),
+            edges: [new Entity(['key' => 'new_powers', 'count' => 3])],
+        );
+
+        self::assertSame(3, $result['edges'][0]['count']);
+    }
+
+    public function testEdgesDefaultCountToOneWhenMissing(): void
     {
         $result = $this->build(
             character: new Entity(),
             edges: [new Entity(['key' => 'alertness'])],
         );
 
-        self::assertSame([], $result['edges']);
+        self::assertSame(1, $result['edges'][0]['count']);
+    }
+
+    public function testMissingEdgeCatalogEntryFallsBackToStoredKey(): void
+    {
+        $result = $this->build(
+            character: new Entity(),
+            edges: [new Entity(['key' => 'not_a_real_edge', 'count' => 1])],
+        );
+
+        $row = $result['edges'][0];
+        self::assertSame('Not A Real Edge', $row['name']);
+        self::assertSame('', $row['category']);
+        self::assertSame('', $row['summary']);
     }
 
     private function build(

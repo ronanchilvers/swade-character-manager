@@ -128,7 +128,12 @@
                 <h2 class="sheet__title">Edges &amp; Advances</h2>
                 <ul class="sheet__list">
                     {% for edge in sheet.edges %}
-                    <li class="sheet__list__row">{{ edge.name }}</li>
+                    <li class="sheet__list__row">
+                        <span class="sheet__edges__name">{{ edge.name }}</span>
+                        {% if edge.count > 1 %}
+                        <span class="sheet__edges__count">&times;{{ edge.count }}</span>
+                        {% endif %}
+                    </li>
                     {% endfor %}
                     {% if sheet.edges|length < 5 %}
                         {{ m.empty_lines(5 - sheet.edges|length) }}
