@@ -20,9 +20,10 @@
     <h3 class="edges-group__title">{{ category|replace({'_': ' '})|title }}</h3>
     <div class="cards">
         {% for edge in edges %}
+        {% set isSelected = selected[edge.id]|default(0) > 0 %}
         <div class="card card--skill card--edge">
             <div class="card__inner">
-                <div class="card__title card__title--collapsible card__title--collapsed">{{ edge.name }}</div>
+                <div class="card__title card__title--collapsible card__title--collapsed{% if isSelected %} card__title--selected{% endif %}">{{ edge.name }}</div>
                 <div class="card__content">
                     {% if edge.summary %}
                     <p>{{ edge.summary }}</p>

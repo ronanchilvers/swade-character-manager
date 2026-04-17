@@ -1,3 +1,17 @@
+function updateEdgeTitleSelectionState(element, isSelected) {
+  const card = element.closest('.card');
+  if (!card) {
+    return;
+  }
+
+  const title = card.querySelector('.card__title');
+  if (!title) {
+    return;
+  }
+
+  title.classList.toggle('card__title--selected', isSelected);
+}
+
 function updateEdgeCounter(counter) {
   const input = counter.querySelector('.js-edge-input');
   const value = counter.querySelector('.js-edge-value');
@@ -7,6 +21,7 @@ function updateEdgeCounter(counter) {
   input.value = count;
   value.textContent = count;
   minus.disabled = count === 0;
+  updateEdgeTitleSelectionState(counter, count > 0);
 }
 
 function updateEdgeToggle(toggle) {
@@ -17,6 +32,7 @@ function updateEdgeToggle(toggle) {
   input.value = value;
   button.classList.toggle('edge-toggle__button--active', value === 1);
   button.setAttribute('aria-pressed', value === 1 ? 'true' : 'false');
+  updateEdgeTitleSelectionState(toggle, value === 1);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

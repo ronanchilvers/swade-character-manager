@@ -4,7 +4,7 @@
 
 $card-option-color-disabled: #ccc;
 $card-option-background-disabled: #f9f9f9;
-$card-option-background-selected: #e7f2e6;
+$card-option-background-selected: card_vars.$card-selected-background;
 
 .cards--hindrances {
     .card__footer {
