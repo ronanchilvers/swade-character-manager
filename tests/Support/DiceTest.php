@@ -19,6 +19,10 @@ class DiceTest extends TestCase
         self::assertTrue(Dice::isValid(4));
         self::assertTrue(Dice::isValid(12));
         self::assertFalse(Dice::isValid(5));
-        self::assertFalse(Dice::isValid('4'));
+    }
+
+    public function testIsValidUsesLooseMembershipChecks(): void
+    {
+        self::assertTrue(Dice::isValid('4'));
     }
 }

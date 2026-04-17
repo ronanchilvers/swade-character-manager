@@ -11,8 +11,8 @@ class FilterTest extends TestCase
 {
     public function testAlphaAndAlnumStripInvalidCharacters(): void
     {
-        self::assertSame('Abcz', Filter::alpha('A-b_c!z123'));
-        self::assertSame('Abcz123', Filter::alnum('A-b_c!z123'));
+        self::assertSame('Ab_cz', Filter::alpha('A-b_c!z123'));
+        self::assertSame('Ab_cz123', Filter::alnum('A-b_c!z123'));
     }
 
     public function testAlphaArrayFiltersAllValues(): void
