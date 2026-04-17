@@ -7,6 +7,7 @@ use App\Controller\Character\Base;
 use App\Controller\Character\Hindrances;
 use App\Controller\Character\Attributes;
 use App\Controller\Character\Edges;
+use App\Controller\Character\Sheet;
 use App\Controller\Character\Skills;
 use App\Controller\Home;
 use App\Middleware\Auth as MiddlewareAuth;
@@ -43,4 +44,6 @@ Flight::group('/characters', function () {
         ->setAlias('characters_skills');
     Flight::route('GET|POST /edges/@hash:[a-z0-9]{32}', [Edges::class, 'index'])
         ->setAlias('characters_edges');
+    Flight::route('GET /sheet/@hash:[a-z0-9]{32}', [Sheet::class, 'index'])
+        ->setAlias('characters_sheet');
 }, [ MiddlewareAuth::class ]);
