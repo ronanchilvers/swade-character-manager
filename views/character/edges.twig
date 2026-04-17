@@ -1,0 +1,106 @@
+{% extends 'layouts/character/builder.twig' %}
+
+{% set back_url = get_url('characters_skills', {hash: entity.hash}) %}
+{% set next_label = "Save" %}
+
+{% block page %}
+
+<div class="panel">
+    <h2 class="panel__title">Edges</h2>
+    <div class="panel__content">
+        <p>Edges are the special abilities, training, and advantages that make your hero stand out. Some improve core actions, some unlock new options, and some are only available once your character meets the right prerequisites.</p>
+        <p>Set an Edge to <strong>0</strong> to remove it from the character. Increase the count when the same Edge is taken more than once and its effects stack.</p>
+    </div>
+</div>
+
+{% for category, edges in edges_by_category %}
+<section class="edges-group">
+    <h3 class="edges-group__title">{{ category|replace({'_': ' '})|title }}</h3>
+    <div class="cards">
+        {% for edge in edges %}
+        <div class="card card--skill card--edge">
+            <div class="card__inner">
+                <div class="card__title">{{ edge.name }}</div>
+                <div class="card__content">
+                    {% if edge.summary %}
+                    <p>{{ edge.summary }}</p>
+                    {% endif %}
+
+                    {% if edge.requirements %}
+                    <div class="card__section">
+                        <h4 class="card__subtitle">Requirements</h4>
+                        <ul class="card__list">
+                            {% for requirement in edge.requirements %}
+                            {% set requirement_value = requirement.value %}
+                            {% if requirement.value is iterable %}
+                            {% set requirement_value = requirement.target == 'one_of'
+                                ? requirement.value|join(' or ')
+                                : requirement.value|join(', ') %}
+                            {% endif %}
+                            <li>
+                                {% if requirement.type == 'rank' %}
+                                {{ requirement_value }} rank
+                                {% elseif requirement.type == 'attribute' or requirement.type == 'trait' %}
+                                {{ requirement.target }} {{ requirement_value }}
+                                {% elseif requirement.type == 'edge' %}
+                                Requires {{ requirement_value }}
+                                {% elseif requirement.type == 'arcane_background' %}
+                                Arcane Background: {{ requirement_value }}
+                                {% elseif requirement.type == 'wild_card' %}
+                                Wild Card
+                                {% elseif requirement.type == 'hindrance_any_of' %}
+                                Hindrance: {{ requirement_value }}
+                                {% elseif requirement.type == 'special' and requirement.target == 'one_of' %}
+                                One of: {{ requirement_value }}
+                                {% else %}
+                                {{ requirement.type|replace({'_': ' '})|title }}: {{ requirement_value }}
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    {% if edge.effects %}
+                    <div class="card__section">
+                        <h4 class="card__subtitle">Effects</h4>
+                        <ul class="card__list">
+                            {% for effect in edge.effects %}
+                            <li>{{ effect.details }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    {% if edge.notes %}
+                    <div class="card__section">
+                        <h4 class="card__subtitle">Notes</h4>
+                        <ul class="card__list">
+                            {% for note in edge.notes %}
+                            <li>{{ note }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card__footer">
+                    <label class="card__subtitle" for="edge_{{ edge.id }}">Times taken</label>
+                    <input
+                        class="field__input"
+                        id="edge_{{ edge.id }}"
+                        min="0"
+                        name="edges[{{ edge.id }}]"
+                        step="1"
+                        type="number"
+                        value="{{ selected[edge.id]|default(0) }}"
+                    />
+                    <p class="card__help">Use 0 to remove this Edge entirely.</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endfor %}
+
+{% endblock %}
