@@ -14,8 +14,9 @@ The shipped builder flow is:
 2. `characters_hindrances`
 3. `characters_attributes`
 4. `characters_skills`
+5. `characters_edges`
 
-There is persistence support for `edges` in the schema and `App\Entity\Factory\Edge`, but there is no route, controller, or Twig screen for editing edges yet.
+Edges are now edited through a dedicated builder step backed by `App\Controller\Character\Edges`, `views/character/edges.twig`, and `App\Entity\Factory\Edge`.
 
 Authentication is Google OAuth based (`App\Controller\Auth`) and sessions are stored in an encrypted cookie via `App\Http\Session\CookieStorage`.
 
