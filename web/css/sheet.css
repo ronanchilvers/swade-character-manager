@@ -537,7 +537,7 @@ main {
 }
 .sheet__attributes__die, .sheet__attributes__max {
   font-family: "Special Elite", "Courier New", monospace;
-  text-align: center;
+  text-align: left;
   min-width: 2.2rem;
 }
 .sheet__attributes__max {
@@ -581,6 +581,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* width: 4rem; */
 }
 .sheet__circle__value {
   width: 3.2rem;
@@ -592,11 +593,12 @@ main {
   justify-content: center;
   font-family: "Special Elite", "Courier New", monospace;
   font-size: 1.3rem;
+  padding-top: 0.3rem;
 }
 .sheet__circle__label {
   margin-top: 0.25rem;
   font-family: "Special Elite", "Courier New", monospace;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
 }
 .sheet__list {
@@ -643,10 +645,13 @@ main {
   gap: 0.1rem;
 }
 .sheet__die-strip__step {
+  display: inline-block;
   font-family: "Special Elite", "Courier New", monospace;
   font-size: 0.8rem;
   min-width: 1.4rem;
-  padding: 0 0.1rem;
+  height: 1.3rem;
+  width: 1rem;
+  padding-top: 0.1rem;
   text-align: center;
   color: var(--c-sheet-muted);
   border: 1px solid transparent;
@@ -723,16 +728,18 @@ main {
   right: 0;
   top: 0;
 }
-.sheet__rail--fatigue {
-  right: 0;
-  top: 55%;
-}
 .sheet__rail__label {
   writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.4rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  margin-bottom: 1rem;
+  transform: translateX(-0.2em);
+  font-weight: 600;
+}
+.sheet__rail__list + .sheet__rail__label {
+  margin-bottom: 0;
+  margin-top: 1rem;
 }
 .sheet__rail__list {
   list-style: none;
@@ -744,18 +751,21 @@ main {
   text-align: center;
 }
 .sheet__rail__list li {
-  width: 1.6rem;
-  height: 1.6rem;
+  line-height: 1;
+  width: 3rem;
+  height: 3rem;
   border: 2px solid var(--c-sheet-ink);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
+  padding-top: 0.4rem;
 }
 .sheet__rail__list__divider {
   border-style: dashed !important;
-  font-size: 0.7rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 600;
 }
 .sheet__weapons__table {
   width: 100%;

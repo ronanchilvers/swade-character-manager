@@ -95,7 +95,7 @@ $title-font: "Special Elite", "Courier New", monospace;
         &__die,
         &__max {
             font-family: $title-font;
-            text-align: center;
+            text-align: left;
             min-width: 2.2rem;
         }
 
@@ -149,6 +149,7 @@ $title-font: "Special Elite", "Courier New", monospace;
         display: flex;
         flex-direction: column;
         align-items: center;
+        /* width: 4rem; */
 
         &__value {
             width: 3.2rem;
@@ -160,12 +161,13 @@ $title-font: "Special Elite", "Courier New", monospace;
             justify-content: center;
             font-family: $title-font;
             font-size: 1.3rem;
+            padding-top: 0.3rem;
         }
 
         &__label {
             margin-top: 0.25rem;
             font-family: $title-font;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
         }
     }
@@ -223,10 +225,13 @@ $title-font: "Special Elite", "Courier New", monospace;
         gap: 0.1rem;
 
         &__step {
+            display: inline-block;
             font-family: $title-font;
             font-size: 0.8rem;
             min-width: 1.4rem;
-            padding: 0 0.1rem;
+            height: 1.3rem;
+            width: 1rem;
+            padding-top: 0.1rem;
             text-align: center;
             color: var(--c-sheet-muted);
             border: 1px solid transparent;
@@ -319,17 +324,18 @@ $title-font: "Special Elite", "Courier New", monospace;
             top: 0;
         }
 
-        &--fatigue {
-            right: 0;
-            top: 55%;
-        }
-
         &__label {
             writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.4rem;
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            line-height: 1;
+            margin-bottom: 1rem;
+            transform: translateX(-0.2em);
+            font-weight: 600;
+        }
+        &__list + &__label {
+            margin-bottom: 0;
+            margin-top: 1rem;
         }
 
         &__list {
@@ -342,19 +348,22 @@ $title-font: "Special Elite", "Courier New", monospace;
             text-align: center;
 
             li {
-                width: 1.6rem;
-                height: 1.6rem;
+                line-height: 1;
+                width: 3rem;
+                height: 3rem;
                 border: 2px solid var(--c-sheet-ink);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 0.85rem;
+                font-size: 1.2rem;
+                padding-top: 0.4rem;
             }
 
             &__divider {
                 border-style: dashed !important;
-                font-size: 0.7rem !important;
+                font-size: 1.4rem !important;
+                font-weight: 600;
             }
         }
     }
