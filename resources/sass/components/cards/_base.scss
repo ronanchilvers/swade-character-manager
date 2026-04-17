@@ -48,6 +48,28 @@
         border-bottom: card_vars.$card-border;
         background: card_vars.$card-title-background;
     }
+    .card__title--collapsible {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    .card__title--collapsible::after {
+        content: "▾";
+        font-size: 0.9rem;
+        line-height: 1;
+    }
+    .card__title--collapsible:focus-visible {
+        outline: 2px solid var(--c-black);
+        outline-offset: -2px;
+    }
+    .card__title--collapsed::after {
+        content: "▸";
+    }
+    .card__title--collapsed ~ .card__content,
+    .card__title--collapsed ~ .card__footer {
+        display: none;
+    }
     .card__content {
         flex: 1 1 auto;
         margin-top: 1rem;
