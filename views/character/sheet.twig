@@ -1,0 +1,200 @@
+{% extends 'layouts/default.twig' %}
+
+{% do add_stylesheet('/css/sheet.css') %}
+
+{% set back_url = get_url('characters_concept', {hash: entity.hash}) %}
+
+{% macro die_strip(faces, selected) %}
+    <span class="sheet__die-strip">
+    {% for face in faces %}
+        <span class="sheet__die-strip__step{% if selected == face %} sheet__die-strip__step--active{% endif %}">{{ face }}</span>
+    {% endfor %}
+    </span>
+{% endmacro %}
+
+{% macro empty_lines(count) %}
+    {% for _ in 1..count %}
+        <li class="sheet__list__row sheet__list__row--empty">&nbsp;</li>
+    {% endfor %}
+{% endmacro %}
+
+{% import _self as m %}
+
+{% block content %}
+<section class="sheet">
+
+    <header class="sheet__topbar">
+        <a class="button" href="{{ back_url }}">&laquo; Back to builder</a>
+    </header>
+
+    <div class="sheet__top">
+        <div class="sheet__panel sheet__panel--torn sheet__attributes">
+            <h2 class="sheet__title">Attributes</h2>
+            <ul class="sheet__attributes__list">
+                {% for attr in sheet.attributes %}
+                <li class="sheet__attributes__row">
+                    <span class="sheet__attributes__die">{{ attr.die ? 'd' ~ attr.die : '—' }}</span>
+                    <span class="sheet__attributes__max">{{ attr.max ? 'd' ~ attr.max : '—' }}</span>
+                    <span class="sheet__attributes__label">{{ attr.label|upper }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="sheet__panel sheet__identity">
+            <dl class="sheet__identity__grid">
+                <div class="sheet__identity__row">
+                    <dt>Name</dt>
+                    <dd>{{ sheet.identity.name }}</dd>
+                    <dt class="sheet__identity__ht">HT</dt>
+                    <dd class="sheet__identity__ht-val">&nbsp;</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Race</dt>
+                    <dd>&nbsp;</dd>
+                    <dt class="sheet__identity__wt">WT</dt>
+                    <dd class="sheet__identity__wt-val">&nbsp;</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Bennies</dt>
+                    <dd>&nbsp;</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Conviction</dt>
+                    <dd>&nbsp;</dd>
+                </div>
+            </dl>
+
+            <div class="sheet__traits-circles">
+                <div class="sheet__circle">
+                    <span class="sheet__circle__value">{{ sheet.identity.pace ?? '—' }}</span>
+                    <span class="sheet__circle__label">Pace</span>
+                </div>
+                <div class="sheet__circle">
+                    <span class="sheet__circle__value">{{ sheet.identity.parry ?? '—' }}</span>
+                    <span class="sheet__circle__label">Parry</span>
+                </div>
+                <div class="sheet__circle">
+                    <span class="sheet__circle__value">{{ sheet.identity.toughness ?? '—' }}</span>
+                    <span class="sheet__circle__label">Toughness</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet__middle">
+        <div class="sheet__panel sheet__panel--torn sheet__skills">
+            <h2 class="sheet__title">Skills</h2>
+            <ul class="sheet__skills__list">
+                {% for skill in sheet.skills %}
+                <li class="sheet__skills__row{% if skill.is_core %} sheet__skills__row--core{% endif %}">
+                    {{ m.die_strip(skill.die_faces, skill.die) }}
+                    <span class="sheet__skills__name">{{ skill.name }}</span>
+                    <span class="sheet__skills__attribute">({{ skill.linked_attribute|capitalize }})</span>
+                </li>
+                {% endfor %}
+                {% if sheet.skills|length < 20 %}
+                    {{ m.empty_lines(20 - sheet.skills|length) }}
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="sheet__panel sheet__gear">
+            <h2 class="sheet__title">Gear</h2>
+            <ul class="sheet__list">
+                {{ m.empty_lines(18) }}
+            </ul>
+        </div>
+
+        <div class="sheet__right">
+            <div class="sheet__panel sheet__panel--torn sheet__hindrances">
+                <h2 class="sheet__title">Hindrances</h2>
+                <ul class="sheet__list">
+                    {% for hindrance in sheet.hindrances %}
+                    <li class="sheet__list__row">
+                        <span class="sheet__hindrances__name">{{ hindrance.name }}</span>
+                        <span class="sheet__hindrances__level sheet__hindrances__level--{{ hindrance.level }}">
+                            {{ hindrance.level|title }}
+                        </span>
+                    </li>
+                    {% endfor %}
+                    {% if sheet.hindrances|length < 5 %}
+                        {{ m.empty_lines(5 - sheet.hindrances|length) }}
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="sheet__panel sheet__panel--torn sheet__edges">
+                <h2 class="sheet__title">Edges &amp; Advances</h2>
+                <ul class="sheet__list">
+                    {% for edge in sheet.edges %}
+                    <li class="sheet__list__row">{{ edge.name }}</li>
+                    {% endfor %}
+                    {% if sheet.edges|length < 5 %}
+                        {{ m.empty_lines(5 - sheet.edges|length) }}
+                    {% endif %}
+                </ul>
+
+                <ul class="sheet__advances">
+                    {% for tier in ['N','N','N','S','S','S','S','V','V','V','V','H','H','H','H','L','L','L','L'] %}
+                    <li class="sheet__advances__row">
+                        <span class="sheet__advances__tier">{{ tier }}</span>
+                        <span class="sheet__advances__line">&nbsp;</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <aside class="sheet__rail sheet__rail--wounds">
+            <span class="sheet__rail__label">Wounds</span>
+            <ul class="sheet__rail__list">
+                <li>&minus;1</li>
+                <li>&minus;2</li>
+                <li>&minus;3</li>
+                <li class="sheet__rail__list__divider">Inc</li>
+            </ul>
+        </aside>
+
+        <aside class="sheet__rail sheet__rail--fatigue">
+            <span class="sheet__rail__label">Fatigue</span>
+            <ul class="sheet__rail__list">
+                <li>&minus;1</li>
+                <li>&minus;2</li>
+            </ul>
+        </aside>
+    </div>
+
+    <div class="sheet__bottom">
+        <div class="sheet__panel sheet__weapons">
+            <h2 class="sheet__title">Weapon</h2>
+            <table class="sheet__weapons__table">
+                <thead>
+                    <tr>
+                        <th class="sheet__weapons__name">Name</th>
+                        <th>Range</th>
+                        <th>Damage</th>
+                        <th>AP</th>
+                        <th>RoF</th>
+                        <th>WT</th>
+                        <th class="sheet__weapons__notes">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for _ in 1..4 %}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

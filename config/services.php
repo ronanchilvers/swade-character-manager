@@ -6,6 +6,7 @@ declare(strict_types=1);
 // - $container - A flightphp/Container instance
 // - $settings - The application configuration array
 
+use App\Character\Sheet;
 use App\Entity\Factory\Character;
 use App\Entity\Factory\Edge;
 use App\Entity\Factory\Hindrance;
@@ -112,3 +113,5 @@ $container->singleton(
         return $manager;
     }
 );
+
+$container->singleton(Sheet::class, Sheet::class);
