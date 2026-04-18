@@ -579,6 +579,10 @@ main {
   font-weight: 500;
   font-family: "Special Elite", "Courier New", monospace;
 }
+.sheet__identity__row dd {
+  font-family: "Mynerve", cursive;
+  font-size: 1.2rem;
+}
 .sheet__traits-circles {
   display: flex;
   gap: 1.2rem;

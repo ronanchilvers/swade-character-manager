@@ -145,6 +145,10 @@ $text-font-size: 1.2rem;
                 font-weight: 500;
                 font-family: $title-font;
             }
+            dd {
+                font-family: $text-font;
+                font-size: $text-font-size;
+            }
         }
     }
 
