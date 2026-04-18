@@ -584,7 +584,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: 4rem; */
+  width: 4rem;
 }
 .sheet__circle__value {
   width: 3.2rem;
