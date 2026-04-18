@@ -9,9 +9,11 @@ declare(strict_types=1);
 use App\Character\Sheet;
 use App\Entity\Factory\Character;
 use App\Entity\Factory\Edge;
+use App\Entity\Factory\Gear;
 use App\Entity\Factory\Hindrance;
 use App\Entity\Factory\Skill;
 use App\Entity\Factory\User;
+use App\Entity\Factory\Weapon;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
@@ -97,6 +99,8 @@ $classes = [
     Hindrance::class,
     Skill::class,
     Edge::class,
+    Gear::class,
+    Weapon::class,
 ];
 foreach ($classes as $class) {
     $container->singleton($class, $class);

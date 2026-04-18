@@ -22,8 +22,8 @@ The active character-builder flow is:
 - `src/Service/Data/*.php` loads catalog data from `data/*.php`, not from the JSON siblings.
 
 ## Persistence and Catalog Model
-- The database schema is currently managed by a single bootstrap file: `schema/000_schema.sql`.
-- `characters`, `users`, `hindrances`, `skills`, and `edges` tables are created there.
+- The database schema is managed by a set of per-table bootstrap files under `schema/`, named `NNN_<table>.sql` and applied in filename order (`010_users.sql` through `070_weapons.sql`). Each file drops and recreates its table.
+- `users`, `characters`, `hindrances`, `skills`, `edges`, `gear`, and `weapons` tables are created this way.
 - Hindrances, skills, and edges store catalog references as string keys such as `hindrance_key` and `skill_key`.
 - The `edges` table now stores `edge_count` so the same catalog edge can be taken multiple times for one character without duplicating rows.
 - Runtime catalog lookups come from `App\Service\Data\Manager` plus `App\Service\Data\Hindrances`, `Skills`, and `Edges`.
@@ -53,7 +53,7 @@ Verified result on 2026-04-16:
 The earlier service-layer tests that referenced missing classes were removed and replaced with coverage for the code that actually ships.
 
 ## Known Documentation-Sensitive Gaps
-- Historical docs previously referred to `schema/001_schema.sql`, but the repo currently has only `schema/000_schema.sql`.
+- Historical docs previously referred to a single bootstrap file (`schema/001_schema.sql` or `schema/000_schema.sql`). The schema is now split into one file per table under `schema/`, applied in filename order.
 - Historical docs previously described a JSON-first runtime catalog service. The live app loads PHP catalog exports from `data/*.php`.
 - Historical docs previously described service-layer character workflows such as `CharacterAttributes` and `CharacterSkills`. Those classes are still not present in `src/Service`; the current flow remains controller/factory driven.
 

@@ -19,13 +19,45 @@
     {% endfor %}
 {% endmacro %}
 
+{% macro gear_row(item) %}
+    <li class="sheet__list__row sheet__gear__row" data-gear-row>
+        <span class="sheet__gear__name"
+              contenteditable="true"
+              data-cell="name"
+              data-placeholder="Add gear…">{{ item.name ?? '' }}</span>
+        <button class="sheet__row__remove"
+                type="button"
+                aria-label="Remove gear row">&times;</button>
+    </li>
+{% endmacro %}
+
+{% macro weapon_row(weapon) %}
+    <tr class="sheet__weapons__row" data-weapon-row>
+        <td contenteditable="true" data-cell="name" data-placeholder="Weapon name">{{ weapon.name ?? '' }}</td>
+        <td contenteditable="true" data-cell="range">{{ weapon.range ?? '' }}</td>
+        <td contenteditable="true" data-cell="damage">{{ weapon.damage ?? '' }}</td>
+        <td contenteditable="true" data-cell="ap">{{ weapon.ap ?? '' }}</td>
+        <td contenteditable="true" data-cell="rof">{{ weapon.rof ?? '' }}</td>
+        <td contenteditable="true" data-cell="weight">{{ weapon.weight ?? '' }}</td>
+        <td contenteditable="true" data-cell="notes" class="sheet__weapons__notes-cell">{{ weapon.notes ?? '' }}</td>
+        <td class="sheet__weapons__actions-cell">
+            <button class="sheet__row__remove"
+                    type="button"
+                    aria-label="Remove weapon row">&times;</button>
+        </td>
+    </tr>
+{% endmacro %}
+
 {% import _self as m %}
 
 {% block content %}
-<section class="sheet">
+<section class="sheet"
+         data-character-hash="{{ entity.hash }}"
+         data-sheet-root>
 
     <header class="sheet__topbar">
         <a class="button" href="{{ back_url }}">&laquo; Back to builder</a>
+        <span class="sheet__status" data-sheet-status aria-live="polite"></span>
     </header>
 
     <div class="sheet__top">
@@ -47,27 +79,29 @@
                 <div class="sheet__identity__row">
                     <dt>Name</dt>
                     <dd>{{ sheet.identity.name }}</dd>
-                    <!--<dt class="sheet__identity__ht">HT</dt>-->
-                    <!--<dd class="sheet__identity__ht-val">&nbsp;</dd>-->
-                </div>
-                <div class="sheet__identity__row">
-                    <dt>Race</dt>
-                    <dd>&nbsp;</dd>
-                    <!--
-                    <dt class="sheet__identity__wt">WT</dt>
-                    <dd class="sheet__identity__wt-val">&nbsp;</dd>
-                    -->
                 </div>
                 <div class="sheet__identity__row">
                     <dt>Bennies</dt>
-                    <dd>&nbsp;</dd>
+                    <dd>
+                        <span class="sheet__counter"
+                              data-counter="bennies"
+                              role="spinbutton"
+                              tabindex="0"
+                              aria-valuenow="{{ sheet.state.bennies }}"
+                              aria-valuemin="0">{{ sheet.state.bennies }}</span>
+                    </dd>
                 </div>
-                <!--
                 <div class="sheet__identity__row">
                     <dt>Conviction</dt>
-                    <dd>&nbsp;</dd>
+                    <dd>
+                        <span class="sheet__counter"
+                              data-counter="conviction"
+                              role="spinbutton"
+                              tabindex="0"
+                              aria-valuenow="{{ sheet.state.conviction }}"
+                              aria-valuemin="0">{{ sheet.state.conviction }}</span>
+                    </dd>
                 </div>
-                -->
             </dl>
 
             <div class="sheet__traits-circles">
@@ -106,9 +140,17 @@
 
         <div class="sheet__panel sheet__gear">
             <h2 class="sheet__title">Gear</h2>
-            <ul class="sheet__list">
-                {{ m.empty_lines(18) }}
+            <ul class="sheet__list sheet__gear__list" data-editable="gear">
+                {% for item in sheet.gear %}
+                    {{ m.gear_row(item) }}
+                {% endfor %}
+                <li class="sheet__list__row sheet__list__row--add">
+                    <button class="sheet__row__add" type="button" data-add="gear">+ Add gear</button>
+                </li>
             </ul>
+            <template data-row-template="gear">
+                {{ m.gear_row({name: '', notes: ''}) }}
+            </template>
         </div>
 
         <div class="sheet__right">
@@ -158,13 +200,18 @@
 
         <aside class="sheet__rail sheet__panel sheet__rail--wounds">
             <span class="sheet__rail__label">Wounds</span>
-            <ul class="sheet__rail__list">
-                <li class="sheet__rail__list__item" data-value="1" data-type="wound">&minus;1</li>
-                <li class="sheet__rail__list__item" data-value="2" data-type="wound">&minus;2</li>
-                <li class="sheet__rail__list__item" data-value="3" data-type="wound">&minus;3</li>
-                <li class="sheet__rail__list__item sheet__rail__list__divider">Inc</li>
-                <li class="sheet__rail__list__item" data-value="2" data-type="fatigue">&minus;2</li>
-                <li class="sheet__rail__list__item" data-value="1" data-type="fatigue">&minus;1</li>
+            <ul class="sheet__rail__list" data-rail="wounds">
+                {% for n in 1..3 %}
+                <li class="sheet__rail__list__item{% if sheet.state.wounds >= n %} sheet__rail__list__item--selected{% endif %}"
+                    data-rail-step="{{ n }}">&minus;{{ n }}</li>
+                {% endfor %}
+            </ul>
+            <span class="sheet__rail__list__divider">Inc</span>
+            <ul class="sheet__rail__list" data-rail="fatigue">
+                {% for n in 1..2 %}
+                <li class="sheet__rail__list__item{% if sheet.state.fatigue >= n %} sheet__rail__list__item--selected{% endif %}"
+                    data-rail-step="{{ n }}">&minus;{{ n }}</li>
+                {% endfor %}
             </ul>
             <span class="sheet__rail__label">Fatigue</span>
         </aside>
@@ -173,7 +220,7 @@
     <div class="sheet__bottom">
         <div class="sheet__panel sheet__weapons">
             <h2 class="sheet__title">Weapon</h2>
-            <table class="sheet__weapons__table">
+            <table class="sheet__weapons__table" data-editable="weapons">
                 <thead>
                     <tr>
                         <th class="sheet__weapons__name">Name</th>
@@ -183,22 +230,25 @@
                         <th>RoF</th>
                         <th>WT</th>
                         <th class="sheet__weapons__notes">Notes</th>
+                        <th class="sheet__weapons__actions" aria-hidden="true"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for _ in 1..4 %}
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
+                    {% for weapon in sheet.weapons %}
+                        {{ m.weapon_row(weapon) }}
                     {% endfor %}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" class="sheet__weapons__add-cell">
+                            <button class="sheet__row__add" type="button" data-add="weapons">+ Add weapon</button>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
+            <template data-row-template="weapons">
+                {{ m.weapon_row({name: '', range: '', damage: '', ap: '', rof: '', weight: '', notes: ''}) }}
+            </template>
         </div>
     </div>
 </section>

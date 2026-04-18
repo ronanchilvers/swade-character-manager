@@ -46,4 +46,12 @@ Flight::group('/characters', function () {
         ->setAlias('characters_edges');
     Flight::route('GET /sheet/@hash:[a-z0-9]{32}', [Sheet::class, 'index'])
         ->setAlias('characters_sheet');
+    Flight::route('POST /sheet/@hash:[a-z0-9]{32}/state', [Sheet::class, 'updateState'])
+        ->setAlias('characters_sheet_state');
+    Flight::route('POST /sheet/@hash:[a-z0-9]{32}/notes', [Sheet::class, 'updateNotes'])
+        ->setAlias('characters_sheet_notes');
+    Flight::route('POST /sheet/@hash:[a-z0-9]{32}/gear', [Sheet::class, 'updateGear'])
+        ->setAlias('characters_sheet_gear');
+    Flight::route('POST /sheet/@hash:[a-z0-9]{32}/weapons', [Sheet::class, 'updateWeapons'])
+        ->setAlias('characters_sheet_weapons');
 }, [ MiddlewareAuth::class ]);

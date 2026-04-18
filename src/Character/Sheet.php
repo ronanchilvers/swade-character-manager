@@ -23,6 +23,8 @@ class Sheet
         array $edges,
         Manager $manager,
         CharacterFactory $characterFactory,
+        array $gear = [],
+        array $weapons = [],
     ): array {
         return [
             'identity' => $this->buildIdentity($character),
@@ -30,7 +32,52 @@ class Sheet
             'hindrances' => $this->buildHindrances($hindrances, $manager),
             'skills' => $this->buildSkills($skills, $manager),
             'edges' => $this->buildEdges($edges, $manager),
+            'state' => $this->buildState($character),
+            'gear' => $this->buildGear($gear),
+            'weapons' => $this->buildWeapons($weapons),
         ];
+    }
+
+    private function buildState(Entity $character): array
+    {
+        return [
+            'wounds'     => max(0, (int) ($character->wounds ?? 0)),
+            'fatigue'    => max(0, (int) ($character->fatigue ?? 0)),
+            'bennies'    => max(0, (int) ($character->bennies ?? 0)),
+            'conviction' => max(0, (int) ($character->conviction ?? 0)),
+            'notes'      => (string) ($character->notes ?? ''),
+        ];
+    }
+
+    private function buildGear(array $gear): array
+    {
+        $rows = [];
+        foreach ($gear as $item) {
+            $rows[] = [
+                'name'  => (string) ($item->name ?? ''),
+                'notes' => (string) ($item->notes ?? ''),
+            ];
+        }
+
+        return $rows;
+    }
+
+    private function buildWeapons(array $weapons): array
+    {
+        $rows = [];
+        foreach ($weapons as $weapon) {
+            $rows[] = [
+                'name'   => (string) ($weapon->name ?? ''),
+                'range'  => (string) ($weapon->range ?? ''),
+                'damage' => (string) ($weapon->damage ?? ''),
+                'ap'     => (string) ($weapon->ap ?? ''),
+                'rof'    => (string) ($weapon->rof ?? ''),
+                'weight' => (string) ($weapon->weight ?? ''),
+                'notes'  => (string) ($weapon->notes ?? ''),
+            ];
+        }
+
+        return $rows;
     }
 
     private function buildIdentity(Entity $character): array

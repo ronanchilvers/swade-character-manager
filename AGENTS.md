@@ -5,7 +5,7 @@ The app is a Composer-managed PHP 8.5 project under the `App\\` namespace. Runti
 
 Application code lives in `src/`. Use `src/Controller/` and `src/Controller/Character/` for Flight handlers, `src/Entity/` and `src/Entity/Factory/` for generic entities plus database persistence, `src/Http/` for response, cookie, and session helpers, `src/Middleware/` for Flight middleware, `src/Service/Data/` for catalog loaders, `src/Budget/` for character point summaries, and `src/Twig/` for Twig extensions.
 
-Templates live in `views/`. Public assets live in `web/`, with Sass sources in `resources/sass/` compiled into `web/css/`. Catalog content currently loads from the PHP exports in `data/*.php`; matching `data/*.json` files exist in the repo as source/reference material, but the runtime `App\Service\Data\*` classes read the PHP files. Database bootstrap SQL currently lives in a single file, [`schema/000_schema.sql`](/Users/ronan/Personal/experiments/swade-character-manager/schema/000_schema.sql), which drops and recreates the schema. Tests live in `tests/`.
+Templates live in `views/`. Public assets live in `web/`, with Sass sources in `resources/sass/` compiled into `web/css/`. Catalog content currently loads from the PHP exports in `data/*.php`; matching `data/*.json` files exist in the repo as source/reference material, but the runtime `App\Service\Data\*` classes read the PHP files. Database bootstrap SQL lives under `schema/`, with one file per table named `NNN_<table>.sql` and applied in filename order (currently `010_users.sql` through `070_weapons.sql`); each file drops and recreates its table. Tests live in `tests/`.
 
 ## Current Application Flow
 The shipped builder flow is:
@@ -36,9 +36,9 @@ Rebuild CSS from Sass with:
 
 When Sass changes modify tracked files under `web/css/`, commit those rebuilt CSS artifacts in the same change.
 
-Reset the database schema with:
+Reset the database schema by applying every file in `schema/` in filename order, for example:
 
-- `mysql ... < schema/000_schema.sql`
+- `cat schema/*.sql | mysql ...`
 
 Run tests with:
 
