@@ -66,11 +66,10 @@
   // ---- Wound / fatigue rails ------------------------------------------------
 
   function wireRail(field) {
-    const list = sheet.querySelector('[data-rail="' + field + '"]');
-    if (!list) {
+    const items = Array.from(sheet.querySelectorAll('.sheet__rail__list__item[data-rail="' + field + '"]'));
+    if (items.length === 0) {
       return;
     }
-    const items = Array.from(list.querySelectorAll('.sheet__rail__list__item'));
 
     function applyCount(count) {
       items.forEach((el, i) => {
@@ -105,8 +104,34 @@
     });
   }
 
+  function wireBooleanRailItem(field) {
+    const item = sheet.querySelector('.sheet__rail__list__item[data-rail="' + field + '"]');
+    if (!item) {
+      return;
+    }
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('aria-pressed', item.classList.contains('sheet__rail__list__item--selected') ? 'true' : 'false');
+
+    const toggle = () => {
+      const next = !item.classList.contains('sheet__rail__list__item--selected');
+      item.classList.toggle('sheet__rail__list__item--selected', next);
+      item.setAttribute('aria-pressed', next ? 'true' : 'false');
+      saveState({ [field]: next ? 1 : 0 });
+    };
+
+    item.addEventListener('click', toggle);
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  }
+
   wireRail('wounds');
   wireRail('fatigue');
+  wireBooleanRailItem('incapacitated');
 
   // ---- Bennies / conviction counters ---------------------------------------
 

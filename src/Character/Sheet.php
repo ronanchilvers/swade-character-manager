@@ -41,11 +41,12 @@ class Sheet
     private function buildState(Entity $character): array
     {
         return [
-            'wounds'     => max(0, (int) ($character->wounds ?? 0)),
-            'fatigue'    => max(0, (int) ($character->fatigue ?? 0)),
-            'bennies'    => max(0, (int) ($character->bennies ?? 0)),
-            'conviction' => max(0, (int) ($character->conviction ?? 0)),
-            'notes'      => (string) ($character->notes ?? ''),
+            'wounds'        => max(0, (int) ($character->wounds ?? 0)),
+            'fatigue'       => max(0, (int) ($character->fatigue ?? 0)),
+            'incapacitated' => ((int) ($character->incapacitated ?? 0)) > 0,
+            'bennies'       => max(0, (int) ($character->bennies ?? 0)),
+            'conviction'    => max(0, (int) ($character->conviction ?? 0)),
+            'notes'         => (string) ($character->notes ?? ''),
         ];
     }
 

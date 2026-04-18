@@ -11,9 +11,12 @@
     --c-sheet-rail-item-border-active: rgba(116, 0, 0, 1);
     --c-parchment: #f6ecd5;
     --c-parchment-dark: #e8d9b0;
+    --c-button-hover: rgba(166, 30, 30, 0.25);
 }
 
 $title-font: "Special Elite", "Courier New", monospace;
+$text-font: "Mynerve", cursive;
+$text-font-size: 1.2rem;
 
 .sheet {
     max-width: 1200px;
@@ -140,6 +143,7 @@ $title-font: "Special Elite", "Courier New", monospace;
 
             dt {
                 font-weight: 500;
+                font-family: $title-font;
             }
         }
     }
@@ -252,7 +256,8 @@ $title-font: "Special Elite", "Courier New", monospace;
 
     &__hindrances {
         &__name {
-            font-weight: 500;
+            font-family: $text-font;
+            font-size: $text-font-size;
         }
 
         &__level {
@@ -282,14 +287,14 @@ $title-font: "Special Elite", "Courier New", monospace;
         gap: 0.6rem;
 
         &__name {
-            font-weight: 500;
+            font-family: $text-font;
+            font-size: $text-font-size;
         }
 
         &__count {
             font-family: $title-font;
+            font-size: $text-font-size;
             color: var(--c-sheet-heading);
-            font-size: 0.85em;
-            margin-left: 0.4rem;
         }
     }
 
@@ -338,6 +343,7 @@ $title-font: "Special Elite", "Courier New", monospace;
             margin-bottom: 0.8rem;
             transform: translateX(-0.2em);
             font-weight: 600;
+            color: var(--c-sheet-heading);
         }
         &__list + &__label {
             margin-bottom: 0;
@@ -384,13 +390,13 @@ $title-font: "Special Elite", "Courier New", monospace;
                         background: var(--c-sheet-rail-item-hover);
                     }
                 }
+                &--inc {
+                    border-style: dashed !important;
+                    /* font-size: 1.4rem !important; */
+                    font-weight: 600;
+                }
             }
 
-            &__divider {
-                /* border-style: dashed !important; */
-                font-size: 1.4rem !important;
-                font-weight: 600;
-            }
         }
     }
 
@@ -407,6 +413,7 @@ $title-font: "Special Elite", "Courier New", monospace;
                 font-size: 0.85rem;
                 padding: 0.25rem 0.5rem;
                 border-bottom: 1px solid var(--c-sheet-muted);
+                width: 10%;
             }
 
             td {
@@ -414,13 +421,27 @@ $title-font: "Special Elite", "Courier New", monospace;
                 padding: 0.35rem 0.5rem;
                 min-height: 1.6rem;
             }
-
-            &__name {
-                width: 18%;
+            tbody td {
+                font-family: $text-font;
+                font-size: $text-font-size;
             }
 
-            &__notes {
-                width: 28%;
+            th#{&}__name {
+                width: 20%;
+            }
+            th#{&}__range {
+                width: 15%;
+            }
+            th#{&}__damage {
+                width: 15%;
+            }
+            th#{&}__ap,
+            th#{&}__rof,
+            th#{&}__wt {
+                width: 5%;
+            }
+            th#{&}__notes {
+                width: auto;
             }
         }
     }
@@ -507,6 +528,9 @@ $title-font: "Special Elite", "Courier New", monospace;
     &__gear__name {
         flex: 1;
         min-height: 1.2em;
+        font-family: $text-font;
+        font-size: $text-font-size;
+        padding: 0.2rem 0.6rem;
     }
 
     &__row__remove {
@@ -551,12 +575,14 @@ $title-font: "Special Elite", "Courier New", monospace;
         color: var(--c-sheet-muted);
         font-family: $title-font;
         letter-spacing: 0.06em;
-        padding: 0.2rem 0.6rem;
+        padding: 0.3rem 0.6rem 0rem 0.6rem;
         cursor: pointer;
         border-radius: 0.25rem;
+        width: 100%;
 
         &:hover,
         &:focus-visible {
+            background-color: var(--c-button-hover);
             color: var(--c-sheet-heading);
             border-color: var(--c-sheet-heading);
         }

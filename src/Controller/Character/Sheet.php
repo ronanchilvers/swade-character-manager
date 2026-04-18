@@ -18,7 +18,7 @@ use Flight;
 
 class Sheet
 {
-    private const STATE_FIELDS = ['wounds', 'fatigue', 'bennies', 'conviction'];
+    private const STATE_FIELDS = ['wounds', 'fatigue', 'incapacitated', 'bennies', 'conviction'];
 
     public function __construct(
         private FactoryCharacter $factory,
