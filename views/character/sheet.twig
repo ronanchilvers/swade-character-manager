@@ -244,6 +244,14 @@
                 {{ m.weapon_row({name: '', range: '', damage: '', ap: '', rof: '', weight: '', notes: ''}) }}
             </template>
         </div>
+
+        <div class="sheet__panel sheet__notes">
+            <h2 class="sheet__title">Notes</h2>
+            <textarea class="sheet__notes__input"
+                      data-notes
+                      rows="6"
+                      placeholder="Session notes, backstory, reminders…">{{ sheet.state.notes }}</textarea>
+        </div>
     </div>
 </section>
 {% endblock %}

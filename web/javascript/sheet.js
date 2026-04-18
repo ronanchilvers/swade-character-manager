@@ -62,6 +62,7 @@
   const saveState   = debounce((partial) => post('state',   partial),       250);
   const saveGear    = debounce((rows)    => post('gear',    { rows }),      400);
   const saveWeapons = debounce((rows)    => post('weapons', { rows }),      400);
+  const saveNotes   = debounce((notes)   => post('notes',   { notes }),     600);
 
   // ---- Wound / fatigue rails ------------------------------------------------
 
@@ -294,4 +295,19 @@
       }
     },
   });
+
+  // ---- Notes textarea ------------------------------------------------------
+
+  const notesEl = sheet.querySelector('[data-notes]');
+  if (notesEl) {
+    const autosize = () => {
+      notesEl.style.height = 'auto';
+      notesEl.style.height = notesEl.scrollHeight + 'px';
+    };
+    notesEl.addEventListener('input', () => {
+      autosize();
+      saveNotes(notesEl.value);
+    });
+    autosize();
+  }
 })();
