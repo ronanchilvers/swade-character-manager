@@ -8,7 +8,7 @@
         <div class="card__inner">
             <div class="card__title">{{ character.name }}</div>
             <div class="card__content">
-                {{ character.concept ?? "No concept yet" }}
+                {% if character.concept|length > 0 %}{{ character.concept }}{% else %}No concept yet{% endif %}
             </div>
             <div class="card__footer">
                 <a class="button button--primary" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
