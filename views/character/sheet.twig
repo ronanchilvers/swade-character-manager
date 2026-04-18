@@ -1,6 +1,7 @@
 {% extends 'layouts/default.twig' %}
 
 {% do add_stylesheet('/css/sheet.css') %}
+{% do add_script('/javascript/sheet.js') %}
 
 {% set back_url = get_url('characters_concept', {hash: entity.hash}) %}
 
@@ -151,15 +152,15 @@
             </div>
         </div>
 
-        <aside class="sheet__rail sheet__rail--wounds">
+        <aside class="sheet__rail sheet__panel sheet__rail--wounds">
             <span class="sheet__rail__label">Wounds</span>
             <ul class="sheet__rail__list">
-                <li>&minus;1</li>
-                <li>&minus;2</li>
-                <li>&minus;3</li>
-                <li class="sheet__rail__list__divider">Inc</li>
-                <li>&minus;1</li>
-                <li>&minus;2</li>
+                <li class="sheet__rail__list__item">&minus;1</li>
+                <li class="sheet__rail__list__item">&minus;2</li>
+                <li class="sheet__rail__list__item">&minus;3</li>
+                <li class="sheet__rail__list__item sheet__rail__list__divider">Inc</li>
+                <li class="sheet__rail__list__item">&minus;1</li>
+                <li class="sheet__rail__list__item">&minus;2</li>
             </ul>
             <span class="sheet__rail__label">Fatigue</span>
         </aside>
