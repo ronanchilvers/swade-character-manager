@@ -566,7 +566,7 @@ main {
 }
 .sheet__identity__row {
   display: grid;
-  grid-template-columns: 6rem 1fr 3rem 3rem;
+  grid-template-columns: 6rem 1fr;
   gap: 0.5rem;
   align-items: baseline;
   border-bottom: 1px solid var(--c-sheet-muted);
@@ -585,7 +585,7 @@ main {
 }
 .sheet__traits-circles {
   display: flex;
-  gap: 1.2rem;
+  gap: 1rem;
   padding-top: 0.5rem;
 }
 .sheet__circle {
@@ -605,12 +605,20 @@ main {
   font-family: "Special Elite", "Courier New", monospace;
   font-size: 1.3rem;
   padding-top: 0.3rem;
+  cursor: default;
 }
 .sheet__circle__label {
   margin-top: 0.25rem;
   font-family: "Special Elite", "Courier New", monospace;
   font-size: 0.8rem;
   text-transform: uppercase;
+}
+.sheet__circle--bennies {
+  margin-right: 2rem;
+}
+.sheet__circle--bennies .sheet__circle__value, .sheet__circle--bennies .sheet__circle__label {
+  border-color: var(--c-sheet-heading);
+  color: var(--c-sheet-heading);
 }
 .sheet__list {
   list-style: none;
@@ -643,12 +651,17 @@ main {
   padding: 0.25rem 0;
   min-height: 1.6rem;
 }
+.sheet__skills__row--core {
+  color: var(--c-sheet-heading);
+}
 .sheet__skills__name {
-  font-weight: 500;
+  font-family: "Special Elite", "Courier New", monospace;
 }
 .sheet__skills__attribute {
+  font-family: "Special Elite", "Courier New", monospace;
   color: var(--c-sheet-muted);
-  font-size: 0.85em;
+  font-size: 0.8em;
+  line-height: 2;
 }
 .sheet__die-strip {
   display: inline-flex;
@@ -681,7 +694,7 @@ main {
   font-family: "Special Elite", "Courier New", monospace;
   font-size: 0.75rem;
   text-transform: uppercase;
-  padding: 0.1rem 0.45rem;
+  padding: 0.3rem 0.45rem 0 0.45rem;
   border-radius: 3px;
   border: 1px solid var(--c-sheet-ink);
 }
@@ -711,7 +724,7 @@ main {
 .sheet__advances {
   list-style: none;
   padding: 0;
-  margin: 0.4rem 0 0;
+  margin: 0 0 0;
 }
 .sheet__advances__row {
   display: grid;
@@ -862,21 +875,15 @@ main {
   color: var(--c-sheet-muted);
   font-style: italic;
 }
-.sheet__counter {
-  display: inline-block;
-  min-width: 2.25rem;
-  padding: 0.1rem 0.45rem;
-  border: 1px dashed var(--c-parchment-dark);
-  border-radius: 0.25rem;
-  text-align: center;
+.sheet [data-counter] {
   cursor: pointer;
   user-select: none;
   font-variant-numeric: tabular-nums;
 }
-.sheet__counter:hover {
+.sheet [data-counter]:hover {
   background: rgba(0, 0, 0, 0.03);
 }
-.sheet__counter:focus-visible {
+.sheet [data-counter]:focus-visible {
   outline: 2px solid var(--c-sheet-rail-item-selected);
   outline-offset: 2px;
 }

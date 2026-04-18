@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
     character_hash       VARCHAR(32),
     character_user       INT(11),
     character_name       VARCHAR(128),
+    character_concept    VARCHAR(255) NOT NULL DEFAULT '',
     -- rank and core attributes stored as die face values (4/6/8/10/12)
     character_rank       ENUM('Novice','Seasoned','Veteran','Heroic','Legendary')
                              NOT NULL DEFAULT 'Novice',
@@ -22,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `characters` (
     character_fatigue       TINYINT UNSIGNED NOT NULL DEFAULT 0,
     character_incapacitated TINYINT UNSIGNED NOT NULL DEFAULT 0,
     character_bennies       TINYINT UNSIGNED NOT NULL DEFAULT 3,
-    character_conviction    TINYINT UNSIGNED NOT NULL DEFAULT 0,
     character_notes         TEXT NULL,
     character_created    DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     character_updated    DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),

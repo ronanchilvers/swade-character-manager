@@ -171,7 +171,7 @@
     });
   }
 
-  sheet.querySelectorAll('.sheet__counter').forEach(wireCounter);
+  sheet.querySelectorAll('[data-counter]').forEach(wireCounter);
 
   // ---- Editable list rows (gear + weapons) ---------------------------------
 

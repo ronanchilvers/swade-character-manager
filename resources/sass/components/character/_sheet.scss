@@ -131,7 +131,7 @@ $text-font-size: 1.2rem;
 
         &__row {
             display: grid;
-            grid-template-columns: 6rem 1fr 3rem 3rem;
+            grid-template-columns: 6rem 1fr;
             gap: 0.5rem;
             align-items: baseline;
             border-bottom: 1px solid var(--c-sheet-muted);
@@ -154,7 +154,7 @@ $text-font-size: 1.2rem;
 
     &__traits-circles {
         display: flex;
-        gap: 1.2rem;
+        gap: 1rem;
         padding-top: 0.5rem;
     }
 
@@ -175,6 +175,7 @@ $text-font-size: 1.2rem;
             font-family: $title-font;
             font-size: 1.3rem;
             padding-top: 0.3rem;
+            cursor: default;
         }
 
         &__label {
@@ -182,6 +183,15 @@ $text-font-size: 1.2rem;
             font-family: $title-font;
             font-size: 0.8rem;
             text-transform: uppercase;
+        }
+
+        &--bennies {
+            margin-right: 2rem;
+        }
+        &--bennies &__value,
+        &--bennies &__label {
+            border-color: var(--c-sheet-heading);
+            color: var(--c-sheet-heading);
         }
     }
 
@@ -220,15 +230,21 @@ $text-font-size: 1.2rem;
             border-bottom: 1px solid var(--c-sheet-muted);
             padding: 0.25rem 0;
             min-height: 1.6rem;
+
+            &--core {
+                color: var(--c-sheet-heading);
+            }
         }
 
         &__name {
-            font-weight: 500;
+            font-family: $title-font;
         }
 
         &__attribute {
+            font-family: $title-font;
             color: var(--c-sheet-muted);
-            font-size: 0.85em;
+            font-size: 0.8em;
+            line-height: 2;
         }
     }
 
@@ -268,7 +284,7 @@ $text-font-size: 1.2rem;
             font-family: $title-font;
             font-size: 0.75rem;
             text-transform: uppercase;
-            padding: 0.1rem 0.45rem;
+            padding: 0.3rem 0.45rem 0 0.45rem;
             border-radius: vars.$border-radius-default;
             border: 1px solid var(--c-sheet-ink);
 
@@ -481,13 +497,7 @@ $text-font-size: 1.2rem;
         }
     }
 
-    &__counter {
-        display: inline-block;
-        min-width: 2.25rem;
-        padding: 0.1rem 0.45rem;
-        border: 1px dashed var(--c-parchment-dark);
-        border-radius: 0.25rem;
-        text-align: center;
+    [data-counter] {
         cursor: pointer;
         user-select: none;
         font-variant-numeric: tabular-nums;

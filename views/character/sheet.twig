@@ -81,30 +81,25 @@
                     <dd>{{ sheet.identity.name }}</dd>
                 </div>
                 <div class="sheet__identity__row">
-                    <dt>Bennies</dt>
-                    <dd>
-                        <span class="sheet__counter"
-                              data-counter="bennies"
-                              role="spinbutton"
-                              tabindex="0"
-                              aria-valuenow="{{ sheet.state.bennies }}"
-                              aria-valuemin="0">{{ sheet.state.bennies }}</span>
-                    </dd>
+                    <dt>Race</dt>
+                    <dd>Human</dd>
                 </div>
                 <div class="sheet__identity__row">
-                    <dt>Conviction</dt>
-                    <dd>
-                        <span class="sheet__counter"
-                              data-counter="conviction"
-                              role="spinbutton"
-                              tabindex="0"
-                              aria-valuenow="{{ sheet.state.conviction }}"
-                              aria-valuemin="0">{{ sheet.state.conviction }}</span>
-                    </dd>
+                    <dt>Concept</dt>
+                    <dd>{{ sheet.identity.concept }}</dd>
                 </div>
             </dl>
 
             <div class="sheet__traits-circles">
+                <div class="sheet__circle sheet__circle--editable sheet__circle--bennies">
+                    <span class="sheet__circle__value"
+                          data-counter="bennies"
+                          role="spinbutton"
+                          tabindex="0"
+                          aria-valuenow="{{ sheet.state.bennies }}"
+                          aria-valuemin="0">{{ sheet.state.bennies }}</span>
+                    <span class="sheet__circle__label">Bennies</span>
+                </div>
                 <div class="sheet__circle">
                     <span class="sheet__circle__value">{{ sheet.identity.pace ?? '—' }}</span>
                     <span class="sheet__circle__label">Pace</span>
@@ -129,12 +124,12 @@
                 <li class="sheet__skills__row{% if skill.is_core %} sheet__skills__row--core{% endif %}">
                     {{ m.die_strip(skill.die_faces, skill.die) }}
                     <span class="sheet__skills__name">{{ skill.name }}</span>
-                    <span class="sheet__skills__attribute">({{ skill.linked_attribute|capitalize }})</span>
+                    <span class="sheet__skills__attribute">{{ skill.linked_attribute|capitalize }}</span>
                 </li>
                 {% endfor %}
-                {% if sheet.skills|length < 20 %}
+                {# {% if sheet.skills|length < 20 %}
                     {{ m.empty_lines(20 - sheet.skills|length) }}
-                {% endif %}
+                {% endif %} #}
             </ul>
         </div>
 
@@ -165,9 +160,10 @@
                         </span>
                     </li>
                     {% endfor %}
-                    {% if sheet.hindrances|length < 5 %}
+                    {{ m.empty_lines(1) }}
+                    {# {% if sheet.hindrances|length < 5 %}
                         {{ m.empty_lines(5 - sheet.hindrances|length) }}
-                    {% endif %}
+                    {% endif %} #}
                 </ul>
             </div>
 
@@ -182,9 +178,6 @@
                         {% endif %}
                     </li>
                     {% endfor %}
-                    {% if sheet.edges|length < 5 %}
-                        {{ m.empty_lines(5 - sheet.edges|length) }}
-                    {% endif %}
                 </ul>
 
                 <ul class="sheet__advances">

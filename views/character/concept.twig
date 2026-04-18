@@ -22,7 +22,13 @@
     <div class="field__inner">
         <input class="field__input" type="text" name="name" value="{{ entity.name }}"/>
     </div>
-    <p class="field__error">This field is required</p>
+</div>
+
+<div class="field {% if field_has_error('concept', errors) %}field--error{% endif %}">
+    <label class="field__label">Concept</label>
+    <div class="field__inner">
+        <textarea class="field__input" name="concept" rows="3">{{ entity.concept }}</textarea>
+    </div>
 </div>
 
 {% endblock %}

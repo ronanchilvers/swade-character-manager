@@ -45,7 +45,6 @@ class Sheet
             'fatigue'       => max(0, (int) ($character->fatigue ?? 0)),
             'incapacitated' => ((int) ($character->incapacitated ?? 0)) > 0,
             'bennies'       => max(0, (int) ($character->bennies ?? 0)),
-            'conviction'    => max(0, (int) ($character->conviction ?? 0)),
             'notes'         => (string) ($character->notes ?? ''),
         ];
     }
@@ -85,6 +84,7 @@ class Sheet
     {
         return [
             'name' => (string) ($character->name ?? ''),
+            'concept' => (string) ($character->concept ?? ''),
             'rank' => (string) ($character->rank ?? ''),
             'pace' => $this->intOrNull($character->pace),
             'parry' => $this->intOrNull($character->parry),
