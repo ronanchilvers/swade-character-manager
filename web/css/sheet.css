@@ -470,6 +470,7 @@ main {
   --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
   --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
   --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
+  --c-sheet-rail-item-border-active: rgba(116, 0, 0, 1);
   --c-parchment: #f6ecd5;
   --c-parchment-dark: #e8d9b0;
 }
@@ -502,6 +503,7 @@ main {
 .sheet__panel--torn {
   background: var(--c-parchment);
   border: 1px dashed var(--c-parchment-dark);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   clip-path: polygon(0 6px, 3% 0, 8% 5px, 14% 1px, 22% 4px, 30% 0, 38% 5px, 46% 2px, 54% 5px, 62% 0, 70% 4px, 78% 1px, 86% 5px, 94% 0, 100% 6px, 100% calc(100% - 6px), 94% 100%, 86% calc(100% - 5px), 78% calc(100% - 1px), 70% calc(100% - 4px), 62% 100%, 54% calc(100% - 5px), 46% calc(100% - 2px), 38% calc(100% - 5px), 30% 100%, 22% calc(100% - 4px), 14% calc(100% - 1px), 8% calc(100% - 5px), 3% 100%, 0 calc(100% - 6px));
   padding: 1.4rem 1.1rem;
 }
@@ -516,7 +518,7 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
-  padding-right: 5rem;
+  padding-right: 3.5rem;
   margin-bottom: 1rem;
 }
 .sheet__bottom {
@@ -719,7 +721,7 @@ main {
 }
 .sheet__rail {
   position: absolute;
-  top: 0;
+  top: 2rem;
   width: 3rem;
   display: flex;
   flex-direction: column;
@@ -730,14 +732,14 @@ main {
 }
 .sheet__rail--wounds {
   right: 0;
-  top: 0;
+  /* top: 0; */
 }
 .sheet__rail__label {
   writing-mode: vertical-rl;
   font-size: 1.5rem;
   letter-spacing: 0.2em;
   line-height: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   transform: translateX(-0.2em);
   font-weight: 600;
 }
@@ -774,14 +776,9 @@ main {
 .sheet__rail__list__item:hover {
   background: var(--c-sheet-rail-item-hover);
 }
-.sheet__rail__list__item {
-  /* &:active {
-      background: var(--c-sheet-rail-item-active);
-  } */
-}
 .sheet__rail__list__item--selected {
   background: var(--c-sheet-rail-item-selected);
-  border-color: transparent !important;
+  border-color: var(--c-sheet-rail-item-border-active) !important;
   color: var(--c-white);
 }
 .sheet__rail__list__item--selected:hover {
