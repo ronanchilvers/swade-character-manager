@@ -898,22 +898,6 @@ main {
   text-align: center;
   vertical-align: middle;
 }
-.sheet__row__add {
-  background: transparent;
-  border: 1px dashed var(--c-parchment-dark);
-  color: var(--c-sheet-muted);
-  font-family: "Special Elite", "Courier New", monospace;
-  letter-spacing: 0.06em;
-  padding: 0.3rem 0.6rem 0rem 0.6rem;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  width: 100%;
-}
-.sheet__row__add:hover, .sheet__row__add:focus-visible {
-  background-color: var(--c-button-hover);
-  color: var(--c-sheet-heading);
-  border-color: var(--c-sheet-heading);
-}
 .sheet__rail__list__item {
   cursor: pointer;
 }
@@ -933,7 +917,10 @@ main {
   .sheet__topbar {
     display: none;
   }
-  .sheet__status, .sheet__row__remove, .sheet__row__add, .sheet__list__row--add, .sheet__weapons__add-cell {
+  .sheet__status, .sheet__row__remove, .sheet__list__row--add, .sheet__weapons__add-cell {
+    display: none;
+  }
+  .sheet .button {
     display: none;
   }
 }

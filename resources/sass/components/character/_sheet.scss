@@ -595,25 +595,6 @@ $text-font-size: sheet.$sheet-text-font-size;
         vertical-align: middle;
     }
 
-    &__row__add {
-        background: transparent;
-        border: 1px dashed var(--c-parchment-dark);
-        color: var(--c-sheet-muted);
-        font-family: $title-font;
-        letter-spacing: 0.06em;
-        padding: 0.3rem 0.6rem 0rem 0.6rem;
-        cursor: pointer;
-        border-radius: 0.25rem;
-        width: 100%;
-
-        &:hover,
-        &:focus-visible {
-            background-color: var(--c-button-hover);
-            color: var(--c-sheet-heading);
-            border-color: var(--c-sheet-heading);
-        }
-    }
-
     &__rail__list__item {
         cursor: pointer;
 
@@ -639,9 +620,12 @@ $text-font-size: sheet.$sheet-text-font-size;
 
         &__status,
         &__row__remove,
-        &__row__add,
         &__list__row--add,
         &__weapons__add-cell {
+            display: none;
+        }
+
+        .button {
             display: none;
         }
     }
