@@ -26,3 +26,4 @@ node_modules
 .codex
 .phpunit.result.cache
 *.csv
+.progress.md
