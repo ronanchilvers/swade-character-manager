@@ -7,19 +7,22 @@
     <div class="card">
         <div class="card__inner">
             <div class="card__title">{{ character.name }}</div>
-            <div class="card__content">
+            <div class="card__content{% if character.concept|length == 0 %} card__content--empty{% endif %}">
                 {% if character.concept|length > 0 %}{{ character.concept }}{% else %}No concept yet{% endif %}
             </div>
             <div class="card__footer">
-                <a class="button button--primary" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
-                <a class="button" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
+                <a class="button button--sheet-primary" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
+                <a class="button button--sheet-secondary" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
             </div>
         </div>
     </div>
 {% endfor %}
 </div>
 {% else %}
-    <p>No characters found<p>
-    <p><a class="button button--primary" href="{{ get_url('characters_create') }}">Create one now</a></p>
+    <div class="home__empty">
+        <h2 class="home__empty__title">No characters yet</h2>
+        <p class="home__empty__body">Your roster is empty. Roll up your first hero to get started.</p>
+        <a class="button button--sheet-primary" href="{{ get_url('characters_create') }}">Create one now</a>
+    </div>
 {% endif %}
 {% endblock %}

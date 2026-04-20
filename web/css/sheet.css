@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /** Character Sheet Stylesheet **/
 /** Settings **/
 :root {
@@ -9,6 +10,20 @@
   --c-red: #ff0000;
   --c-green: #00ff00;
   --c-blue: #0000ff;
+}
+
+:root {
+  --c-sheet-heading: #a61e1e;
+  --c-sheet-ink: #1d1208;
+  --c-sheet-muted: #8b7a5b;
+  --c-sheet-paper: #fbf6ea;
+  --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
+  --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
+  --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
+  --c-sheet-rail-item-border-active: rgba(116, 0, 0, 1);
+  --c-parchment: #f6ecd5;
+  --c-parchment-dark: #e8d9b0;
+  --c-button-hover: rgba(166, 30, 30, 0.25);
 }
 
 /** Base rules **/
@@ -387,6 +402,41 @@ main {
   } */
 }
 
+/** Sheet-style buttons — shared visual language with the character sheet. **/
+.button--sheet-primary,
+.button--sheet-secondary {
+  font-family: "Special Elite", "Courier New", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  border-radius: 3px;
+  padding: 0.5rem 1rem 0.4rem;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.button--sheet-primary {
+  background: var(--c-sheet-heading);
+  border: 1px solid var(--c-sheet-heading);
+  color: var(--c-white);
+}
+.button--sheet-primary:hover, .button--sheet-primary:focus-visible {
+  background: var(--c-sheet-rail-item-active);
+  border-color: var(--c-sheet-rail-item-border-active);
+  color: var(--c-white);
+}
+
+.button--sheet-secondary {
+  background: transparent;
+  border: 1px dashed var(--c-parchment-dark);
+  color: var(--c-sheet-muted);
+}
+.button--sheet-secondary:hover, .button--sheet-secondary:focus-visible {
+  background: var(--c-button-hover);
+  border-color: var(--c-sheet-heading);
+  color: var(--c-sheet-heading);
+}
+
 .toast__container {
   position: fixed;
   bottom: 2rem;
@@ -460,20 +510,6 @@ main {
   border-color: #f44933;
   background-color: rgb(253.1325581395, 224.1023255814, 220.3674418605);
   color: rgb(183.1255813953, 29.623255814, 9.8744186047);
-}
-
-:root {
-  --c-sheet-heading: #a61e1e;
-  --c-sheet-ink: #1d1208;
-  --c-sheet-muted: #8b7a5b;
-  --c-sheet-paper: #fbf6ea;
-  --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
-  --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
-  --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
-  --c-sheet-rail-item-border-active: rgba(116, 0, 0, 1);
-  --c-parchment: #f6ecd5;
-  --c-parchment-dark: #e8d9b0;
-  --c-button-hover: rgba(166, 30, 30, 0.25);
 }
 
 .sheet {

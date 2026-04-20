@@ -1,0 +1,17 @@
+:root {
+    --c-sheet-heading: #a61e1e;
+    --c-sheet-ink: #1d1208;
+    --c-sheet-muted: #8b7a5b;
+    --c-sheet-paper: #fbf6ea;
+    --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
+    --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
+    --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
+    --c-sheet-rail-item-border-active: rgba(116, 0, 0, 1);
+    --c-parchment: #f6ecd5;
+    --c-parchment-dark: #e8d9b0;
+    --c-button-hover: rgba(166, 30, 30, 0.25);
+}
+
+$sheet-title-font: "Special Elite", "Courier New", monospace;
+$sheet-text-font: "Mynerve", cursive;
+$sheet-text-font-size: 1.2rem;

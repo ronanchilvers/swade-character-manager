@@ -1,4 +1,5 @@
 @use "../settings/css-variables" as vars;
+@use "../settings/sheet-theme" as sheet;
 @use "sass:color";
 @use "sass:map";
 
@@ -80,5 +81,44 @@ $button-margin-default: 0.5rem;
                 color.adjust($background_color, $lightness: 10%)
             );
         } */
+    }
+}
+
+/** Sheet-style buttons — shared visual language with the character sheet. **/
+.button--sheet-primary,
+.button--sheet-secondary {
+    font-family: sheet.$sheet-title-font;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border-radius: vars.$border-radius-default;
+    padding: 0.5rem 1rem 0.4rem;
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.button--sheet-primary {
+    background: var(--c-sheet-heading);
+    border: 1px solid var(--c-sheet-heading);
+    color: var(--c-white);
+
+    &:hover,
+    &:focus-visible {
+        background: var(--c-sheet-rail-item-active);
+        border-color: var(--c-sheet-rail-item-border-active);
+        color: var(--c-white);
+    }
+}
+
+.button--sheet-secondary {
+    background: transparent;
+    border: 1px dashed var(--c-parchment-dark);
+    color: var(--c-sheet-muted);
+
+    &:hover,
+    &:focus-visible {
+        background: var(--c-button-hover);
+        border-color: var(--c-sheet-heading);
+        color: var(--c-sheet-heading);
     }
 }
