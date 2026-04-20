@@ -18,8 +18,14 @@ a {
     h#{$level} {
         font-size: 1.8rem - (($level - 1) * 0.2rem);
         font-family: "Special Elite", system-ui;
+        font-weight: 400;
+        color: var(--c-sheet-heading);
     }
 }
 p,ul,ol,dl {
     margin-bottom: 0.5rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }

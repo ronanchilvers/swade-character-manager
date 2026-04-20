@@ -104,25 +104,36 @@ a:hover {
 h1 {
   font-size: 1.8rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 h2 {
   font-size: 1.6rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 h3 {
   font-size: 1.4rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 h4 {
   font-size: 1.2rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 p, ul, ol, dl {
   margin-bottom: 0.5rem;
+}
+p:last-child, ul:last-child, ol:last-child, dl:last-child {
+  margin-bottom: 0;
 }
 
 /** Elements **/

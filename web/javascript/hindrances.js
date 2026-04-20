@@ -7,7 +7,7 @@ function updateHindranceTitleState(hindrance) {
   }
 
   const isSelected = Array.from(hindrance.querySelectorAll('.js-checkbox')).some((checkbox) => checkbox.checked);
-  title.classList.toggle('card__title--selected', isSelected);
+  title.closest('.card').classList.toggle('card--selected', isSelected);
 }
 
 function updatePointSpend() {

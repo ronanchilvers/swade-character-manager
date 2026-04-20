@@ -1,7 +1,12 @@
-$card-border: 1px solid #CCC !default;
-$card-title-background: linear-gradient(
-    to bottom,
-    #fcfcfc,
-    #fff
-) !default;
-$card-selected-background: #e7f2e6 !default;
+$card-border: 1px solid var(--c-parchment-dark) !default;
+$card-border-dotted: 1px dotted var(--c-parchment-dark) !default;
+$card-background: var(--c-sheet-paper) !default;
+/* $card-selected-background: transparent url(/images/icons/certified.png) !default; */
+
+$card-title-font: "Special Elite", "Courier New", monospace !default;
+$card-title-font-size: 1.2rem !default;
+$card-title-color: var(--c-sheet-heading);
+
+$card-text-font: "Special Elite", "Courier New", monospace !default;
+$card-text-font-size: 1rem !default;
+$card-text-color: var(--c-sheet-ink);

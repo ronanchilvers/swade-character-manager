@@ -1,56 +1,60 @@
 @use "../../settings/css-variables" as vars;
-@use "variables" as card_vars;
+@use "variables" as card;
 @use "../../tools/breakpoints";
 
 /** Cards **/
 .cards {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin: 0.5rem -0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    /* align-items: start; */
+
+    /* max-width: 1024px; */
+    margin: 0 auto;
+
+    @include breakpoints.at(laptop) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @include breakpoints.at(phablet) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
-    flex: 1 1;
-    min-width: 20rem;
-    max-width: calc(100% / 3);
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
-
-    @include breakpoints.at(laptop) {
-        max-width: 50%;
-    }
-    @include breakpoints.at(phablet) {
-        max-width: 100%;
-    }
+    padding: 0;
+    width: 100%;
 
     .card__inner {
         flex: 1;
-        border: card_vars.$card-border;
-        border-radius: vars.$border-radius-default;
+        background: card.$card-background;
+        border: card.$card-border;
+        color: card.$card-text-color;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        background: var(--c-white);
+
+        font-family: card.$card-title-font;
+        font-weight: 400;
     }
 
     .card__title,
     .card__content,
     .card__footer {
+        position: relative;
         padding: 1rem 1rem;
     }
 
     .card__title {
         flex: 0 0 auto;
         font-size: 1.1rem;
-        font-weight: 600;
-        border-bottom: card_vars.$card-border;
-        background: card_vars.$card-title-background;
-    }
-    .card__title--selected {
-        background: card_vars.$card-selected-background;
+        font-weight: 400;
+        color: card.$card-title-color;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 1.25rem;
+        padding-bottom: 0.75rem;
     }
     .card__title--collapsible {
         display: flex;
@@ -79,13 +83,34 @@
     }
     .card__content {
         flex: 1 1 auto;
-        margin-top: 1rem;
+        padding-top: 0;
     }
     .card__footer {
+        border-top: 1px dashed var(--c-parchment-dark);
         flex: 0 0 auto;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-        margin-top: 1rem;
+    }
+
+    &--dotted {
+        .card__inner {
+            border: card.$card-border-dotted;
+        }
+    }
+
+    &--selected &__inner {
+        border-color: var(--c-sheet-heading);
+        border-style: solid;
+        color: var(--c-sheet-heading);
+    }
+
+    &--core .card__title {
+        /* padding-left: 5rem; */
+    }
+    &--core .card__title::before {
+        /* position: absolute;
+        left: 0.75rem;
+        content: 'CORE/'; */
     }
 }

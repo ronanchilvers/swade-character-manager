@@ -22,9 +22,9 @@
 
 <div class="cards cards--hindrances">
         {% for hindrance in hindrances %}
-        <div class="card">
+        <div class="card card--dotted {% if selected[hindrance.id] is defined %} card--selected{% endif %}">
             <div class="card__inner">
-                <div class="card__title card__title--collapsible card__title--collapsed{% if selected[hindrance.id] is defined %} card__title--selected{% endif %}">{{ hindrance.name }}</div>
+                <div class="card__title">{{ hindrance.name }}</div>
                 <div class="card__content">
                     <div>
                         {% if hindrance.summary %}

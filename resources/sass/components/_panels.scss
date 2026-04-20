@@ -1,22 +1,29 @@
 @use "../settings/css-variables" as vars;
+@use "../settings/sheet-theme" as sheet;
 
 $panel-padding: 2rem;
-$panel-border: 1px solid #CCC;
-$panel-title-background: #ccc;
 
 .panel {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: $panel-border;
-    border-radius: vars.$border-radius-default;
-    background: var(--c-white);
+    background: var(--c-sheet-paper);
+    border: 1px solid var(--c-parchment-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    color: var(--c-sheet-ink);
+    font-family: sheet.$sheet-title-font;
+    margin-bottom: 1.5rem;
 
     .panel__title {
-        padding: 1rem 1rem 0.5rem 1rem;
-        border-bottom: $panel-border;
+        padding: 1rem 1rem 0 1rem;
+        font-family: sheet.$sheet-title-font;
+        letter-spacing: 0.08em;
+        color: var(--c-sheet-heading);
+        font-size: 1.25rem;
     }
+
     .panel__content {
         padding: 1rem 1rem;
+        font-family: sheet.$sheet-title-font;
     }
 }

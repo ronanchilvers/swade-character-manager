@@ -105,25 +105,36 @@ a:hover {
 h1 {
   font-size: 1.8rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 h2 {
   font-size: 1.6rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 h3 {
   font-size: 1.4rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 h4 {
   font-size: 1.2rem;
   font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
 }
 
 p, ul, ol, dl {
   margin-bottom: 0.5rem;
+}
+p:last-child, ul:last-child, ol:last-child, dl:last-child {
+  margin-bottom: 0;
 }
 
 /** Elements **/
@@ -471,56 +482,59 @@ main {
   color: rgb(183.1255813953, 29.623255814, 9.8744186047);
 }
 
+/* $card-selected-background: transparent url(/images/icons/certified.png) !default; */
 /** Cards **/
 .cards {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin: 0.5rem -0.5rem;
-}
-
-.card {
-  flex: 1 1;
-  min-width: 20rem;
-  max-width: 33.3333333333%;
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  /* align-items: start; */
+  /* max-width: 1024px; */
+  margin: 0 auto;
 }
 @media (max-width: 1022px) {
-  .card {
-    max-width: 50%;
+  .cards {
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media (max-width: 767px) {
-  .card {
-    max-width: 100%;
+  .cards {
+    grid-template-columns: 1fr;
   }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
 }
 .card .card__inner {
   flex: 1;
-  border: 1px solid #CCC;
-  border-radius: 3px;
+  background: var(--c-sheet-paper);
+  border: 1px solid var(--c-parchment-dark);
+  color: var(--c-sheet-ink);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--c-white);
+  font-family: "Special Elite", "Courier New", monospace;
+  font-weight: 400;
 }
 .card .card__title,
 .card .card__content,
 .card .card__footer {
+  position: relative;
   padding: 1rem 1rem;
 }
 .card .card__title {
   flex: 0 0 auto;
   font-size: 1.1rem;
-  font-weight: 600;
-  border-bottom: 1px solid #CCC;
-  background: linear-gradient(to bottom, #fcfcfc, #fff);
-}
-.card .card__title--selected {
-  background: #e7f2e6;
+  font-weight: 400;
+  color: var(--c-sheet-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.25rem;
+  padding-bottom: 0.75rem;
 }
 .card .card__title--collapsible {
   display: flex;
@@ -549,14 +563,30 @@ main {
 }
 .card .card__content {
   flex: 1 1 auto;
-  margin-top: 1rem;
+  padding-top: 0;
 }
 .card .card__footer {
+  border-top: 1px dashed var(--c-parchment-dark);
   flex: 0 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  margin-top: 1rem;
+}
+.card--dotted .card__inner {
+  border: 1px dotted var(--c-parchment-dark);
+}
+.card--selected .card__inner {
+  border-color: var(--c-sheet-heading);
+  border-style: solid;
+  color: var(--c-sheet-heading);
+}
+.card--core .card__title {
+  /* padding-left: 5rem; */
+}
+.card--core .card__title::before {
+  /* position: absolute;
+  left: 0.75rem;
+  content: 'CORE/'; */
 }
 
 .cards--character {
@@ -567,38 +597,6 @@ main {
   .cards--character {
     width: auto;
   }
-}
-.cards--character .card__inner {
-  background: var(--c-parchment);
-  border: 1px solid var(--c-parchment-dark);
-  border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  color: var(--c-sheet-ink);
-}
-.cards--character .card__title {
-  font-family: "Special Elite", "Courier New", monospace;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--c-sheet-heading);
-  background: transparent;
-  border-bottom: 1px solid var(--c-sheet-muted);
-  font-size: 1.25rem;
-}
-.cards--character .card__content {
-  font-family: "Mynerve", cursive;
-  font-size: 1.2rem;
-  color: var(--c-sheet-ink);
-  margin-top: 0;
-}
-.cards--character .card__content--empty {
-  color: var(--c-sheet-muted);
-  font-style: italic;
-}
-.cards--character .card__footer {
-  border-top: 1px dashed var(--c-parchment-dark);
-  gap: 0.5rem;
-  margin-top: 0;
 }
 
 .home__empty {
@@ -615,14 +613,14 @@ main {
 .home__empty__title {
   margin: 0 0 0.5rem;
   font-family: "Special Elite", "Courier New", monospace;
+  font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--c-sheet-heading);
-  font-size: 1.25rem;
 }
 .home__empty__body {
-  font-family: "Mynerve", cursive;
-  font-size: 1.2rem;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 1rem;
   margin: 0 0 1.25rem;
 }
 
@@ -639,7 +637,7 @@ main {
   padding: 0;
   gap: 0;
   align-items: stretch;
-  border-top: 1px solid #CCC;
+  border-top: 1px solid var(--c-parchment-dark);
 }
 .card--edge .card__subtitle {
   margin-bottom: 0;
@@ -670,7 +668,7 @@ main {
 .edge-counter__button {
   flex: 0 0 4rem;
   border: none;
-  border-right: 1px solid #CCC;
+  border-right: 1px solid var(--c-parchment-dark);
   background: #f6f6f6;
   color: var(--c-black);
   font-size: 1.75rem;
@@ -679,7 +677,7 @@ main {
 }
 .edge-counter__button:last-child {
   border-right: none;
-  border-left: 1px solid #CCC;
+  border-left: 1px solid var(--c-parchment-dark);
 }
 .edge-counter__button:disabled {
   color: var(--c-medium-grey);
@@ -721,12 +719,13 @@ main {
   letter-spacing: 0.04em;
 }
 .edge-toggle__button.edge-toggle__button--active {
-  background: #e7f2e6;
+  /* background: card_vars.$card-selected-background; */
 }
 
+/* $card-option-background-selected: card_vars.$card-selected-background; */
 .cards--hindrances .card__footer {
   padding: 0;
-  border-top: 1px solid #CCC;
+  border-top: 1px solid var(--c-parchment-dark);
 }
 .cards--hindrances .card__option {
   flex: 1;
@@ -734,7 +733,7 @@ main {
   text-align: center;
   overflow: hidden;
   cursor: pointer;
-  border-right: 1px solid #CCC;
+  border-right: 1px solid var(--c-parchment-dark);
   position: relative;
 }
 .cards--hindrances .card__option:last-child {
@@ -751,38 +750,34 @@ main {
   background-color: #f9f9f9;
 }
 .cards--hindrances .card__footer input[type=checkbox]:checked + .card__option {
-  background-color: #e7f2e6;
+  /* background-color: $card-option-background-selected; */
 }
 
 .card--skill .card__footer {
   flex-direction: column;
 }
 
-.card--core .card__title {
-  position: relative;
-  padding-left: 2rem;
-  color: rgb(0, 125, 0);
-}
-.card--core .card__title::before {
-  position: absolute;
-  left: 0.75rem;
-  content: "✱";
-}
-
 .panel {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid #CCC;
-  border-radius: 3px;
-  background: var(--c-white);
+  background: var(--c-sheet-paper);
+  border: 1px solid var(--c-parchment-dark);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  color: var(--c-sheet-ink);
+  font-family: "Special Elite", "Courier New", monospace;
+  margin-bottom: 1.5rem;
 }
 .panel .panel__title {
-  padding: 1rem 1rem 0.5rem 1rem;
-  border-bottom: 1px solid #CCC;
+  padding: 1rem 1rem 0 1rem;
+  font-family: "Special Elite", "Courier New", monospace;
+  letter-spacing: 0.08em;
+  color: var(--c-sheet-heading);
+  font-size: 1.25rem;
 }
 .panel .panel__content {
   padding: 1rem 1rem;
+  font-family: "Special Elite", "Courier New", monospace;
 }
 
 .progress {

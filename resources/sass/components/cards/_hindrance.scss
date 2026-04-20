@@ -4,7 +4,7 @@
 
 $card-option-color-disabled: #ccc;
 $card-option-background-disabled: #f9f9f9;
-$card-option-background-selected: card_vars.$card-selected-background;
+/* $card-option-background-selected: card_vars.$card-selected-background; */
 
 .cards--hindrances {
     .card__footer {
@@ -35,6 +35,6 @@ $card-option-background-selected: card_vars.$card-selected-background;
         background-color: $card-option-background-disabled;
     }
     .card__footer input[type="checkbox"]:checked + .card__option {
-        background-color: $card-option-background-selected;
+        /* background-color: $card-option-background-selected; */
     }
 }

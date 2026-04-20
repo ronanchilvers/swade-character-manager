@@ -1,6 +1,5 @@
 @use "../../settings/css-variables" as vars;
-@use "../../settings/sheet-theme" as sheet;
-@use "variables" as card_vars;
+@use "variables" as card;
 @use "../../tools/breakpoints";
 
 .cards--character {
@@ -9,43 +8,6 @@
 
     @include breakpoints.at(laptop) {
         width: auto;
-    }
-
-    .card__inner {
-        background: var(--c-parchment);
-        border: 1px solid var(--c-parchment-dark);
-        border-radius: vars.$border-radius-default;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-        color: var(--c-sheet-ink);
-    }
-
-    .card__title {
-        font-family: sheet.$sheet-title-font;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--c-sheet-heading);
-        background: transparent;
-        border-bottom: 1px solid var(--c-sheet-muted);
-        font-size: 1.25rem;
-    }
-
-    .card__content {
-        font-family: sheet.$sheet-text-font;
-        font-size: sheet.$sheet-text-font-size;
-        color: var(--c-sheet-ink);
-        margin-top: 0;
-
-        &--empty {
-            color: var(--c-sheet-muted);
-            font-style: italic;
-        }
-    }
-
-    .card__footer {
-        border-top: 1px dashed var(--c-parchment-dark);
-        gap: 0.5rem;
-        margin-top: 0;
     }
 }
 
@@ -62,16 +24,16 @@
 
     &__title {
         margin: 0 0 0.5rem;
-        font-family: sheet.$sheet-title-font;
+        font-family: card.$card-title-font;
+        font-size: card.$card-title-font-size;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: var(--c-sheet-heading);
-        font-size: 1.25rem;
     }
 
     &__body {
-        font-family: sheet.$sheet-text-font;
-        font-size: sheet.$sheet-text-font-size;
+        font-family: card.$card-text-font;
+        font-size: card.$card-text-font-size;
         margin: 0 0 1.25rem;
     }
 }
