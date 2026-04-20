@@ -344,6 +344,80 @@ main {
   color: #222222;
 }
 
+.button--large {
+  padding: 1rem 1.4rem 0.7rem;
+  font-size: 1rem;
+}
+
+.button--small {
+  padding: 0.35rem 0.6rem 0.2rem;
+  font-size: 0.75rem;
+}
+
+/* $led-off: transparent; */
+.button--toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-style: solid;
+  background-color: var(--c-parchment);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.button--toggle.button--large {
+  padding-left: 1.15rem;
+  padding-right: 1.15rem;
+}
+.button--toggle::after {
+  opacity: 0.5;
+  content: "";
+  display: inline-block;
+  margin-top: -0.25rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6666;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.45), 0 0 4px rgba(255, 102, 102, 0.75);
+  transition: background 120ms ease, box-shadow 120ms ease;
+}
+
+.button--toggle--is-on,
+input[type=checkbox]:checked + .button--toggle {
+  border-color: var(--c-parchment-dark);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.15);
+  padding-top: 1.1rem;
+  padding-bottom: 0.6rem;
+}
+.button--toggle--is-on::after,
+input[type=checkbox]:checked + .button--toggle::after {
+  opacity: 1;
+  background: #3fb950;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.45), 0 0 6px rgba(63, 185, 80, 0.85);
+}
+
+.button--toggle--is-disabled,
+.button--toggle[aria-disabled=true],
+input[type=checkbox]:disabled + .button--toggle {
+  cursor: not-allowed;
+  opacity: 0.25;
+}
+.button--toggle--is-disabled:hover, .button--toggle--is-disabled:focus-visible,
+.button--toggle[aria-disabled=true]:hover,
+.button--toggle[aria-disabled=true]:focus-visible,
+input[type=checkbox]:disabled + .button--toggle:hover,
+input[type=checkbox]:disabled + .button--toggle:focus-visible {
+  background: transparent;
+  border-color: var(--c-parchment-dark);
+  color: var(--c-sheet-muted);
+}
+.button--toggle--is-disabled::after,
+.button--toggle[aria-disabled=true]::after,
+input[type=checkbox]:disabled + .button--toggle::after {
+  background: #e5e5e5;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.35);
+}
+
 .toast__container {
   position: fixed;
   bottom: 2rem;

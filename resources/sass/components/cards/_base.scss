@@ -35,7 +35,7 @@
         flex-direction: column;
         overflow: hidden;
 
-        font-family: card.$card-title-font;
+        font-family: card.$card-text-font;
         font-weight: 400;
     }
 
@@ -48,9 +48,10 @@
 
     .card__title {
         flex: 0 0 auto;
-        font-size: 1.1rem;
-        font-weight: 400;
+        font-family: card.$card-title-font;
+        font-size: card.$card-title-font-size;
         color: card.$card-title-color;
+        font-weight: 400;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         font-size: 1.25rem;
@@ -91,6 +92,15 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+
+        &--no-border {
+            border-top: none;
+        }
+
+        &--grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
     }
 
     &--dotted {

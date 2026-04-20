@@ -37,7 +37,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="card__footer js-hindrance">
+                <div class="card__footer card__footer--no-border card__footer--grid js-hindrance">
                     {% for level in levels %}
                     {% set valid = level in hindrance.levels %}
                     {% if valid %}
@@ -52,7 +52,7 @@
                         {% if selected[hindrance.id] is defined and selected[hindrance.id] == level %}checked{% endif %}
                     />
                     {% endif %}
-                    <label for="hindrance_{{ hindrance.id }}_{{ level }}" class="card__option card__option--{{ level }}{% if not valid %} card__option--disabled{% endif %}">
+                    <label for="hindrance_{{ hindrance.id }}_{{ level }}" class="button button--large button--toggle {% if not valid %} button--toggle--is-disabled{% endif %}">
                         {{ level|title }}
                     </label>
                     {% endfor %}
