@@ -110,6 +110,7 @@
     }
 
     &--selected &__inner {
+        background: card.$card-selected-background;
         border-color: var(--c-sheet-heading);
         border-style: solid;
         color: var(--c-sheet-heading);
