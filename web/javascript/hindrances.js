@@ -34,8 +34,20 @@ function updatePointSpend() {
   });
 }
 
+function applySelectedFilter(showSelectedOnly) {
+  document.querySelectorAll('.cards--hindrances .card').forEach((card) => {
+    card.style.display = showSelectedOnly && !card.classList.contains('card--selected') ? 'none' : '';
+  });
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
   updatePointSpend();
+
+  const filterToggle = document.querySelector('.js-filter-selected');
+  if (filterToggle) {
+    filterToggle.addEventListener('change', () => applySelectedFilter(filterToggle.checked));
+  }
+
   document.querySelectorAll(".js-hindrance").forEach((hindrance) => {
     hindrance.addEventListener('click', (e) => {
       let t = e.target;
@@ -48,6 +60,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       });
       t.checked = was_checked;
       updatePointSpend();
+      if (filterToggle) applySelectedFilter(filterToggle.checked);
     });
   });
 

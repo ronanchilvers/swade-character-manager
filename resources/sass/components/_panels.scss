@@ -26,4 +26,11 @@ $panel-padding: 2rem;
         padding: 1rem 1rem;
         font-family: sheet.$sheet-title-font;
     }
+
+    &--controls {
+        padding: 0.25rem 0.5rem;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
 }

@@ -115,13 +115,4 @@
         border-style: solid;
         color: var(--c-sheet-heading);
     }
-
-    &--core .card__title {
-        /* padding-left: 5rem; */
-    }
-    &--core .card__title::before {
-        /* position: absolute;
-        left: 0.75rem;
-        content: 'CORE/'; */
-    }
 }
