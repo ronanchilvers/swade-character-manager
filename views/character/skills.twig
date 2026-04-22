@@ -1,5 +1,7 @@
 {% extends 'layouts/character/builder.twig' %}
 
+{% do add_script('/javascript/skills.js') %}
+
 {% set selected_keys = selected|keys %}
 {% set back_url = get_url('characters_attributes', {hash: entity.hash}) %}
 
@@ -14,6 +16,17 @@
     amet felis. Quisque vitae mollis tellus, a mattis risus. Ut ullamcorper
     dolor ut placerat volutpat. Curabitur luctus cursus ligula, ut fringilla
     erat placerat eget.</p>
+    </div>
+</div>
+
+<div class="panel panel--controls">
+    <div class="panel__subpanel"></div>
+    <div class="panel__subpanel">
+        <label class="button button--slider">
+            <input type="checkbox" class="js-filter-selected">
+            <span class="button__slide"></span>
+            Show selected only
+        </label>
     </div>
 </div>
 
