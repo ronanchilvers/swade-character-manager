@@ -40,10 +40,8 @@
                     name="skills[{{ skill.id }}]"
                 >
                 {% for value in dice_options %}
-                    {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
+                    {% if (skill.core_skill and 0 == value) %}
                     {# a core skill or a selected skill - no 'untrained' option #}
-                    {% elseif isSelected and selected[skill.id] > value %}
-                    {# a selected skill at a higher level than value - option unavailable #}
                     {% else %}
                     {% set isSelectedValue = selected[skill.id] and (selected[skill.id] == value) %}
                     <option value="{{ value }}" {% if isSelectedValue %}selected{% endif %}>

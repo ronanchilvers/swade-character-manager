@@ -29,9 +29,7 @@
                     name="attributes[{{ field }}]">
                 {% for value in attribute_options %}
                 {% set attributeDie = attribute(entity, field) %}
-                {% if attributeDie > value %}{% else %}
                     <option value="{{ value }}" {% if attributeDie == value %}selected{% endif %}>d{{ value }}</option>
-                {% endif %}
                 {% endfor %}
                 </select>
             </div>
