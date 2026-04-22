@@ -873,10 +873,15 @@ input[type=checkbox]:disabled + .button--toggle::after {
   padding: 1rem 1rem;
   font-family: "Special Elite", "Courier New", monospace;
 }
+.panel .panel__subpanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 .panel--controls {
   padding: 0.25rem 0.5rem;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 

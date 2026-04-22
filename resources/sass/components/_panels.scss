@@ -27,10 +27,17 @@ $panel-padding: 2rem;
         font-family: sheet.$sheet-title-font;
     }
 
+    .panel__subpanel {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
     &--controls {
         padding: 0.25rem 0.5rem;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
     }
+
 }
