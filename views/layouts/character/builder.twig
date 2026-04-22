@@ -12,7 +12,9 @@
             {% if back_url %}
                 <a class="button" href="{{ back_url }}">{% if back_label %}{{ back_label }}{% else %}&laquo; Previous{% endif %}</a>
             {% endif %}
+            {% if not hide_submit %}
                 <button class="button button--primary" type="submit">{% if next_label %}{{ next_label }}{% else %}Save and Continue &raquo;{% endif %}</button>
+            {% endif %}
             </div>
 
         </form>

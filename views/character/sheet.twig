@@ -3,7 +3,9 @@
 {% do add_stylesheet('/css/sheet.css') %}
 {% do add_script('/javascript/sheet.js') %}
 
-{% set back_url = get_url('characters_concept', {hash: entity.hash}) %}
+{% set back_label = "Edit in character builder" %}
+{% set back_url = get_url('characters_edges', {hash: entity.hash}) %}
+{% set hide_submit = true %}
 
 {% macro die_strip(faces, selected) %}
     <span class="sheet__die-strip">
