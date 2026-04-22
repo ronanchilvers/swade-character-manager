@@ -1,24 +1,22 @@
-@use "sass:color";
-@use "../settings/css-variables" as vars;
+@use "../settings/sheet-theme" as sheet;
 @use "../tools/breakpoints";
 
-$toast-background-colour: rgb(255,255,255,1);
-$toast-colour: var(--c-black);
+$toast-heading-font: sheet.$sheet-title-font;
+$toast-heading-font-size: sheet.$sheet-title-font;
+$toast-heading-color: sheet.$sheet-title-color;
+$toast-body-font: sheet.$sheet-plain-font;
+$toast-body-font-size: sheet.$sheet-plain-font-size;
 
-$toast-accent-default: var(--c-medium-grey);
-$toast-accent-pale-default: var(--c-light-grey);
-$toast-accent-success: #19c62b;
-$toast-accent-pale-success: color.adjust(#19c62b, $lightness: 45%);
-$toast-accent-info: #4f5fef;
-$toast-accent-pale-info: color.adjust(#4f5fef, $lightness: 30%);
-$toast-accent-warning: #f7c204;
-$toast-accent-pale-warning: color.adjust(#f7c204, $lightness: 45%);
-$toast-accent-error: #f44933;
-$toast-accent-pale-error: color.adjust(#f44933, $lightness: 35%);
-$toast-colour-success: color.adjust(#19c62b, $lightness: -20%);
-$toast-colour-info: color.adjust(#4f5fef, $lightness: -20%);
-$toast-colour-warning: color.adjust(#f7c204, $lightness: -20%);
-$toast-colour-error: color.adjust(#f44933, $lightness: -20%);
+$toast-paper: var(--c-parchment);
+$toast-paper-deep: var(--c-sheet-paper);
+$toast-ink: var(--c-sheet-ink);
+$toast-muted: var(--c-sheet-muted);
+$toast-accent-default: var(--c-sheet-heading);
+$toast-accent-success: #5c3f17;
+$toast-accent-info: #7a4a24;
+$toast-accent-warning: #8f4b12;
+$toast-accent-error: #8a0000;
+$toast-shadow: rgba(29, 18, 8, 0.16);
 
 .toast__container {
     position: fixed;
@@ -26,70 +24,174 @@ $toast-colour-error: color.adjust(#f44933, $lightness: -20%);
     left: 2rem;
     z-index: 20;
     min-width: 10rem;
-    max-width: 30rem;
+    max-width: min(32rem, calc(100vw - 2rem));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.85rem;
+
     @include breakpoints.at(tablet) {
         min-width: auto;
         bottom: 1rem;
         left: 1rem;
         right: 1rem;
+        max-width: inherit;
     }
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
 }
 
 .toast {
     position: relative;
-    padding: 0;
-    border: 1px solid $toast-accent-default;
-    border-left: 15px solid $toast-accent-default;
-    background-color: $toast-accent-pale-default;
-    border-radius: vars.$border-radius-default;
-    color: $toast-colour;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    white-space: wrap;
-    margin-bottom: 1rem;
+    overflow: hidden;
+    padding: 1rem 2rem 1rem 1rem;
+    border: 1px solid var(--c-parchment-dark);
+    border-left: 0.45rem solid $toast-accent-default;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0)) 0 0 / 100% 100%,
+        linear-gradient(135deg, $toast-paper 0%, $toast-paper-deep 100%);
+    color: $toast-ink;
+    box-shadow: 0 0.5rem 1rem $toast-shadow;
+    white-space: normal;
+    transform-origin: left bottom;
+    animation: toast-enter 220ms ease-out;
+    transition: opacity 180ms ease, transform 180ms ease;
 
-    &:last-child {
-        margin-bottom: 0;
-    }
-
-    .toast__close {
+    &::before {
+        content: "";
         position: absolute;
-        top: 0.25rem;
+        inset: 0;
+        pointer-events: none;
+        background:
+            linear-gradient(90deg, rgba(166, 30, 30, 0.06), rgba(166, 30, 30, 0) 30%),
+            repeating-linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.08) 0,
+                rgba(255, 255, 255, 0.08) 2px,
+                rgba(0, 0, 0, 0) 2px,
+                rgba(0, 0, 0, 0) 8px
+            );
+        opacity: 0.65;
+    }
+
+    &--closing {
+        opacity: 0;
+        transform: translateY(0.35rem);
+    }
+
+    &__close {
+        position: absolute;
+        top: 0.5rem;
         right: 0.5rem;
-        font-size: 0.8rem;
-        font-weight: 600;
+        width: 1rem;
+        height: 1rem;
+        padding: 0;
+        border: none;
+        background: transparent;
+        color: $toast-muted;
+        font-family: $toast-heading-font;
+        font-size: 1.5rem;
+        line-height: 1;
         cursor: pointer;
+        transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+
+        &:hover,
+        &:focus-visible {
+            color: $toast-accent-default;
+            background: rgba(255, 255, 255, 0.35);
+            outline: none;
+        }
     }
-    .toast__heading {
-        font-size: 1rem;
-        font-weight: 600;
-        padding: 0.5rem 1rem 0.25rem 1rem;
+
+    &__stamp {
+        display: inline-block;
+        margin-bottom: 0.45rem;
+        padding: 0.2rem 0.55rem 0.05rem;
+        border: 1px solid currentColor;
+        font-family: $toast-heading-font;
+        font-size: 0.72rem;
+        line-height: 1;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: $toast-accent-default;
+        background: rgba(255, 255, 255, 0.25);
     }
-    .toast__message {
-        font-size: 1.1rem;
-        padding: 0.25rem 1rem 0.5rem 1rem;
+
+    &__heading {
+        margin: 0 0 0.5rem;
+        font-family: $toast-heading-font;
+        font-size: $toast-heading-font-size;
+        font-weight: 400;
+        line-height: 1.25;
+        color: $toast-heading-color;
+    }
+
+    &__message {
+        margin: 0;
+        font-family: $toast-body-font;
+        font-size: $toast-body-font-size;
+        line-height: 1.35;
+        color: $toast-ink;
     }
 
     &--success {
-        border-color: $toast-accent-success;
-        background-color: $toast-accent-pale-success;
-        color: $toast-colour-success;
+        border-left-color: $toast-accent-success;
+
+        .toast__stamp,
+        .toast__close:hover,
+        .toast__close:focus-visible {
+            color: $toast-accent-success;
+        }
     }
+
     &--info {
-        border-color: $toast-accent-info;
-        background-color: $toast-accent-pale-info;
-        color: $toast-colour-info;
+        border-left-color: $toast-accent-info;
+
+        .toast__stamp,
+        .toast__close:hover,
+        .toast__close:focus-visible {
+            color: $toast-accent-info;
+        }
     }
+
     &--warning {
-        border-color: $toast-accent-warning;
-        background-color: $toast-accent-pale-warning;
-        color: $toast-colour-warning;
+        border-left-color: $toast-accent-warning;
+
+        .toast__stamp,
+        .toast__close:hover,
+        .toast__close:focus-visible {
+            color: $toast-accent-warning;
+        }
     }
+
     &--error {
-        border-color: $toast-accent-error;
-        background-color: $toast-accent-pale-error;
-        color: $toast-colour-error;
+        border-left-color: $toast-accent-error;
+
+        .toast__stamp,
+        .toast__close:hover,
+        .toast__close:focus-visible {
+            color: $toast-accent-error;
+        }
+
+        .toast__heading {
+            color: $toast-accent-error;
+        }
+    }
+}
+
+@keyframes toast-enter {
+    from {
+        opacity: 0;
+        transform: translateY(0.35rem) rotate(-0.35deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        animation: none;
+        transition: none;
     }
 }

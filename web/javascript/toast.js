@@ -1,20 +1,43 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-  // Handle close clicks
-  document.querySelector(".toast__container").addEventListener('click', (e) => {
-    e.target.closest('.toast').remove();
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".toast__container");
+  if (!container) {
+    return;
+  }
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function dismissToast(toast) {
+    if (!toast || toast.dataset.closing === "true") {
+      return;
+    }
+
+    toast.dataset.closing = "true";
+
+    if (reduceMotion) {
+      toast.remove();
+      return;
+    }
+
+    toast.classList.add("toast--closing");
+
+    const removeToast = () => {
+      toast.removeEventListener("transitionend", removeToast);
+      toast.remove();
+    };
+
+    toast.addEventListener("transitionend", removeToast);
+    window.setTimeout(removeToast, 220);
+  }
+
+  container.addEventListener("click", (e) => {
+    if (!e.target.closest(".toast__close")) {
+      return;
+    }
+
+    dismissToast(e.target.closest(".toast"));
   });
-  // Handle timeouts
-  setTimeout(() => {
-    document.querySelectorAll(".toast").forEach((toast) => {
-      let opacity = 1;
-      const timer = setInterval(function() {
-          if (opacity <= 0.1) {
-              clearInterval(timer);
-              toast.remove();
-          }
-          toast.style.opacity = opacity;
-          opacity -= 0.1;
-      }, 50);
-    });
-  }, 5000);
+
+  container.querySelectorAll(".toast").forEach((toast) => {
+    window.setTimeout(() => dismissToast(toast), 5000);
+  });
 });

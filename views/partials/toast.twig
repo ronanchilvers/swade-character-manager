@@ -1,13 +1,18 @@
-<div class="toast__container">
+<div class="toast__container" role="region" aria-label="Notifications">
     {% for toast in session.getFlashes() %}
-    <div class="toast toast--{{ toast.type }}">
-        <div class="toast__close">&#x2715;</div>
-        <div class="toast__heading">
-            {{ toast.type|capitalize }}
-        </div>
-        <div class="toast__message">
-            {{ toast.message }}
-        </div>
-    </div>
+    {% set heading = {
+        success: 'Saved',
+        info: 'Update',
+        warning: 'Warning',
+        error: 'Problem'
+    }[toast.type]|default('Update') %}
+    <section class="toast toast--{{ toast.type }}"
+             role="{% if toast.type == 'error' %}alert{% else %}status{% endif %}"
+             aria-live="{% if toast.type == 'error' %}assertive{% else %}polite{% endif %}">
+        <button class="toast__close" type="button" aria-label="Dismiss notification">&times;</button>
+        <!--<div class="toast__stamp">{{ toast.type|capitalize }}</div>-->
+        <p class="toast__heading">{{ heading }}</p>
+        <p class="toast__message">{{ toast.message }}</p>
+    </section>
     {% endfor %}
 </div>
