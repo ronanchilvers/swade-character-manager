@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
-use App\Budget;
 use App\Budget\HindranceBudget;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
@@ -57,6 +56,9 @@ class Hindrances
             }
         }
 
+        /** @var HindrancesData $hindranceService */
+        $hindranceService = $this->manager->getType(HindrancesData::class);
+
         $budgets = [
             new HindranceBudget($entity, $characterHindrances)
         ];
@@ -72,7 +74,7 @@ class Hindrances
         Flight::render('character/hindrances.twig', [
             'page_title' => 'Hindrances',
             'entity'     => $entity,
-            'hindrances' => $this->manager->getType(HindrancesData::class)->all(),
+            'hindrances' => $hindranceService->forBuilder(),
             'selected'   => $selected,
             'errors'     => $errors,
             'budgets'    => $budgets,

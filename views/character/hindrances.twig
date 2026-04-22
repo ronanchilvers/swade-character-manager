@@ -38,9 +38,12 @@
                         {% if hindrance.summary %}
                         <p>{{ hindrance.summary }}</p>
                         {% endif %}
-                        {% if hindrance.effects %}
-                            {% for effect in hindrance.effects %}
-                            <p>{{ effect.level|title }}: {{ effect.details }}</p>
+                        {% if hindrance.effects_by_level %}
+                            {% for level in levels %}
+                            {% set effects = hindrance.effects_by_level[level] ?? [] %}
+                            {% if effects %}
+                            <p>{{ level|title }}: {{ effects|join(' ') }}</p>
+                            {% endif %}
                             {% endfor %}
                         {% endif %}
                     </div>
