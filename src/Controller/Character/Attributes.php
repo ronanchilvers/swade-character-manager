@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
-use App\Budget\AttributeBudget;
 use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
@@ -47,16 +46,10 @@ class Attributes
                 'Sorry! There was a problem!',
             );
         }
-
-        $budgets = [
-            new AttributeBudget($entity, []),
-        ];
-
         Flight::render('character/attributes.twig', [
             'page_title' => 'Attributes',
             'entity' => $entity,
             'errors' => $errors,
-            'budgets' => $budgets,
             'attribute_options' => $sizes,
             'attribute_fields' => $this->factory->attributeFields(),
         ]);

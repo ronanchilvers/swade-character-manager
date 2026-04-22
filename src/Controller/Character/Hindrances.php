@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
-use App\Budget\HindranceBudget;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Entity\Factory\Hindrance;
@@ -58,26 +57,12 @@ class Hindrances
 
         /** @var HindrancesData $hindranceService */
         $hindranceService = $this->manager->getType(HindrancesData::class);
-
-        $budgets = [
-            new HindranceBudget($entity, $characterHindrances)
-        ];
-        // $budgets = (new Budget())
-        //     ->add(
-        //         'hindrances',
-        //         'Hindrance',
-        //         $points,
-        //         Hindrance::MAX_POINTS
-        //     )
-        //     ;
-
         Flight::render('character/hindrances.twig', [
             'page_title' => 'Hindrances',
             'entity'     => $entity,
             'hindrances' => $hindranceService->forBuilder(),
             'selected'   => $selected,
             'errors'     => $errors,
-            'budgets'    => $budgets,
         ]);
     }
 }

@@ -12,25 +12,12 @@ use flight\database\SimplePdo;
 
 class Hindrance extends Factory
 {
-    public const MAX_POINTS = 4;
-
     public function forCharacter(Entity $character): array
     {
         return $this->find(
             $this->prefix('character_id') . ' = ?',
             [$character->id],
         );
-    }
-
-    public function pointsForCharacter(Entity $character): int
-    {
-        $hindrances = $this->forCharacter($character);
-        $points = 0;
-        foreach ($hindrances as $hindrance) {
-            $points += "major" == $hindrance->level ? 2 : 1;
-        }
-
-        return $points;
     }
 
     public function syncForCharacter(Entity $character, array $selected): Result

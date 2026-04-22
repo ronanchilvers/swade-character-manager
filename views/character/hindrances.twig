@@ -1,7 +1,6 @@
 {% extends 'layouts/character/builder.twig' %}
 
 {% do add_script('/javascript/hindrances.js') %}
-{% do add_script('/javascript/budgets.js') %}
 
 {% set levels = [ 'minor', 'major' ] %}
 {% set back_url = get_url('characters_concept', {hash: entity.hash}) %}
@@ -16,7 +15,7 @@
         <li>Minor - small, annoying problems. Each minor hindrance gets you <strong>1</strong> hindrance point.</li>
         <li>Major - big, difficult problems that can really bite you. Each major hindrance gets you <strong>2</strong> hindrance points.</li>
     </ul>
-    <p>Choose up to <strong>{{ budget.maxFor('hindrances') }}</strong> points of hindrances. You have <strong class="js-points">{{ remaining_points }}</strong> points left to choose.</p>
+    <p>Choose up to <strong>4</strong> points of hindrances. You can use hindrance points later to buy extra abilities.</p>
     </div>
 </div>
 
@@ -54,9 +53,7 @@
                     {% if valid %}
                     <input
                         type="checkbox"
-                        class="js-budget-option js-checkbox"
-                        data-budget="hindrances"
-                        data-budget-value="{{ 'major' == level ? 2 : 1 }}"
+                        class="js-checkbox"
                         id="hindrance_{{ hindrance.id }}_{{ level }}"
                         name="hindrances[{{ hindrance.id }}]"
                         value="{{ level }}"

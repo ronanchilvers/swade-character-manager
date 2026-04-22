@@ -8,7 +8,6 @@ The attributes screen described in the original plan is now present in the appli
 - Route: `characters_attributes`
 - Controller: `App\Controller\Character\Attributes`
 - View: `views/character/attributes.twig`
-- Budget helper: `App\Budget\AttributeBudget`
 
 ## What Did Not Happen
 The service-oriented implementation proposed in the original plan was not carried through in the current tree.
@@ -18,7 +17,7 @@ These planned classes are not present:
 - `App\Service\CharacterAttributes`
 - `App\Service\CharacterHindrances`
 
-The live implementation keeps attribute handling in the controller plus `App\Entity\Factory\Character`. The stale service-layer tests that previously targeted this unimplemented design have been removed in favor of tests for the live budgets and factories.
+The live implementation keeps attribute handling in the controller plus `App\Entity\Factory\Character`. The stale service-layer tests that previously targeted this unimplemented design have been removed in favor of tests for the live code that still ships.
 
 ## Current Behavior
 - Attribute options are driven by `App\Dice::validSizes()`.
@@ -26,9 +25,6 @@ The live implementation keeps attribute handling in the controller plus `App\Ent
 - The controller writes the selected die values directly onto the `characters` entity and persists them through `App\Entity\Factory\Character::update()`.
 - `Character::beforeUpdate()` recalculates `pace` and `toughness`.
 - The attributes screen redirects to the skills step after a successful save.
-
-## Important Caveat
-`App\Budget\AttributeBudget` currently reports hindrance-derived points from the passed `$existing` rows, but `App\Controller\Character\Attributes` instantiates it with an empty array. The budget panel therefore does not implement the richer allocation rules described in the original plan.
 
 ## If Work Resumes Here
 Use this file as background only. Before implementing anything else around attributes:

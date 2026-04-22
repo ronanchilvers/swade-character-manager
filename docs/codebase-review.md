@@ -1,6 +1,6 @@
 # Repository State Review
 
-Last verified against the repository on 2026-04-17.
+Last verified against the repository on 2026-04-22.
 
 ## Overview
 This is a small server-rendered PHP 8.5 application for building Savage Worlds characters. It uses Flight for routing and dependency injection, Twig for HTML rendering, Google OAuth for login, and an encrypted cookie-backed session layer.
@@ -43,10 +43,11 @@ vendor/bin/phpunit --configuration phpunit.xml.dist
 
 The suite now passes cleanly against the live implementation.
 
-Verified result on 2026-04-16:
+Verified result on 2026-04-22:
 
-- `tests/Budget/` covers the current budget helpers.
 - `tests/Entity/Factory/` covers the live character, hindrance, skill, and edge factories.
+- `tests/Character/SheetTest.php` covers the sheet presenter used by the read-only character sheet.
+- `tests/Http/CorsPolicyTest.php` and `tests/Support/` cover the current support helpers.
 - `tests/Service/Data/SkillsTest.php` and `tests/Service/Data/EdgesTest.php` cover the live catalog loaders.
 - `vendor/bin/phpunit --configuration phpunit.xml.dist` exits successfully on the current tree.
 

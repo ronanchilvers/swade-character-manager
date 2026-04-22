@@ -3,7 +3,7 @@
 ## Project Structure & Module Organization
 The app is a Composer-managed PHP 8.5 project under the `App\\` namespace. Runtime entrypoints live in `web/` (`index.php` for production-style boot, `index_dev.php` for local serving). Framework wiring lives in `config/`: `settings.php` loads defaults plus `.env.php`, `events.php` boots the encrypted cookie-backed session lifecycle, `services.php` registers DI services, `maps.php` exposes Flight helpers, and `routes.php` defines the current character-builder flow.
 
-Application code lives in `src/`. Use `src/Controller/` and `src/Controller/Character/` for Flight handlers, `src/Entity/` and `src/Entity/Factory/` for generic entities plus database persistence, `src/Http/` for response, cookie, and session helpers, `src/Middleware/` for Flight middleware, `src/Service/Data/` for catalog loaders, `src/Budget/` for character point summaries, and `src/Twig/` for Twig extensions.
+Application code lives in `src/`. Use `src/Controller/` and `src/Controller/Character/` for Flight handlers, `src/Entity/` and `src/Entity/Factory/` for generic entities plus database persistence, `src/Http/` for response, cookie, and session helpers, `src/Middleware/` for Flight middleware, `src/Service/Data/` for catalog loaders, and `src/Twig/` for Twig extensions.
 
 Templates live in `views/`. Public assets live in `web/`, with Sass sources in `resources/sass/` compiled into `web/css/`. Catalog content currently loads from the PHP exports in `data/*.php`; matching `data/*.json` files exist in the repo as source/reference material, but the runtime `App\Service\Data\*` classes read the PHP files. Database bootstrap SQL lives under `schema/`, with one file per table named `NNN_<table>.sql` and applied in filename order (currently `010_users.sql` through `070_weapons.sql`); each file drops and recreates its table. Tests live in `tests/`.
 
@@ -44,7 +44,7 @@ Run tests with:
 
 - `vendor/bin/phpunit --configuration phpunit.xml.dist`
 
-As of 2026-04-16, the PHPUnit suite has been realigned with the live code and passes cleanly. Current coverage is centered on live factory behavior, budget calculations, and catalog loading, rather than the older planned service-layer architecture.
+As of 2026-04-22, the PHPUnit suite passes cleanly against the live code. Current coverage is centered on live factory behavior, presenter behavior, support utilities, and catalog loading, rather than the older planned service-layer architecture.
 
 ## Coding Style & Naming Conventions
 Follow the existing PHP style: `declare(strict_types=1);`, 4-space indentation, opening braces on the next line for classes and methods, and short array syntax. Keep namespaces PSR-4-compatible under `App\\`.
@@ -54,7 +54,7 @@ Use PascalCase for classes, camelCase for methods, and snake_case for Flight rou
 Twig templates follow feature-based naming such as `views/character/hindrances.twig` and shared partials under `views/partials/`. Sass is organized by settings/tools/base/elements/components inside `resources/sass/`.
 
 ## Testing Guidelines
-Prefer PHPUnit for new coverage, with test files named `*Test.php` under `tests/`. Current committed tests are split between `tests/Budget/`, `tests/Entity/Factory/`, and `tests/Service/Data/`.
+Prefer PHPUnit for new coverage, with test files named `*Test.php` under `tests/`. Current committed tests are split between `tests/Character/`, `tests/Entity/Factory/`, `tests/Http/`, `tests/Service/Data/`, and `tests/Support/`.
 
 When changing behavior in the live controllers/factories, favor tests that match the implementation that actually exists in `src/`; do not reintroduce tests for planned services or APIs that are not present in the tree. For Twig, JavaScript, or Sass changes, do a manual pass through the affected builder step and note what you exercised.
 

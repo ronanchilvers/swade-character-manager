@@ -1,7 +1,5 @@
 {% extends 'layouts/character/builder.twig' %}
 
-{% do add_script('/javascript/budgets.js') %}
-
 {% set back_url = get_url('characters_hindrances', {hash: entity.hash}) %}
 
 {% block page %}
@@ -26,21 +24,13 @@
                 {{ attribute.description }}
             </div>
             <div class="card__footer">
-                <select class="field__input js-budget-option"
+                <select class="field__input"
                     id="attribute_{{ field }}"
-                    name="attributes[{{ field }}]"
-                    data-budget="attributes">
-                {% set multiplier = 0 %}
+                    name="attributes[{{ field }}]">
                 {% for value in attribute_options %}
                 {% set attributeDie = attribute(entity, field) %}
                 {% if attributeDie > value %}{% else %}
-                    {% set budget_value = 0 %}
-                    {% if value > 4 and attributeDie < value %}
-                        {% set budget_value = 1 %}
-                    {% endif %}
-                    <option value="{{ value }}" {% if attributeDie == value %}selected{% endif %}
-                        data-budget-value="{{ budget_value * multiplier }}">d{{ value }}{% if 0 < budget_value %} (+{{ budget_value * multiplier }} points){% endif %}</option>
-                    {% set multiplier = multiplier + 1 %}
+                    <option value="{{ value }}" {% if attributeDie == value %}selected{% endif %}>d{{ value }}</option>
                 {% endif %}
                 {% endfor %}
                 </select>

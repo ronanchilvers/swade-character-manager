@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
-use App\Budget\HindranceBudget;
-use App\Budget\SkillBudget;
 use App\Dice;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
-use App\Entity\Factory\Hindrance as FactoryHindrances;
 use App\Entity\Factory\Skill as FactorySkill;
 use App\Filter;
 use App\Service\Data\Manager;
@@ -21,7 +18,6 @@ class Skills
     public function __construct(
         private FactoryCharacter $factory,
         private FactorySkill $skillFactory,
-        private FactoryHindrances $hindrancesFactory,
         private Manager $manager,
     ) {
     }
@@ -68,12 +64,6 @@ class Skills
         $diceOptions = Dice::validSizes();
         array_unshift($diceOptions, 0);
 
-        $characterHindrances = $this->hindrancesFactory->forCharacter($entity);
-        $budgets = [
-            new SkillBudget($entity, $characterSkills),
-            new HindranceBudget($entity, $characterHindrances)->setLabel('Hindrance Points'),
-        ];
-
         Flight::render('character/skills.twig', [
             'page_title' => 'Skills',
             'entity' => $entity,
@@ -81,7 +71,6 @@ class Skills
             'selected' => $selected,
             'skills' => $coreSkills + $nonCoreSkills,
             'dice_options' => $diceOptions,
-            'budgets' => $budgets,
         ]);
     }
 }

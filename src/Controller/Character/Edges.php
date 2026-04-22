@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Character;
 
-use App\Budget\HindranceBudget;
-use App\Budget\SkillBudget;
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Entity\Factory\Edge as FactoryEdge;
-use App\Entity\Factory\Hindrance as FactoryHindrances;
-use App\Entity\Factory\Skill as FactorySkill;
 use App\Filter;
 use App\Service\Data\Edges as DataEdges;
 use App\Service\Data\Manager;
@@ -21,8 +17,6 @@ class Edges
     public function __construct(
         private FactoryCharacter $factory,
         private FactoryEdge $edgeFactory,
-        private FactorySkill $skillFactory,
-        private FactoryHindrances $hindrancesFactory,
         private Manager $manager,
     ) {
     }
@@ -68,14 +62,6 @@ class Edges
                 $selected[$edge->key] = $edge->count;
             }
         }
-
-        $characterSkills = $this->skillFactory->forCharacter($entity);
-        $characterHindrances = $this->hindrancesFactory->forCharacter($entity);
-        $budgets = [
-            new SkillBudget($entity, $characterSkills),
-            new HindranceBudget($entity, $characterHindrances)->setLabel('Hindrance Points'),
-        ];
-
         Flight::render('character/edges.twig', [
             'page_title' => 'Edges',
             'entity' => $entity,
@@ -84,7 +70,6 @@ class Edges
             ),
             'errors' => $errors,
             'selected' => $selected,
-            'budgets' => $budgets,
         ]);
     }
 

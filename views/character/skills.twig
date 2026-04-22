@@ -1,8 +1,5 @@
 {% extends 'layouts/character/builder.twig' %}
 
-{% do add_script('/javascript/budgets.js') %}
-{#% do add_script('/javascript/skills.js') %#}
-
 {% set selected_keys = selected|keys %}
 {% set back_url = get_url('characters_attributes', {hash: entity.hash}) %}
 
@@ -38,14 +35,10 @@
             <div class="card__footer">
                 <p><strong>{{ skill.linked_attribute|capitalize }} skill</strong> - you have {{ skill.linked_attribute|capitalize }} at d{{ attributeDie }}</p>
                 <select
-                    class="field__input js-skill-die js-budget-option"
+                    class="field__input"
                     id="skill_{{ skill.id }}"
                     name="skills[{{ skill.id }}]"
-                    data-budget="skills"
-                    data-linked-attribute-die="{{ group.attribute_die }}"
-                    data-baseline-die="{{ skill.core_skill ? 4 : 0 }}"
                 >
-                {% set multiplier = 0 %}
                 {% for value in dice_options %}
                     {% if (isSelected and 0 == value) or (skill.core_skill and 0 == value) %}
                     {# a core skill or a selected skill - no 'untrained' option #}
@@ -53,25 +46,13 @@
                     {# a selected skill at a higher level than value - option unavailable #}
                     {% else %}
                     {% set isSelectedValue = selected[skill.id] and (selected[skill.id] == value) %}
-                    {% set budget_value = 1 %}
-                    {% if 0 == value %}
-                        {% set budget_value = 0 %}
-                    {% elseif skill.core_skill and 4 == value %}
-                        {% set budget_value = 0 %}
-                    {% elseif attributeDie < value %}
-                        {% set budget_value = 2 %}
-                    {% endif %}
-                    <option
-                        value="{{ value }}" {% if isSelectedValue %}selected{% endif %}
-                        data-budget-value="{{ budget_value * multiplier }}"
-                        >
+                    <option value="{{ value }}" {% if isSelectedValue %}selected{% endif %}>
                         {% if value == 0 %}
                         Untrained
                         {% else %}
-                        d{{ value }}{% if 0 < budget_value and not isSelectedValue %} (cost +{{ budget_value * multiplier }}){% endif %}
+                        d{{ value }}
                         {% endif %}
                     </option>
-                    {% set multiplier = multiplier + 1 %}
                     {% endif %}
                 {% endfor %}
                 </select>
