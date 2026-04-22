@@ -23,6 +23,7 @@ $field-input-border: 1px solid #666;
         padding: 1rem;
         background-color: $form-buttons-background;
         box-shadow: 0 -0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+        z-index: 30;
     }
 }
 
