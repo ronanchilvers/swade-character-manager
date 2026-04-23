@@ -647,7 +647,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .sheet__top {
   display: grid;
-  grid-template-columns: minmax(200px, 1fr) 2fr;
+  grid-template-columns: 2fr minmax(200px, 1fr);
   gap: 1rem;
   margin-bottom: 1rem;
 }

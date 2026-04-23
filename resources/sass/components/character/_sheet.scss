@@ -51,7 +51,7 @@ $text-font-size: sheet.$sheet-text-font-size;
 
     &__top {
         display: grid;
-        grid-template-columns: minmax(200px, 1fr) 2fr;
+        grid-template-columns: 2fr minmax(200px, 1fr);
         gap: 1rem;
         margin-bottom: 1rem;
 
