@@ -516,6 +516,19 @@ $text-font-size: sheet.$sheet-text-font-size;
     }
 
     &__weapons {
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+            height: 8px;
+            -webkit-appearance: none;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: var(--c-sheet-muted);
+            border-radius: 4px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
         &__table {
             width: 100%;
             border-collapse: collapse;

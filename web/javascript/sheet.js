@@ -256,7 +256,7 @@
         }
         return;
       }
-      if (e.target.matches('.sheet__row__add[data-add="' + options.addKey + '"]')) {
+      if (e.target.matches('button[data-add="' + options.addKey + '"]')) {
         const newRow = addRow();
         const target = firstEditableCell(newRow);
         if (target) {

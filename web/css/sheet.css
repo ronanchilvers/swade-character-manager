@@ -1067,6 +1067,20 @@ input[type=checkbox]:disabled + .button--toggle::after {
   border-style: dashed !important;
   font-weight: 600;
 }
+.sheet__weapons {
+  overflow-x: scroll;
+}
+.sheet__weapons::-webkit-scrollbar {
+  height: 8px;
+  -webkit-appearance: none;
+}
+.sheet__weapons::-webkit-scrollbar-thumb {
+  background: var(--c-sheet-muted);
+  border-radius: 4px;
+}
+.sheet__weapons::-webkit-scrollbar-track {
+  background: transparent;
+}
 .sheet__weapons__table {
   width: 100%;
   border-collapse: collapse;
