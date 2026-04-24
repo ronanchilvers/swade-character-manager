@@ -6,9 +6,9 @@
         </h1>
         <nav class="menu">
         {% if session.has('user') %}
-            <a href="{{ get_url('home_page') }}" class="menu__item">Your Characters</a>
-            <a href="{{ get_url('characters_create') }}" class="menu__item">Create a character</a>
-            <a href="{{ get_url('auth_logout') }}" class="dropdown__menu__item">Logout</a>
+            <a href="{{ get_url('home_page') }}" class="button button--filled menu__item">Your Characters</a>
+            <a href="{{ get_url('characters_create') }}" class="button button--filled menu__item">Create a character</a>
+            <a href="{{ get_url('auth_logout') }}" class="button button--filled dropdown__menu__item">Logout</a>
             {#
             <div class="menu__item menu__item--user dropdown">
                 <img src="/images/icons/settings.svg" />

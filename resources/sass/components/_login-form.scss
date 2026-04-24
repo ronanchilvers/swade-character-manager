@@ -1,30 +1,60 @@
 @use "../settings/css-variables" as vars;
+@use "../settings/sheet-theme" as sheet;
 @use "../tools/breakpoints";
 
 .login-form {
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    /* justify-content: space-between; */
     align-items: center;
-    background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.6),
-            rgba(0, 0, 0, 0.6)
-        ),
-        url('/images/backgrounds/pa-5.png') center / cover no-repeat;
+    background: var(--c-white);
 
     &__section {
-        border-radius: vars.$border-radius-default;
-        background-color: var(--c-light-grey);
-        box-shadow: 0 0 0.2rem rgba(255, 255, 255, 1);
         padding: 3rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &--left {
+            flex-basis: 560px;
+            background: var(--c-white); // url('/images/backgrounds/paper-tileable.png') repeat top left;
+            border-right: 1px solid var(--c-parchment-dark);
+            width: 100%;
+
+            @include breakpoints.at('laptop') {
+                flex-basis: 50%;
+            }
+            @include breakpoints.at('phablet') {
+                flex-basis: 100%;
+            }
+        }
+        &--right {
+            flex: 1 1;
+            background: rgb(67, 167, 233) url(/images/backgrounds/blue-background.png) no-repeat center center;
+            @include breakpoints.at('phablet') {
+                display: none;
+            }
+        }
+    }
+    &__header,
+    &__content {
+        max-width: 460px;
     }
     &__header {
         text-align: center;
     }
     &__content {
         padding: 1rem;
+    }
+    &__characters {
+        max-width: 500px;
+    }
+
+    .panel {
+        padding: 3rem;
     }
 }

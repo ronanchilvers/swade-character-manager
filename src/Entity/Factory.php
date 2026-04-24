@@ -75,15 +75,20 @@ abstract class Factory
         );
     }
 
-    public function find(?string $where = null, array $params = []): array
+    public function find(?string $where = null, array $params = [], ?string $order = null): array
     {
-        $sql = sprintf(
+        $sql = [];
+        $sql[] = sprintf(
             "SELECT * FROM %s",
             $this->getTableName(),
         );
         if (!is_null($where)) {
-            $sql .= " WHERE {$where}";
+            $sql[] = "WHERE {$where}";
         }
+        if (!is_null($order)) {
+            $sql[] = "ORDER BY {$order}";
+        }
+        $sql = implode(' ', $sql);
         $data = $this->pdo->fetchAll(
             $sql,
             $params

@@ -12,10 +12,22 @@
 }
 
 :root {
-  --c-sheet-heading: #a61e1e;
+  /* --c-sheet-heading: #a61e1e;
   --c-sheet-ink: #1d1208;
   --c-sheet-muted: #8b7a5b;
   --c-sheet-paper: #fbf6ea;
+  --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
+  --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
+  --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
+  --c-sheet-rail-item-border-active: rgba(116, 0, 0, 1);
+  --c-parchment: #f6ecd5;
+  --c-parchment-dark: #e8d9b0;
+  --c-button-hover: rgba(166, 30, 30, 0.25); */
+  --c-sheet-heading: #222;
+  --c-sheet-ink: #1d1208;
+  --c-sheet-muted: #8b7a5b;
+  --c-sheet-paper: #fbf6ea;
+  --c-sheet-rail: rgba(245, 245, 245);
   --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
   --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
   --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
@@ -102,29 +114,29 @@ a:hover {
 }
 
 h1 {
-  font-size: 1.8rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 2.2rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
 
 h2 {
-  font-size: 1.6rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 2rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
 
 h3 {
-  font-size: 1.4rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 1.8rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
 
 h4 {
-  font-size: 1.2rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 1.6rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
@@ -205,7 +217,7 @@ main {
   justify-content: flex-start;
   flex-direction: column;
   padding: 1rem;
-  background-color: var(--c-white);
+  background: var(--c-white) url(/images/backgrounds/blue-background.png) no-repeat center center;
   z-index: 30;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 480px;
@@ -276,24 +288,25 @@ main {
 
 .button {
   display: inline-block;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 0.85rem;
   border-radius: 3px;
-  padding: 0.6rem 1rem 0.3rem;
+  padding: 0.5rem 1rem 0.4rem;
   margin-right: 0.5rem;
   text-align: center;
   line-height: 1;
   cursor: pointer;
   transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
-  background: transparent;
-  border: 1px dashed var(--c-parchment-dark);
-  color: var(--c-sheet-muted);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px dashed rgba(34, 34, 34, 0.5);
+  color: rgba(34, 34, 34, 0.9);
 }
 .button:hover, .button:focus-visible {
-  border-color: var(--c-sheet-heading);
-  color: var(--c-sheet-heading);
+  border-color: #222222;
+  color: rgba(34, 34, 34, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   text-decoration: none;
 }
 .button:visited, .button:active {
@@ -360,7 +373,7 @@ main {
   justify-content: space-between;
   gap: 0.75rem;
   border-style: solid;
-  background-color: var(--c-paper);
+  background-color: rgba(255, 255, 255, 0.5);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
@@ -383,9 +396,9 @@ main {
 
 .button--toggle--is-on,
 input[type=checkbox]:checked + .button--toggle {
-  border-color: var(--c-parchment-dark);
-  background-color: var(--c-parchment);
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.15);
+  border-color: rgba(34, 34, 34, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
   padding-top: 1.1rem;
   padding-bottom: 0.6rem;
 }
@@ -393,7 +406,7 @@ input[type=checkbox]:checked + .button--toggle {
 input[type=checkbox]:checked + .button--toggle::after {
   opacity: 1;
   background: #3fb950;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.45), 0 0 6px rgba(63, 185, 80, 0.85);
+  box-shadow: inset 0 0 2px rgb(0, 0, 0), 0 0 6px #3fb950;
 }
 
 .button--toggle--is-disabled,
@@ -425,8 +438,8 @@ input[type=checkbox]:disabled + .button--toggle::after {
   padding-left: 40px;
 }
 .button--slider .button__slide {
-  border-color: var(--c-parchment-dark);
-  background-color: var(--c-parchment);
+  border-color: rgba(34, 34, 34, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.15);
   position: absolute;
   cursor: pointer;
@@ -522,7 +535,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   border: none;
   background: transparent;
   color: var(--c-sheet-muted);
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
@@ -538,7 +551,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   margin-bottom: 0.45rem;
   padding: 0.2rem 0.55rem 0.05rem;
   border: 1px solid currentColor;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 0.72rem;
   line-height: 1;
   letter-spacing: 0.14em;
@@ -548,8 +561,8 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .toast__heading {
   margin: 0 0 0.5rem;
-  font-family: "Special Elite", "Courier New", monospace;
-  font-size: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: "Staatliches", "Courier New", monospace;
   font-weight: 400;
   line-height: 1.25;
   color: var(--c-sheet-heading);
@@ -624,7 +637,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   margin-bottom: 1rem;
 }
 .sheet__title {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   color: var(--c-sheet-heading);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -633,15 +646,19 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .sheet__panel {
   position: relative;
-  background: var(--c-sheet-paper);
+  /* background: var(--c-sheet-paper); */
+  background: var(--c-white);
   padding: 1rem 1.1rem;
-  border: 1px solid var(--c-parchment-dark);
+  /* border: 1px solid var(--c-parchment-dark); */
+  border: 1px solid #555;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 .sheet__panel--torn {
-  background: var(--c-parchment);
-  border: 1px dashed var(--c-parchment-dark);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  background: var(--c-parchment) url(/images/backgrounds/paper-tileable.png) repeat top left;
+  border: 1px dashed #555;
+  border-top: none;
+  border-bottom: none;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0.8); */
   clip-path: polygon(0 6px, 3% 0, 8% 5px, 14% 1px, 22% 4px, 30% 0, 38% 5px, 46% 2px, 54% 5px, 62% 0, 70% 4px, 78% 1px, 86% 5px, 94% 0, 100% 6px, 100% calc(100% - 6px), 94% 100%, 86% calc(100% - 5px), 78% calc(100% - 1px), 70% calc(100% - 4px), 62% 100%, 54% calc(100% - 5px), 46% calc(100% - 2px), 38% calc(100% - 5px), 30% 100%, 22% calc(100% - 4px), 14% calc(100% - 1px), 8% calc(100% - 5px), 3% 100%, 0 calc(100% - 6px));
   padding: 1.4rem 1.1rem;
 }
@@ -667,7 +684,6 @@ input[type=checkbox]:disabled + .button--toggle::after {
 @media (max-width: 1022px) {
   .sheet__middle {
     grid-template-columns: 1fr 1fr;
-    /* padding-right: 0; */
   }
 }
 @media (max-width: 767px) {
@@ -675,7 +691,6 @@ input[type=checkbox]:disabled + .button--toggle::after {
     display: flex;
     flex-direction: column;
     padding-right: 0;
-    /* grid-template-columns: 1fr; */
   }
 }
 .sheet__right {
@@ -704,7 +719,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 .sheet__notes__input {
   width: 100%;
   min-height: 6rem;
-  border: 1px dashed var(--c-parchment-dark);
+  border: 1px dashed #EEE;
   background: transparent;
   padding: 0.5rem 0.6rem;
   font-family: "Mynerve", cursive;
@@ -736,7 +751,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   padding-bottom: 0.2rem;
 }
 .sheet__attributes__die, .sheet__attributes__max {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   text-align: left;
   min-width: 2.2rem;
 }
@@ -745,7 +760,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   font-size: 0.85em;
 }
 .sheet__attributes__label {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   letter-spacing: 0.05em;
 }
 .sheet__identity {
@@ -771,7 +786,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .sheet__identity__row dt {
   font-weight: 500;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
 }
 .sheet__identity__row dd {
   font-family: "Mynerve", cursive;
@@ -796,14 +811,14 @@ input[type=checkbox]:disabled + .button--toggle::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 1.3rem;
   padding-top: 0.3rem;
   cursor: default;
 }
 .sheet__circle__label {
   margin-top: 0.25rem;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 0.8rem;
   text-transform: uppercase;
 }
@@ -849,10 +864,10 @@ input[type=checkbox]:disabled + .button--toggle::after {
   color: var(--c-sheet-heading);
 }
 .sheet__skills__name {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
 }
 .sheet__skills__attribute {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   color: var(--c-sheet-muted);
   font-size: 0.8em;
   line-height: 2;
@@ -864,7 +879,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .sheet__die-strip__step {
   display: inline-block;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 0.8rem;
   min-width: 1.4rem;
   height: 1.3rem;
@@ -888,7 +903,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   font-size: 1.2rem;
 }
 .sheet__hindrances__level {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 0.75rem;
   text-transform: uppercase;
   padding: 0.3rem 0.45rem 0 0.45rem;
@@ -909,32 +924,50 @@ input[type=checkbox]:disabled + .button--toggle::after {
   flex-direction: column;
   gap: 0.6rem;
 }
+.sheet__edges .sheet__list__row span {
+  flex: 0 0;
+  text-align: left;
+  min-width: 1rem;
+}
+.sheet__edges .sheet__list__row span:last-child {
+  flex: 1 1;
+  text-align: right;
+}
+.sheet__edges__rank {
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 1.2rem;
+  color: var(--c-sheet-heading);
+}
 .sheet__edges__name {
   font-family: "Mynerve", cursive;
   font-size: 1.2rem;
 }
 .sheet__edges__count {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 1.2rem;
   color: var(--c-sheet-heading);
 }
-.sheet__advances {
-  list-style: none;
-  padding: 0;
-  margin: 0.4rem 0 0;
-}
-.sheet__advances__row {
-  display: grid;
-  grid-template-columns: 1.2rem 1fr;
-  gap: 0.5rem;
-  align-items: center;
-  border-bottom: 1px solid var(--c-sheet-muted);
-  padding: 0.15rem 0;
-  min-height: 1.3rem;
-}
-.sheet__advances__tier {
-  font-family: "Special Elite", "Courier New", monospace;
-  color: var(--c-sheet-heading);
+.sheet {
+  /* &__advances {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0;
+
+      &__row {
+          display: grid;
+          grid-template-columns: 1.2rem 1fr;
+          gap: 0.5rem;
+          align-items: center;
+          border-bottom: 1px solid var(--c-sheet-muted);
+          padding: 0.15rem 0;
+          min-height: 1.3rem;
+      }
+
+      &__tier {
+          font-family: $title-font;
+          color: var(--c-sheet-heading);
+      }
+  } */
 }
 .sheet__rail {
   position: absolute;
@@ -943,16 +976,11 @@ input[type=checkbox]:disabled + .button--toggle::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   text-transform: uppercase;
   padding: 1rem 2rem;
   z-index: 10;
-  /* @include breakpoints.at('laptop') {
-      flex-direction: row;
-      top: auto;
-      width: auto;
-      justify-content: center;
-  } */
+  background-color: var(--c-sheet-rail);
 }
 @media (max-width: 767px) {
   .sheet__rail {
@@ -978,14 +1006,10 @@ input[type=checkbox]:disabled + .button--toggle::after {
   letter-spacing: 0.2em;
   line-height: 1;
   margin-bottom: 0.8rem;
+  margin-left: 0.5rem;
   transform: translateX(-0.2em);
   font-weight: 600;
   color: var(--c-sheet-heading);
-  /* @include breakpoints.at('laptop') {
-      writing-mode: horizontal-tb;
-      transform: none;
-      margin: 0.3em 0.5rem 0 0;
-  } */
 }
 @media (max-width: 767px) {
   .sheet__rail__label {
@@ -1000,9 +1024,6 @@ input[type=checkbox]:disabled + .button--toggle::after {
 .sheet__rail__list + .sheet__rail__label {
   margin-bottom: 0;
   margin-top: 1rem;
-  /* @include breakpoints.at('laptop') {
-      margin: 0.3rem 0 0 0.5rem;
-  } */
 }
 @media (max-width: 767px) {
   .sheet__rail__list + .sheet__rail__label {
@@ -1051,6 +1072,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   cursor: pointer;
   user-select: none;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  background-color: var(--c-white);
 }
 .sheet__rail__list__item:hover {
   background: var(--c-sheet-rail-item-hover);
@@ -1086,7 +1108,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   border-collapse: collapse;
 }
 .sheet__weapons__table th {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   color: var(--c-sheet-heading);
   text-transform: uppercase;
   text-align: left;
@@ -1129,7 +1151,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   gap: 1rem;
 }
 .sheet__status {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;

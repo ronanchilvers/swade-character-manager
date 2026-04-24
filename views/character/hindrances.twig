@@ -44,7 +44,8 @@
                             {% for level in levels %}
                             {% set effects = hindrance.effects_by_level[level] ?? [] %}
                             {% if effects %}
-                            <p>{{ level|title }}: {{ effects|join(' ') }}</p>
+                            <h4 class="card__subtitle">{{ level|title }}</h4>
+                            <p>{{ effects|join(' ') }}</p>
                             {% endif %}
                             {% endfor %}
                         {% endif %}

@@ -178,8 +178,6 @@ class Sheet
             ];
         }
 
-        usort($rows, fn (array $a, array $b): int => strcasecmp($a['name'], $b['name']));
-
         return $rows;
     }
 

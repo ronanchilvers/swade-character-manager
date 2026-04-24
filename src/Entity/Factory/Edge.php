@@ -17,6 +17,7 @@ class Edge extends Factory
         return $this->find(
             $this->prefix('character_id') . ' = ?',
             [$character->id],
+            "edge_created ASC"
         );
     }
 

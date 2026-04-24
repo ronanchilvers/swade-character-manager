@@ -11,7 +11,7 @@
                 {% if character.concept|length > 0 %}{{ character.concept }}{% else %}No concept yet{% endif %}
             </div>
             <div class="card__footer">
-                <a class="button button--primary" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
+                <a class="button" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
                 <a class="button" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
             </div>
         </div>

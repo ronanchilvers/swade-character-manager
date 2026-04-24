@@ -8,8 +8,10 @@ $panel-padding: 2rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: var(--c-sheet-paper);
-    border: 1px solid var(--c-parchment-dark);
+    /* background: var(--c-sheet-paper);
+    border: 1px solid var(--c-parchment-dark); */
+    background: rgba(255,255,255,1);
+    border: 1px solid #222;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     color: var(--c-sheet-ink);
     font-family: sheet.$sheet-title-font;
@@ -25,13 +27,17 @@ $panel-padding: 2rem;
 
     .panel__content {
         padding: 1rem 1rem;
-        font-family: sheet.$sheet-title-font;
+        font-family: sheet.$sheet-plain-font;
     }
 
     .panel__subpanel {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+    }
+
+    &--dark {
+        background: var(--c-parchment);
     }
 
     &--controls {

@@ -13,10 +13,22 @@
 }
 
 :root {
-  --c-sheet-heading: #a61e1e;
+  /* --c-sheet-heading: #a61e1e;
   --c-sheet-ink: #1d1208;
   --c-sheet-muted: #8b7a5b;
   --c-sheet-paper: #fbf6ea;
+  --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
+  --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
+  --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
+  --c-sheet-rail-item-border-active: rgba(116, 0, 0, 1);
+  --c-parchment: #f6ecd5;
+  --c-parchment-dark: #e8d9b0;
+  --c-button-hover: rgba(166, 30, 30, 0.25); */
+  --c-sheet-heading: #222;
+  --c-sheet-ink: #1d1208;
+  --c-sheet-muted: #8b7a5b;
+  --c-sheet-paper: #fbf6ea;
+  --c-sheet-rail: rgba(245, 245, 245);
   --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
   --c-sheet-rail-item-selected: rgba(166, 30, 30, 1);
   --c-sheet-rail-item-active: rgba(166, 30, 30, 0.75);
@@ -103,29 +115,29 @@ a:hover {
 }
 
 h1 {
-  font-size: 1.8rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 2.2rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
 
 h2 {
-  font-size: 1.6rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 2rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
 
 h3 {
-  font-size: 1.4rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 1.8rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
 
 h4 {
-  font-size: 1.2rem;
-  font-family: "Special Elite", system-ui;
+  font-size: 1.6rem;
+  font-family: "Staatliches", system-ui;
   font-weight: 400;
   color: var(--c-sheet-heading);
 }
@@ -206,7 +218,7 @@ main {
   justify-content: flex-start;
   flex-direction: column;
   padding: 1rem;
-  background-color: var(--c-white);
+  background: var(--c-white) url(/images/backgrounds/blue-background.png) no-repeat center center;
   z-index: 30;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 480px;
@@ -340,24 +352,25 @@ main {
 } */
 .button {
   display: inline-block;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 0.85rem;
   border-radius: 3px;
-  padding: 0.6rem 1rem 0.3rem;
+  padding: 0.5rem 1rem 0.4rem;
   margin-right: 0.5rem;
   text-align: center;
   line-height: 1;
   cursor: pointer;
   transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
-  background: transparent;
-  border: 1px dashed var(--c-parchment-dark);
-  color: var(--c-sheet-muted);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px dashed rgba(34, 34, 34, 0.5);
+  color: rgba(34, 34, 34, 0.9);
 }
 .button:hover, .button:focus-visible {
-  border-color: var(--c-sheet-heading);
-  color: var(--c-sheet-heading);
+  border-color: #222222;
+  color: rgba(34, 34, 34, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   text-decoration: none;
 }
 .button:visited, .button:active {
@@ -424,7 +437,7 @@ main {
   justify-content: space-between;
   gap: 0.75rem;
   border-style: solid;
-  background-color: var(--c-paper);
+  background-color: rgba(255, 255, 255, 0.5);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
@@ -447,9 +460,9 @@ main {
 
 .button--toggle--is-on,
 input[type=checkbox]:checked + .button--toggle {
-  border-color: var(--c-parchment-dark);
-  background-color: var(--c-parchment);
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.15);
+  border-color: rgba(34, 34, 34, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
   padding-top: 1.1rem;
   padding-bottom: 0.6rem;
 }
@@ -457,7 +470,7 @@ input[type=checkbox]:checked + .button--toggle {
 input[type=checkbox]:checked + .button--toggle::after {
   opacity: 1;
   background: #3fb950;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.45), 0 0 6px rgba(63, 185, 80, 0.85);
+  box-shadow: inset 0 0 2px rgb(0, 0, 0), 0 0 6px #3fb950;
 }
 
 .button--toggle--is-disabled,
@@ -489,8 +502,8 @@ input[type=checkbox]:disabled + .button--toggle::after {
   padding-left: 40px;
 }
 .button--slider .button__slide {
-  border-color: var(--c-parchment-dark);
-  background-color: var(--c-parchment);
+  border-color: rgba(34, 34, 34, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.15);
   position: absolute;
   cursor: pointer;
@@ -586,7 +599,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   border: none;
   background: transparent;
   color: var(--c-sheet-muted);
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
@@ -602,7 +615,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   margin-bottom: 0.45rem;
   padding: 0.2rem 0.55rem 0.05rem;
   border: 1px solid currentColor;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 0.72rem;
   line-height: 1;
   letter-spacing: 0.14em;
@@ -612,8 +625,8 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .toast__heading {
   margin: 0 0 0.5rem;
-  font-family: "Special Elite", "Courier New", monospace;
-  font-size: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: "Staatliches", "Courier New", monospace;
   font-weight: 400;
   line-height: 1.25;
   color: var(--c-sheet-heading);
@@ -677,13 +690,15 @@ input[type=checkbox]:disabled + .button--toggle::after {
     transition: none;
   }
 }
+/* $card-border: 1px solid var(--c-parchment-dark) !default; */
+/* $card-border-dotted: 1px dotted var(--c-parchment-dark) !default; */
+/* $card-background: var(--c-sheet-paper) !default; */
+/* $card-selected-background: var(--c-sheet-paper) !default; */
 /** Cards **/
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
-  /* align-items: start; */
-  /* max-width: 1024px; */
   margin: 0 auto;
 }
 @media (max-width: 1022px) {
@@ -705,13 +720,12 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .card .card__inner {
   flex: 1;
-  background: var(--c-sheet-paper);
-  border: 1px solid var(--c-parchment-dark);
+  background: rgba(230, 230, 230, 0.1);
+  border: 1px solid #222;
   color: var(--c-sheet-ink);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font-family: "Special Elite", "Courier New", monospace;
   font-weight: 400;
 }
 .card .card__title,
@@ -722,7 +736,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .card .card__title {
   flex: 0 0 auto;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 1.2rem;
   color: var(--c-sheet-heading);
   font-weight: 400;
@@ -756,16 +770,25 @@ input[type=checkbox]:disabled + .button--toggle::after {
 .card .card__title--collapsed ~ .card__footer {
   display: none;
 }
+.card .card__subtitle {
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 1.2rem;
+  color: var(--c-sheet-heading);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.1rem;
+}
 .card .card__content {
   flex: 1 1 auto;
   padding-top: 0;
 }
 .card .card__footer {
-  border-top: 1px dashed var(--c-parchment-dark);
+  border-top: 1px dashed #222;
   flex: 0 0 auto;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 .card .card__footer--no-border {
   border-top: none;
@@ -775,10 +798,10 @@ input[type=checkbox]:disabled + .button--toggle::after {
   grid-template-columns: 1fr 1fr;
 }
 .card--dotted .card__inner {
-  border: 1px dotted var(--c-parchment-dark);
+  border: 1px dashed #222;
 }
 .card--selected .card__inner {
-  background: var(--c-sheet-paper);
+  background: rgb(255, 255, 255);
   border-color: var(--c-sheet-heading);
   border-style: solid;
   color: var(--c-sheet-heading);
@@ -807,14 +830,14 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .home__empty__title {
   margin: 0 0 0.5rem;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--c-sheet-heading);
 }
 .home__empty__body {
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Roboto", "Monaco", sans-serif;
   font-size: 1rem;
   margin: 0 0 1.25rem;
 }
@@ -828,26 +851,31 @@ input[type=checkbox]:disabled + .button--toggle::after {
   text-transform: capitalize;
 }
 
-.card--edge .card__footer {
-  padding: 0;
-  gap: 0;
-  align-items: stretch;
-  border-top: 1px solid var(--c-parchment-dark);
-}
-.card--edge .card__subtitle {
-  margin-bottom: 0;
-  font-size: 1rem;
-}
-.card--edge .card__section {
-  margin-top: 1rem;
-}
-.card--edge .card__list {
-  padding-left: 1.25rem;
-}
-.card--edge .card__list:last-child {
-  margin-bottom: 0;
-}
+/* .card--edge {
+    .card__footer {
+        padding: 0;
+        gap: 0;
+        align-items: stretch;
+        border-top: card_vars.$card-border;
+    }
 
+    .card__subtitle {
+        margin-bottom: 0;
+        font-size: 1rem;
+    }
+
+    .card__section {
+        margin-top: 1rem;
+    }
+
+    .card__list {
+        padding-left: 1.25rem;
+    }
+
+    .card__list:last-child {
+        margin-bottom: 0;
+    }
+} */
 .edge-counter {
   display: flex;
   align-items: stretch;
@@ -863,7 +891,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 .edge-counter__button {
   flex: 0 0 4rem;
   border: none;
-  border-right: 1px solid var(--c-parchment-dark);
+  border-right: 1px solid #222;
   background: #f6f6f6;
   color: var(--c-black);
   font-size: 1.75rem;
@@ -872,7 +900,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .edge-counter__button:last-child {
   border-right: none;
-  border-left: 1px solid var(--c-parchment-dark);
+  border-left: 1px solid #222;
 }
 .edge-counter__button:disabled {
   color: var(--c-medium-grey);
@@ -931,28 +959,33 @@ input[type=checkbox]:disabled + .button--toggle::after {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--c-sheet-paper);
-  border: 1px solid var(--c-parchment-dark);
+  /* background: var(--c-sheet-paper);
+  border: 1px solid var(--c-parchment-dark); */
+  background: rgb(255, 255, 255);
+  border: 1px solid #222;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   color: var(--c-sheet-ink);
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   margin-bottom: 1.5rem;
 }
 .panel .panel__title {
   padding: 1rem 1rem 0 1rem;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Staatliches", "Courier New", monospace;
   letter-spacing: 0.08em;
   color: var(--c-sheet-heading);
   font-size: 1.25rem;
 }
 .panel .panel__content {
   padding: 1rem 1rem;
-  font-family: "Special Elite", "Courier New", monospace;
+  font-family: "Roboto", sans-serif;
 }
 .panel .panel__subpanel {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+}
+.panel--dark {
+  background: var(--c-parchment);
 }
 .panel--controls {
   padding: 0.25rem 0.5rem;

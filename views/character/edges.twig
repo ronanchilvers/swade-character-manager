@@ -6,7 +6,6 @@
 {% set next_label = "Save" %}
 
 {% block page %}
-
 <div class="panel">
     <h2 class="panel__title">Edges</h2>
     <div class="panel__content">
@@ -23,7 +22,7 @@
         {% set isSelected = selected[edge.id]|default(0) > 0 %}
         <div class="card card--skill card--edge">
             <div class="card__inner">
-                <div class="card__title card__title--collapsible card__title--collapsed{% if isSelected %} card__title--selected{% endif %}">{{ edge.name }}</div>
+                <div class="card__title card__title--collapsible card__title--collap1sed{% if isSelected %} card__title--selected{% endif %}">{{ edge.name }}</div>
                 <div class="card__content">
                     {% if edge.summary %}
                     <p>{{ edge.summary }}</p>
@@ -86,7 +85,7 @@
                     </div>
                     {% endif %}
                 </div>
-                <div class="card__footer">
+                <div class="card__footer card__footer--no-border">
                     {% if edge.repeatable %}
                     <div class="edge-counter js-edge-counter">
                         <input
@@ -122,12 +121,12 @@
                             value="{{ selected[edge.id]|default(0) > 0 ? 1 : 0 }}"
                             class="js-edge-input"
                         />
-                        <button
-                            class="edge-toggle__button js-edge-select{% if selected[edge.id]|default(0) > 0 %} edge-toggle__button--active{% endif %}"
-                            type="button"
+                        <label
+                            class="button button--large button--toggle js-edge-select{% if selected[edge.id]|default(0) > 0 %} edge-toggle__button--active{% endif %}"
+                            for="edge_{{ edge.id }}"
                             aria-label="Toggle {{ edge.name }}"
                             aria-pressed="{{ selected[edge.id]|default(0) > 0 ? 'true' : 'false' }}"
-                        >Selected</button>
+                        >Selected</label>
                     </div>
                     {% endif %}
                 </div>

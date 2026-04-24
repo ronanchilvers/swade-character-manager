@@ -30,7 +30,7 @@ function updateEdgeToggle(toggle) {
   const value = Math.max(0, parseInt(input.value || '0', 10)) > 0 ? 1 : 0;
 
   input.value = value;
-  button.classList.toggle('edge-toggle__button--active', value === 1);
+  button.classList.toggle('button--toggle--is-on', value === 1);
   button.setAttribute('aria-pressed', value === 1 ? 'true' : 'false');
   updateEdgeTitleSelectionState(toggle, value === 1);
 }
