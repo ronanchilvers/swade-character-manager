@@ -116,6 +116,7 @@
 .login-form__section--right {
   flex: 1 1;
   background: rgb(67, 167, 233) url(/images/backgrounds/blue-background.png) no-repeat center center;
+  background-size: cover;
 }
 @media (max-width: 767px) {
   .login-form__section--right {

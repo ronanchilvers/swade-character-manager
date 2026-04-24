@@ -1,13 +1,15 @@
 @use "variables" as card_vars;
 
-.edges-group {
-    margin-bottom: 1.5rem;
-}
+/* .edges-group {
+    &--selected {
+        display: none;
+    }
+} */
 
-.edges-group__title {
+/* .edges-group__title {
     padding: 0 0.5rem;
     text-transform: capitalize;
-}
+} */
 
 /* .card--edge {
     .card__footer {
@@ -82,14 +84,14 @@
     line-height: 1;
 }
 
-.edge-toggle {
+/* .edge-toggle {
     display: flex;
     align-items: stretch;
     overflow: hidden;
     width: 100%;
-}
+} */
 
-.edge-toggle__button {
+/* .edge-toggle__button {
     flex: 1 1 auto;
     width: 100%;
     min-height: 4.25rem;
@@ -101,8 +103,4 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-
-    &.edge-toggle__button--active {
-        /* background: card_vars.$card-selected-background; */
-    }
-}
+} */

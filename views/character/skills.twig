@@ -30,13 +30,21 @@
     </div>
 </div>
 
+<h3>Core Skills</h3>
 <div class="cards">
+    {% set core = true %}
     {% for skill in skills %}
+{% if core and not skill.core_skill %}
+    {% set core = false %}
+</div>
+<h3>Optional Skills</h3>
+<div class="cards">
+{% endif %}
     {% set isSelected = skill.id in selected_keys %}
     {% set attributeDie = entity.get(skill.linked_attribute) %}
-    <div class="card card--skill card--{{ skill.core_skill ? 'core' : 'non-core' }}">
+    <div class="card card--skill card--{{ skill.core_skill ? 'core' : 'non-core' }} {% if skill.core_skill %}card--selected{% endif %}">
         <div class="card__inner">
-            <div class="card__title{% if isSelected %} card__title--selected{% endif %}" for="skill_{{ skill.id }}">{% if skill.core_skill %}<strong>CORE</strong>/{% endif %}{{ skill.name }}</div>
+            <div class="card__title {% if not skill.core_skill %}card__title--collaps1ible card__title--co1llapsed{% endif %}{% if isSelected %} card__title--selected{% endif %}" for="skill_{{ skill.id }}">{% if skill.core_skill %}<strong>CORE</strong>/{% endif %}{{ skill.name }}</div>
             <div class="card__content">
                 {% if skill.summary %}
                 <p>{{ skill.summary }}</p>

@@ -180,6 +180,10 @@ main {
   width: 100%;
 }
 
+section {
+  margin-bottom: 1.5rem;
+}
+
 #wrapper {
   flex-grow: 1;
   min-height: 100vh;

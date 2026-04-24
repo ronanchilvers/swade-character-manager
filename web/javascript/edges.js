@@ -5,6 +5,15 @@ function updateEdgeTitleSelectionState(element, isSelected) {
   }
 
   card.classList.toggle('card--selected', isSelected);
+  const group = card.closest('.edges-group');
+  let toggleOn = false;
+  if (isSelected) {
+    toggleOn = true;
+  } else {
+    const selectedEdges = group.querySelectorAll('.card--selected');
+    toggleOn = 0 < selectedEdges.length;
+  }
+  group.classList.toggle('edges-group--selected', toggleOn);
 }
 
 function updateEdgeCounter(counter) {
@@ -33,6 +42,9 @@ function updateEdgeToggle(toggle) {
 function applySelectedFilter(showSelectedOnly) {
   document.querySelectorAll('.cards .card:not(.card--selected)').forEach((card) => {
     card.style.display = showSelectedOnly ? 'none' : '';
+  });
+  document.querySelectorAll('.edges-group:not(.edges-group--selected)').forEach((group) => {
+    group.style.display = showSelectedOnly ? 'none' : '';
   });
 }
 

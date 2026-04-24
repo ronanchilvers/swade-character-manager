@@ -8,6 +8,8 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     margin: 0 auto;
+    margin-bottom: 1.5rem;
+    /* align-items: flex-start; */
 
     @include breakpoints.at(laptop) {
         grid-template-columns: 1fr 1fr;
@@ -24,7 +26,7 @@
     width: 100%;
 
     .card__inner {
-        flex: 1;
+        flex: 1 1;
         background: card.$card-background;
         border: card.$card-border;
         color: card.$card-text-color;
@@ -55,13 +57,15 @@
     .card__title--collapsible {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         cursor: pointer;
     }
     .card__title--collapsible::after {
+        flex: 1 1;
         content: "▾";
         font-size: 0.9rem;
         line-height: 1;
+        text-align: right;
     }
     .card__title--collapsible:focus-visible {
         outline: 2px solid var(--c-black);

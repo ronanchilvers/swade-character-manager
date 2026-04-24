@@ -181,6 +181,10 @@ main {
   width: 100%;
 }
 
+section {
+  margin-bottom: 1.5rem;
+}
+
 #wrapper {
   flex-grow: 1;
   min-height: 100vh;
@@ -697,6 +701,8 @@ input[type=checkbox]:disabled + .button--toggle::after {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   margin: 0 auto;
+  margin-bottom: 1.5rem;
+  /* align-items: flex-start; */
 }
 @media (max-width: 1022px) {
   .cards {
@@ -716,7 +722,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   width: 100%;
 }
 .card .card__inner {
-  flex: 1;
+  flex: 1 1;
   background: rgb(245, 245, 245);
   border: 1px solid #222;
   color: var(--c-sheet-ink);
@@ -745,13 +751,15 @@ input[type=checkbox]:disabled + .button--toggle::after {
 .card .card__title--collapsible {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   cursor: pointer;
 }
 .card .card__title--collapsible::after {
+  flex: 1 1;
   content: "▾";
   font-size: 0.9rem;
   line-height: 1;
+  text-align: right;
 }
 .card .card__title--collapsible:focus-visible {
   outline: 2px solid var(--c-black);
@@ -842,15 +850,15 @@ input[type=checkbox]:disabled + .button--toggle::after {
   margin: 0 0 1.25rem;
 }
 
-.edges-group {
-  margin-bottom: 1.5rem;
-}
-
-.edges-group__title {
-  padding: 0 0.5rem;
-  text-transform: capitalize;
-}
-
+/* .edges-group {
+    &--selected {
+        display: none;
+    }
+} */
+/* .edges-group__title {
+    padding: 0 0.5rem;
+    text-transform: capitalize;
+} */
 /* .card--edge {
     .card__footer {
         padding: 0;
@@ -921,30 +929,25 @@ input[type=checkbox]:disabled + .button--toggle::after {
   line-height: 1;
 }
 
-.edge-toggle {
-  display: flex;
-  align-items: stretch;
-  overflow: hidden;
-  width: 100%;
-}
-
-.edge-toggle__button {
-  flex: 1 1 auto;
-  width: 100%;
-  min-height: 4.25rem;
-  border: none;
-  background: #f6f6f6;
-  color: var(--c-black);
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.edge-toggle__button.edge-toggle__button--active {
-  /* background: card_vars.$card-selected-background; */
-}
-
+/* .edge-toggle {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    width: 100%;
+} */
+/* .edge-toggle__button {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 4.25rem;
+    border: none;
+    background: #f6f6f6;
+    color: var(--c-black);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+} */
 .cards--hindrances input[type=checkbox] {
   position: absolute;
   left: -999px;
