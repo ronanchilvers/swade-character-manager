@@ -1,13 +1,9 @@
 @use "../../settings/sheet-theme" as sheet;
 
-/* $card-border: 1px solid var(--c-parchment-dark) !default; */
 $card-border: 1px solid #222 !default;
-/* $card-border-dotted: 1px dotted var(--c-parchment-dark) !default; */
 $card-border-dotted: 1px dashed #222 !default;
-/* $card-background: var(--c-sheet-paper) !default; */
-$card-background: rgba(230,230,230,0.1) !default;
-/* $card-selected-background: var(--c-sheet-paper) !default; */
-$card-selected-background: rgba(255,255,255,1) !default;
+$card-background: rgba(245, 245, 245) !default;
+$card-selected-background: rgb(255,255,255) !default;
 
 $card-title-font: "Staatliches", "Courier New", monospace !default;
 $card-title-font-size: 1.2rem !default;

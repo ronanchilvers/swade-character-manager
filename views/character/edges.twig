@@ -14,6 +14,17 @@
     </div>
 </div>
 
+<div class="panel panel--controls">
+    <div class="panel__subpanel"></div>
+    <div class="panel__subpanel">
+        <label class="button button--slider">
+            <input type="checkbox" class="js-filter-selected">
+            <span class="button__slide"></span>
+            Show selected only
+        </label>
+    </div>
+</div>
+
 {% for category, edges in edges_by_category %}
 <section class="edges-group">
     <h3 class="edges-group__title">{{ category|replace({'_': ' '})|title }}</h3>

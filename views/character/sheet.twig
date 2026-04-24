@@ -66,6 +66,7 @@
     #}
     <div class="sheet__top">
         <div class="sheet__panel sheet__identity">
+            <h2 class="sheet__title">Identity <a class="button button--small" href="{{ get_url('characters_concept', {hash: entity.hash}) }}">Edit</a></h2>
             <dl class="sheet__identity__grid">
                 <div class="sheet__identity__row">
                     <dt>Name</dt>
@@ -106,7 +107,7 @@
             </div>
         </div>
         <div class="sheet__panel sheet__panel--torn sheet__attributes">
-            <h2 class="sheet__title">Attributes</h2>
+            <h2 class="sheet__title">Attributes <a class="button button--small" href="{{ get_url('characters_attributes', {hash: entity.hash}) }}">Edit</a></h2>
             <ul class="sheet__attributes__list">
                 {% for attr in sheet.attributes %}
                 <li class="sheet__attributes__row">
@@ -139,7 +140,7 @@
             <span class="sheet__rail__label">Fatigue</span>
         </aside>
         <div class="sheet__panel sheet__panel--torn sheet__skills">
-            <h2 class="sheet__title">Skills</h2>
+            <h2 class="sheet__title">Skills <a class="button button--small" href="{{ get_url('characters_skills', {hash: entity.hash}) }}">Edit</a></h2>
             <ul class="sheet__skills__list">
                 {% for skill in sheet.skills %}
                 <li class="sheet__skills__row{% if skill.is_core %} sheet__skills__row--core{% endif %}">
@@ -171,7 +172,7 @@
 
         <div class="sheet__right">
             <div class="sheet__panel sheet__panel--torn sheet__hindrances">
-                <h2 class="sheet__title">Hindrances</h2>
+                <h2 class="sheet__title">Hindrances <a class="button button--small" href="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">Edit</a></h2>
                 <ul class="sheet__list">
                     {% for hindrance in sheet.hindrances %}
                     <li class="sheet__list__row">
@@ -189,13 +190,13 @@
             </div>
 
             <div class="sheet__panel sheet__panel--torn sheet__edges">
-                <h2 class="sheet__title">Edges &amp; Advances</h2>
+                <h2 class="sheet__title">Edges &amp; Advances <a class="button button--small" href="{{ get_url('characters_edges', {hash: entity.hash}) }}">Edit</a></h2>
                 <ul class="sheet__list">
                     {% for edge in sheet.edges %}
                     <li class="sheet__list__row">
                         <span class="sheet__edges__rank">{{ edge_tiers[loop.index0] }}</span>
                         <span class="sheet__edges__name">{{ edge.name }}</span>
-                        <span class="sheet__edges__count">{% if edge.count > 0 %}&times;{{ edge.count }}{% endif %}</span>
+                        <span class="sheet__edges__count">{% if edge.count > 1 %}&times;{{ edge.count }}{% endif %}</span>
                     </li>
                     {% endfor %}
                 </ul>

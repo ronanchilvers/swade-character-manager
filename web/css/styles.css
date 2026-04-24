@@ -165,9 +165,8 @@ body {
   flex-direction: column;
   position: relative;
   color: var(--c-black);
-  background-color: var(--c-white);
   min-height: 100vh;
-  background-color: #fcfcfc;
+  background-color: #ccc;
 }
 
 main {
@@ -453,8 +452,8 @@ main {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #cc3333;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.45), 0 0 4px rgba(204, 51, 51, 0.75);
+  background: #eeeeee;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.45), 0 0 4px rgba(238, 238, 238, 0.75);
   transition: background 120ms ease, box-shadow 120ms ease;
 }
 
@@ -524,7 +523,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   left: 1px;
   bottom: 1px;
   right: auto;
-  background-color: #cc3333;
+  background-color: #eeeeee;
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.45), 0 0 3px rgba(100, 100, 100, 0.85);
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -690,10 +689,6 @@ input[type=checkbox]:disabled + .button--toggle::after {
     transition: none;
   }
 }
-/* $card-border: 1px solid var(--c-parchment-dark) !default; */
-/* $card-border-dotted: 1px dotted var(--c-parchment-dark) !default; */
-/* $card-background: var(--c-sheet-paper) !default; */
-/* $card-selected-background: var(--c-sheet-paper) !default; */
 /** Cards **/
 .cards {
   display: grid;
@@ -720,7 +715,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .card .card__inner {
   flex: 1;
-  background: rgba(230, 230, 230, 0.1);
+  background: rgb(245, 245, 245);
   border: 1px solid #222;
   color: var(--c-sheet-ink);
   display: flex;
@@ -810,10 +805,13 @@ input[type=checkbox]:disabled + .button--toggle::after {
 .cards--character {
   width: 1024px;
   margin: 0 auto;
+  margin-top: 2rem;
 }
 @media (max-width: 1022px) {
   .cards--character {
     width: auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 }
 

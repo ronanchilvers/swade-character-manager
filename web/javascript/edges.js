@@ -4,12 +4,7 @@ function updateEdgeTitleSelectionState(element, isSelected) {
     return;
   }
 
-  const title = card.querySelector('.card__title');
-  if (!title) {
-    return;
-  }
-
-  title.classList.toggle('card__title--selected', isSelected);
+  card.classList.toggle('card--selected', isSelected);
 }
 
 function updateEdgeCounter(counter) {
@@ -33,6 +28,12 @@ function updateEdgeToggle(toggle) {
   button.classList.toggle('button--toggle--is-on', value === 1);
   button.setAttribute('aria-pressed', value === 1 ? 'true' : 'false');
   updateEdgeTitleSelectionState(toggle, value === 1);
+}
+
+function applySelectedFilter(showSelectedOnly) {
+  document.querySelectorAll('.cards .card:not(.card--selected)').forEach((card) => {
+    card.style.display = showSelectedOnly ? 'none' : '';
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -62,4 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
       updateEdgeToggle(toggle);
     });
   });
+
+  const filterToggle = document.querySelector('.js-filter-selected');
+  if (filterToggle) {
+    filterToggle.addEventListener('change', () => applySelectedFilter(filterToggle.checked));
+  }
 });

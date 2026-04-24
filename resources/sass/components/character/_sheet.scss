@@ -21,6 +21,9 @@ $border-color-light: #EEE;
     }
 
     &__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-family: $title-font;
         color: var(--c-sheet-heading);
         text-transform: uppercase;
