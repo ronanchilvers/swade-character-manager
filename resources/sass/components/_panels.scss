@@ -8,8 +8,6 @@ $panel-padding: 2rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /* background: var(--c-sheet-paper);
-    border: 1px solid var(--c-parchment-dark); */
     background: rgba(255,255,255,1);
     border: 1px solid #222;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -37,7 +35,7 @@ $panel-padding: 2rem;
     }
 
     &--dark {
-        background: var(--c-parchment);
+        background: rgb(245, 245, 245);
     }
 
     &--controls {

@@ -406,20 +406,21 @@ main {
   color: var(--c-white);
 }
 
-.button--google {
-  background: #ffffff;
-  border: 1px solid var(--c-parchment-dark);
-  color: #444444;
-  font-family: "Roboto", sans-serif;
-  text-transform: none;
-  letter-spacing: 0;
-}
-.button--google:hover, .button--google:focus-visible {
-  background: var(--c-parchment);
-  border-color: var(--c-sheet-muted);
-  color: #222222;
-}
+/* .button--google {
+    background: #ffffff;
+    border: 1px solid var(--c-parchment-dark);
+    color: #444444;
+    font-family: "Roboto", sans-serif;
+    text-transform: none;
+    letter-spacing: 0;
 
+    &:hover,
+    &:focus-visible {
+        background: var(--c-parchment);
+        border-color: var(--c-sheet-muted);
+        color: #222222;
+    }
+} */
 .button--large {
   padding: 1rem 1.4rem 0.7rem;
   font-size: 1rem;
@@ -957,8 +958,6 @@ input[type=checkbox]:disabled + .button--toggle::after {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* background: var(--c-sheet-paper);
-  border: 1px solid var(--c-parchment-dark); */
   background: rgb(255, 255, 255);
   border: 1px solid #222;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -983,7 +982,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
   justify-content: flex-start;
 }
 .panel--dark {
-  background: var(--c-parchment);
+  background: rgb(245, 245, 245);
 }
 .panel--controls {
   padding: 0.25rem 0.5rem;

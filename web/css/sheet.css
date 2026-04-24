@@ -342,20 +342,21 @@ main {
   color: var(--c-white);
 }
 
-.button--google {
-  background: #ffffff;
-  border: 1px solid var(--c-parchment-dark);
-  color: #444444;
-  font-family: "Roboto", sans-serif;
-  text-transform: none;
-  letter-spacing: 0;
-}
-.button--google:hover, .button--google:focus-visible {
-  background: var(--c-parchment);
-  border-color: var(--c-sheet-muted);
-  color: #222222;
-}
+/* .button--google {
+    background: #ffffff;
+    border: 1px solid var(--c-parchment-dark);
+    color: #444444;
+    font-family: "Roboto", sans-serif;
+    text-transform: none;
+    letter-spacing: 0;
 
+    &:hover,
+    &:focus-visible {
+        background: var(--c-parchment);
+        border-color: var(--c-sheet-muted);
+        color: #222222;
+    }
+} */
 .button--large {
   padding: 1rem 1.4rem 0.7rem;
   font-size: 1rem;

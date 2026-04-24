@@ -7,7 +7,6 @@
     height: 100vh;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
     align-items: center;
     background: var(--c-white);
 
@@ -21,8 +20,8 @@
 
         &--left {
             flex-basis: 560px;
-            background: var(--c-white); // url('/images/backgrounds/paper-tileable.png') repeat top left;
-            border-right: 1px solid var(--c-parchment-dark);
+            background: transparent;
+            border-right: 1px solid #222;
             width: 100%;
 
             @include breakpoints.at('laptop') {
