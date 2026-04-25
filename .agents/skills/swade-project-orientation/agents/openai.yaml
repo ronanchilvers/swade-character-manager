@@ -1,0 +1,4 @@
+interface:
+  display_name: "SWADE Project Orientation"
+  short_description: "Find SWADE structure and architecture."
+  default_prompt: "Use this skill to orient yourself in the SWADE character manager repository before tracing behavior or adding modules."

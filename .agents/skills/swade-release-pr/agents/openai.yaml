@@ -1,0 +1,4 @@
+interface:
+  display_name: "SWADE Release PR"
+  short_description: "Prepare SWADE commits and PRs."
+  default_prompt: "Use this skill when preparing commits, PR descriptions, or release notes for the SWADE character manager."

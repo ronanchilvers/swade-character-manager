@@ -1,0 +1,4 @@
+interface:
+  display_name: "SWADE Sass Assets"
+  short_description: "Edit SWADE Sass and CSS assets."
+  default_prompt: "Use this skill when editing SWADE Sass, CSS artifacts, or frontend presentation assets."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SWADE Data Schema"
+  short_description: "Work on SWADE data and schema."
+  default_prompt: "Use this skill when changing SWADE catalog data, data loaders, entity factories, persistence, or schema files."

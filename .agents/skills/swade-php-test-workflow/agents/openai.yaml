@@ -1,0 +1,4 @@
+interface:
+  display_name: "SWADE PHP Tests"
+  short_description: "Add and run SWADE PHPUnit tests."
+  default_prompt: "Use this skill when adding tests or verifying PHP behavior in the SWADE character manager."

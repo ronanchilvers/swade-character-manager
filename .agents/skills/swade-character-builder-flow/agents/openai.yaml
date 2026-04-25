@@ -1,0 +1,4 @@
+interface:
+  display_name: "SWADE Builder Flow"
+  short_description: "Work on SWADE builder steps and views."
+  default_prompt: "Use this skill when changing the SWADE character builder flow, routes, controllers, views, or related factories."
