@@ -13,12 +13,45 @@ use flight\database\SimplePdo;
 
 class Skill extends Factory
 {
+    private const CORE_SKILL_DIE = 4;
+
     public function forCharacter(Entity $character): array
     {
         return $this->find(
             $this->prefix('character_id') . ' = ?',
             [$character->id],
         );
+    }
+
+    public function insertCoreForCharacter(Entity $character, Skills $skillService): Result
+    {
+        $result = new Result();
+
+        try {
+            $rows = [];
+            foreach ($skillService->core() as $key => $skill) {
+                $rows[] = [
+                    $this->prefix('character_id') => $character->id,
+                    $this->prefix('key') => $key,
+                    $this->prefix('die') => static::CORE_SKILL_DIE,
+                    $this->prefix('attribute') => strtolower($skill['linked_attribute']),
+                    $this->prefix('core') => 'yes',
+                ];
+            }
+
+            if (empty($rows)) {
+                return $result;
+            }
+
+            if (!$this->pdo->insert($this->getTableName(), $rows)) {
+                throw new \RuntimeException('Unable to create core skills');
+            }
+
+            return $result;
+        } catch (Exception $ex) {
+            return $result
+                ->addError($ex->getMessage());
+        }
     }
 
     public function syncForCharacter(Entity $character, array $selected, Skills $skillService): Result

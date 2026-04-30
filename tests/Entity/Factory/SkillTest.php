@@ -13,6 +13,38 @@ use PHPUnit\Framework\TestCase;
 
 class SkillTest extends TestCase
 {
+    private const DATA_DIR = __DIR__ . '/../../../data';
+
+    public function testInsertCoreForCharacterStoresEveryCoreSkillAtD4(): void
+    {
+        $skillService = new Skills(self::DATA_DIR);
+        $expectedRows = [];
+        foreach ($skillService->core() as $key => $skill) {
+            $expectedRows[] = [
+                'skill_character_id' => 10,
+                'skill_key' => $key,
+                'skill_die' => 4,
+                'skill_attribute' => strtolower($skill['linked_attribute']),
+                'skill_core' => 'yes',
+            ];
+        }
+
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('insert')
+            ->with('skills', $expectedRows)
+            ->willReturn((string) count($expectedRows));
+
+        $factory = new Skill($pdo, new Validator());
+        $result = $factory->insertCoreForCharacter(
+            new Entity(['id' => 10]),
+            $skillService,
+        );
+
+        self::assertTrue($result->isSuccess());
+        self::assertCount(5, $expectedRows);
+    }
+
     public function testSyncForCharacterStoresAttributeAndCoreMetadataFromCatalog(): void
     {
         $pdo = $this->createMock(SimplePdo::class);
@@ -46,7 +78,7 @@ class SkillTest extends TestCase
                 'athletics' => 4,
                 'fighting' => 8,
             ],
-            new Skills(__DIR__ . '/../../../data')
+            new Skills(self::DATA_DIR)
         );
 
         self::assertTrue($result->isSuccess());

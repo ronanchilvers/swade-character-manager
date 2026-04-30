@@ -8,6 +8,7 @@ use App\Entity;
 use App\Entity\Factory\Result;
 use flight\database\SimplePdo;
 use Ronanchilvers\Utility\Str;
+use Throwable;
 
 abstract class Factory
 {
@@ -140,14 +141,17 @@ abstract class Factory
         }
 
         try {
-            $id = $this->pdo->insert(
-                $this->getTableName(),
-                $values
-            );
-            $entity->id = $id;
+            $this->pdo->transaction(function (SimplePdo $pdo) use ($entity, $values): void {
+                $id = $pdo->insert(
+                    $this->getTableName(),
+                    $values
+                );
+                $entity->id = $id;
+                $this->afterInsert($entity);
+            });
 
             return new Result();
-        } catch (\Exception $ex) {
+        } catch (Throwable $ex) {
             return new Result()->addError($ex->getMessage());
         }
     }
@@ -189,6 +193,10 @@ abstract class Factory
     }
 
     protected function beforeInsert(Entity $entity): void
+    {
+    }
+
+    protected function afterInsert(Entity $entity): void
     {
     }
 

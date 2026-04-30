@@ -71,10 +71,12 @@ class Base
         if ("POST" == Flight::request()->getMethod()) {
             $entity->name = Filter::noTags($_POST['name']);
             $entity->concept = Filter::noTags($_POST['concept'] ?? '');
-            if (
-                !($errors = $this->factory->validate($entity)) &&
-                $this->factory->upsert($entity)
-            ) {
+            $errors = $this->factory->validate($entity);
+            if (!$errors) {
+                $result = $this->factory->upsert($entity);
+                $errors = $result->errors();
+            }
+            if (!$errors) {
                 Flight::session()->success(
                     sprintf('Saved character %s successfully', $entity->name)
                 );

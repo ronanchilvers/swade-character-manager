@@ -7,6 +7,7 @@ namespace Tests\Character;
 use App\Character\Sheet;
 use App\Entity;
 use App\Entity\Factory\Character as CharacterFactory;
+use App\Entity\Factory\Skill as SkillFactory;
 use App\Entity\Validator;
 use App\Service\Data\Edges;
 use App\Service\Data\Hindrances;
@@ -149,7 +150,7 @@ class SheetTest extends TestCase
         self::assertFalse($row['is_core']);
     }
 
-    public function testEdgesAreEnrichedFromCatalogAndSortedAlpha(): void
+    public function testEdgesAreEnrichedFromCatalogInCharacterOrder(): void
     {
         $result = $this->build(
             character: new Entity(),
@@ -161,7 +162,7 @@ class SheetTest extends TestCase
 
         self::assertCount(2, $result['edges']);
         $names = array_column($result['edges'], 'name');
-        self::assertSame(['Alertness', 'Brawny'], $names);
+        self::assertSame(['Brawny', 'Alertness'], $names);
         self::assertSame('background', $result['edges'][0]['category']);
         self::assertNotSame('', $result['edges'][0]['summary']);
     }
@@ -213,6 +214,8 @@ class SheetTest extends TestCase
         $factory = new CharacterFactory(
             $this->createStub(SimplePdo::class),
             new Validator(),
+            $this->createStub(SkillFactory::class),
+            $this->createStub(Manager::class),
         );
 
         return new Sheet()->build(

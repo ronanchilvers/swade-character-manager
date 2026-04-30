@@ -6,19 +6,23 @@ namespace Tests\Entity\Factory;
 
 use App\Entity;
 use App\Entity\Factory\Character as CharacterFactory;
+use App\Entity\Factory\Result;
+use App\Entity\Factory\Skill;
 use App\Entity\Validator;
+use App\Service\Data\Manager;
+use App\Service\Data\Skills;
+use Flight;
 use flight\database\SimplePdo;
 use flight\util\Collection;
 use PHPUnit\Framework\TestCase;
 
 class CharacterTest extends TestCase
 {
+    private const DATA_DIR = __DIR__ . '/../../../data';
+
     public function testValidAttributeDicePassValidation(): void
     {
-        $factory = new CharacterFactory(
-            $this->createStub(SimplePdo::class),
-            new Validator()
-        );
+        $factory = $this->factory();
 
         $entity = new Entity([
             'hash' => str_repeat('a', 32),
@@ -36,10 +40,7 @@ class CharacterTest extends TestCase
 
     public function testInvalidAttributeDiceAreRejected(): void
     {
-        $factory = new CharacterFactory(
-            $this->createStub(SimplePdo::class),
-            new Validator()
-        );
+        $factory = $this->factory();
 
         $entity = new Entity([
             'hash' => str_repeat('a', 32),
@@ -57,10 +58,7 @@ class CharacterTest extends TestCase
 
     public function testConceptOnlyEntityStillValidatesWithoutAttributes(): void
     {
-        $factory = new CharacterFactory(
-            $this->createStub(SimplePdo::class),
-            new Validator()
-        );
+        $factory = $this->factory();
 
         $entity = new Entity([
             'name' => 'Mara',
@@ -85,7 +83,7 @@ class CharacterTest extends TestCase
                 'character_name' => 'Mara',
             ]));
 
-        $factory = new CharacterFactory($pdo, new Validator());
+        $factory = $this->factory($pdo);
         $entity = $factory->forUserHash(7, str_repeat('b', 32));
 
         self::assertInstanceOf(Entity::class, $entity);
@@ -102,7 +100,7 @@ class CharacterTest extends TestCase
             ->with('characters', 'character_id = ?', [10])
             ->willReturn(1);
 
-        $factory = new CharacterFactory($pdo, new Validator());
+        $factory = $this->factory($pdo);
         $result = $factory->delete(new Entity(['id' => 10]));
 
         self::assertTrue($result->isSuccess());
@@ -116,10 +114,125 @@ class CharacterTest extends TestCase
             ->method('delete')
             ->willThrowException(new \RuntimeException('delete failed'));
 
-        $factory = new CharacterFactory($pdo, new Validator());
+        $factory = $this->factory($pdo);
         $result = $factory->delete(new Entity(['id' => 10]));
 
         self::assertFalse($result->isSuccess());
         self::assertSame(['delete failed'], $result->errors());
+    }
+
+    public function testInsertCreatesCoreSkillsAfterCharacterIdIsAssigned(): void
+    {
+        $this->mapSessionUser(7);
+        $skillService = new Skills(self::DATA_DIR);
+
+        $manager = $this->createMock(Manager::class);
+        $manager->expects(self::once())
+            ->method('getType')
+            ->with(Skills::class)
+            ->willReturn($skillService);
+
+        $skillFactory = $this->createMock(Skill::class);
+        $skillFactory->expects(self::once())
+            ->method('insertCoreForCharacter')
+            ->with(
+                self::callback(function (Entity $entity): bool {
+                    return '10' === $entity->id;
+                }),
+                $skillService,
+            )
+            ->willReturn(new Result());
+
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('insert')
+            ->with(
+                'characters',
+                self::callback(function (array $values): bool {
+                    return 7 === $values['character_user']
+                        && 'Mara' === $values['character_name']
+                        && is_string($values['character_hash'])
+                        && 32 === strlen($values['character_hash']);
+                })
+            )
+            ->willReturn('10');
+        $pdo->expects(self::once())
+            ->method('transaction')
+            ->willReturnCallback(function (callable $callback) use ($pdo): void {
+                $callback($pdo);
+            });
+
+        $entity = new Entity(['name' => 'Mara']);
+        $result = $this->factory($pdo, $skillFactory, $manager)->insert($entity);
+
+        self::assertTrue($result->isSuccess());
+        self::assertSame('10', $entity->id);
+    }
+
+    public function testInsertReturnsErrorAndRollsBackWhenCoreSkillCreationFails(): void
+    {
+        $this->mapSessionUser(7);
+        $rolledBack = false;
+
+        $manager = $this->createMock(Manager::class);
+        $manager->expects(self::once())
+            ->method('getType')
+            ->with(Skills::class)
+            ->willReturn(new Skills(self::DATA_DIR));
+
+        $skillFactory = $this->createStub(Skill::class);
+        $skillFactory->method('insertCoreForCharacter')
+            ->willReturn(new Result(['skill seed failed']));
+
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->method('insert')
+            ->willReturn('10');
+        $pdo->expects(self::once())
+            ->method('transaction')
+            ->willReturnCallback(function (callable $callback) use ($pdo, &$rolledBack): void {
+                try {
+                    $callback($pdo);
+                } catch (\Throwable $ex) {
+                    $rolledBack = true;
+                    throw $ex;
+                }
+            });
+
+        $result = $this->factory($pdo, $skillFactory, $manager)->insert(
+            new Entity(['name' => 'Mara'])
+        );
+
+        self::assertFalse($result->isSuccess());
+        self::assertSame(['skill seed failed'], $result->errors());
+        self::assertTrue($rolledBack);
+    }
+
+    private function factory(
+        ?SimplePdo $pdo = null,
+        ?Skill $skillFactory = null,
+        ?Manager $manager = null,
+    ): CharacterFactory {
+        return new CharacterFactory(
+            $pdo ?? $this->createStub(SimplePdo::class),
+            new Validator(),
+            $skillFactory ?? $this->createStub(Skill::class),
+            $manager ?? $this->createStub(Manager::class),
+        );
+    }
+
+    private function mapSessionUser(int $id): void
+    {
+        $session = new class ($id) {
+            public object $user;
+
+            public function __construct(int $id)
+            {
+                $this->user = (object) ['id' => $id];
+            }
+        };
+
+        Flight::map('session', function () use ($session) {
+            return $session;
+        });
     }
 }

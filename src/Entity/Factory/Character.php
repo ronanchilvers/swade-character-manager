@@ -6,9 +6,14 @@ namespace App\Entity\Factory;
 
 use App\Entity;
 use App\Entity\Factory;
+use App\Entity\Validator;
+use App\Service\Data\Manager;
+use App\Service\Data\Skills;
 use Flight;
+use flight\database\SimplePdo;
 use Respect\Validation\ValidatorBuilder as v;
 use Ronanchilvers\Utility\Str;
+use RuntimeException;
 
 class Character extends Factory
 {
@@ -45,6 +50,15 @@ class Character extends Factory
         ],
     ];
     private const DEFAULT_PACE = 6;
+
+    public function __construct(
+        SimplePdo $pdo,
+        Validator $validator,
+        private Skill $skillFactory,
+        private Manager $manager,
+    ) {
+        parent::__construct($pdo, $validator);
+    }
 
     public function attributeFields(): array
     {
@@ -112,6 +126,18 @@ class Character extends Factory
     {
         $entity->user = Flight::session()->user->id;
         $entity->hash = Str::token(32);
+    }
+
+    protected function afterInsert(Entity $entity): void
+    {
+        $result = $this->skillFactory->insertCoreForCharacter(
+            $entity,
+            $this->manager->getType(Skills::class)
+        );
+
+        if (!$result->isSuccess()) {
+            throw new RuntimeException(implode('; ', $result->errors()));
+        }
     }
 
     protected function beforeUpdate(Entity $entity): void
