@@ -956,9 +956,17 @@ input[type=checkbox]:disabled + .button--toggle::after {
   text-align: left;
   min-width: 1rem;
 }
-.sheet__edges .sheet__list__row span:last-child {
+.sheet__edges .sheet__list__row span {
   flex: 1 1;
+}
+.sheet__edges .sheet__list__row span:first-child {
+  flex: 0 0;
+  min-width: 1rem;
+}
+.sheet__edges .sheet__list__row span:last-child {
+  flex: 0 0;
   text-align: right;
+  white-space: nowrap;
 }
 .sheet__edges__rank {
   font-family: "Staatliches", "Courier New", monospace;

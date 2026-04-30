@@ -366,9 +366,17 @@ $border-color-light: #EEE;
             text-align: left;
             min-width: 1rem;
         }
-        .sheet__list__row span:last-child {
+        .sheet__list__row span {
             flex: 1 1;
+        }
+        .sheet__list__row span:first-child {
+            flex: 0 0;
+            min-width: 1rem;
+        }
+        .sheet__list__row span:last-child {
+            flex: 0 0;
             text-align: right;
+            white-space: nowrap;
         }
 
         &__rank {
