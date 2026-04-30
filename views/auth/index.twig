@@ -4,19 +4,19 @@
 
 {% block wrapper %}
 <div class="login-form">
-    <div class="login-form__section login-form__section--left">
+    <div class="login-form__hero" aria-hidden="true">
+        <img class="login-form__characters" src="/images/backgrounds/characters-1.png" alt="" />
+    </div>
+
+    <div class="login-form__panel">
         <div class="panel panel--dark">
             <div class="login-form__header">
                 <h1>Character Maker</h1>
             </div>
             <div class="login-form__content">
-            <a class="button button--full button--primary" href="{{ url }}">Login With Google</a>
+                <a class="button button--full button--primary" href="{{ url }}">Login With Google</a>
             </div>
         </div>
-    </div>
-
-    <div class="login-form__section login-form__section--right">
-        <img class="login-form__characters" src="/images/backgrounds/characters-1.png" />
     </div>
 </div>
 {% endblock %}

@@ -4,45 +4,30 @@
 
 .login-form {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    background: var(--c-white);
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 3rem 1.5rem;
+    background: rgb(67, 167, 233) url(/images/backgrounds/blue-background.png) no-repeat center center;
+    background-size: cover;
 
-    &__section {
-        padding: 3rem;
-        min-height: 100vh;
+    &__hero {
+        width: min(100%, 760px);
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-
-        &--left {
-            flex-basis: 560px;
-            background: transparent;
-            border-right: 1px solid #222;
-            width: 100%;
-
-            @include breakpoints.at('laptop') {
-                flex-basis: 50%;
-            }
-            @include breakpoints.at('phablet') {
-                flex-basis: 100%;
-            }
-        }
-        &--right {
-            flex: 1 1;
-            background: rgb(67, 167, 233) url(/images/backgrounds/blue-background.png) no-repeat center center;
-            background-size: cover;
-            @include breakpoints.at('phablet') {
-                display: none;
-            }
-        }
     }
+
+    &__panel {
+        width: min(100%, 460px);
+    }
+
     &__header,
     &__content {
-        max-width: 460px;
+        width: 100%;
     }
     &__header {
         text-align: center;
@@ -51,10 +36,25 @@
         padding: 1rem;
     }
     &__characters {
-        max-width: 500px;
+        width: min(100%, 500px);
+        max-height: 360px;
+        object-fit: contain;
+
+        @include breakpoints.at('phablet') {
+            max-height: 280px;
+        }
+
+        @include breakpoints.at('mobile') {
+            max-height: 220px;
+        }
     }
 
     .panel {
         padding: 3rem;
+        margin-bottom: 0;
+
+        @include breakpoints.at('mobile') {
+            padding: 2rem 1.5rem;
+        }
     }
 }
