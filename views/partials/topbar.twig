@@ -1,7 +1,7 @@
 <header class="topbar">
     <div class="topbar__section">
         <h1>
-            SCM
+            {{ site.name }}
             {% if (title is defined) and (title|length > 0) %} : {{ title }}{% elseif (page_title is defined) %} : {{ page_title }}{% endif %}
         </h1>
         <nav class="menu">

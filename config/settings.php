@@ -6,6 +6,7 @@ use App\Http\Cookie;
 
 $settings = [
     "site" => [
+        "name" => "The Forge",
         "url" => "http://localhost:8080",
     ],
     "database" => [

@@ -79,6 +79,7 @@ $container->singleton(
         }
         $twig->addGlobal('session', $container->get(Session::class));
         $twig->addGlobal('request', Flight::request());
+        $twig->addGlobal('site', $settings['site']);
 
         return $twig;
     }

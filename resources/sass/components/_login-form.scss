@@ -54,7 +54,7 @@
             38% calc(100% - 5px), 30% 100%, 22% calc(100% - 4px), 14% calc(100% - 1px),
             8% calc(100% - 5px), 3% 100%, 0 calc(100% - 6px)
         );
-        padding: 3rem;
+        padding: 1rem;
         margin-bottom: 0;
 
         @include breakpoints.at('mobile') {
