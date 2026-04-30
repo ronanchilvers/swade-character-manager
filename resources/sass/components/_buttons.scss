@@ -64,14 +64,15 @@ $button-background-toggle-on: rgba(#fff, 0.7);
 }
 
 .button--danger {
-    background: var(--c-sheet-heading);
-    border: 1px solid var(--c-sheet-heading);
-    color: var(--c-white);
+    background: transparent; //var(--c-sheet-heading);
+    border: 1px dashed #aa0000;
+    color: #aa0000; //var(--c-white);
 
     &:hover,
     &:focus-visible {
         background: var(--c-sheet-rail-item-active);
         border-color: var(--c-sheet-rail-item-border-active);
+        border-style: solid;
         color: var(--c-white);
     }
 }
