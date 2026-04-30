@@ -16,6 +16,10 @@ $border-color-light: #EEE;
     color: var(--c-sheet-ink);
     font-family: "Roboto", sans-serif;
 
+    @include breakpoints.at('laptop') {
+        margin: 1rem 0 1rem 0;
+    }
+
     &__topbar {
         margin-bottom: 1rem;
     }

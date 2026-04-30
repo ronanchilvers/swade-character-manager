@@ -190,7 +190,7 @@ section {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-width: 485px;
+  min-width: 400px;
 }
 
 #wrapper__inner {
@@ -224,7 +224,7 @@ section {
   background-size: cover;
   z-index: 30;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  min-width: 480px;
+  min-width: 400px;
 }
 .topbar .topbar__section {
   display: flex;
@@ -249,8 +249,21 @@ section {
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 479px) {
+  .menu {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
 .menu__item {
   margin-right: 1rem;
+}
+@media (max-width: 479px) {
+  .menu__item {
+    margin: 0 0 0.25rem 0;
+    width: 100%;
+  }
 }
 .menu__item:last-child {
   margin-right: 0;
@@ -638,6 +651,11 @@ input[type=checkbox]:disabled + .button--toggle::after {
   padding: 0 1rem 2rem;
   color: var(--c-sheet-ink);
   font-family: "Roboto", sans-serif;
+}
+@media (max-width: 1022px) {
+  .sheet {
+    margin: 1rem 0 1rem 0;
+  }
 }
 .sheet__topbar {
   margin-bottom: 1rem;

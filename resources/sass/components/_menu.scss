@@ -1,3 +1,5 @@
+@use "../tools/breakpoints";
+
 .menu {
     /* outline: 1px dotted blue; */
 
@@ -6,8 +8,19 @@
     justify-content: space-between;
     align-items: center;
 
+    @include breakpoints.at(mobile) {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
     &__item {
         margin-right: 1rem;
+
+        @include breakpoints.at(mobile) {
+            margin: 0 0 0.25rem 0;
+            width : 100%;
+        }
     }
     &__item:last-child {
         margin-right: 0;
