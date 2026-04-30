@@ -67,6 +67,33 @@ class Character extends Factory
         );
     }
 
+    public function forUserHash(int $userId, string $hash): ?Entity
+    {
+        return $this->one(
+            $this->prefix('user') . ' = ? AND ' . $this->prefix('hash') . ' = ?',
+            [$userId, $hash],
+        );
+    }
+
+    public function delete(Entity $entity): Result
+    {
+        try {
+            $deleted = $this->pdo->delete(
+                $this->getTableName(),
+                $this->prefix('id') . ' = ?',
+                [(int) $entity->id]
+            );
+
+            if (1 !== $deleted) {
+                return new Result()->addError('Unable to delete character');
+            }
+
+            return new Result();
+        } catch (\Exception $ex) {
+            return new Result()->addError($ex->getMessage());
+        }
+    }
+
     public function getValidationRules(): array
     {
         return [

@@ -34,6 +34,37 @@ class Base
         $this->createOrConcept(new Entity());
     }
 
+    public function delete(string $hash): void
+    {
+        $entity = $this->factory->forUserHash(
+            (int) Flight::session()->user->id,
+            $hash
+        );
+        if (!$entity instanceof Entity) {
+            Flight::session()->error('Unable to find character');
+            Flight::redirect(Flight::getUrl('home_page'));
+            return;
+        }
+
+        $confirmedName = trim((string) ($_POST['confirm_name'] ?? ''));
+        if (0 !== strcasecmp($confirmedName, (string) $entity->name)) {
+            Flight::session()->error('Type the character name to confirm deletion');
+            Flight::redirect(Flight::getUrl('home_page'));
+            return;
+        }
+
+        $result = $this->factory->delete($entity);
+        if ($result->isSuccess()) {
+            Flight::session()->success(
+                sprintf('Deleted character %s successfully', $entity->name)
+            );
+        } else {
+            Flight::session()->error('Sorry! There was a problem deleting that character');
+        }
+
+        Flight::redirect(Flight::getUrl('home_page'));
+    }
+
     protected function createOrConcept(Entity $entity): void
     {
         $errors = [];

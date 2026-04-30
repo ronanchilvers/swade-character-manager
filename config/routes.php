@@ -34,6 +34,8 @@ Flight::group('/auth', function () {
 Flight::group('/characters', function () {
     Flight::route('GET|POST /create', [Base::class, 'create'])
         ->setAlias('characters_create');
+    Flight::route('POST /delete/@hash:[a-z0-9]{32}', [Base::class, 'delete'])
+        ->setAlias('characters_delete');
     Flight::route('GET|POST /concept/@hash:[a-z0-9]{32}', [Base::class, 'index'])
         ->setAlias('characters_concept');
     Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Hindrances::class, 'index'])

@@ -1,5 +1,7 @@
 {% extends 'layouts/default.twig' %}
 
+{% do add_script('/javascript/character-delete.js') %}
+
 {% block content %}
 {% if characters|length > 0 %}
 <div class="cards cards--character">
@@ -13,9 +15,37 @@
             <div class="card__footer">
                 <a class="button" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
                 <a class="button" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
+                <button class="button button--danger"
+                        type="button"
+                        data-character-delete-open="{{ character.hash }}">Delete</button>
             </div>
         </div>
     </div>
+    <dialog class="character-delete"
+            aria-labelledby="character-delete-title-{{ character.hash }}"
+            data-character-delete-dialog="{{ character.hash }}"
+            data-character-name="{{ character.name|e('html_attr') }}">
+        <form class="character-delete__form"
+              method="post"
+              action="{{ get_url('characters_delete', {hash: character.hash}) }}">
+            <h2 class="character-delete__title" id="character-delete-title-{{ character.hash }}">Delete {{ character.name }}?</h2>
+            <p class="character-delete__body">
+                This permanently deletes the character and all sheet data. Type <strong>{{ character.name }}</strong> to confirm.
+            </p>
+            <label class="field">
+                <span class="field__label">Character name</span>
+                <input class="field__input"
+                       type="text"
+                       name="confirm_name"
+                       autocomplete="off"
+                       data-character-delete-input>
+            </label>
+            <div class="character-delete__buttons">
+                <button class="button" type="button" data-character-delete-cancel>Cancel</button>
+                <button class="button button--danger" type="submit" data-character-delete-submit disabled>Delete character</button>
+            </div>
+        </form>
+    </dialog>
 {% endfor %}
 </div>
 {% else %}
