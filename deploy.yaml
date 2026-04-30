@@ -1,0 +1,23 @@
+---
+shared:
+  files:
+    - .env.php
+  folders:
+    - tmp/logs
+clear_paths:
+  paths:
+    - .env.php.dist
+    - .claudeignore
+    - .gitignore
+    - .tool-versions
+    - AGENTS.md
+    - CLAUDE.md
+    - composer.json
+    - composer.lock
+    - deploy.yaml
+    - package.json
+    - package-lock.json
+    - phpunit.xml.dist
+    - resources
+    - docs
+    - tests
