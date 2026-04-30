@@ -824,6 +824,16 @@ input[type=checkbox]:disabled + .button--toggle::after {
   gap: 1rem;
   padding-top: 0.5rem;
 }
+@media (max-width: 767px) {
+  .sheet__traits-circles {
+    gap: 0;
+  }
+}
+@media (max-width: 479px) {
+  .sheet__traits-circles {
+    gap: 0;
+  }
+}
 .sheet__circle {
   display: flex;
   flex-direction: column;
@@ -851,10 +861,46 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .sheet__circle--bennies {
   margin-right: 2rem;
+  width: auto;
+}
+@media (max-width: 479px) {
+  .sheet__circle--bennies {
+    margin-right: 1rem;
+  }
 }
 .sheet__circle--bennies .sheet__circle__value, .sheet__circle--bennies .sheet__circle__label {
   border-color: var(--c-sheet-heading);
   color: var(--c-sheet-heading);
+}
+.sheet__counter {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.sheet__counter__button {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 2px solid var(--c-sheet-heading);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--c-sheet-heading);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.sheet__counter__button:hover, .sheet__counter__button:focus-visible {
+  background: var(--c-sheet-heading);
+  color: var(--c-sheet-paper);
+}
+.sheet__counter__button:focus-visible {
+  outline: 2px solid var(--c-sheet-rail-item-selected);
+  outline-offset: 2px;
 }
 .sheet__list {
   list-style: none;

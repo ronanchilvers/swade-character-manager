@@ -139,6 +139,15 @@
       saveState({ [field]: next });
     }
 
+    const control = sheet.querySelector('[data-counter-control="' + field + '"]');
+    if (control) {
+      control.querySelectorAll('[data-counter-step]').forEach((button) => {
+        button.addEventListener('click', () => {
+          step(parseInt(button.dataset.counterStep, 10) || 0);
+        });
+      });
+    }
+
     el.addEventListener('click', (e) => {
       step(e.shiftKey || e.altKey ? -1 : +1);
     });

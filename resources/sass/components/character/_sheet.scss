@@ -210,6 +210,12 @@ $border-color-light: #EEE;
         display: flex;
         gap: 1rem;
         padding-top: 0.5rem;
+        @include breakpoints.at('phablet') {
+            gap: 0;
+        }
+        @include breakpoints.at('mobile') {
+            gap: 0;
+        }
     }
 
     &__circle {
@@ -241,11 +247,51 @@ $border-color-light: #EEE;
 
         &--bennies {
             margin-right: 2rem;
+            width: auto;
+
+            @include breakpoints.at('mobile') {
+                margin-right: 1rem;
+            }
         }
         &--bennies &__value,
         &--bennies &__label {
             border-color: var(--c-sheet-heading);
             color: var(--c-sheet-heading);
+        }
+    }
+
+    &__counter {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        &__button {
+            width: 1.75rem;
+            height: 1.75rem;
+            border: 2px solid var(--c-sheet-heading);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.65);
+            color: var(--c-sheet-heading);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-family: $title-font;
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: manipulation;
+
+            &:hover,
+            &:focus-visible {
+                background: var(--c-sheet-heading);
+                color: var(--c-sheet-paper);
+            }
+
+            &:focus-visible {
+                outline: 2px solid var(--c-sheet-rail-item-selected);
+                outline-offset: 2px;
+            }
         }
     }
 

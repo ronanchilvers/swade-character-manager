@@ -84,12 +84,22 @@
 
             <div class="sheet__traits-circles">
                 <div class="sheet__circle sheet__circle--editable sheet__circle--bennies">
-                    <span class="sheet__circle__value"
-                          data-counter="bennies"
-                          role="spinbutton"
-                          tabindex="0"
-                          aria-valuenow="{{ sheet.state.bennies }}"
-                          aria-valuemin="0">{{ sheet.state.bennies }}</span>
+                    <div class="sheet__counter" data-counter-control="bennies">
+                        <button class="sheet__counter__button"
+                                type="button"
+                                data-counter-step="-1"
+                                aria-label="Decrease bennies">&minus;</button>
+                        <span class="sheet__circle__value"
+                              data-counter="bennies"
+                              role="spinbutton"
+                              tabindex="0"
+                              aria-valuenow="{{ sheet.state.bennies }}"
+                              aria-valuemin="0">{{ sheet.state.bennies }}</span>
+                        <button class="sheet__counter__button"
+                                type="button"
+                                data-counter-step="1"
+                                aria-label="Increase bennies">+</button>
+                    </div>
                     <span class="sheet__circle__label">Bennies</span>
                 </div>
                 <div class="sheet__circle">
