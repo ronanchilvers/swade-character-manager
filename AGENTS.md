@@ -13,7 +13,7 @@
 - Bootstrap SQL files in `schema/` are destructive table rebuilds and must be applied in filename order.
 
 ## Commands
-- Serve locally: `composer run serve` (`http://127.0.0.1:8080`).
+- Serve locally: `composer run serve` (`http://localhost:8080`). Note the dev server may already be running.
 - Run tests: `vendor/bin/phpunit --configuration phpunit.xml.dist`.
 - Rebuild CSS only when needed: `npm run sass-dev` or `npm run sass-prod`.
 - When Sass changes modify tracked files under `web/css/`, commit those rebuilt CSS artifacts in the same change.
