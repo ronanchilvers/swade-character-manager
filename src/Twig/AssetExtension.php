@@ -29,7 +29,7 @@ class AssetExtension extends \Twig\Extension\AbstractExtension
 
     public function getScripts(): array
     {
-        return array_values($this->scripts);
+        return $this->processPathArray(array_values($this->scripts));
     }
 
     public function addStylesheet(string $path): void
@@ -39,6 +39,22 @@ class AssetExtension extends \Twig\Extension\AbstractExtension
 
     public function getStylesheets(): array
     {
-        return array_values($this->stylesheets);
+        return $this->processPathArray(array_values($this->stylesheets));
+    }
+
+    private function processPathArray($paths): array
+    {
+        $deployInfo = realpath(__DIR__ . '/../../.deploy_info');
+        if ($deployInfo && file_exists($deployInfo)) {
+            $deployData = json_decode(file_get_contents($deployInfo), true);
+            if ($deployData && isset($deployData['sha'])) {
+                $sha = $deployData['sha'];
+                $paths = array_map(function ($path) use ($sha) {
+                    return $path . '?v=' . $sha;
+                }, $paths);
+            }
+        }
+
+        return $paths;
     }
 }
