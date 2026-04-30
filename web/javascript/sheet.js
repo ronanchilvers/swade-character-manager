@@ -72,27 +72,16 @@
       return;
     }
 
-    function applyCount(count) {
-      items.forEach((el, i) => {
-        el.classList.toggle('sheet__rail__list__item--selected', i < count);
-        el.setAttribute('aria-pressed', i < count ? 'true' : 'false');
-      });
-    }
-
-    function currentCount() {
-      return items.filter((el) => el.classList.contains('sheet__rail__list__item--selected')).length;
-    }
-
     items.forEach((item, index) => {
       item.setAttribute('role', 'button');
       item.setAttribute('tabindex', '0');
       item.setAttribute('aria-pressed', item.classList.contains('sheet__rail__list__item--selected') ? 'true' : 'false');
 
       const activate = () => {
-        const target = index + 1;
-        const next = currentCount() === target ? index : target;
-        applyCount(next);
-        saveState({ [field]: next });
+        const nextSelected = !item.classList.contains('sheet__rail__list__item--selected');
+        item.classList.toggle('sheet__rail__list__item--selected', nextSelected);
+        item.setAttribute('aria-pressed', nextSelected ? 'true' : 'false');
+        saveState({ [field]: nextSelected ? index + 1 : 0 });
       };
 
       item.addEventListener('click', activate);
