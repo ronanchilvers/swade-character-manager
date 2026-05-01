@@ -11,12 +11,14 @@
 }
 #wrapper__inner {
     max-width: 1024px;
+    width: 100%;
     margin: 0 auto;
     margin-bottom: 5rem;
 
     @include breakpoints.at(laptop) {
         margin: 0 2rem;
         margin-bottom: 5rem;
+        width: auto;
     }
     @include breakpoints.at(tablet) {
         margin-bottom: 8rem;
