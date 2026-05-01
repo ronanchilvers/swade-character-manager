@@ -9,7 +9,7 @@
     gap: 1rem;
     margin: 0 auto;
     margin-bottom: 1.5rem;
-    /* align-items: flex-start; */
+    align-items: flex-start;
 
     @include breakpoints.at(laptop) {
         grid-template-columns: 1fr 1fr;
