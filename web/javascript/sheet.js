@@ -72,16 +72,37 @@
       return;
     }
 
+    function getStep(item, index) {
+      return parseInt(item.dataset.railStep, 10) || index + 1;
+    }
+
+    function applyCount(count) {
+      items.forEach((el, index) => {
+        const isSelected = getStep(el, index) <= count;
+        el.classList.toggle('sheet__rail__list__item--selected', isSelected);
+        el.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+      });
+    }
+
+    function currentCount() {
+      return items.reduce((count, el, index) => {
+        if (!el.classList.contains('sheet__rail__list__item--selected')) {
+          return count;
+        }
+        return Math.max(count, getStep(el, index));
+      }, 0);
+    }
+
     items.forEach((item, index) => {
       item.setAttribute('role', 'button');
       item.setAttribute('tabindex', '0');
       item.setAttribute('aria-pressed', item.classList.contains('sheet__rail__list__item--selected') ? 'true' : 'false');
 
       const activate = () => {
-        const nextSelected = !item.classList.contains('sheet__rail__list__item--selected');
-        item.classList.toggle('sheet__rail__list__item--selected', nextSelected);
-        item.setAttribute('aria-pressed', nextSelected ? 'true' : 'false');
-        saveState({ [field]: nextSelected ? index + 1 : 0 });
+        const target = getStep(item, index);
+        const next = currentCount() === target ? target - 1 : target;
+        applyCount(next);
+        saveState({ [field]: next });
       };
 
       item.addEventListener('click', activate);
