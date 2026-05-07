@@ -1,8 +1,10 @@
 {% extends 'layouts/default.twig' %}
+{% do add_stylesheet('/css/admin.css') %}
 
 {% block content %}
-<section id="wrapper__inner">
-    <p><a class="button" href="{{ get_url('admin_users_index') }}">&laquo; Back to users</a></p>
+<section id="wrapper__inner" class="admin-view">
+    <p class="admin-view__back"><a class="button" href="{{ get_url('admin_users_index') }}">&laquo; Back to users</a></p>
+    <h2 class="admin-view__title">Edit User</h2>
 
     <form class="form" method="post" action="">
         <div class="field">

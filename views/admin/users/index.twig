@@ -1,11 +1,14 @@
 {% extends 'layouts/default.twig' %}
+{% do add_stylesheet('/css/admin.css') %}
 
 {% block content %}
-<section id="wrapper__inner">
-    <h2>All Users</h2>
+<section id="wrapper__inner" class="admin-view">
+    <h2 class="admin-view__title">All Users</h2>
+    <p class="admin-view__intro">Manage access, review account status, and jump into individual user records.</p>
 
     {% if users|length > 0 %}
-    <table>
+    <div class="admin-users">
+    <table class="admin-users__table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -19,35 +22,47 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.firstname }} {{ user.lastname }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.created }}</td>
-                <td>{% if user.superuser %}Yes{% else %}No{% endif %}</td>
-                <td>{{ user.status|title }}</td>
-                <td>
+                <td data-label="Name">
+                    <span class="admin-users__name">{{ user.firstname }} {{ user.lastname }}</span>
+                    <span class="admin-users__meta">User #{{ user.id }}</span>
+                </td>
+                <td data-label="Email">{{ user.email }}</td>
+                <td data-label="Created">{{ user.created }}</td>
+                <td data-label="Superuser">
+                    {% if user.superuser %}
+                    <span class="admin-pill admin-pill--superuser">Superuser</span>
+                    {% else %}
+                    <span class="admin-pill admin-pill--standard">Standard</span>
+                    {% endif %}
+                </td>
+                <td data-label="Status">
+                    <span class="admin-pill admin-pill--status-{{ user.status }}">{{ user.status|title }}</span>
+                </td>
+                <td data-label="Actions">
+                    <div class="admin-users__actions">
                     <a class="button" href="{{ get_url('admin_users_edit', {id: user.id}) }}">Edit</a>
                     {% if user.id == session.user.id %}
-                        <span>Current account</span>
+                        <span class="admin-users__current">Current account</span>
                     {% elseif user.status == 'active' %}
                         <form method="post"
-                              action="{{ get_url('admin_users_disable', {id: user.id}) }}"
-                              style="display:inline-block;">
+                              action="{{ get_url('admin_users_disable', {id: user.id}) }}">
                             <button class="button button--danger" type="submit">Disable</button>
                         </form>
                     {% else %}
                         <form method="post"
-                              action="{{ get_url('admin_users_enable', {id: user.id}) }}"
-                              style="display:inline-block;">
+                              action="{{ get_url('admin_users_enable', {id: user.id}) }}">
                             <button class="button button--primary" type="submit">Re-enable</button>
                         </form>
                     {% endif %}
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    </div>
     {% else %}
-    <p>No users found.</p>
+    <p class="admin-users__empty">No users found.</p>
     {% endif %}
 </section>
 {% endblock %}

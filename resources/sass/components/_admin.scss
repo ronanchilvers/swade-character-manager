@@ -1,0 +1,181 @@
+@use "../settings/css-variables" as vars;
+@use "../settings/sheet-theme" as sheet;
+@use "../tools/breakpoints";
+
+.admin-view {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--c-parchment);
+    border: 1px solid var(--c-parchment-dark);
+    border-radius: vars.$border-radius-default;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    color: var(--c-sheet-ink);
+
+    &__title {
+        margin: 0 0 1rem;
+        font-family: sheet.$sheet-title-font;
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--c-sheet-heading);
+    }
+
+    &__intro {
+        margin: 0 0 1.25rem;
+        font-family: sheet.$sheet-plain-font;
+        font-size: sheet.$sheet-plain-font-size;
+        color: rgba(29, 18, 8, 0.8);
+    }
+
+    &__back {
+        margin-bottom: 1rem;
+    }
+}
+
+.admin-users {
+    overflow-x: auto;
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 0.95rem;
+        background: rgba(255, 255, 255, 0.45);
+    }
+
+    &__table th,
+    &__table td {
+        padding: 0.85rem 1rem;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid rgba(34, 34, 34, 0.12);
+    }
+
+    &__table th {
+        font-family: sheet.$sheet-title-font;
+        font-size: 0.95rem;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--c-sheet-heading);
+        background: rgba(255, 255, 255, 0.55);
+    }
+
+    &__table tbody tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.22);
+    }
+
+    &__table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.38);
+    }
+
+    &__name {
+        font-weight: 600;
+    }
+
+    &__meta {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 0.82rem;
+        color: var(--c-sheet-muted);
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &__actions .button {
+        margin-right: 0;
+    }
+
+    &__actions form {
+        margin: 0;
+    }
+
+    &__current {
+        font-family: sheet.$sheet-title-font;
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--c-sheet-muted);
+    }
+
+    &__empty {
+        margin: 0;
+        font-family: sheet.$sheet-plain-font;
+    }
+
+    @include breakpoints.at(tablet) {
+        &__table,
+        &__table thead,
+        &__table tbody,
+        &__table tr,
+        &__table th,
+        &__table td {
+            display: block;
+        }
+
+        &__table thead {
+            display: none;
+        }
+
+        &__table tbody {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        &__table tr {
+            padding: 0.25rem 0;
+            border: 1px solid rgba(34, 34, 34, 0.12);
+            border-radius: vars.$border-radius-default;
+            background: rgba(255, 255, 255, 0.42);
+        }
+
+        &__table td {
+            border-bottom: 0;
+            padding: 0.45rem 0.9rem;
+        }
+
+        &__table td::before {
+            content: attr(data-label);
+            display: block;
+            margin-bottom: 0.2rem;
+            font-family: sheet.$sheet-title-font;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--c-sheet-muted);
+        }
+    }
+}
+
+.admin-pill {
+    display: inline-block;
+    padding: 0.3rem 0.55rem 0.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(34, 34, 34, 0.18);
+    font-family: sheet.$sheet-title-font;
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+
+    &--status-active,
+    &--superuser {
+        background: rgba(72, 132, 84, 0.14);
+        color: #305f39;
+        border-color: rgba(72, 132, 84, 0.3);
+    }
+
+    &--status-inactive,
+    &--standard {
+        background: rgba(34, 34, 34, 0.08);
+        color: rgba(29, 18, 8, 0.72);
+        border-color: rgba(34, 34, 34, 0.14);
+    }
+}
