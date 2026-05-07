@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controller\Admin\Characters as AdminCharacters;
 use App\Controller\Admin\Users as AdminUsers;
 use App\Controller\Auth;
 use App\Controller\Character\Base;
@@ -34,6 +35,10 @@ Flight::group('/auth', function () {
 
 // Admin
 Flight::group('/admin', function () {
+    Flight::group('/characters', function () {
+        Flight::route('GET /@id:[0-9]+', [AdminCharacters::class, 'index'])
+            ->setAlias('admin_characters_index');
+    });
     Flight::group('/users', function () {
         Flight::route('GET /', [AdminUsers::class, 'index'])
             ->setAlias('admin_users_index');

@@ -1,0 +1,53 @@
+{% extends 'layouts/default.twig' %}
+{% do add_stylesheet('/css/admin.css') %}
+
+{% block content %}
+<section id="wrapper__inner" class="admin-view">
+    <p class="admin-view__back"><a class="button" href="{{ get_url('admin_users_index') }}">&laquo; Back to users</a></p>
+    <h2 class="admin-view__title">User Characters</h2>
+    <p class="admin-view__intro">Review this user’s roster, creation dates, and core stats without opening individual sheets.</p>
+
+    <section class="admin-group">
+        <header class="admin-group__header">
+            <div>
+                <h3 class="admin-group__title">{{ user.firstname }} {{ user.lastname }}</h3>
+                <p class="admin-group__meta">{{ user.email }}</p>
+            </div>
+            <div class="admin-group__summary">
+                <span class="admin-pill {% if user.status == 'active' %}admin-pill--status-active{% else %}admin-pill--status-inactive{% endif %}">{{ user.status|title }}</span>
+                <span class="admin-group__count">{{ characters|length }} character{% if characters|length != 1 %}s{% endif %}</span>
+            </div>
+        </header>
+
+        {% if characters|length > 0 %}
+        <div class="admin-characters">
+            {% for character in characters %}
+            <article class="admin-character">
+                <div class="admin-character__header">
+                    <div>
+                        <h4 class="admin-character__title">{{ character.name }}</h4>
+                        <p class="admin-character__meta">Created {{ character.created }}{% if character.rank %} · Rank {{ character.rank }}{% endif %}</p>
+                    </div>
+                </div>
+
+                {% if character.concept %}
+                <p class="admin-character__concept">{{ character.concept }}</p>
+                {% endif %}
+
+                <dl class="admin-character__stats">
+                {% for key, label in primary_stats %}
+                    <div class="admin-character__stat">
+                        <dt>{{ label }}</dt>
+                        <dd>{{ attribute(character, key) ?? '—' }}</dd>
+                    </div>
+                {% endfor %}
+                </dl>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="admin-group__empty">No characters for this user yet.</p>
+        {% endif %}
+    </section>
+</section>
+{% endblock %}

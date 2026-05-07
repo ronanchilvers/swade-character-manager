@@ -6,7 +6,7 @@
         </h1>
         <nav class="menu">
         {% if session.has('user') %}
-            <a href="{{ get_url('home_page') }}" class="button button--filled menu__item">Your Characters</a>
+            <a href="{{ get_url('home_page') }}" class="button button--filled menu__item">Characters</a>
             <a href="{{ get_url('characters_create') }}" class="button button--filled menu__item">Create a character</a>
             {% if session.user.superuser %}
             <a href="{{ get_url('admin_users_index') }}" class="button button--filled menu__item">Manage Users</a>

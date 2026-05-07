@@ -179,3 +179,143 @@
         border-color: rgba(34, 34, 34, 0.14);
     }
 }
+
+.admin-groups {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-group {
+    padding: 1rem;
+    border: 1px solid rgba(34, 34, 34, 0.12);
+    border-radius: vars.$border-radius-default;
+    background: rgba(255, 255, 255, 0.32);
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: sheet.$sheet-title-font;
+        font-size: 1.2rem;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--c-sheet-heading);
+    }
+
+    &__meta,
+    &__empty {
+        margin: 0.25rem 0 0;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 0.95rem;
+        color: var(--c-sheet-muted);
+    }
+
+    &__summary {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    &__count {
+        font-family: sheet.$sheet-title-font;
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--c-sheet-muted);
+    }
+}
+
+.admin-characters {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.admin-character {
+    padding: 1rem;
+    border-radius: vars.$border-radius-default;
+    background: rgba(255, 255, 255, 0.48);
+    border: 1px solid rgba(34, 34, 34, 0.08);
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: sheet.$sheet-title-font;
+        font-size: 1.05rem;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--c-sheet-heading);
+    }
+
+    &__meta,
+    &__concept {
+        margin: 0.25rem 0 0;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 0.95rem;
+        color: rgba(29, 18, 8, 0.8);
+    }
+
+    &__concept {
+        margin-top: 0.75rem;
+    }
+
+    &__stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.65rem;
+        margin-top: 0.9rem;
+    }
+
+    &__stat {
+        padding: 0.55rem 0.65rem;
+        border-radius: vars.$border-radius-default;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(34, 34, 34, 0.08);
+    }
+
+    &__stat dt {
+        margin: 0 0 0.2rem;
+        font-family: sheet.$sheet-title-font;
+        font-size: 0.78rem;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--c-sheet-muted);
+    }
+
+    &__stat dd {
+        margin: 0;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--c-sheet-ink);
+    }
+}
+
+@include breakpoints.at(tablet) {
+    .admin-group__header {
+        flex-direction: column;
+    }
+
+    .admin-group__summary {
+        justify-content: flex-start;
+    }
+
+    .admin-character__stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

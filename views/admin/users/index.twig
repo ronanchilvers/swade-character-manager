@@ -40,6 +40,7 @@
                 </td>
                 <td data-label="Actions">
                     <div class="admin-users__actions">
+                    <a class="button" href="{{ get_url('admin_characters_index', {id: user.id}) }}">Characters</a>
                     <a class="button" href="{{ get_url('admin_users_edit', {id: user.id}) }}">Edit</a>
                     {% if user.id == session.user.id %}
                         <span class="admin-users__current">Current account</span>
