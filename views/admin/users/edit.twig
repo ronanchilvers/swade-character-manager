@@ -1,0 +1,65 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+<section id="wrapper__inner">
+    <p><a class="button" href="{{ get_url('admin_users_index') }}">&laquo; Back to users</a></p>
+
+    <form class="form" method="post" action="">
+        <div class="field">
+            <label class="field__label">Email</label>
+            <div class="field__inner">
+                <input class="field__input" type="email" value="{{ entity.email }}" disabled />
+            </div>
+        </div>
+
+        <div class="field {% if field_has_error('firstname', errors) %}field--error{% endif %}">
+            <label class="field__label">First name</label>
+            <div class="field__inner">
+                <input class="field__input" type="text" name="firstname" value="{{ entity.firstname }}" />
+            </div>
+        </div>
+
+        <div class="field {% if field_has_error('lastname', errors) %}field--error{% endif %}">
+            <label class="field__label">Last name</label>
+            <div class="field__inner">
+                <input class="field__input" type="text" name="lastname" value="{{ entity.lastname }}" />
+            </div>
+        </div>
+
+        <div class="field {% if field_has_error('status', errors) %}field--error{% endif %}">
+            <label class="field__label">Status</label>
+            <div class="field__inner">
+                <select class="field__input" name="status" {% if is_self %}disabled{% endif %}>
+                {% for status in statuses %}
+                    <option value="{{ status }}" {% if entity.status == status %}selected{% endif %}>{{ status|title }}</option>
+                {% endfor %}
+                </select>
+                {% if is_self %}
+                    <input type="hidden" name="status" value="{{ entity.status }}" />
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="field {% if field_has_error('superuser', errors) %}field--error{% endif %}">
+            <label class="field__label">Superuser</label>
+            <div class="field__inner">
+                <label>
+                    <input type="checkbox"
+                           name="superuser"
+                           value="1"
+                           {% if entity.superuser %}checked{% endif %}
+                           {% if is_self %}disabled{% endif %} />
+                    Grant full admin access
+                </label>
+                {% if is_self and entity.superuser %}
+                    <input type="hidden" name="superuser" value="1" />
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form__buttons">
+            <button class="button button--primary" type="submit">Save User</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

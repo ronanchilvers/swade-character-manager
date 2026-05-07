@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS users (
     user_firstname VARCHAR(64) NOT NULL,
     user_lastname  VARCHAR(128) NOT NULL,
     user_email     VARCHAR(128) NOT NULL,
+    user_superuser TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    user_status    VARCHAR(16) NOT NULL DEFAULT 'active',
     user_created   DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     user_updated   DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (user_id)

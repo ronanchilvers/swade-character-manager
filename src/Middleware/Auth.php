@@ -4,20 +4,33 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use App\Entity\Factory\User;
 use Flight;
-use flight\Engine;
 
 class Auth
 {
-    public function __construct(private Engine $app)
+    private const LOGIN_FAILED_MESSAGE = 'Login failed';
+
+    public function __construct(private User $factory)
     {
     }
 
-    public function before($params)
+    public function before($params): void
     {
-        if (!isset(Flight::session()->user)) {
+        $session = Flight::session();
+        if (!isset($session->user) || !isset($session->user->id)) {
             Flight::redirect('/auth');
             exit;
         }
+
+        $user = $this->factory->byId((int) $session->user->id);
+        if (!$this->factory->isActive($user)) {
+            $session->delete('user');
+            $session->error(static::LOGIN_FAILED_MESSAGE);
+            Flight::redirect('/auth');
+            exit;
+        }
+
+        $session->user = $user;
     }
 }

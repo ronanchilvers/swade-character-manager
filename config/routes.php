@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controller\Admin\Users as AdminUsers;
 use App\Controller\Auth;
 use App\Controller\Character\Base;
 use App\Controller\Character\Hindrances;
@@ -11,6 +12,7 @@ use App\Controller\Character\Sheet;
 use App\Controller\Character\Skills;
 use App\Controller\Home;
 use App\Middleware\Auth as MiddlewareAuth;
+use App\Middleware\Superuser as MiddlewareSuperuser;
 
 // Variables available for registering services:
 // - $container - A flightphp/Container instance
@@ -29,6 +31,20 @@ Flight::group('/auth', function () {
     Flight::route('GET /return', [Auth::class, 'return']);
     Flight::route('GET /logout', [Auth::class, 'logout'])->setAlias('auth_logout');
 });
+
+// Admin
+Flight::group('/admin', function () {
+    Flight::group('/users', function () {
+        Flight::route('GET /', [AdminUsers::class, 'index'])
+            ->setAlias('admin_users_index');
+        Flight::route('GET|POST /@id:[0-9]+', [AdminUsers::class, 'edit'])
+            ->setAlias('admin_users_edit');
+        Flight::route('POST /@id:[0-9]+/disable', [AdminUsers::class, 'disable'])
+            ->setAlias('admin_users_disable');
+        Flight::route('POST /@id:[0-9]+/enable', [AdminUsers::class, 'enable'])
+            ->setAlias('admin_users_enable');
+    });
+}, [MiddlewareAuth::class, MiddlewareSuperuser::class]);
 
 // Characters
 Flight::group('/characters', function () {

@@ -9,14 +9,17 @@ use App\Entity\Factory\User;
 use App\Filter;
 use Exception;
 use Flight;
+use Throwable;
 
 class Auth
 {
+    private const LOGIN_FAILED_MESSAGE = 'Login failed';
+
     public function __construct(private User $factory)
     {
     }
 
-    public function index()
+    public function index(): void
     {
         $url = Flight::google()->getAuthorizationUrl();
         Flight::session()->oauth2state = Flight::google()->getState();
@@ -26,16 +29,15 @@ class Auth
         ]);
     }
 
-    public function logout()
+    public function logout(): void
     {
         Flight::session()->delete('user');
         Flight::redirect('/');
         exit;
     }
 
-    public function return()
+    public function return(): void
     {
-        // http://localhost:8080/auth/return?state=c25da8f37a6834594269f8ededb5369d&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AfrIepA--mwt1MQ9-VyRptGOZBG45o1gC2wNCaTpifmpdKicuir7ZKrcG33YXdEt8kbMFA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&hd=thelittledot.com&prompt=consent
         $request = Flight::request();
         $session = Flight::session();
         foreach (['state', 'code', 'error'] as $key) {
@@ -49,17 +51,17 @@ class Auth
         // Check for errors
         /* @var $error string */
         if (!empty($error)) {
-            var_dump(__METHOD__, 'error(1): ' . $error);
-            exit;
+            $this->failLogin($session);
+            return;
         }
 
         // Check the state is valid
         /* @var $state string */
         if (empty($state) || $session->oauth2state !== $state) {
-            var_dump(__METHOD__, 'error(2): state mismatch');
-            exit;
+            $this->failLogin($session);
+            return;
         }
-        unset($session->oauth2state);
+        $session->delete('oauth2state');
 
         // Retrieve user data
         try {
@@ -70,23 +72,43 @@ class Auth
             ]);
             $googleUser = $google->getResourceOwner($token);
 
-            $user = $this->factory->one(
-                "user_email = ?",
-                [$googleUser->getEmail()]
-            );
+            $user = $this->factory->byEmail((string) $googleUser->getEmail());
             if (is_null($user)) {
                 $user = User::createFromGoogleUser($googleUser);
-                if (!$this->factory->insert($user)) {
+                $result = $this->factory->insert($user);
+                if (!$result->isSuccess()) {
                     throw new Exception('Unable to create new user account');
                 }
             }
-            $session->user = $user;
-
-            Flight::redirect('/');
+        } catch (Throwable $ex) {
+            $this->failLogin($session);
             return;
-        } catch (Exception $ex) {
-            var_dump(__METHOD__, 'error(3): ' . $ex->getMessage());
-            exit;
         }
+
+        if (!$this->factory->isActive($user)) {
+            $this->failLogin($session);
+            return;
+        }
+
+        $session->user = $user;
+
+        Flight::redirect('/');
+        return;
+    }
+
+    private function failLogin(object $session): void
+    {
+        if (method_exists($session, 'delete')) {
+            $session->delete('user');
+            $session->delete('oauth2state');
+        } else {
+            unset($session->user, $session->oauth2state);
+        }
+
+        if (method_exists($session, 'error')) {
+            $session->error(static::LOGIN_FAILED_MESSAGE);
+        }
+
+        Flight::redirect('/auth');
     }
 }
