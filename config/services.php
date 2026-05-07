@@ -109,8 +109,11 @@ foreach ($classes as $class) {
 
 $container->singleton(
     Manager::class,
-    function () {
-        $manager = new Manager(__DIR__ . '/../data');
+    function () use ($container) {
+        $manager = new Manager(
+            __DIR__ . '/../data',
+            $container->get(SimplePdo::class),
+        );
         $manager->addType(Edges::class);
         $manager->addType(Hindrances::class);
         $manager->addType(Skills::class);

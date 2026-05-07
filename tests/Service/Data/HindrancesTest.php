@@ -5,10 +5,43 @@ declare(strict_types=1);
 namespace Tests\Service\Data;
 
 use App\Service\Data\Hindrances;
+use flight\database\SimplePdo;
 use PHPUnit\Framework\TestCase;
 
 class HindrancesTest extends TestCase
 {
+    public function testBuilderDataCanUseDatabaseBackedCatalogRows(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                [
+                    'hindrance_catalog_key' => 'all_thumbs',
+                    'hindrance_catalog_source' => 'core',
+                    'hindrance_catalog_name' => 'All Thumbs',
+                    'hindrance_catalog_summary' => 'The hero is bad with mechanical or electrical devices.',
+                    'hindrance_catalog_levels' => '["minor"]',
+                    'hindrance_catalog_requirements' => '[]',
+                    'hindrance_catalog_effects' => '[{"level":"minor","details":"Applies to Trait rolls made while using mechanical or electrical devices."}]',
+                    'hindrance_catalog_notes' => '[]',
+                    'hindrance_catalog_source_pages' => '[24]',
+                ],
+            ]);
+
+        $service = new Hindrances(__DIR__ . '/../../../data', $pdo);
+        $hindrances = $service->forBuilder();
+
+        self::assertSame('all_thumbs', $hindrances[0]['id']);
+        self::assertSame('core', $hindrances[0]['source']);
+        self::assertSame(['minor'], $hindrances[0]['levels']);
+        self::assertSame([24], $hindrances[0]['source_pages']);
+        self::assertSame(
+            ['Applies to Trait rolls made while using mechanical or electrical devices.'],
+            $hindrances[0]['effects_by_level']['minor'],
+        );
+    }
+
     public function testBuilderDataGroupsMinorAndMajorEffectsWithoutReplacingRawEffects(): void
     {
         $service = new Hindrances(__DIR__ . '/../../../data');

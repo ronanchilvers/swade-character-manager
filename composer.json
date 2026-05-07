@@ -28,7 +28,8 @@
     "tracy/tracy": "^2.11"
   },
   "scripts": {
-    "serve": "cd web && /opt/homebrew/bin/php -S 127.0.0.1:8080 index_dev.php"
+    "serve": "cd web && /opt/homebrew/bin/php -S 127.0.0.1:8080 index_dev.php",
+    "seed:hindrances": "@php scripts/seed-hindrances.php core"
   },
   "config": {
       "process-timeout" : 0,
