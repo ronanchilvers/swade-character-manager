@@ -48,8 +48,7 @@ class Sheet
         $weapons = $this->weaponFactory->forCharacter($entity);
         $user = false;
         if (Flight::isSuperSession()) {
-            $user = Flight::user();
-            if ($user->id != $entity->user) {
+            if (Flight::user() && (Flight::user()->id != $entity->user)) {
                 $user = $this->userFactory->byId((int) $entity->user);
             }
         }
