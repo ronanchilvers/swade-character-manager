@@ -27,4 +27,4 @@ node_modules
 .phpunit.result.cache
 *.csv
 .progress.md
-.deploy_info
+.deploy_info*
