@@ -29,6 +29,7 @@
   },
   "scripts": {
     "serve": "cd web && /opt/homebrew/bin/php -S 127.0.0.1:8080 index_dev.php",
+    "seed:edges": "@php scripts/seed.php edges core",
     "seed:hindrances": "@php scripts/seed.php hindrances core",
     "seed:skills": "@php scripts/seed.php skills core"
   },

@@ -3,6 +3,7 @@
 
 declare(strict_types=1);
 
+use App\Service\Data\EdgeCatalogSeeder;
 use App\Service\Data\HindranceCatalogSeeder;
 use App\Service\Data\SkillCatalogSeeder;
 use flight\database\SimplePdo;
@@ -26,6 +27,7 @@ foreach (['Type' => $type, 'Source' => $source] as $label => $value) {
 }
 
 $filename = match ($type) {
+    'edges' => sprintf('%s/../data/%s/edges.php', __DIR__, $source),
     'hindrances' => sprintf('%s/../data/%s/hindrances.php', __DIR__, $source),
     'skills' => sprintf('%s/../data/%s/skills.php', __DIR__, $source),
     default => unsupportedType($type),
@@ -45,6 +47,7 @@ $pdo = new SimplePdo(
 );
 
 $seeder = match ($type) {
+    'edges' => new EdgeCatalogSeeder($pdo),
     'hindrances' => new HindranceCatalogSeeder($pdo),
     'skills' => new SkillCatalogSeeder($pdo),
     default => unsupportedType($type),

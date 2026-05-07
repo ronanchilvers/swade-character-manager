@@ -11,6 +11,7 @@ use RuntimeException;
 class Manager
 {
     private const DATABASE_AWARE_TYPES = [
+        Edges::class,
         Hindrances::class,
         Skills::class,
     ];
