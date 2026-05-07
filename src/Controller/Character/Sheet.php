@@ -13,6 +13,7 @@ use App\Entity\Factory\Hindrance as FactoryHindrance;
 use App\Entity\Factory\Result;
 use App\Entity\Factory\Skill as FactorySkill;
 use App\Entity\Factory\Weapon as FactoryWeapon;
+use App\Entity\Factory\User as FactoryUser;
 use App\Service\Data\Manager;
 use Flight;
 
@@ -27,6 +28,7 @@ class Sheet
         private FactoryEdge $edgeFactory,
         private FactoryGear $gearFactory,
         private FactoryWeapon $weaponFactory,
+        private FactoryUser $userFactory,
         private Manager $manager,
         private SheetPresenter $presenter,
     ) {
@@ -44,6 +46,13 @@ class Sheet
         $edges = $this->edgeFactory->forCharacter($entity);
         $gear = $this->gearFactory->forCharacter($entity);
         $weapons = $this->weaponFactory->forCharacter($entity);
+        $user = false;
+        if (Flight::isSuperSession()) {
+            $user = Flight::user();
+            if ($user->id != $entity->user) {
+                $user = $this->userFactory->byId((int) $entity->user);
+            }
+        }
 
         $sheet = $this->presenter->build(
             $entity,
@@ -59,6 +68,7 @@ class Sheet
         Flight::render('character/sheet.twig', [
             'page_title' => $entity->name,
             'entity' => $entity,
+            'user' => $user,
             'sheet' => $sheet,
         ]);
     }
@@ -105,6 +115,12 @@ class Sheet
     {
         $entity = $this->factory->forHash($hash);
         if (!$entity instanceof Entity) {
+            Flight::session()->error('Unable to find character');
+            Flight::redirect(Flight::getUrl('home_page'));
+            return null;
+        }
+        $user = Flight::user();
+        if (!Flight::isSuperUser($user) && ($entity->user != $user->id)) {
             Flight::session()->error('Unable to find character');
             Flight::redirect(Flight::getUrl('home_page'));
             return null;

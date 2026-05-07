@@ -28,6 +28,7 @@
                         <h4 class="admin-character__title">{{ character.name }}</h4>
                         <p class="admin-character__meta">Created {{ character.created }}{% if character.rank %} · Rank {{ character.rank }}{% endif %}</p>
                     </div>
+                    <a href="{{ get_url('characters_sheet', {hash: character.hash}) }}" class="button">View Sheet</a>
                 </div>
 
                 {% if character.concept %}

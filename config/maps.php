@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Session;
+use App\Entity;
 use League\OAuth2\Client\Provider\Google;
 use Twig\Environment;
 
@@ -16,6 +17,25 @@ use Twig\Environment;
 // Mapped methods
 Flight::map('session', function () use ($container) {
     return $container->get(Session::class);
+});
+Flight::map('user', function () use ($container) {
+    $session = $container->get(Session::class);
+
+    return $session->user;
+});
+Flight::map('isSuperUser', function (Entity $user) {
+    return (1 === (int) $user->superuser);
+});
+Flight::map('isSuperSession', function () use ($container) {
+    $user = $container->get(Session::class)->user;
+    if (!$user instanceof Entity) {
+        return false;
+    }
+    if (1 !== (int) $user->superuser) {
+        return false;
+    }
+
+    return true;
 });
 Flight::map('google', function () use ($container) {
     return $container->get(Google::class);

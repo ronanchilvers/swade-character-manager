@@ -702,6 +702,9 @@ input[type=checkbox]:disabled + .button--toggle::after {
     grid-template-columns: 1fr;
   }
 }
+.sheet__top--admin {
+  grid-template-columns: 1fr;
+}
 .sheet__middle {
   position: relative;
   display: grid;

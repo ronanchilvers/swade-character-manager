@@ -73,6 +73,9 @@ $border-color-light: #EEE;
             grid-template-columns: 1fr;
         }
     }
+    &__top--admin {
+        grid-template-columns: 1fr;
+    }
 
     &__middle {
         position: relative;

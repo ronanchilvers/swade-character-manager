@@ -64,6 +64,36 @@
         <span class="sheet__status" data-sheet-status aria-live="polite"></span>
     </header>
     #}
+{% if false != user %}
+    <div class="sheet__top sheet__top--admin">
+        <div class="sheet__panel">
+            <h2 class="sheet__title">Forge User</h2>
+            <dl class="sheet__identity__grid">
+                <div class="sheet__identity__row">
+                    <dt>Name</dt>
+                    <dd>{{ user.firstname }} {{ user.lastname }}</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Email</dt>
+                    <dd>{{ user.email }}</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Created</dt>
+                    <dd>{{ user.created }}</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Superuser?</dt>
+                    <dd>{{ user.superuser ? "Yes" : "No" }}</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Status</dt>
+                    <dd>{{ user.status }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+{% endif %}
+
     <div class="sheet__top">
         <div class="sheet__panel sheet__identity">
             <h2 class="sheet__title">Identity <a class="button button--small" href="{{ get_url('characters_concept', {hash: entity.hash}) }}">Edit</a></h2>
