@@ -29,7 +29,7 @@
   },
   "scripts": {
     "serve": "cd web && /opt/homebrew/bin/php -S 127.0.0.1:8080 index_dev.php",
-    "seed:hindrances": "@php scripts/seed-hindrances.php core"
+    "seed:hindrances": "@php scripts/seed.php hindrances core"
   },
   "config": {
       "process-timeout" : 0,
