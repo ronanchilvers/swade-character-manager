@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 use App\Service\Data\HindranceCatalogSeeder;
+use App\Service\Data\SkillCatalogSeeder;
 use flight\database\SimplePdo;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -26,6 +27,7 @@ foreach (['Type' => $type, 'Source' => $source] as $label => $value) {
 
 $filename = match ($type) {
     'hindrances' => sprintf('%s/../data/%s/hindrances.php', __DIR__, $source),
+    'skills' => sprintf('%s/../data/%s/skills.php', __DIR__, $source),
     default => unsupportedType($type),
 };
 
@@ -44,6 +46,7 @@ $pdo = new SimplePdo(
 
 $seeder = match ($type) {
     'hindrances' => new HindranceCatalogSeeder($pdo),
+    'skills' => new SkillCatalogSeeder($pdo),
     default => unsupportedType($type),
 };
 

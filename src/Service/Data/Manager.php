@@ -10,6 +10,11 @@ use RuntimeException;
 
 class Manager
 {
+    private const DATABASE_AWARE_TYPES = [
+        Hindrances::class,
+        Skills::class,
+    ];
+
     protected string $dataDir;
     protected array $types = [];
     protected array $data = [];
@@ -35,7 +40,7 @@ class Manager
             throw new RuntimeException('Unregistered data class ' . $class);
         }
         if (!isset($this->data[$class])) {
-            $this->data[$class] = Hindrances::class === $class
+            $this->data[$class] = in_array($class, self::DATABASE_AWARE_TYPES, true)
                 ? new $class($this->dataDir, $this->pdo)
                 : new $class($this->dataDir);
         }
