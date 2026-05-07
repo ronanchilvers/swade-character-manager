@@ -739,7 +739,7 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .card .card__inner {
   flex: 1 1;
-  background: rgb(245, 245, 245);
+  background: rgba(245, 245, 245, 0.5);
   border: 1px solid #222;
   color: var(--c-sheet-ink);
   display: flex;
@@ -823,9 +823,12 @@ input[type=checkbox]:disabled + .button--toggle::after {
 }
 .card--selected .card__inner {
   background: rgb(255, 255, 255);
-  border-color: var(--c-sheet-heading);
+  border-color: rgb(0, 0, 0);
   border-style: solid;
-  color: var(--c-sheet-heading);
+  color: rgb(0, 0, 0);
+}
+.card--selected .card__inner .card__title, .card--selected .card__inner h4 {
+  color: rgb(0, 0, 0);
 }
 
 .cards--character {

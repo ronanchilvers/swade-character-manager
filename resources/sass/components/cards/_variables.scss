@@ -2,8 +2,10 @@
 
 $card-border: 1px solid #222 !default;
 $card-border-dotted: 1px dashed #222 !default;
-$card-background: rgba(245, 245, 245) !default;
+$card-background: rgba(245, 245, 245, 0.5) !default;
 $card-selected-background: rgb(255,255,255) !default;
+$card-selected-border: rgba(0, 0, 0, 1) !default;
+$card-selected-color: rgba(0, 0, 0, 1) !default;
 
 $card-title-font: "Staatliches", "Courier New", monospace !default;
 $card-title-font-size: 1.2rem !default;

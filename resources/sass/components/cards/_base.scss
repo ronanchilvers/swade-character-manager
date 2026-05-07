@@ -119,8 +119,12 @@
 
     &--selected &__inner {
         background: card.$card-selected-background;
-        border-color: var(--c-sheet-heading);
+        border-color: card.$card-selected-border;
         border-style: solid;
-        color: var(--c-sheet-heading);
+        color: card.$card-selected-color;
+    }
+    &--selected &__inner &__title,
+    &--selected &__inner h4 {
+        color: card.$card-selected-color;
     }
 }
