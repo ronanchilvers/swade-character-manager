@@ -91,6 +91,13 @@ class Campaign extends Factory
         $entity->hash = Str::token(32);
     }
 
+    protected function beforeUpdate(Entity $entity): void
+    {
+        if (0 == strlen($entity->hash)) {
+            $entity->hash = Str::token(32);
+        }
+    }
+
     protected function afterInsert(Entity $entity): void
     {
         $result = $this->memberFactory->ensureMember(

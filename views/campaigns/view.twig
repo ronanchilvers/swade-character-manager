@@ -1,23 +1,31 @@
 {% extends 'layouts/default.twig' %}
 
+{% do add_stylesheet('/css/campaign.css') %}
+
 {% block content %}
 <section id="wrapper__inner" class="campaigns-view">
-    <h2>{{ campaign.name }}</h2>
-    {% if owner %}
-    <p>Owner: {{ owner.firstname }} {{ owner.lastname }}</p>
-    {% endif %}
+    <div class="section__header">
+        <h2>{{ campaign.name }}</h2>
+        {% if is_owner or is_superuser %}
+        <aside class="invite-link">
+            <div class="invite-link__panel">
+                <p class="invite-link__url js-invite-link">{{ invite_url }}</p>
+                <p class="small">Send this link to players to invite them to join your campaign</p>
+            </div>
+            <div class="invite-link__panel invite-link__panel--links">
+                <a href="#">Copy Link</a>
+                <a href="{{ get_url('campaigns_reset', { hash: campaign.hash })}}">Reset Link</a>
+            </div>
+        </aside>
+        {% endif %}
+
+    </div>
+
     {% if campaign.description|length > 0 %}
     <p>{{ campaign.description }}</p>
     {% endif %}
 
-    {% if is_owner or is_superuser %}
-    <div class="panel">
-        <h3 class="panel__title">Invite Link</h3>
-        <div class="panel__content">
-            <input class="field__input" type="text" value="{{ invite_url }}" readonly>
-        </div>
-    </div>
-    {% endif %}
+    <hr />
 
     <h3>Roster</h3>
     {% if roster|length > 0 %}

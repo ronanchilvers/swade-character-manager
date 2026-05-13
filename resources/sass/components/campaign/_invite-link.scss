@@ -1,0 +1,33 @@
+$invite-link-background-color: rgba(255, 255, 255, 0.5);
+$invite-link-border: 1px dotted #999;
+
+.invite-link {
+    padding: 0.75rem 1.25rem;
+    background-color: $invite-link-background-color;
+    border: $invite-link-border;
+    border-radius: 4px;
+    font-size: 0.9rem;
+
+    &__url {
+        color: #007bff;
+    }
+    &__panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        text-align: center;
+
+        p {
+            margin: 0;
+        }
+
+        &--links {
+            flex-direction: row;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

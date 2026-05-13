@@ -75,6 +75,8 @@ Flight::group('/campaigns', function () {
         ->setAlias('campaigns_leave_character');
     Flight::route('POST /@hash:[a-z0-9]{32}/leave', [Campaigns::class, 'leave'])
         ->setAlias('campaigns_leave');
+    Flight::route('GET /@hash:[a-z0-9]{32}/reset', [Campaigns::class, 'reset'])
+        ->setAlias('campaigns_reset');
 }, [MiddlewareAuth::class]);
 
 // Characters

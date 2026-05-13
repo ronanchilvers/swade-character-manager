@@ -149,6 +149,10 @@ p:last-child, ul:last-child, ol:last-child, dl:last-child {
   margin-bottom: 0;
 }
 
+p.small {
+  font-size: 0.8rem;
+}
+
 /** Elements **/
 html {
   font-size: 100%;
@@ -194,6 +198,19 @@ main {
 section {
   margin-bottom: 3rem;
   width: 100%;
+}
+section .section__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: red;
+  margin: 1rem 0;
 }
 
 /** Components **/

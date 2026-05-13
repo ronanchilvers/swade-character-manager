@@ -3,16 +3,10 @@
 {% block content %}
 <section id="wrapper__inner" class="campaigns-view">
     <h2>Your Campaigns</h2>
-    <p>Campaigns you own or have joined.</p>
-
-    <p>
-        <a class="button button--primary" href="{{ get_url('campaigns_create') }}">Create a Campaign</a>
-    </p>
-
     {% if campaigns|length > 0 %}
     <div class="cards">
     {% for campaign in campaigns %}
-        <div class="card">
+        <div class="card card--selected">
             <div class="card__inner">
                 <div class="card__title">{{ campaign.name }}</div>
                 <div class="card__content{% if campaign.description|length == 0 %} card__content--empty{% endif %}">
@@ -24,6 +18,17 @@
             </div>
         </div>
     {% endfor %}
+        <div class="card">
+            <div class="card__inner">
+                <div class="card__title">Create a Campaign</div>
+                <div class="card__content">
+                    Create a new campaign and invite your friends to join you on your adventures...
+                </div>
+                <div class="card__footer">
+                    <a class="button button--primary button--full" href="{{ get_url('campaigns_create') }}">Create a Campaign</a>
+                </div>
+            </div>
+        </div>
     </div>
     {% else %}
     <div class="home__empty">

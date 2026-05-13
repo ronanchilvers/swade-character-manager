@@ -114,6 +114,25 @@ class Campaigns
         ]);
     }
 
+    public function reset(string $hash): void
+    {
+        $campaign = $this->requireMemberCampaign($hash);
+        if (!$campaign instanceof Entity) {
+            return;
+        }
+
+        $campaign->hash = "";
+
+        $result = $this->campaignFactory->update($campaign);
+        if ($result->isSuccess()) {
+            Flight::session()->success('Reset campaign link successfully');
+        } else {
+            Flight::session()->error($result->errors()[0] ?? 'Sorry! There was a problem resetting the link');
+        }
+
+        Flight::redirect(Flight::getUrl('campaigns_view', ['hash' => $campaign->hash]));
+    }
+
     public function addCharacter(string $hash): void
     {
         $campaign = $this->requireMemberCampaign($hash);
