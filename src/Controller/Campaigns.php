@@ -70,6 +70,8 @@ class Campaigns
             return;
         }
         $isMember = $this->memberFactory->isMember($campaign, $this->currentUserId());
+        $roster = $this->roster($campaign);
+        $currentUserCharacters = $this->characterFactory->forCampaignAndUser($campaign, $this->currentUserId());
 
         Flight::render('campaigns/view.twig', [
             'page_title' => $campaign->name,
@@ -79,13 +81,13 @@ class Campaigns
             'is_owner' => (int) $campaign->user === $this->currentUserId(),
             'is_member' => $isMember,
             'is_superuser' => $this->isSuperuser(),
-            'roster' => $this->roster($campaign),
+            'roster' => $roster,
+            'roster_characters' => $this->rosterCharacters($roster),
             'available_characters' => $isMember
                 ? $this->characterFactory->forUserWithoutCampaign($this->currentUserId())
                 : [],
-            'current_user_characters' => $this->characterFactory->forCampaignAndUser($campaign, $this->currentUserId()),
-            'can_leave' => $isMember
-                && [] === $this->characterFactory->forCampaignAndUser($campaign, $this->currentUserId()),
+            'current_user_characters' => $currentUserCharacters,
+            'can_leave' => $isMember && [] === $currentUserCharacters,
         ]);
     }
 
@@ -248,6 +250,22 @@ class Campaigns
         }
 
         return $members;
+    }
+
+    private function rosterCharacters(array $roster): array
+    {
+        $characters = [];
+        foreach ($roster as $row) {
+            foreach ($row['characters'] as $character) {
+                $characters[] = [
+                    'member' => $row['member'],
+                    'user' => $row['user'],
+                    'character' => $character,
+                ];
+            }
+        }
+
+        return $characters;
     }
 
     private function inviteUrl(Entity $campaign): string

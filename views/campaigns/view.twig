@@ -28,70 +28,65 @@
     <hr />
 
     <h3>Roster</h3>
-    {% if roster|length > 0 %}
-    <div class="cards">
-    {% for row in roster %}
-        <div class="card">
+    {% if roster_characters|length > 0 %}
+    <div class="cards cards--character">
+    {% for row in roster_characters %}
+        {% set character = row.character %}
+        <div class="card card--selected">
             <div class="card__inner">
-                <div class="card__title">
-                    {% if row.user %}
-                    {{ row.user.firstname }} {{ row.user.lastname }}
-                    {% else %}
-                    Unknown user
-                    {% endif %}
-                    <span class="admin-pill">{{ row.member.role|title }}</span>
+                <div class="card__title">{{ character.name }}</div>
+                <div class="card__content{% if character.concept|length == 0 %} card__content--empty{% endif %}">
+                    <p class="small">
+                        {% if row.user %}
+                        Player: {{ row.user.firstname }} {{ row.user.lastname }}
+                        {% else %}
+                        Unknown player
+                        {% endif %}
+                        <span class="pill"> Campaign {{ row.member.role|title }}</span>
+                    </p>
+                    {% if character.concept|length > 0 %}{{ character.concept }}{% else %}No concept yet{% endif %}
                 </div>
-                <div class="card__content">
-                    {% if row.characters|length > 0 %}
-                    <ul>
-                    {% for character in row.characters %}
-                        <li>
-                            {% if character.user == session.user.id %}
-                            <a href="{{ get_url('characters_sheet', {hash: character.hash}) }}">{{ character.name }}</a>
-                            {% else %}
-                            {{ character.name }}
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                    </ul>
-                    {% else %}
-                    No linked characters
-                    {% endif %}
-                </div>
-                {% if row.user and row.user.id == session.user.id and row.characters|length > 0 %}
+                {% if character.user == session.user.id %}
                 <div class="card__footer">
-                    {% for character in row.characters %}
+                    <a class="button" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
                     <form method="post" action="{{ get_url('campaigns_leave_character', {hash: campaign.hash, character_hash: character.hash}) }}">
                         <button class="button" type="submit">Remove {{ character.name }}</button>
                     </form>
-                    {% endfor %}
                 </div>
                 {% endif %}
             </div>
         </div>
     {% endfor %}
     </div>
+    {% elseif roster|length > 0 %}
+    <p>No linked characters</p>
     {% else %}
     <p>No members yet.</p>
     {% endif %}
 
+    <hr />
+
     {% if is_member %}
     <h3>Add Character</h3>
     {% if available_characters|length > 0 %}
-    <form method="post" action="{{ get_url('campaigns_add_character', {hash: campaign.hash}) }}">
-        <div class="field">
-            <label class="field__label">Character</label>
-            <div class="field__inner">
-                <select class="field__input" name="character_hash">
-                    <option>Select&hellip;</option>
-                {% for character in available_characters %}
-                    <option value="{{ character.hash }}">{{ character.name }}</option>
-                {% endfor %}
-                </select>
+    <div class="cards cards--character">
+    {% for character in available_characters %}
+        <div class="card card--selected">
+            <div class="card__inner">
+                <div class="card__title">{{ character.name }}</div>
+                <div class="card__content{% if character.concept|length == 0 %} card__content--empty{% endif %}">
+                    {% if character.concept|length > 0 %}{{ character.concept }}{% else %}No concept yet{% endif %}
+                </div>
+                <div class="card__footer">
+                    <form method="post" action="{{ get_url('campaigns_add_character', {hash: campaign.hash}) }}">
+                        <input type="hidden" name="character_hash" value="{{ character.hash }}">
+                        <button class="button button--primary" type="submit" aria-label="Add {{ character.name }} to campaign">Add Character</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <button class="button button--primary" type="submit">Add Character</button>
-    </form>
+    {% endfor %}
+    </div>
     {% else %}
     <p>You have no unassigned characters available.</p>
     {% endif %}

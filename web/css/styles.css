@@ -1141,4 +1141,26 @@ input[type=checkbox]:disabled + .button--toggle::after {
   background-color: #333;
 }
 
+.pill {
+  display: inline-block;
+  padding: 0.3rem 0.55rem 0.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 34, 34, 0.18);
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.pill--status-active, .pill--superuser {
+  background: rgba(72, 132, 84, 0.14);
+  color: #305f39;
+  border-color: rgba(72, 132, 84, 0.3);
+}
+.pill--status-inactive, .pill--standard {
+  background: rgba(34, 34, 34, 0.08);
+  color: rgba(29, 18, 8, 0.72);
+  border-color: rgba(34, 34, 34, 0.14);
+}
+
 /*# sourceMappingURL=styles.css.map */

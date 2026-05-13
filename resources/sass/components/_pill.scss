@@ -1,0 +1,29 @@
+@use "../settings/css-variables" as vars;
+@use "../settings/sheet-theme" as sheet;
+@use "../tools/breakpoints";
+
+.pill {
+    display: inline-block;
+    padding: 0.3rem 0.55rem 0.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(34, 34, 34, 0.18);
+    font-family: sheet.$sheet-title-font;
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+
+    &--status-active,
+    &--superuser {
+        background: rgba(72, 132, 84, 0.14);
+        color: #305f39;
+        border-color: rgba(72, 132, 84, 0.3);
+    }
+
+    &--status-inactive,
+    &--standard {
+        background: rgba(34, 34, 34, 0.08);
+        color: rgba(29, 18, 8, 0.72);
+        border-color: rgba(34, 34, 34, 0.14);
+    }
+}

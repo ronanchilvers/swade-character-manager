@@ -3,6 +3,7 @@
 {% do add_script('/javascript/character-delete.js') %}
 
 {% block content %}
+<h2>Characters</h2>
 {% if characters|length > 0 %}
 <div class="cards cards--character">
 {% for character in characters %}
