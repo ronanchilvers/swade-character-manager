@@ -1,21 +1,22 @@
 {% set tabs = {
-    characters_concept: "The Basics",
-    characters_hindrances: "Hindrances",
-    characters_attributes: "Attributes",
-    characters_skills: "Skills",
-    characters_edges: "Edges",
-    characters_sheet: "Sheet",
+    concept: "The Basics",
+    hindrances: "Hindrances",
+    attributes: "Attributes",
+    skills: "Skills",
+    edges: "Edges",
+    sheet: "Sheet",
 } %}
 
 <nav class="character-tabs">
 {% for route,title in tabs %}
     {% if entity.id %}
-        {% set url = get_url(route, { hash: entity.hash }) %}
+        {% set url = get_url('characters_' ~ route, { hash: entity.hash }) %}
         <a  class="character-tabs__link{% if request.url == url %} character-tabs__link--active{% endif %}"
-            {% if url %}href="{{ get_url(route, { hash: entity.hash }) }}"{% endif %}>
+            {% if url %}href="{{ url }}"{% endif %}>
     {% else %}
         <a  class="character-tabs__link {% if loop.first %}character-tabs__link--active{% else %}character-tabs__link--disabled{% endif %}">
     {% endif %}
-        {{ loop.index }}. {{ title }}</a>
+        <img src="/images/icons/{{ route }}.svg" />
+        <span>{{ title }}</span></a>
 {% endfor %}
 </nav>

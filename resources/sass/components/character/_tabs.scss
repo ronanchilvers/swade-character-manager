@@ -1,35 +1,65 @@
 @use "../../settings/css-variables" as vars;
+@use "../../tools/breakpoints";
+
+$tabs-border-radius: 4px;
+$tabs-border-colour: rgb(0, 0, 0, 0.25);
+$tabs-border-colour-active: rgb(0, 0, 0, 0.5);
+$tabs-background-colour: #ddd;
+$tabs-background-colour-active: #fff;
 
 .character-tabs {
-    position: sticky;
     display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-    background-color: var(--c-black);
-    color: var(--c-white);
-    overflow: hidden;
-    overflow-x: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    /* overflow: hidden; */
+    /* overflow-x: auto; */
+    width: 100%;
 
     &__link {
-        display: block;
-        padding: 0.4rem 1rem;
+        display: flex;
+        justify-content: center;
+        padding: 0.2rem 0.5rem;
+        margin-right: 0.5rem;
+        width: 8rem;
+        /* min-width: 8rem; */
         text-decoration: none;
-        border-top: 1px solid var(--c-black);
-        border-top-left-radius: vars.$border-radius-default;
-        border-top-right-radius: vars.$border-radius-default;
+        text-align: center;
+        border-radius: $tabs-border-radius;
+        background-color: $tabs-background-colour;
+        border: 1px solid $tabs-border-colour;
         white-space: nowrap;
+
+        img {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.2rem;
+            opacity: 0.8;
+        }
+
+        @include breakpoints.at(tablet) {
+            min-width: 3rem;
+            span {
+                display: none;
+            }
+        }
+
+        &:first-child {
+            margin-left: 0.5rem;
+        }
 
         &:hover {
             text-decoration: none;
         }
 
         &--disabled {
-            color: var(--c-dark-grey);
+            color: var(--c-light-grey);
         }
         &--active {
-            /* border-bottom: 5px solid var(--c-red); */
-            background-color: var(--c-white);
+            background-color: $tabs-background-colour-active;
             color: var(--c-black);
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+            border-color: $tabs-border-colour-active;
         }
     }
 }

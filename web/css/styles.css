@@ -163,6 +163,8 @@ body {
   line-height: 1.6;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: relative;
   color: var(--c-black);
   min-height: 100vh;
@@ -170,55 +172,33 @@ body {
 }
 
 main {
-  flex-grow: 1 1 auto;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   z-index: 0;
-  margin: 0;
+  margin: 0 auto;
+  margin-top: 1rem;
   min-height: 100vh;
   width: 100%;
+  max-width: 1024px;
+}
+@media (max-width: 1022px) {
+  main {
+    padding: 0 1rem;
+    /* width: auto; */
+  }
 }
 
 section {
-  margin-bottom: 1.5rem;
-}
-
-#wrapper {
-  flex-grow: 1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 3rem;
   width: 100%;
-  min-width: 400px;
-}
-
-#wrapper__inner {
-  max-width: 1024px;
-  width: 100%;
-  margin: 0 auto;
-  margin-bottom: 5rem;
-}
-@media (max-width: 1022px) {
-  #wrapper__inner {
-    margin: 0 2rem;
-    margin-bottom: 5rem;
-    width: auto;
-  }
-}
-@media (max-width: 999px) {
-  #wrapper__inner {
-    margin-bottom: 8rem;
-  }
 }
 
 /** Components **/
 .topbar {
   position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -228,6 +208,7 @@ section {
   z-index: 30;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 400px;
+  width: 100%;
 }
 .topbar .topbar__section {
   display: flex;
@@ -831,19 +812,17 @@ input[type=checkbox]:disabled + .button--toggle::after {
   color: rgb(0, 0, 0);
 }
 
-.cards--character {
-  width: 1024px;
-  margin: 0 auto;
-  margin-top: 2rem;
-}
-@media (max-width: 1022px) {
-  .cards--character {
-    width: auto;
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-}
+/* .cards--character {
+    width: 1024px;
+    margin: 0 auto;
+    margin-top: 2rem;
 
+    @include breakpoints.at(laptop) {
+        width: auto;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+} */
 .character-delete {
   width: min(92vw, 32rem);
   padding: 0;

@@ -10,6 +10,8 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     position: relative;
     color: var(--c-black);
     min-height: 100vh;

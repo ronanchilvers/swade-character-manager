@@ -17,10 +17,13 @@
     </head>
 
     <body>
-        {% include "partials/toast.twig" %}
+        {% if session.has('user') %}
+            {% include "partials/topbar.twig" %}
+        {% endif %}
         <main>
             {% block wrapper %}{% endblock %}
         </main>
+        {% include "partials/toast.twig" %}
     </body>
     {% for script in get_scripts() %}
         <script src="{{ script }}"></script>

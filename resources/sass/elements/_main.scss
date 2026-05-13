@@ -1,16 +1,24 @@
 @use "../tools/breakpoints";
 
 main {
-    flex-grow: 1 1 auto;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     z-index: 0;
-    margin: 0;
+    margin: 0 auto;
+    margin-top: 1rem;
     min-height: 100vh;
     width: 100%;
+    max-width: 1024px;
+
+    @include breakpoints.at(laptop) {
+        padding: 0 1rem;
+        /* width: auto; */
+    }
 }
 section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    width: 100%;
 }
