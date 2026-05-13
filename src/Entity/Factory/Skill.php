@@ -13,6 +13,8 @@ use flight\database\SimplePdo;
 
 class Skill extends Factory
 {
+    public const SKILL_FIGHTING = 'fighting';
+
     private const CORE_SKILL_DIE = 4;
 
     public function forCharacter(Entity $character): array
@@ -21,6 +23,19 @@ class Skill extends Factory
             $this->prefix('character_id') . ' = ?',
             [$character->id],
         );
+    }
+
+    public function forCharacterAndKey(Entity $character, string $key): ?Entity
+    {
+        $skill = $this->one(
+            $this->prefix('character_id') . ' = ? AND ' . $this->prefix('key') . ' = ?',
+            [$character->id, $key]
+        );
+        if ($skill instanceof Entity) {
+            return $skill;
+        }
+
+        return null;
     }
 
     public function insertCoreForCharacter(Entity $character, Skills $skillService): Result

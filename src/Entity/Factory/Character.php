@@ -194,7 +194,16 @@ class Character extends Factory
     protected function beforeUpdate(Entity $entity): void
     {
         $entity->pace = static::DEFAULT_PACE;
-        $entity->toughness = ceil($entity->vigor / 2);
+        $entity->toughness = 2 + ceil($entity->vigor / 2);
+
+        // Update character parry
+        $skill = $this->skillFactory->forCharacterAndKey(
+            $entity,
+            Skill::SKILL_FIGHTING
+        );
+        if ($skill instanceof Entity) {
+            $entity->parry = 2 + ceil($skill->die / 2);
+        }
     }
 
     private function updateCampaign(Entity $character, ?int $campaignId): Result

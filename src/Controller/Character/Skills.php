@@ -11,6 +11,7 @@ use App\Entity\Factory\Skill as FactorySkill;
 use App\Filter;
 use App\Service\Data\Manager;
 use App\Service\Data\Skills as SkillsData;
+use Exception;
 use Flight;
 
 class Skills
@@ -34,24 +35,32 @@ class Skills
         $skillService = $this->manager->getType(SkillsData::class);
         $characterSkills = $errors = [];
         if ('POST' === Flight::request()->getMethod()) {
-            $selected = Filter::numberArray($_POST['skills'] ?? []);
-            $selected = array_filter($selected);
-            $result = $this->skillFactory->syncForCharacter(
-                $entity,
-                $selected,
-                $skillService
-            );
+            try {
+                $selected = Filter::numberArray($_POST['skills'] ?? []);
+                $selected = array_filter($selected);
+                $result = $this->skillFactory->syncForCharacter(
+                    $entity,
+                    $selected,
+                    $skillService
+                );
+                if (!$result->isSuccess()) {
+                    throw new Exception('Unable to save character skills');
+                }
 
-            if ($result->isSuccess()) {
+                $result = $this->factory->update($entity);
+                if (!$result->isSuccess()) {
+                    throw new Exception('Unable to update character');
+                }
                 Flight::session()->success(
                     sprintf('Saved character %s successfully', $entity->name)
                 );
                 Flight::redirect(Flight::getUrl('characters_edges', ['hash' => $entity->hash]));
                 return;
+            } catch (Exception $e) {
+                Flight::session()->error(
+                    $e->getMessage() ?: 'Sorry! There was a problem'
+                );
             }
-            Flight::session()->error(
-                'Sorry! There was a problem!'
-            );
         } else {
             $characterSkills = $this->skillFactory->forCharacter($entity);
             $selected = [];
