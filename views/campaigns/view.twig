@@ -53,7 +53,7 @@
                 <div class="card__footer">
                     <a class="button" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
                     <form method="post" action="{{ get_url('campaigns_leave_character', {hash: campaign.hash, character_hash: character.hash}) }}">
-                        <button class="button" type="submit">Remove {{ character.name }}</button>
+                        <button class="button" type="submit">Remove from campaign</button>
                     </form>
                 </div>
                 {% endif %}
@@ -83,7 +83,7 @@
                 <div class="card__footer">
                     <form method="post" action="{{ get_url('campaigns_add_character', {hash: campaign.hash}) }}">
                         <input type="hidden" name="character_hash" value="{{ character.hash }}">
-                        <button class="button button--primary" type="submit" aria-label="Add {{ character.name }} to campaign">Add Character</button>
+                        <button class="button button--primary" type="submit" aria-label="Add to campaign">Add to campaign</button>
                     </form>
                 </div>
             </div>
