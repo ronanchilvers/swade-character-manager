@@ -30,4 +30,4 @@ node_modules
 .deploy_info*
 
 # Development artifacts
-web/css/*/*.map
+web/css/*.map
