@@ -6,7 +6,7 @@
 {% if characters|length > 0 %}
 <div class="cards cards--character">
 {% for character in characters %}
-    <div class="card">
+    <div class="card card--selected">
         <div class="card__inner">
             <div class="card__title">{{ character.name }}</div>
             <div class="card__content{% if character.concept|length == 0 %} card__content--empty{% endif %}">
@@ -47,6 +47,17 @@
         </form>
     </dialog>
 {% endfor %}
+    <div class="card">
+        <div class="card__inner">
+            <div class="card__title">Create a character</div>
+            <div class="card__content card__content--empty">
+                Create a new character to go adventuring with&hellip;
+            </div>
+            <div class="card__footer">
+                <a class="button button--primary button--full" href="{{ get_url('characters_create') }}">Create a Character</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% else %}
     <div class="home__empty">

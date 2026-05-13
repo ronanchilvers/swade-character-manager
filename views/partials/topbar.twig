@@ -7,22 +7,12 @@
         <nav class="menu">
         {% if session.has('user') %}
             <a href="{{ get_url('home_page') }}" class="button button--filled menu__item">Characters</a>
-            <a href="{{ get_url('characters_create') }}" class="button button--filled menu__item">Create a character</a>
+            {#<a href="{{ get_url('characters_create') }}" class="button button--filled menu__item">Create a character</a>#}
             {% if session.user.superuser %}
             <a href="{{ get_url('admin_users_index') }}" class="button button--filled menu__item">Manage Users</a>
             {% endif %}
             <a href="{{ get_url('auth_logout') }}" class="button button--filled menu__item">Logout</a>
-            {#
-            <div class="menu__item menu__item--user dropdown">
-                <img src="/images/icons/settings.svg" />
-                <div class="dropdown__menu">
-                    <span class="dropdown__menu__item">{{ session.user.firstname }} {{ session.user.lastname }}</span>
-                    <a href="{{ get_url('auth_logout') }}" class="dropdown__menu__item">Logout</a>
-                </div>
-            <div>
-            #}
         {% endif %}
         </nav>
     </div>
-
 </header>

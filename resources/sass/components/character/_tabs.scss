@@ -1,4 +1,5 @@
 @use "../../settings/css-variables" as vars;
+@use "../../settings/sheet-theme" as sheet;
 @use "../../tools/breakpoints";
 
 $tabs-border-radius: 4px;
@@ -6,29 +7,32 @@ $tabs-border-colour: rgb(0, 0, 0, 0.25);
 $tabs-border-colour-active: rgb(0, 0, 0, 0.5);
 $tabs-background-colour: #ddd;
 $tabs-background-colour-active: #fff;
+$tabs-text-color: #666;
+$tabs-text-color-active: #333;
+$tabs-text-color-disabled: #999;
 
 .character-tabs {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 0.75rem;
-    /* overflow: hidden; */
-    /* overflow-x: auto; */
     width: 100%;
 
     &__link {
+        font-family: sheet.$sheet-title-font;
+        color: $tabs-text-color;
         display: flex;
         justify-content: center;
         padding: 0.2rem 0.5rem;
         margin-right: 0.5rem;
         width: 8rem;
-        /* min-width: 8rem; */
         text-decoration: none;
         text-align: center;
         border-radius: $tabs-border-radius;
         background-color: $tabs-background-colour;
         border: 1px solid $tabs-border-colour;
         white-space: nowrap;
+        cursor: pointer;
 
         img {
             width: 24px;
@@ -53,11 +57,15 @@ $tabs-background-colour-active: #fff;
         }
 
         &--disabled {
-            color: var(--c-light-grey);
+            color: $tabs-text-color-disabled;
+            cursor: auto;
+            img {
+                opacity: 0.4;
+            }
         }
         &--active {
             background-color: $tabs-background-colour-active;
-            color: var(--c-black);
+            color: $tabs-text-color-active;
             box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
             border-color: $tabs-border-colour-active;
         }
