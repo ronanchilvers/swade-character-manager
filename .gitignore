@@ -28,3 +28,6 @@ node_modules
 *.csv
 .progress.md
 .deploy_info*
+
+# Development artifacts
+web/css/*/*.map

@@ -9,7 +9,7 @@ $topbar-border-colour: #cccccc;
     justify-content: flex-start;
     flex-direction: column;
     padding: 1rem;
-    background: var(--c-white) url(/images/backgrounds/blue-background.png) no-repeat center center;
+    background: var(--c-white) url(/images/backgrounds/blue-background-tileable.png) repeat top left;
     background-size: cover;
     z-index: 30;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
