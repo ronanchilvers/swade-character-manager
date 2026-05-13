@@ -1,6 +1,7 @@
 {% extends 'layouts/default.twig' %}
 
 {% do add_stylesheet('/css/campaign.css') %}
+{% do add_script('/javascript/campaign-invite.js') %}
 
 {% block content %}
 <section id="wrapper__inner" class="campaigns-view">
@@ -13,7 +14,7 @@
                 <p class="small">Send this link to players to invite them to join your campaign</p>
             </div>
             <div class="invite-link__panel invite-link__panel--links">
-                <a href="#">Copy Link</a>
+                <a href="#" class="js-copy-invite-link">Copy Link</a>
                 <a href="{{ get_url('campaigns_reset', { hash: campaign.hash })}}">Reset Link</a>
             </div>
         </aside>
