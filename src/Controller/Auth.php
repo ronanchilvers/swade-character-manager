@@ -72,7 +72,6 @@ class Auth
                 'code' => $code,
             ]);
             $googleUser = $google->getResourceOwner($token);
-
             $user = $this->factory->byEmail((string) $googleUser->getEmail());
             if (is_null($user)) {
                 $user = User::createFromGoogleUser($googleUser);

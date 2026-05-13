@@ -1,0 +1,26 @@
+@use "../../tools/breakpoints";
+
+.roster {
+    &-header {
+        /* outline: 1px dotted red; */
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+
+        @include breakpoints.at('phablet') {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        &__panel {
+            line-height: 1;
+            @include breakpoints.at('phablet') {
+                width: 100%;
+            }
+        }
+    }
+}

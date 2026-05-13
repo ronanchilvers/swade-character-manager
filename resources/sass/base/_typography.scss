@@ -16,7 +16,7 @@ a {
 }
 @for $level from 1 through 4 {
     h#{$level} {
-        font-size: 2.2rem - (($level - 1) * 0.2rem);
+        font-size: 2.5rem - (($level - 1) * 0.4rem);
         font-family: "Staatliches", system-ui;
         font-weight: 400;
         color: var(--c-sheet-heading);

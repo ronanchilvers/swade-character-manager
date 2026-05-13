@@ -7,21 +7,6 @@
 <section id="wrapper__inner" class="campaigns-view">
     <div class="section__header">
         <h2>{{ campaign.name }}</h2>
-        {% if is_owner or is_superuser %}
-        <aside class="invite-link">
-            <div class="invite-link__panel">
-                <p class="invite-link__url js-invite-link">{{ invite_url }}</p>
-                <p class="small">Send this link to players to invite them to join your campaign</p>
-            </div>
-            <div class="invite-link__panel invite-link__panel--links">
-                <a href="#" class="js-copy-invite-link">Copy Link</a>
-                <a href="{{ get_url('campaigns_reset', { hash: campaign.hash })}}">Reset Link</a>
-            </div>
-        </aside>
-        {% else %}
-        <p><strong>Owner: {{ owner.firstname }} {{ owner.lastname }}</strong></p>
-        {% endif %}
-
     </div>
 
     {% if campaign.description|length > 0 %}
@@ -30,8 +15,29 @@
 
     <hr />
 
-    <h3>Roster</h3>
+    <div class="roster-header">
+        <div class="roster-header__panel">
+            <h3>{{ owner.firstname }} {{ owner.lastname }}</h3>
+            <p class="small1">Game Master</p>
+        </div>
+        {% if is_owner or is_superuser %}
+        <div class="roster-header__panel">
+            <aside class="invite-link">
+                <div class="invite-link__panel">
+                    <p class="invite-link__url js-invite-link">{{ invite_url }}</p>
+                    <p class="small">Send this link to players to invite them to join your campaign</p>
+                </div>
+                <div class="invite-link__panel invite-link__panel--links">
+                    <a href="#" class="js-copy-invite-link">Copy Link</a>
+                    <a href="{{ get_url('campaigns_reset', { hash: campaign.hash })}}">Reset Link</a>
+                </div>
+            </aside>
+        </div>
+        {% endif %}
+    </div>
+
     {% if roster_characters|length > 0 %}
+    <h3>Active Characters in the Campaign</h3>
     <div class="cards cards--character">
     {% for row in roster_characters %}
         {% set character = row.character %}
@@ -45,9 +51,8 @@
                         {% else %}
                         Unknown player
                         {% endif %}
-                        <span class="pill"> Campaign {{ row.member.role|title }}</span>
                     </p>
-                    {% if character.concept|length > 0 %}{{ character.concept }}{% else %}No concept yet{% endif %}
+                    {% if character.concept|length > 0 %}<p>{{ character.concept }}</p>{% else %}<p>No concept yet</p>{% endif %}
                 </div>
                 {% if character.user == session.user.id %}
                 <div class="card__footer">
@@ -67,10 +72,8 @@
     <p>No members yet.</p>
     {% endif %}
 
-    <hr />
-
     {% if is_member %}
-    <h3>Add Character</h3>
+    <h3>Characters that can be added to the campaign</h3>
     {% if available_characters|length > 0 %}
     <div class="cards cards--character">
     {% for character in available_characters %}
@@ -93,6 +96,8 @@
     {% else %}
     <p>You have no unassigned characters available.</p>
     {% endif %}
+
+    <hr />
 
     <h3>Leave Campaign</h3>
     {% if can_leave %}
