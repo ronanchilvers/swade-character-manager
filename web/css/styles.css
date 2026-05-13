@@ -202,15 +202,15 @@ section {
 section .section__header {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 hr {
   border: 0;
   height: 1px;
-  background-color: red;
-  margin: 1rem 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
 }
 
 /** Components **/

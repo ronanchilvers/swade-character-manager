@@ -17,6 +17,8 @@
                 <a href="{{ get_url('campaigns_reset', { hash: campaign.hash })}}">Reset Link</a>
             </div>
         </aside>
+        {% else %}
+        <p><strong>Owner: {{ owner.firstname }} {{ owner.lastname }}</strong></p>
         {% endif %}
 
     </div>

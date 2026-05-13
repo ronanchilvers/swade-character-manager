@@ -58,6 +58,43 @@ class Campaigns
         ]);
     }
 
+    public function edit(string $hash): void
+    {
+        $campaign = $this->campaignForHash($hash);
+        if (!$campaign instanceof Entity) {
+            return;
+        }
+        if (!$this->canEdit($campaign)) {
+            Flight::session()->error('You do not have permission to edit that campaign');
+            Flight::redirect(Flight::getUrl('campaigns_view', ['hash' => $campaign->hash]));
+            return;
+        }
+
+        $errors = [];
+        if ('POST' === Flight::request()->getMethod()) {
+            $campaign->name = trim(Filter::noTags($_POST['name'] ?? ''));
+            $campaign->description = trim(Filter::noTags($_POST['description'] ?? ''));
+            $errors = $this->campaignFactory->validate($campaign);
+            if (!$errors) {
+                $result = $this->campaignFactory->update($campaign);
+                $errors = $result->errors();
+            }
+            if (!$errors) {
+                Flight::session()->success(sprintf('Updated campaign %s', $campaign->name));
+                Flight::redirect(Flight::getUrl('campaigns_view', ['hash' => $campaign->hash]));
+                return;
+            }
+            Flight::session()->error('Sorry! There was a problem updating that campaign');
+        }
+
+        Flight::render('campaigns/edit.twig', [
+            'page_title' => sprintf('Edit %s', $campaign->name),
+            'campaign' => $campaign,
+            'entity' => $campaign,
+            'errors' => $errors,
+        ]);
+    }
+
     public function view(string $hash): void
     {
         $campaign = $this->campaignForHash($hash);
@@ -233,6 +270,12 @@ class Campaigns
     {
         return $this->isSuperuser()
             || $this->memberFactory->isMember($campaign, $this->currentUserId());
+    }
+
+    private function canEdit(Entity $campaign): bool
+    {
+        return $this->isSuperuser()
+            || (int) $campaign->user === $this->currentUserId();
     }
 
     private function roster(Entity $campaign): array

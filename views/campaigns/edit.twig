@@ -1,0 +1,26 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+<section id="wrapper__inner" class="campaigns-view">
+    <h2>Edit Campaign</h2>
+
+    <form method="post" action="{{ get_url('campaigns_edit', { hash: campaign.hash }) }}">
+        <div class="field {% if field_has_error('name', errors) %}field--error{% endif %}">
+            <label class="field__label">Campaign name</label>
+            <div class="field__inner">
+                <input class="field__input" type="text" name="name" maxlength="128" value="{{ entity.name }}">
+            </div>
+        </div>
+
+        <div class="field {% if field_has_error('description', errors) %}field--error{% endif %}">
+            <label class="field__label">Description</label>
+            <div class="field__inner">
+                <textarea class="field__input" name="description" rows="5">{{ entity.description }}</textarea>
+            </div>
+        </div>
+
+        <button class="button button--primary" type="submit">Save Changes</button>
+        <a class="button" href="{{ get_url('campaigns_view', { hash: campaign.hash }) }}">Cancel</a>
+    </form>
+</section>
+{% endblock %}

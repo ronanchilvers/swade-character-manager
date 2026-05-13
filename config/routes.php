@@ -67,6 +67,8 @@ Flight::group('/campaigns', function () {
         ->setAlias('campaigns_create');
     Flight::route('GET /@hash:[a-z0-9]{32}', [Campaigns::class, 'view'])
         ->setAlias('campaigns_view');
+    Flight::route('GET|POST /@hash:[a-z0-9]{32}/edit', [Campaigns::class, 'edit'])
+        ->setAlias('campaigns_edit');
     Flight::route('GET|POST /join/@hash:[a-z0-9]{32}', [Campaigns::class, 'join'])
         ->setAlias('campaigns_join');
     Flight::route('POST /@hash:[a-z0-9]{32}/characters', [Campaigns::class, 'addCharacter'])

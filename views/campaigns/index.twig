@@ -14,6 +14,9 @@
                 </div>
                 <div class="card__footer">
                     <a class="button" href="{{ get_url('campaigns_view', {hash: campaign.hash}) }}">Open</a>
+                {% if campaign.user == session.user.id %}
+                    <a class="button" href="{{ get_url('campaigns_edit', { hash: campaign.hash })}}">Edit Campaign</a>
+                {% endif %}
                 </div>
             </div>
         </div>
