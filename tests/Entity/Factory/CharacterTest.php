@@ -121,6 +121,91 @@ class CharacterTest extends TestCase
         self::assertSame(['delete failed'], $result->errors());
     }
 
+    public function testCampaignValidationAcceptsNullOrPositiveInteger(): void
+    {
+        $entity = new Entity([
+            'hash' => str_repeat('a', 32),
+            'user' => 1,
+            'name' => 'Mara',
+            'campaign' => null,
+        ]);
+
+        self::assertSame([], $this->factory()->validate($entity));
+
+        $entity->campaign = 4;
+        self::assertSame([], $this->factory()->validate($entity));
+
+        $entity->campaign = 0;
+        self::assertContains('campaign', $this->factory()->validate($entity));
+    }
+
+    public function testJoinCampaignRejectsDifferentExistingCampaign(): void
+    {
+        $result = $this->factory()->joinCampaign(
+            new Entity(['id' => 4]),
+            new Entity(['id' => 10, 'campaign' => 9]),
+        );
+
+        self::assertFalse($result->isSuccess());
+        self::assertSame(['Character already belongs to another campaign'], $result->errors());
+    }
+
+    public function testJoinCampaignIsIdempotentForSameCampaign(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::never())
+            ->method('update');
+
+        $result = $this->factory($pdo)->joinCampaign(
+            new Entity(['id' => 4]),
+            new Entity(['id' => 10, 'campaign' => 4]),
+        );
+
+        self::assertTrue($result->isSuccess());
+    }
+
+    public function testJoinCampaignAssignsCampaignColumn(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('update')
+            ->with('characters', ['character_campaign' => 4], 'character_id = ?', [10])
+            ->willReturn(1);
+
+        $character = new Entity(['id' => 10]);
+        $result = $this->factory($pdo)->joinCampaign(new Entity(['id' => 4]), $character);
+
+        self::assertTrue($result->isSuccess());
+        self::assertSame(4, $character->campaign);
+    }
+
+    public function testLeaveCampaignClearsCampaignColumn(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('update')
+            ->with('characters', ['character_campaign' => null], 'character_id = ?', [10])
+            ->willReturn(1);
+
+        $character = new Entity(['id' => 10, 'campaign' => 4]);
+        $result = $this->factory($pdo)->leaveCampaign($character);
+
+        self::assertTrue($result->isSuccess());
+        self::assertNull($character->campaign);
+    }
+
+    public function testDeleteIsBlockedWhenCharacterBelongsToCampaign(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::never())
+            ->method('delete');
+
+        $result = $this->factory($pdo)->delete(new Entity(['id' => 10, 'campaign' => 4]));
+
+        self::assertFalse($result->isSuccess());
+        self::assertSame(['Character must leave the campaign before deletion'], $result->errors());
+    }
+
     public function testInsertCreatesCoreSkillsAfterCharacterIdIsAssigned(): void
     {
         $this->mapSessionUser(7);

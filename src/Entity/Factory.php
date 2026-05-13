@@ -141,14 +141,12 @@ abstract class Factory
         }
 
         try {
-            $this->pdo->transaction(function (SimplePdo $pdo) use ($entity, $values): void {
-                $id = $pdo->insert(
-                    $this->getTableName(),
-                    $values
-                );
-                $entity->id = $id;
-                $this->afterInsert($entity);
-            });
+            $id = $this->pdo->insert(
+                $this->getTableName(),
+                $values
+            );
+            $entity->id = $id;
+            $this->afterInsert($entity);
 
             return new Result();
         } catch (Throwable $ex) {

@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 use App\Character\Sheet;
 use App\Entity\Factory\Character;
+use App\Entity\Factory\Campaign;
+use App\Entity\Factory\Campaign\Member as CampaignMember;
 use App\Entity\Factory\Edge;
 use App\Entity\Factory\Gear;
 use App\Entity\Factory\Hindrance;
@@ -95,6 +97,8 @@ $container->singleton(
 
 // Database factories
 $classes = [
+    CampaignMember::class,
+    Campaign::class,
     Character::class,
     User::class,
     Hindrance::class,

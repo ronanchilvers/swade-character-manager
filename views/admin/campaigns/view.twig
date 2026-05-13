@@ -1,0 +1,55 @@
+{% extends 'layouts/default.twig' %}
+{% do add_stylesheet('/css/admin.css') %}
+
+{% block content %}
+<section id="wrapper__inner" class="admin-view">
+    <h2 class="admin-view__title">{{ campaign.name }}</h2>
+    {% if owner %}
+    <p class="admin-view__intro">Owner: {{ owner.firstname }} {{ owner.lastname }} ({{ owner.email }})</p>
+    {% endif %}
+
+    {% if roster|length > 0 %}
+    <div class="admin-users">
+        <table class="admin-users__table">
+            <thead>
+                <tr>
+                    <th>Member</th>
+                    <th>Role</th>
+                    <th>Characters</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in roster %}
+                <tr>
+                    <td data-label="Member">
+                        {% if row.user %}
+                        <span class="admin-users__name">{{ row.user.firstname }} {{ row.user.lastname }}</span>
+                        <span class="admin-users__meta">{{ row.user.email }}</span>
+                        {% else %}
+                        Unknown user
+                        {% endif %}
+                    </td>
+                    <td data-label="Role">{{ row.member.role|title }}</td>
+                    <td data-label="Characters">
+                        {% if row.characters|length > 0 %}
+                        <ul>
+                        {% for character in row.characters %}
+                            <li><a href="{{ get_url('characters_sheet', {hash: character.hash}) }}">{{ character.name }}</a></li>
+                        {% endfor %}
+                        </ul>
+                        {% else %}
+                        No linked characters
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>No members found.</p>
+    {% endif %}
+
+    <p><a class="button" href="{{ get_url('admin_campaigns_index') }}">Back to Campaigns</a></p>
+</section>
+{% endblock %}

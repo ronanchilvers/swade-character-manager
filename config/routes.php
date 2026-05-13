@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 use App\Controller\Admin\Characters as AdminCharacters;
+use App\Controller\Admin\Campaigns as AdminCampaigns;
 use App\Controller\Admin\Users as AdminUsers;
 use App\Controller\Auth;
+use App\Controller\Campaigns;
 use App\Controller\Character\Base;
 use App\Controller\Character\Hindrances;
 use App\Controller\Character\Attributes;
@@ -35,6 +37,12 @@ Flight::group('/auth', function () {
 
 // Admin
 Flight::group('/admin', function () {
+    Flight::group('/campaigns', function () {
+        Flight::route('GET /', [AdminCampaigns::class, 'index'])
+            ->setAlias('admin_campaigns_index');
+        Flight::route('GET /@hash:[a-z0-9]{32}', [AdminCampaigns::class, 'view'])
+            ->setAlias('admin_campaigns_view');
+    });
     Flight::group('/characters', function () {
         Flight::route('GET /@id:[0-9]+', [AdminCharacters::class, 'index'])
             ->setAlias('admin_characters_index');
@@ -50,6 +58,24 @@ Flight::group('/admin', function () {
             ->setAlias('admin_users_enable');
     });
 }, [MiddlewareAuth::class, MiddlewareSuperuser::class]);
+
+// Campaigns
+Flight::group('/campaigns', function () {
+    Flight::route('GET /', [Campaigns::class, 'index'])
+        ->setAlias('campaigns_index');
+    Flight::route('GET|POST /create', [Campaigns::class, 'create'])
+        ->setAlias('campaigns_create');
+    Flight::route('GET /@hash:[a-z0-9]{32}', [Campaigns::class, 'view'])
+        ->setAlias('campaigns_view');
+    Flight::route('GET|POST /join/@hash:[a-z0-9]{32}', [Campaigns::class, 'join'])
+        ->setAlias('campaigns_join');
+    Flight::route('POST /@hash:[a-z0-9]{32}/characters', [Campaigns::class, 'addCharacter'])
+        ->setAlias('campaigns_add_character');
+    Flight::route('POST /@hash:[a-z0-9]{32}/characters/@character_hash:[a-z0-9]{32}/leave', [Campaigns::class, 'leaveCharacter'])
+        ->setAlias('campaigns_leave_character');
+    Flight::route('POST /@hash:[a-z0-9]{32}/leave', [Campaigns::class, 'leave'])
+        ->setAlias('campaigns_leave');
+}, [MiddlewareAuth::class]);
 
 // Characters
 Flight::group('/characters', function () {

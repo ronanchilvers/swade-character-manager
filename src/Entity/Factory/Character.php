@@ -89,8 +89,58 @@ class Character extends Factory
         );
     }
 
+    public function forCampaign(Entity $campaign): array
+    {
+        return $this->find(
+            $this->prefix('campaign') . ' = ?',
+            [(int) $campaign->id],
+            $this->prefix('name') . ' ASC',
+        );
+    }
+
+    public function forCampaignAndUser(Entity $campaign, int $userId): array
+    {
+        return $this->find(
+            $this->prefix('campaign') . ' = ? AND ' . $this->prefix('user') . ' = ?',
+            [(int) $campaign->id, $userId],
+            $this->prefix('name') . ' ASC',
+        );
+    }
+
+    public function forUserWithoutCampaign(int $userId): array
+    {
+        return $this->find(
+            $this->prefix('user') . ' = ? AND ' . $this->prefix('campaign') . ' IS NULL',
+            [$userId],
+            $this->prefix('name') . ' ASC',
+        );
+    }
+
+    public function joinCampaign(Entity $campaign, Entity $character): Result
+    {
+        $campaignId = (int) $campaign->id;
+        $currentCampaignId = (int) ($character->campaign ?? 0);
+        if ($currentCampaignId > 0 && $currentCampaignId !== $campaignId) {
+            return new Result(['Character already belongs to another campaign']);
+        }
+        if ($currentCampaignId === $campaignId) {
+            return new Result();
+        }
+
+        return $this->updateCampaign($character, $campaignId);
+    }
+
+    public function leaveCampaign(Entity $character): Result
+    {
+        return $this->updateCampaign($character, null);
+    }
+
     public function delete(Entity $entity): Result
     {
+        if ((int) ($entity->campaign ?? 0) > 0) {
+            return new Result(['Character must leave the campaign before deletion']);
+        }
+
         try {
             $deleted = $this->pdo->delete(
                 $this->getTableName(),
@@ -119,6 +169,7 @@ class Character extends Factory
             'spirit' => v::intVal()->in([4, 6, 8, 10, 12]),
             'strength' => v::intVal()->in([4, 6, 8, 10, 12]),
             'vigor' => v::intVal()->in([4, 6, 8, 10, 12]),
+            'campaign' => v::oneOf(v::nullType(), v::intVal()->greaterThan(0)),
         ];
     }
 
@@ -144,5 +195,26 @@ class Character extends Factory
     {
         $entity->pace = static::DEFAULT_PACE;
         $entity->toughness = ceil($entity->vigor / 2);
+    }
+
+    private function updateCampaign(Entity $character, ?int $campaignId): Result
+    {
+        if ((int) ($character->id ?? 0) <= 0) {
+            return new Result(['Unable to update character campaign']);
+        }
+
+        try {
+            $this->pdo->update(
+                $this->getTableName(),
+                [$this->prefix('campaign') => $campaignId],
+                $this->prefix('id') . ' = ?',
+                [(int) $character->id],
+            );
+            $character->campaign = $campaignId;
+
+            return new Result();
+        } catch (\Exception $ex) {
+            return new Result()->addError($ex->getMessage());
+        }
     }
 }

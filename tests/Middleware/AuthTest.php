@@ -25,7 +25,12 @@ class AuthTest extends TestCase
             ->onlyMethods(['byId', 'isActive'])
             ->getMock();
 
-        Flight::map('session', fn () => new AuthMiddlewareTestSession());
+        $session = new AuthMiddlewareTestSession();
+        Flight::map('session', fn () => $session);
+        Flight::map('request', fn () => new class {
+            public string $method = 'GET';
+            public string $url = '/campaigns/join/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+        });
         Flight::map('redirect', function (string $url): void {
             throw new AuthMiddlewareRedirected($url);
         });
@@ -36,6 +41,35 @@ class AuthTest extends TestCase
         } catch (AuthMiddlewareRedirected $redirect) {
             self::assertSame('/auth', $redirect->url);
         }
+
+        self::assertSame('/campaigns/join/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', $session->auth_return_url);
+    }
+
+    public function testMissingSessionUserIgnoresUnsafeReturnUrl(): void
+    {
+        $factory = $this->getMockBuilder(User::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['byId', 'isActive'])
+            ->getMock();
+
+        $session = new AuthMiddlewareTestSession();
+        Flight::map('session', fn () => $session);
+        Flight::map('request', fn () => new class {
+            public string $method = 'GET';
+            public string $url = '//evil.example/path';
+        });
+        Flight::map('redirect', function (string $url): void {
+            throw new AuthMiddlewareRedirected($url);
+        });
+
+        try {
+            (new Auth($factory))->before([]);
+            self::fail('Expected redirect');
+        } catch (AuthMiddlewareRedirected $redirect) {
+            self::assertSame('/auth', $redirect->url);
+        }
+
+        self::assertFalse(isset($session->auth_return_url));
     }
 
     public function testInactiveSessionUserIsLoggedOutWithGenericMessage(): void

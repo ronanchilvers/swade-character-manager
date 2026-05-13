@@ -1,0 +1,48 @@
+{% extends 'layouts/default.twig' %}
+{% do add_stylesheet('/css/admin.css') %}
+
+{% block content %}
+<section id="wrapper__inner" class="admin-view">
+    <h2 class="admin-view__title">All Campaigns</h2>
+    <p class="admin-view__intro">Review campaign ownership, membership, and linked characters.</p>
+
+    {% if campaigns|length > 0 %}
+    <div class="admin-users">
+        <table class="admin-users__table">
+            <thead>
+                <tr>
+                    <th>Campaign</th>
+                    <th>Owner</th>
+                    <th>Created</th>
+                    <th>Members</th>
+                    <th>Characters</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for campaign in campaigns %}
+                <tr>
+                    <td data-label="Campaign">
+                        <span class="admin-users__name">{{ campaign.name }}</span>
+                        <span class="admin-users__meta">Campaign #{{ campaign.id }}</span>
+                    </td>
+                    <td data-label="Owner">
+                        {{ campaign.owner_firstname }} {{ campaign.owner_lastname }}
+                        <span class="admin-users__meta">{{ campaign.owner_email }}</span>
+                    </td>
+                    <td data-label="Created">{{ campaign.created }}</td>
+                    <td data-label="Members">{{ campaign.member_count }}</td>
+                    <td data-label="Characters">{{ campaign.character_count }}</td>
+                    <td data-label="Actions">
+                        <a class="button" href="{{ get_url('admin_campaigns_view', {hash: campaign.hash}) }}">View</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="admin-users__empty">No campaigns found.</p>
+    {% endif %}
+</section>
+{% endblock %}

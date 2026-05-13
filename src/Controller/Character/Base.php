@@ -53,6 +53,12 @@ class Base
             return;
         }
 
+        if ((int) ($entity->campaign ?? 0) > 0) {
+            Flight::session()->error('This character must leave the campaign before deletion');
+            Flight::redirect(Flight::getUrl('home_page'));
+            return;
+        }
+
         $result = $this->factory->delete($entity);
         if ($result->isSuccess()) {
             Flight::session()->success(

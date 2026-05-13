@@ -92,8 +92,41 @@ class Auth
 
         $session->user = $user;
 
-        Flight::redirect('/');
+        $returnUrl = $this->consumeReturnUrl($session);
+        Flight::redirect($returnUrl ?? '/');
         return;
+    }
+
+    private function consumeReturnUrl(object $session): ?string
+    {
+        $returnUrl = isset($session->auth_return_url)
+            ? (string) $session->auth_return_url
+            : null;
+
+        if (method_exists($session, 'delete')) {
+            $session->delete('auth_return_url');
+        } else {
+            unset($session->auth_return_url);
+        }
+
+        if (is_null($returnUrl) || !$this->isSafeReturnUrl($returnUrl)) {
+            return null;
+        }
+
+        return $returnUrl;
+    }
+
+    private function isSafeReturnUrl(string $url): bool
+    {
+        if (!str_starts_with($url, '/') || str_starts_with($url, '//')) {
+            return false;
+        }
+
+        $parts = parse_url($url);
+
+        return is_array($parts)
+            && !isset($parts['scheme'])
+            && !isset($parts['host']);
     }
 
     private function failLogin(object $session): void
@@ -101,8 +134,9 @@ class Auth
         if (method_exists($session, 'delete')) {
             $session->delete('user');
             $session->delete('oauth2state');
+            $session->delete('auth_return_url');
         } else {
-            unset($session->user, $session->oauth2state);
+            unset($session->user, $session->oauth2state, $session->auth_return_url);
         }
 
         if (method_exists($session, 'error')) {
