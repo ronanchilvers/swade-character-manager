@@ -2,7 +2,7 @@
     <div class="topbar__section">
         <h1>
             {{ site.name }}
-            {% if (title is defined) and (title|length > 0) %} : {{ title }}{% elseif (page_title is defined) %} : {{ page_title }}{% endif %}
+            {# {% if (title is defined) and (title|length > 0) %} : {{ title }}{% elseif (page_title is defined) %} : {{ page_title }}{% endif %} #}
         </h1>
         <nav class="menu">
         {% if session.has('user') %}
