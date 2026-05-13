@@ -1,3 +1,5 @@
+@use "../tools/breakpoints";
+
 section {
     margin-bottom: 3rem;
     width: 100%;
@@ -7,5 +9,11 @@ section {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
+
+        @include breakpoints.at('phablet') {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
     }
 }
