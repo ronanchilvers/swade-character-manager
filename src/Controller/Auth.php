@@ -25,6 +25,7 @@ class Auth
         Flight::session()->oauth2state = Flight::google()->getState();
 
         Flight::render('auth/index.twig', [
+            'body_class' => 'login',
             'url' => $url,
         ]);
     }

@@ -16,7 +16,7 @@
     {% endfor %}
     </head>
 
-    <body>
+    <body{% if body_class %} class="{{ body_class }}"{% endif %}>
         {% if session.has('user') %}
             {% include "partials/topbar.twig" %}
         {% endif %}
