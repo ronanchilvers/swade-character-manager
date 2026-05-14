@@ -7,6 +7,7 @@ namespace Tests\Service\Data;
 use App\Service\Data\Skills;
 use flight\database\SimplePdo;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class SkillsTest extends TestCase
 {
@@ -90,5 +91,95 @@ class SkillsTest extends TestCase
         self::assertSame('agility', $service->attributeForSkill('athletics'));
         self::assertSame('smarts', $service->attributeForSkill('notice'));
         self::assertNull($service->attributeForSkill('not_real'));
+    }
+
+    public function testFileCatalogIsUsedWhenDatabaseRowsAreUnavailable(): void
+    {
+        $throwingPdo = $this->createMock(SimplePdo::class);
+        $throwingPdo->expects(self::once())
+            ->method('fetchAll')
+            ->willThrowException(new RuntimeException('catalog table missing'));
+
+        $emptyPdo = $this->createMock(SimplePdo::class);
+        $emptyPdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([]);
+
+        self::assertCount(32, (new Skills(__DIR__ . '/../../../data'))->all());
+        self::assertCount(32, (new Skills(__DIR__ . '/../../../data', $throwingPdo))->all());
+        self::assertCount(32, (new Skills(__DIR__ . '/../../../data', $emptyPdo))->all());
+    }
+
+    public function testDatabaseRowsDecodeInvalidJsonColumnsAsEmptyArrays(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                [
+                    'skill_catalog_key' => 'spellcasting',
+                    'skill_catalog_source' => 'custom',
+                    'skill_catalog_name' => 'Spellcasting',
+                    'skill_catalog_linked_attribute' => 'smarts',
+                    'skill_catalog_core_skill' => '0',
+                    'skill_catalog_arcane_background' => 'Magic',
+                    'skill_catalog_summary' => '',
+                    'skill_catalog_requirements' => '',
+                    'skill_catalog_effects' => '{bad json',
+                    'skill_catalog_notes' => null,
+                    'skill_catalog_source_pages' => '[60]',
+                ],
+            ]);
+
+        $entry = (new Skills(__DIR__ . '/../../../data', $pdo))->forId('spellcasting');
+
+        self::assertSame('custom', $entry['source']);
+        self::assertSame('Magic', $entry['arcane_background']);
+        self::assertSame([], $entry['requirements']);
+        self::assertSame([], $entry['effects']);
+        self::assertSame([], $entry['notes']);
+        self::assertSame([60], $entry['source_pages']);
+    }
+
+    public function testCoreAndNonCoreCollectionsAreBuiltFromDatabaseRows(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                [
+                    'skill_catalog_key' => 'custom_core',
+                    'skill_catalog_source' => 'custom',
+                    'skill_catalog_name' => 'Custom Core',
+                    'skill_catalog_linked_attribute' => 'vigor',
+                    'skill_catalog_core_skill' => '1',
+                    'skill_catalog_arcane_background' => null,
+                    'skill_catalog_summary' => '',
+                    'skill_catalog_requirements' => '[]',
+                    'skill_catalog_effects' => '[]',
+                    'skill_catalog_notes' => '[]',
+                    'skill_catalog_source_pages' => '[]',
+                ],
+                [
+                    'skill_catalog_key' => 'custom_arcane',
+                    'skill_catalog_source' => 'custom',
+                    'skill_catalog_name' => 'Custom Arcane',
+                    'skill_catalog_linked_attribute' => 'spirit',
+                    'skill_catalog_core_skill' => '0',
+                    'skill_catalog_arcane_background' => 'Miracles',
+                    'skill_catalog_summary' => '',
+                    'skill_catalog_requirements' => '[]',
+                    'skill_catalog_effects' => '[]',
+                    'skill_catalog_notes' => '[]',
+                    'skill_catalog_source_pages' => '[]',
+                ],
+            ]);
+
+        $service = new Skills(__DIR__ . '/../../../data', $pdo);
+
+        self::assertArrayHasKey('custom_core', $service->core());
+        self::assertArrayNotHasKey('athletics', $service->core());
+        self::assertArrayHasKey('custom_arcane', $service->nonCore());
+        self::assertSame('spirit', $service->attributeForSkill('custom_arcane'));
     }
 }

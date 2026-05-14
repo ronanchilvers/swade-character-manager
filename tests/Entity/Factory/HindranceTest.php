@@ -8,10 +8,26 @@ use App\Entity;
 use App\Entity\Factory\Hindrance;
 use App\Entity\Validator;
 use flight\database\SimplePdo;
+use flight\util\Collection;
 use PHPUnit\Framework\TestCase;
 
 class HindranceTest extends TestCase
 {
+    public function testForCharacterFindsSelectionsByCharacterId(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->with('SELECT * FROM hindrances WHERE hindrance_character_id = ?', [10])
+            ->willReturn([
+                new Collection(['hindrance_id' => 1, 'hindrance_character_id' => 10, 'hindrance_key' => 'bad_eyes']),
+            ]);
+
+        $rows = (new Hindrance($pdo, new Validator()))->forCharacter(new Entity(['id' => 10]));
+
+        self::assertSame('bad_eyes', $rows[0]->key);
+    }
+
     public function testSyncForCharacterReplacesSelectionsWithSubmittedLevels(): void
     {
         $pdo = $this->createMock(SimplePdo::class);

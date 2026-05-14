@@ -9,11 +9,35 @@ use App\Entity\Factory\Skill;
 use App\Entity\Validator;
 use App\Service\Data\Skills;
 use flight\database\SimplePdo;
+use flight\util\Collection;
 use PHPUnit\Framework\TestCase;
 
 class SkillTest extends TestCase
 {
     private const DATA_DIR = __DIR__ . '/../../../data';
+
+    public function testForCharacterAndForCharacterAndKeyReadSelections(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->with('SELECT * FROM skills WHERE skill_character_id = ?', [10])
+            ->willReturn([
+                new Collection(['skill_id' => 1, 'skill_character_id' => 10, 'skill_key' => 'athletics']),
+            ]);
+        $pdo->expects(self::once())
+            ->method('fetchRow')
+            ->with(
+                'SELECT * FROM skills WHERE skill_character_id = ? AND skill_key = ?',
+                [10, 'fighting'],
+            )
+            ->willReturn(new Collection(['skill_id' => 2, 'skill_character_id' => 10, 'skill_key' => 'fighting']));
+
+        $factory = new Skill($pdo, new Validator());
+
+        self::assertSame('athletics', $factory->forCharacter(new Entity(['id' => 10]))[0]->key);
+        self::assertSame('fighting', $factory->forCharacterAndKey(new Entity(['id' => 10]), 'fighting')->key);
+    }
 
     public function testInsertCoreForCharacterStoresEveryCoreSkillAtD4(): void
     {

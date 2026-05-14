@@ -8,10 +8,27 @@ use App\Entity;
 use App\Entity\Factory\Weapon;
 use App\Entity\Validator;
 use flight\database\SimplePdo;
+use flight\util\Collection;
 use PHPUnit\Framework\TestCase;
 
 class WeaponTest extends TestCase
 {
+    public function testForCharacterSortsRowsByPosition(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->with('SELECT * FROM weapons WHERE weapon_character_id = ?', [10])
+            ->willReturn([
+                new Collection(['weapon_id' => 2, 'weapon_character_id' => 10, 'weapon_position' => 2, 'weapon_name' => 'Knife']),
+                new Collection(['weapon_id' => 1, 'weapon_character_id' => 10, 'weapon_position' => 1, 'weapon_name' => 'Winchester']),
+            ]);
+
+        $rows = (new Weapon($pdo, new Validator()))->forCharacter(new Entity(['id' => 10]));
+
+        self::assertSame(['Winchester', 'Knife'], array_map(fn (Entity $row): string => $row->name, $rows));
+    }
+
     public function testSyncForCharacterWritesAllStringFieldsAndAssignsPositions(): void
     {
         $pdo = $this->createMock(SimplePdo::class);
