@@ -75,6 +75,9 @@ class Sheet
     public function updateState(string $hash): void
     {
         $entity = $this->resolveForJson($hash);
+        if (!$entity instanceof Entity) {
+            return;
+        }
         $payload = $this->jsonBody();
 
         foreach (self::STATE_FIELDS as $field) {
@@ -90,6 +93,9 @@ class Sheet
     public function updateNotes(string $hash): void
     {
         $entity = $this->resolveForJson($hash);
+        if (!$entity instanceof Entity) {
+            return;
+        }
         $payload = $this->jsonBody();
         $entity->notes = (string) ($payload['notes'] ?? '');
 
@@ -99,6 +105,9 @@ class Sheet
     public function updateGear(string $hash): void
     {
         $entity = $this->resolveForJson($hash);
+        if (!$entity instanceof Entity) {
+            return;
+        }
         $rows = $this->jsonBody()['rows'] ?? [];
         $this->respond($this->gearFactory->syncForCharacter($entity, is_array($rows) ? $rows : []));
     }
@@ -106,6 +115,9 @@ class Sheet
     public function updateWeapons(string $hash): void
     {
         $entity = $this->resolveForJson($hash);
+        if (!$entity instanceof Entity) {
+            return;
+        }
         $rows = $this->jsonBody()['rows'] ?? [];
         $this->respond($this->weaponFactory->syncForCharacter($entity, is_array($rows) ? $rows : []));
     }
@@ -128,16 +140,12 @@ class Sheet
         return $entity;
     }
 
-    private function resolveForJson(string $hash): Entity
+    private function resolveForJson(string $hash): ?Entity
     {
         $entity = $this->factory->forHash($hash);
         if (!$entity instanceof Entity) {
-            Flight::response()
-                ->status(404)
-                ->header('Content-Type', 'application/json')
-                ->write(json_encode(['ok' => false, 'errors' => ['Not found']]))
-                ->send();
-            exit;
+            Flight::json(['ok' => false, 'errors' => ['Not found']], 404);
+            return null;
         }
 
         return $entity;
@@ -159,7 +167,6 @@ class Sheet
             return;
         }
 
-        Flight::response()->status(422);
-        Flight::json(['ok' => false, 'errors' => $result->errors()]);
+        Flight::json(['ok' => false, 'errors' => $result->errors()], 422);
     }
 }

@@ -57,6 +57,19 @@ abstract class ControllerTestCase extends TestCase
         return $response;
     }
 
+    protected function mapJsonToResponse(?JsonResponse $response = null): JsonResponse
+    {
+        $response = $this->mapResponse($response);
+        Flight::map('json', function (array $data, int $code = 200) use ($response): void {
+            $response
+                ->status($code)
+                ->header('Content-Type', 'application/json')
+                ->write((string) json_encode($data));
+        });
+
+        return $response;
+    }
+
     protected function mapUrls(array $routes = []): FlightUrlMap
     {
         $urlMap = new FlightUrlMap($routes);
