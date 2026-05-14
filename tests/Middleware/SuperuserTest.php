@@ -70,6 +70,7 @@ class SuperuserTest extends TestCase
 class SuperuserMiddlewareTestSession
 {
     public array $errors = [];
+    public ?object $user = null;
 
     public function error(string $message): void
     {

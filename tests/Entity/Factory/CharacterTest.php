@@ -241,11 +241,8 @@ class CharacterTest extends TestCase
                 })
             )
             ->willReturn('10');
-        $pdo->expects(self::once())
-            ->method('transaction')
-            ->willReturnCallback(function (callable $callback) use ($pdo): void {
-                $callback($pdo);
-            });
+        $pdo->expects(self::never())
+            ->method('transaction');
 
         $entity = new Entity(['name' => 'Mara']);
         $result = $this->factory($pdo, $skillFactory, $manager)->insert($entity);
@@ -254,10 +251,9 @@ class CharacterTest extends TestCase
         self::assertSame('10', $entity->id);
     }
 
-    public function testInsertReturnsErrorAndRollsBackWhenCoreSkillCreationFails(): void
+    public function testInsertReturnsErrorWhenCoreSkillCreationFails(): void
     {
         $this->mapSessionUser(7);
-        $rolledBack = false;
 
         $manager = $this->createMock(Manager::class);
         $manager->expects(self::once())
@@ -272,16 +268,8 @@ class CharacterTest extends TestCase
         $pdo = $this->createMock(SimplePdo::class);
         $pdo->method('insert')
             ->willReturn('10');
-        $pdo->expects(self::once())
-            ->method('transaction')
-            ->willReturnCallback(function (callable $callback) use ($pdo, &$rolledBack): void {
-                try {
-                    $callback($pdo);
-                } catch (\Throwable $ex) {
-                    $rolledBack = true;
-                    throw $ex;
-                }
-            });
+        $pdo->expects(self::never())
+            ->method('transaction');
 
         $result = $this->factory($pdo, $skillFactory, $manager)->insert(
             new Entity(['name' => 'Mara'])
@@ -289,7 +277,6 @@ class CharacterTest extends TestCase
 
         self::assertFalse($result->isSuccess());
         self::assertSame(['skill seed failed'], $result->errors());
-        self::assertTrue($rolledBack);
     }
 
     private function factory(

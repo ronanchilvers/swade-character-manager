@@ -164,6 +164,7 @@ class AdminUsersControllerTestSession
 {
     public array $errors = [];
     public array $successes = [];
+    public ?object $user = null;
 
     public function error(string $message): void
     {

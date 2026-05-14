@@ -73,10 +73,7 @@ class AdminCharactersTest extends TestCase
             ->getMock();
         $userFactory->expects(self::never())->method('byId');
 
-        $characterFactory = $this->getMockBuilder(CharacterFactory::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['forUser'])
-            ->getMock();
+        $characterFactory = $this->createStub(CharacterFactory::class);
 
         $session = new AdminCharactersSession();
         Flight::map('session', fn () => $session);
@@ -105,10 +102,7 @@ class AdminCharactersTest extends TestCase
             ->with(9)
             ->willReturn(null);
 
-        $characterFactory = $this->getMockBuilder(CharacterFactory::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['forUser'])
-            ->getMock();
+        $characterFactory = $this->createStub(CharacterFactory::class);
 
         $session = new AdminCharactersSession();
         Flight::map('session', fn () => $session);

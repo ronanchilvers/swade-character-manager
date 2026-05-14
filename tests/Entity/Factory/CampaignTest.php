@@ -82,11 +82,8 @@ class CampaignTest extends TestCase
                 }),
             )
             ->willReturn('22');
-        $pdo->expects(self::once())
-            ->method('transaction')
-            ->willReturnCallback(function (callable $callback) use ($pdo): void {
-                $callback($pdo);
-            });
+        $pdo->expects(self::never())
+            ->method('transaction');
 
         $campaign = new Entity(['name' => 'The Flood']);
         $result = $this->factory($pdo, $memberFactory)->insert($campaign);

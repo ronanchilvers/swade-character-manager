@@ -120,10 +120,7 @@ class AuthTest extends TestCase
 
     public function testSuccessfulLoginIgnoresUnsafeStoredReturnUrl(): void
     {
-        $factory = $this->getMockBuilder(User::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['byEmail', 'isActive'])
-            ->getMock();
+        $factory = $this->createStub(User::class);
         $user = new Entity([
             'id' => 9,
             'email' => 'mara@example.com',
@@ -184,6 +181,9 @@ class AuthTest extends TestCase
 class AuthControllerTestSession
 {
     public array $errors = [];
+    public ?string $oauth2state = null;
+    public ?string $auth_return_url = null;
+    public mixed $user = null;
 
     public function delete(string $key): void
     {
