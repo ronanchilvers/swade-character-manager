@@ -1122,6 +1122,14 @@ input[type=checkbox]:disabled + .button--toggle::after {
 .panel--dark {
   background: rgb(245, 245, 245);
 }
+.panel--danger {
+  background: rgba(255, 220, 220, 0.25);
+  border-color: #8c1414;
+  color: #8c1414;
+}
+.panel--danger .panel__title {
+  color: #8c1414;
+}
 .panel--controls {
   padding: 0.25rem 0.5rem;
   flex-direction: row;

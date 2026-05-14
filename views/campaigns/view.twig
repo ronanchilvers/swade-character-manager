@@ -36,7 +36,7 @@
         {% endif %}
     </div>
 
-    {% if roster_characters|length > 0 %}
+{% if roster_characters|length > 0 %}
     <h3>Active Characters in the Campaign</h3>
     <div class="cards cards--character">
     {% for row in roster_characters %}
@@ -66,13 +66,14 @@
         </div>
     {% endfor %}
     </div>
-    {% elseif roster|length > 0 %}
+{% elseif roster|length > 0 %}
     <p>No linked characters</p>
-    {% else %}
+{% else %}
     <p>No members yet.</p>
-    {% endif %}
+{% endif %}
 
-    {% if is_member %}
+{% if is_member %}
+    <hr />
     <h3>Characters that can be added to the campaign</h3>
     {% if available_characters|length > 0 %}
     <div class="cards cards--character">
@@ -99,14 +100,21 @@
 
     <hr />
 
-    <h3>Leave Campaign</h3>
-    {% if can_leave %}
-    <form method="post" action="{{ get_url('campaigns_leave', {hash: campaign.hash}) }}">
-        <button class="button button--danger" type="submit">Leave Campaign</button>
-    </form>
-    {% else %}
-    <p>Remove your characters from this campaign before leaving.</p>
-    {% endif %}
-    {% endif %}
+    <div class="panel panel--danger panel--collapsible panel--collapsed">
+        <div class="panel__title">
+            <h3>Leave Campaign</h3>
+        </div>
+        <div class="panel__content">
+            {% if can_leave %}
+            <p>If you leave this campaign you will need to get a new invitation link from the owner to join it again.</p>
+            <form method="post" action="{{ get_url('campaigns_leave', {hash: campaign.hash}) }}">
+                <button class="button button--danger" type="submit">Leave Campaign</button>
+            </form>
+            {% else %}
+            <p>Remove your characters from this campaign before leaving.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
 </section>
 {% endblock %}
