@@ -8,10 +8,27 @@ use App\Entity;
 use App\Entity\Factory\Gear;
 use App\Entity\Validator;
 use flight\database\SimplePdo;
+use flight\util\Collection;
 use PHPUnit\Framework\TestCase;
 
 class GearTest extends TestCase
 {
+    public function testForCharacterSortsRowsByPosition(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->with('SELECT * FROM gear WHERE gear_character_id = ?', [10])
+            ->willReturn([
+                new Collection(['gear_id' => 2, 'gear_character_id' => 10, 'gear_position' => 2, 'gear_name' => 'Lantern']),
+                new Collection(['gear_id' => 1, 'gear_character_id' => 10, 'gear_position' => 1, 'gear_name' => 'Rope']),
+            ]);
+
+        $rows = (new Gear($pdo, new Validator()))->forCharacter(new Entity(['id' => 10]));
+
+        self::assertSame(['Rope', 'Lantern'], array_map(fn (Entity $row): string => $row->name, $rows));
+    }
+
     public function testSyncForCharacterPreservesOrderAndAssignsPositions(): void
     {
         $pdo = $this->createMock(SimplePdo::class);

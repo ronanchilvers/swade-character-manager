@@ -19,11 +19,8 @@ class FactoryTest extends TestCase
             ->method('insert')
             ->with('test_entities', ['test_entity_name' => 'Mara'])
             ->willReturn('123');
-        $pdo->expects(self::once())
-            ->method('transaction')
-            ->willReturnCallback(function (callable $callback) use ($pdo): void {
-                $callback($pdo);
-            });
+        $pdo->expects(self::never())
+            ->method('transaction');
 
         $factory = $this->factory($pdo);
         $entity = new Entity(['name' => 'Mara']);
@@ -39,11 +36,8 @@ class FactoryTest extends TestCase
         $pdo = $this->createMock(SimplePdo::class);
         $pdo->method('insert')
             ->willReturn('123');
-        $pdo->expects(self::once())
-            ->method('transaction')
-            ->willReturnCallback(function (callable $callback) use ($pdo): void {
-                $callback($pdo);
-            });
+        $pdo->expects(self::never())
+            ->method('transaction');
 
         $factory = $this->factory($pdo, true);
         $result = $factory->insert(new Entity(['name' => 'Mara']));

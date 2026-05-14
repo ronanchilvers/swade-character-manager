@@ -8,10 +8,26 @@ use App\Entity;
 use App\Entity\Factory\Edge;
 use App\Entity\Validator;
 use flight\database\SimplePdo;
+use flight\util\Collection;
 use PHPUnit\Framework\TestCase;
 
 class EdgeTest extends TestCase
 {
+    public function testForCharacterFindsEdgesByCharacterIdInCreationOrder(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->with('SELECT * FROM edges WHERE edge_character_id = ? ORDER BY edge_created ASC', [10])
+            ->willReturn([
+                new Collection(['edge_id' => 1, 'edge_character_id' => 10, 'edge_key' => 'alertness']),
+            ]);
+
+        $rows = (new Edge($pdo, new Validator()))->forCharacter(new Entity(['id' => 10]));
+
+        self::assertSame('alertness', $rows[0]->key);
+    }
+
     public function testSyncForCharacterStoresSubmittedEdgeCounts(): void
     {
         $pdo = $this->createMock(SimplePdo::class);

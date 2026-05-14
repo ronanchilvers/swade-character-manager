@@ -5,33 +5,22 @@ declare(strict_types=1);
 
 use App\Service\Data\EdgeCatalogSeeder;
 use App\Service\Data\HindranceCatalogSeeder;
+use App\Service\Data\SeedCommand;
 use App\Service\Data\SkillCatalogSeeder;
 use flight\database\SimplePdo;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$type = $argv[1] ?? null;
-$source = $argv[2] ?? null;
-if (!is_string($type) || '' === trim($type) || !is_string($source) || '' === trim($source)) {
-    fwrite(STDERR, "Usage: php scripts/seed.php <type> <source>\n");
+try {
+    $command = (new SeedCommand())->resolve($argv[1] ?? null, $argv[2] ?? null, dirname(__DIR__));
+} catch (RuntimeException $ex) {
+    fwrite(STDERR, $ex->getMessage() . "\n");
     exit(1);
 }
 
-$type = trim($type);
-$source = trim($source);
-foreach (['Type' => $type, 'Source' => $source] as $label => $value) {
-    if (!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $value)) {
-        fwrite(STDERR, "{$label} must use lowercase letters, numbers, and hyphens only.\n");
-        exit(1);
-    }
-}
-
-$filename = match ($type) {
-    'edges' => sprintf('%s/../data/%s/edges.php', __DIR__, $source),
-    'hindrances' => sprintf('%s/../data/%s/hindrances.php', __DIR__, $source),
-    'skills' => sprintf('%s/../data/%s/skills.php', __DIR__, $source),
-    default => unsupportedType($type),
-};
+$type = $command['type'];
+$source = $command['source'];
+$filename = $command['filename'];
 
 $settings = require __DIR__ . '/../config/settings.php';
 $database = $settings['database'];
@@ -50,7 +39,6 @@ $seeder = match ($type) {
     'edges' => new EdgeCatalogSeeder($pdo),
     'hindrances' => new HindranceCatalogSeeder($pdo),
     'skills' => new SkillCatalogSeeder($pdo),
-    default => unsupportedType($type),
 };
 
 $count = $seeder->seedFile($filename, $source);
@@ -62,9 +50,3 @@ printf(
     $filename,
     $source,
 );
-
-function unsupportedType(string $type): never
-{
-    fwrite(STDERR, sprintf("Unsupported seed type: %s\n", $type));
-    exit(1);
-}

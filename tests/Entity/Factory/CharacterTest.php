@@ -92,6 +92,39 @@ class CharacterTest extends TestCase
         self::assertSame(str_repeat('b', 32), $entity->hash);
     }
 
+    public function testCampaignReadHelpersUseExpectedQueries(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::exactly(3))
+            ->method('fetchAll')
+            ->willReturnCallback(function (string $sql, array $params): array {
+                if ('SELECT * FROM characters WHERE character_campaign = ? ORDER BY character_name ASC' === $sql) {
+                    self::assertSame([4], $params);
+
+                    return [new Collection(['character_id' => 1, 'character_campaign' => 4])];
+                }
+                if ('SELECT * FROM characters WHERE character_campaign = ? AND character_user = ? ORDER BY character_name ASC' === $sql) {
+                    self::assertSame([4, 7], $params);
+
+                    return [new Collection(['character_id' => 2, 'character_campaign' => 4, 'character_user' => 7])];
+                }
+
+                self::assertSame(
+                    'SELECT * FROM characters WHERE character_user = ? AND character_campaign IS NULL ORDER BY character_name ASC',
+                    $sql,
+                );
+                self::assertSame([7], $params);
+
+                return [new Collection(['character_id' => 3, 'character_user' => 7, 'character_campaign' => null])];
+            });
+
+        $factory = $this->factory($pdo);
+
+        self::assertSame(1, $factory->forCampaign(new Entity(['id' => 4]))[0]->id);
+        self::assertSame(2, $factory->forCampaignAndUser(new Entity(['id' => 4]), 7)[0]->id);
+        self::assertSame(3, $factory->forUserWithoutCampaign(7)[0]->id);
+    }
+
     public function testDeleteRemovesCharacterById(): void
     {
         $pdo = $this->createMock(SimplePdo::class);
@@ -179,6 +212,31 @@ class CharacterTest extends TestCase
         self::assertSame(4, $character->campaign);
     }
 
+    public function testJoinCampaignReturnsErrorForUnsavedCharacter(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::never())
+            ->method('update');
+
+        $result = $this->factory($pdo)->joinCampaign(new Entity(['id' => 4]), new Entity());
+
+        self::assertFalse($result->isSuccess());
+        self::assertSame(['Unable to update character campaign'], $result->errors());
+    }
+
+    public function testJoinCampaignReturnsDatabaseErrors(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('update')
+            ->willThrowException(new \RuntimeException('update failed'));
+
+        $result = $this->factory($pdo)->joinCampaign(new Entity(['id' => 4]), new Entity(['id' => 10]));
+
+        self::assertFalse($result->isSuccess());
+        self::assertSame(['update failed'], $result->errors());
+    }
+
     public function testLeaveCampaignClearsCampaignColumn(): void
     {
         $pdo = $this->createMock(SimplePdo::class);
@@ -241,11 +299,8 @@ class CharacterTest extends TestCase
                 })
             )
             ->willReturn('10');
-        $pdo->expects(self::once())
-            ->method('transaction')
-            ->willReturnCallback(function (callable $callback) use ($pdo): void {
-                $callback($pdo);
-            });
+        $pdo->expects(self::never())
+            ->method('transaction');
 
         $entity = new Entity(['name' => 'Mara']);
         $result = $this->factory($pdo, $skillFactory, $manager)->insert($entity);
@@ -254,10 +309,9 @@ class CharacterTest extends TestCase
         self::assertSame('10', $entity->id);
     }
 
-    public function testInsertReturnsErrorAndRollsBackWhenCoreSkillCreationFails(): void
+    public function testInsertReturnsErrorWhenCoreSkillCreationFails(): void
     {
         $this->mapSessionUser(7);
-        $rolledBack = false;
 
         $manager = $this->createMock(Manager::class);
         $manager->expects(self::once())
@@ -272,16 +326,8 @@ class CharacterTest extends TestCase
         $pdo = $this->createMock(SimplePdo::class);
         $pdo->method('insert')
             ->willReturn('10');
-        $pdo->expects(self::once())
-            ->method('transaction')
-            ->willReturnCallback(function (callable $callback) use ($pdo, &$rolledBack): void {
-                try {
-                    $callback($pdo);
-                } catch (\Throwable $ex) {
-                    $rolledBack = true;
-                    throw $ex;
-                }
-            });
+        $pdo->expects(self::never())
+            ->method('transaction');
 
         $result = $this->factory($pdo, $skillFactory, $manager)->insert(
             new Entity(['name' => 'Mara'])
@@ -289,7 +335,6 @@ class CharacterTest extends TestCase
 
         self::assertFalse($result->isSuccess());
         self::assertSame(['skill seed failed'], $result->errors());
-        self::assertTrue($rolledBack);
     }
 
     private function factory(

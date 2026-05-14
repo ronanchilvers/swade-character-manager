@@ -20,10 +20,7 @@ class AuthTest extends TestCase
 
     public function testMissingSessionUserRedirectsToLogin(): void
     {
-        $factory = $this->getMockBuilder(User::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['byId', 'isActive'])
-            ->getMock();
+        $factory = $this->createStub(User::class);
 
         $session = new AuthMiddlewareTestSession();
         Flight::map('session', fn () => $session);
@@ -47,10 +44,7 @@ class AuthTest extends TestCase
 
     public function testMissingSessionUserIgnoresUnsafeReturnUrl(): void
     {
-        $factory = $this->getMockBuilder(User::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['byId', 'isActive'])
-            ->getMock();
+        $factory = $this->createStub(User::class);
 
         $session = new AuthMiddlewareTestSession();
         Flight::map('session', fn () => $session);
@@ -146,6 +140,8 @@ class AuthTest extends TestCase
 class AuthMiddlewareTestSession
 {
     public array $errors = [];
+    public ?string $auth_return_url = null;
+    public mixed $user = null;
 
     public function delete(string $key): void
     {
