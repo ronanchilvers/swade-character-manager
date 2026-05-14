@@ -175,6 +175,11 @@ body {
   background-color: #ccc;
 }
 
+body.login {
+  background: rgb(67, 167, 233) url(/images/backgrounds/blue-background-tileable.png) repeat top left;
+  background-size: cover;
+}
+
 main {
   flex: 1 1 auto;
   display: flex;
@@ -197,11 +202,6 @@ main {
 .login main {
   margin: 0;
   max-width: 100%;
-}
-@media (max-width: 1022px) {
-  .login main {
-    padding: 0;
-  }
 }
 
 section {

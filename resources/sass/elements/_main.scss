@@ -20,7 +20,4 @@ main {
 .login main {
     margin: 0;
     max-width: 100%;
-    @include breakpoints.at(laptop) {
-        padding: 0;
-    }
 }

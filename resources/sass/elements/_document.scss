@@ -17,3 +17,7 @@ body {
     min-height: 100vh;
     background-color: #ccc;
 }
+body.login {
+    background: rgb(67, 167, 233) url(/images/backgrounds/blue-background-tileable.png) repeat top left;
+    background-size: cover;
+}
