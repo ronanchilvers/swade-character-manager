@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace App\Service\Data {
     class NonDatabaseCatalog extends \App\Service\Data
     {
+        protected function entryFromRow(mixed $row): array
+        {
+            return [];
+        }
     }
 }
 
