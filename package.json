@@ -5,7 +5,8 @@
     "sass": "^1.98.0"
   },
   "scripts": {
-    "sass-dev": "./node_modules/.bin/sass --watch --update --style=expanded resources/sass:web/css",
+    "sass-dev-watch": "./node_modules/.bin/sass --watch --update --style=expanded resources/sass:web/css",
+    "sass-dev": "./node_modules/.bin/sass --update --style=expanded resources/sass:web/css",
     "sass-prod": "./node_modules/.bin/sass --no-source-map --style=compressed resources/sass:web/css"
   }
 }
