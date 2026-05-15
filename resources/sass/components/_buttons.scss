@@ -1,5 +1,5 @@
 @use "../settings/css-variables" as vars;
-@use "../settings/sheet-theme" as sheet;
+@use "../settings/sheet-tokens" as sheet;
 
 $button-text-colour: rgba(#222,0.9);
 $button-border: rgba(#222,0.5);

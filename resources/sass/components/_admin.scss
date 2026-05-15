@@ -1,5 +1,5 @@
 @use "../settings/css-variables" as vars;
-@use "../settings/sheet-theme" as sheet;
+@use "../settings/sheet-tokens" as sheet;
 @use "../tools/breakpoints";
 
 .admin-view {

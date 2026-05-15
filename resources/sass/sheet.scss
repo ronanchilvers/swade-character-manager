@@ -1,23 +1,8 @@
 /** Character Sheet Stylesheet **/
+/**
+ * Loaded alongside styles.css via base.twig. Only the sheet-specific
+ * rules live here; settings, base, elements, and shared components
+ * come from styles.css.
+ */
 
-/** Settings **/
-@use "settings/css-variables";
-@use "settings/colours";
-@use "settings/sheet-theme";
-
-/** Base rules **/
-@use "base/reset";
-@use "base/typography";
-
-/** Elements **/
-@use "elements/document";
-@use "elements/main";
-@use "elements/section";
-
-/** Components **/
-@use "components/topbar";
-@use "components/menu";
-@use "components/dropdown";
-@use "components/buttons";
-@use "components/toast";
 @use "components/character/sheet";

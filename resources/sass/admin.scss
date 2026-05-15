@@ -1,8 +1,4 @@
 /** Admin Stylesheet **/
+/** Loaded alongside styles.css; only admin-specific rules live here. */
 
-/** Settings **/
-@use "settings/css-variables";
-@use "settings/sheet-theme";
-
-/** Components **/
 @use "components/admin";

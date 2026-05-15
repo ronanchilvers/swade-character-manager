@@ -1,8 +1,4 @@
-/** Characters Stylesheet **/
+/** Character Builder Stylesheet **/
+/** Loaded alongside styles.css; only builder-specific rules live here. */
 
-/** Settings **/
-@use "settings/css-variables";
-@use "settings/colours";
-
-/** Components **/
 @use "components/character/tabs";

@@ -1,4 +1,13 @@
 :root {
+    --c-white: #ffffff;
+    --c-light-grey: #cccccc;
+    --c-medium-grey: #999999;
+    --c-dark-grey: #666666;
+    --c-black: #000000;
+    --c-red: #ff0000;
+    --c-green: #00ff00;
+    --c-blue: #0000ff;
+
     --c-sheet-heading: rgb(135, 28, 22);
     --c-sheet-ink: #1d1208;
     --c-sheet-muted: #8b7a5b;
@@ -13,10 +22,3 @@
     --c-parchment-dark: #e8d9b0;
     --c-button-hover: rgba(166, 30, 30, 0.25);
 }
-
-$sheet-title-font: "Staatliches", "Courier New", monospace;
-$sheet-title-color: var(--c-sheet-heading);
-$sheet-text-font: "Mynerve", cursive;
-$sheet-text-font-size: 1.2rem;
-$sheet-plain-font: "Roboto", sans-serif;
-$sheet-plain-font-size: 1rem;
