@@ -38,10 +38,8 @@ $border-color-light: #EEE;
 
     &__panel {
         position: relative;
-        /* background: var(--c-sheet-paper); */
         background: var(--c-white);
         padding: 1rem 1.1rem;
-        /* border: 1px solid var(--c-parchment-dark); */
         border: 1px solid $border-color;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 
@@ -50,7 +48,6 @@ $border-color-light: #EEE;
             border: 1px dashed $border-color;
             border-top: none;
             border-bottom: none;
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0.8); */
             clip-path: polygon(
                 0 6px, 3% 0, 8% 5px, 14% 1px, 22% 4px, 30% 0, 38% 5px, 46% 2px,
                 54% 5px, 62% 0, 70% 4px, 78% 1px, 86% 5px, 94% 0, 100% 6px,
@@ -381,8 +378,6 @@ $border-color-light: #EEE;
             line-height: 1.2;
             text-align: center;
             color: var(--c-sheet-muted-pale);
-            /* border: 1px solid transparent; */
-            /* border-radius: vars.$border-radius-default; */
 
             svg {
                 width: 32px;
@@ -391,8 +386,6 @@ $border-color-light: #EEE;
 
             &--active {
                 color: var(--c-sheet-rail-item-border-active);
-                /* border-color: var(--c-sheet-ink); */
-                /* background: rgba(166, 30, 30, 0.08); */
             }
         }
     }
@@ -447,27 +440,6 @@ $border-color-light: #EEE;
         }
 
     }
-
-    /* &__advances {
-        list-style: none;
-        padding: 0;
-        margin: 0.4rem 0 0;
-
-        &__row {
-            display: grid;
-            grid-template-columns: 1.2rem 1fr;
-            gap: 0.5rem;
-            align-items: center;
-            border-bottom: 1px solid var(--c-sheet-muted);
-            padding: 0.15rem 0;
-            min-height: 1.3rem;
-        }
-
-        &__tier {
-            font-family: $title-font;
-            color: var(--c-sheet-heading);
-        }
-    } */
 
     &__rail {
         position: absolute;
@@ -536,9 +508,6 @@ $border-color-light: #EEE;
             gap: 0.4rem;
             text-align: center;
 
-            /* @include breakpoints.at('laptop') {
-                flex-direction: row;
-            } */
             @include breakpoints.at('phablet') {
                 flex-direction: row;
                 gap: 0.6rem;

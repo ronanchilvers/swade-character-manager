@@ -1,8 +1,6 @@
 @use "../tools/breakpoints";
 
 .menu {
-    /* outline: 1px dotted blue; */
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,10 +22,5 @@
     }
     &__item:last-child {
         margin-right: 0;
-    }
-
-    &__item--user {
-        height: 25px;
-        width: 25px;
     }
 }

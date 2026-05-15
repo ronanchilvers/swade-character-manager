@@ -2,18 +2,6 @@
 @use "variables" as card;
 @use "../../tools/breakpoints";
 
-/* .cards--character {
-    width: 1024px;
-    margin: 0 auto;
-    margin-top: 2rem;
-
-    @include breakpoints.at(laptop) {
-        width: auto;
-        margin-left: 2rem;
-        margin-right: 2rem;
-    }
-} */
-
 .character-delete {
     width: min(92vw, 32rem);
     padding: 0;
