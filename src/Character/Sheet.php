@@ -106,6 +106,7 @@ class Sheet
                 'label' => $label,
                 'die' => $die,
                 'max' => $die,
+                'die_faces' => self::DIE_FACES,
             ];
         }
 

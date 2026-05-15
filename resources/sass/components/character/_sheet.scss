@@ -150,11 +150,17 @@ $border-color-light: #EEE;
 
         &__row {
             display: grid;
-            grid-template-columns: 2.5rem 2.5rem 1fr;
-            align-items: baseline;
+            grid-template-columns: 3rem 2rem 1fr;
+            align-items: center;
             gap: 0.4rem;
             border-bottom: 1px solid var(--c-sheet-muted);
             padding-bottom: 0.2rem;
+
+            .die {
+                width: 40px;
+                height: 40px;
+                color: var(--c-sheet-rail-item-border-active);
+            }
         }
 
         &__die,
@@ -327,7 +333,7 @@ $border-color-light: #EEE;
 
         &__row {
             display: grid;
-            grid-template-columns: auto 1fr auto;
+            grid-template-columns: 10rem 6rem 1fr;
             gap: 0.5rem;
             align-items: center;
             border-bottom: 1px solid var(--c-sheet-muted);
@@ -359,20 +365,24 @@ $border-color-light: #EEE;
         &__step {
             display: inline-block;
             font-family: $title-font;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             min-width: 1.4rem;
-            height: 1.3rem;
-            width: 1rem;
             padding-top: 0.1rem;
+            line-height: 1.2;
             text-align: center;
-            color: var(--c-sheet-muted);
-            border: 1px solid transparent;
-            border-radius: vars.$border-radius-default;
+            color: var(--c-sheet-muted-pale);
+            /* border: 1px solid transparent; */
+            /* border-radius: vars.$border-radius-default; */
+
+            svg {
+                width: 32px;
+                height: 32px;
+            }
 
             &--active {
-                color: var(--c-sheet-heading);
-                border-color: var(--c-sheet-heading);
-                background: rgba(166, 30, 30, 0.08);
+                color: var(--c-sheet-rail-item-border-active);
+                /* border-color: var(--c-sheet-heading); */
+                /* background: rgba(166, 30, 30, 0.08); */
             }
         }
     }
@@ -505,7 +515,6 @@ $border-color-light: #EEE;
             margin-bottom: 0.8rem;
             margin-left: 0.5rem;
             transform: translateX(-0.2em);
-            font-weight: 600;
             color: var(--c-sheet-heading);
             @include breakpoints.at('phablet') {
                 writing-mode: horizontal-tb;
@@ -553,7 +562,7 @@ $border-color-light: #EEE;
                 align-items: center;
                 justify-content: center;
                 font-size: 1.2rem;
-                padding-top: 0.4rem;
+                padding-top: 0.2rem;
 
                 @include breakpoints.at('phablet') {
                     width: 2.5rem;

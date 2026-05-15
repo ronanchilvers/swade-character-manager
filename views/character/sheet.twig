@@ -12,7 +12,9 @@
 {% macro die_strip(faces, selected) %}
     <span class="sheet__die-strip">
     {% for face in faces %}
-        <span class="sheet__die-strip__step{% if selected == face %} sheet__die-strip__step--active{% endif %}">{{ face }}</span>
+        <span class="sheet__die-strip__step{% if selected == face %} sheet__die-strip__step--active{% endif %}">
+            <svg class="die"><use href="/images/icons/dice.svg#d{{ face }}"/></svg>
+        </span>
     {% endfor %}
     </span>
 {% endmacro %}
@@ -151,8 +153,10 @@
             <ul class="sheet__attributes__list">
                 {% for attr in sheet.attributes %}
                 <li class="sheet__attributes__row">
-                    <span class="sheet__attributes__die">{{ attr.die ? 'd' ~ attr.die : '—' }}</span>
-                    <span class="sheet__attributes__max">{{ attr.max ? 'd' ~ attr.max : '—' }}</span>
+                    {# {{ m.die_strip(attr.die_faces, attr.die) }} #}
+                    <!--<span class="sheet__attributes__max">{{ attr.max ? 'd' ~ attr.max : '—' }}</span>-->
+                    <svg class="die" title="{{ attr.die }} sided die"><use href="/images/icons/dice.svg#d{{ attr.die }}"/></svg>
+                    <!--<span class="sheet__attributes__die">{{ attr.die ? 'd' ~ attr.die : '—' }}</span>-->
                     <span class="sheet__attributes__label">{{ attr.label|upper }}</span>
                 </li>
                 {% endfor %}
