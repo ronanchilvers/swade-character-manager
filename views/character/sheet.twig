@@ -225,7 +225,7 @@
                             {{ hindrance.level|title }}
                         </span>
                         <span class="sheet__hindrances__name">{{ hindrance.name }}</span>
-                        <a class="sheet__hindrances__info help-icon" href="#" data-summary="{{ hindrance.summary }}" data-effects="{{ hindrance.effects_by_level[hindrance.level]|join(',') }}">?</a>
+                        <a class="sheet__hindrances__info help-icon" href="#" data-name="{{ hindrance.name }}" data-summary="{{ hindrance.summary }}" data-effects="{{ hindrance.effects_by_level[hindrance.level]|join(' ') }}">?</a>
                     </li>
                     {% endfor %}
                     {{ m.empty_lines(1) }}
@@ -242,7 +242,7 @@
                     <li class="sheet__list__row">
                         <span class="sheet__edges__rank">{{ edge_tiers[loop.index0] }}</span>
                         <span class="sheet__edges__name">{{ edge.name }} {% if edge.count > 1 %}&times;{{ edge.count }}{% endif %}</span>
-                        <a class="sheet__edges__info help-icon" href="#" data-summary="{{ edge.summary }}" data-effects="{{ edge.effects|join(',') }}">?</a>
+                        <a class="sheet__edges__info help-icon" href="#" data-name="{{ edge.name }}" data-summary="{{ edge.summary }}" data-effects="{{ edge.effects|join(' ') }}">?</a>
                     </li>
                     {% endfor %}
                 </ul>

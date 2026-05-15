@@ -144,6 +144,59 @@
   wireRail('fatigue');
   wireBooleanRailItem('incapacitated');
 
+  // ---- Help dialogs --------------------------------------------------------
+
+  function wireHelpDialogs() {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'sheet__help-dialog';
+    dialog.innerHTML = [
+      '<form method="dialog" class="sheet__help-dialog__content">',
+      '  <div class="sheet__help-dialog__header">',
+      '    <h2 class="sheet__help-dialog__title"></h2>',
+      '    <button class="sheet__help-dialog__close" type="submit" aria-label="Close help dialog">&times;</button>',
+      '  </div>',
+      '  <div class="sheet__help-dialog__body">',
+      '    <p class="sheet__help-dialog__summary"></p>',
+      '    <p class="sheet__help-dialog__effects"></p>',
+      '  </div>',
+      '</form>',
+    ].join('');
+
+    const title = dialog.querySelector('.sheet__help-dialog__title');
+    const summary = dialog.querySelector('.sheet__help-dialog__summary');
+    const effects = dialog.querySelector('.sheet__help-dialog__effects');
+
+    document.body.appendChild(dialog);
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        dialog.close();
+      }
+    });
+
+    sheet.addEventListener('click', (e) => {
+      const icon = e.target.closest('.help-icon');
+      if (!icon || !sheet.contains(icon)) {
+        return;
+      }
+
+      e.preventDefault();
+
+      title.textContent = icon.dataset.name || 'Help';
+      summary.textContent = icon.dataset.summary || '';
+      effects.textContent = icon.dataset.effects || '';
+      effects.hidden = !effects.textContent.trim();
+
+      if (typeof dialog.showModal === 'function') {
+        dialog.showModal();
+      } else {
+        window.alert([title.textContent, summary.textContent, effects.textContent].filter(Boolean).join('\n\n'));
+      }
+    });
+  }
+
+  wireHelpDialogs();
+
   // ---- Bennies / conviction counters ---------------------------------------
 
   function wireCounter(el) {
