@@ -111,7 +111,7 @@ class Skills extends Data
         return $this->databaseEntries;
     }
 
-    private function entryFromRow(mixed $row): array
+    protected function entryFromRow(mixed $row): array
     {
         return [
             'id' => (string) $row['skill_catalog_key'],

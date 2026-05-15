@@ -63,7 +63,7 @@ class Edges extends Data
         return $this->databaseEntries;
     }
 
-    private function entryFromRow(mixed $row): array
+    protected function entryFromRow(mixed $row): array
     {
         return [
             'id' => (string) $row['edge_catalog_key'],
@@ -73,7 +73,9 @@ class Edges extends Data
             'summary' => (string) $row['edge_catalog_summary'],
             'repeatable' => (bool) (int) $row['edge_catalog_repeatable'],
             'requirements' => $this->decodeJson($row['edge_catalog_requirements']),
-            'effects' => $this->decodeJson($row['edge_catalog_effects']),
+            'effects' => $this->forSheet(
+                $this->decodeJson($row['edge_catalog_effects'])
+            ),
             'notes' => $this->decodeJson($row['edge_catalog_notes']),
             'source_pages' => $this->decodeJson($row['edge_catalog_source_pages']),
         ];
@@ -88,5 +90,13 @@ class Edges extends Data
         $decoded = json_decode($value, true);
 
         return is_array($decoded) ? $decoded : [];
+    }
+
+    private function forSheet(array $effects)
+    {
+        return array_map(
+            fn (mixed $effect): string => $effect['details'] ?: '',
+            $effects,
+        );
     }
 }

@@ -33,4 +33,6 @@ abstract class Data
     {
         return $this->data['entries'];
     }
+
+    abstract protected function entryFromRow(mixed $row): array;
 }

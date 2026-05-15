@@ -14,6 +14,13 @@ use App\Service\Data\Skills as SkillsData;
 class Sheet
 {
     public const ATTRIBUTE_ORDER = ['agility', 'smarts', 'spirit', 'strength', 'vigor'];
+    public const ATTRIBUTE_DESCRIPTIONS = [
+        'agility' => 'Nimbleness, dexterity, coordination',
+        'smarts' => 'Intelligence, mental acuity, fast thinking',
+        'spirit' => 'Self-confidence, backbone, willpower',
+        'strength' => 'Physical prowess, fitness',
+        'vigor' => 'Physical endurance, resistance',
+    ];
     public const DIE_FACES = [4, 6, 8, 10, 12];
 
     public function build(
@@ -107,6 +114,7 @@ class Sheet
                 'die' => $die,
                 'max' => $die,
                 'die_faces' => self::DIE_FACES,
+                'description' => self::ATTRIBUTE_DESCRIPTIONS[$key],
             ];
         }
 
@@ -124,6 +132,7 @@ class Sheet
                 'key' => $key,
                 'name' => $entry['name'] ?? $this->humanise($key),
                 'summary' => $entry['summary'] ?? '',
+                'effects_by_level' => $entry['effects_by_level'],
                 'level' => (string) ($hindrance->level ?? ''),
             ];
         }
@@ -174,6 +183,7 @@ class Sheet
                 'key' => $key,
                 'name' => $entry['name'] ?? $this->humanise($key),
                 'summary' => $entry['summary'] ?? '',
+                'effects' => $entry['effects'] ?? '',
                 'category' => (string) ($entry['category'] ?? ''),
                 'count' => $count,
             ];

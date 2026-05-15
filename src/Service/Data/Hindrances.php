@@ -93,8 +93,9 @@ class Hindrances extends Data
         return $this->databaseEntries;
     }
 
-    private function entryFromRow(mixed $row): array
+    protected function entryFromRow(mixed $row): array
     {
+        $effects = $this->decodeJson($row['hindrance_catalog_effects']);
         return [
             'id' => (string) $row['hindrance_catalog_key'],
             'source' => (string) $row['hindrance_catalog_source'],
@@ -102,7 +103,10 @@ class Hindrances extends Data
             'levels' => $this->decodeJson($row['hindrance_catalog_levels']),
             'summary' => (string) $row['hindrance_catalog_summary'],
             'requirements' => $this->decodeJson($row['hindrance_catalog_requirements']),
-            'effects' => $this->decodeJson($row['hindrance_catalog_effects']),
+            'effects' => $effects,
+            'effects_by_level' => $this->groupEffectsByLevel(
+                $effects ?? []
+            ),
             'notes' => $this->decodeJson($row['hindrance_catalog_notes']),
             'source_pages' => $this->decodeJson($row['hindrance_catalog_source_pages']),
         ];

@@ -24,10 +24,10 @@
   --c-parchment: #f6ecd5;
   --c-parchment-dark: #e8d9b0;
   --c-button-hover: rgba(166, 30, 30, 0.25); */
-  --c-sheet-heading: #222;
+  --c-sheet-heading: rgb(135, 28, 22);
   --c-sheet-ink: #1d1208;
   --c-sheet-muted: #8b7a5b;
-  --c-sheet-muted-pale: #c4b9a4;
+  --c-sheet-muted-pale: #d3ccbe;
   --c-sheet-paper: #fbf6ea;
   --c-sheet-rail: rgba(245, 245, 245);
   --c-sheet-rail-item-hover: rgba(166, 30, 30, 0.5);

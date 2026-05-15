@@ -158,6 +158,7 @@
                     <svg class="die" title="{{ attr.die }} sided die"><use href="/images/icons/dice.svg#d{{ attr.die }}"/></svg>
                     <!--<span class="sheet__attributes__die">{{ attr.die ? 'd' ~ attr.die : '—' }}</span>-->
                     <span class="sheet__attributes__label">{{ attr.label|upper }}</span>
+                    <span class="sheet__attributes__description">{{ attr.description }}</span>
                 </li>
                 {% endfor %}
             </ul>
@@ -220,10 +221,11 @@
                 <ul class="sheet__list">
                     {% for hindrance in sheet.hindrances %}
                     <li class="sheet__list__row">
-                        <span class="sheet__hindrances__name">{{ hindrance.name }}</span>
                         <span class="sheet__hindrances__level sheet__hindrances__level--{{ hindrance.level }}">
                             {{ hindrance.level|title }}
                         </span>
+                        <span class="sheet__hindrances__name">{{ hindrance.name }}</span>
+                        <a class="sheet__hindrances__info help-icon" href="#" data-summary="{{ hindrance.summary }}" data-effects="{{ hindrance.effects_by_level[hindrance.level]|join(',') }}">?</a>
                     </li>
                     {% endfor %}
                     {{ m.empty_lines(1) }}
@@ -239,8 +241,8 @@
                     {% for edge in sheet.edges %}
                     <li class="sheet__list__row">
                         <span class="sheet__edges__rank">{{ edge_tiers[loop.index0] }}</span>
-                        <span class="sheet__edges__name">{{ edge.name }}</span>
-                        <span class="sheet__edges__count">{% if edge.count > 1 %}&times;{{ edge.count }}{% endif %}</span>
+                        <span class="sheet__edges__name">{{ edge.name }} {% if edge.count > 1 %}&times;{{ edge.count }}{% endif %}</span>
+                        <a class="sheet__edges__info help-icon" href="#" data-summary="{{ edge.summary }}" data-effects="{{ edge.effects|join(',') }}">?</a>
                     </li>
                     {% endfor %}
                 </ul>

@@ -41,17 +41,17 @@ class Sheet
             return;
         }
 
-        $hindrances = $this->hindranceFactory->forCharacter($entity);
-        $skills = $this->skillFactory->forCharacter($entity);
-        $edges = $this->edgeFactory->forCharacter($entity);
-        $gear = $this->gearFactory->forCharacter($entity);
-        $weapons = $this->weaponFactory->forCharacter($entity);
         $user = false;
         if (Flight::isSuperSession()) {
             if (Flight::user() && (Flight::user()->id != $entity->user)) {
                 $user = $this->userFactory->byId((int) $entity->user);
             }
         }
+        $hindrances = $this->hindranceFactory->forCharacter($entity);
+        $skills = $this->skillFactory->forCharacter($entity);
+        $edges = $this->edgeFactory->forCharacter($entity);
+        $gear = $this->gearFactory->forCharacter($entity);
+        $weapons = $this->weaponFactory->forCharacter($entity);
 
         $sheet = $this->presenter->build(
             $entity,
