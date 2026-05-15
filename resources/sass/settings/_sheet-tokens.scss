@@ -1,10 +1,11 @@
 /**
  * Sass-only tokens for the sheet theme.
  *
- * Importing this module emits no CSS, so partials can pull in the
- * scalar values without dragging a :root block into every compiled
- * stylesheet. The matching CSS custom properties live in
- * _sheet-theme.scss and are emitted once via styles.scss.
+ * Importing this module emits no CSS unless %sheet-heading is
+ * @extend-ed, so partials can pull in the scalar values without
+ * dragging unwanted rules into every compiled stylesheet. The matching
+ * CSS custom properties live in _sheet-theme.scss and are emitted once
+ * via styles.scss.
  */
 
 $sheet-title-font: "Staatliches", "Courier New", monospace;
@@ -13,3 +14,10 @@ $sheet-text-font: "Mynerve", cursive;
 $sheet-text-font-size: 1.2rem;
 $sheet-plain-font: "Roboto", sans-serif;
 $sheet-plain-font-size: 1rem;
+
+%sheet-heading {
+    font-family: $sheet-title-font;
+    color: var(--c-sheet-heading);
+    font-weight: 400;
+    text-transform: uppercase;
+}

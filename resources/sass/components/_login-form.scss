@@ -1,6 +1,7 @@
 @use "../settings/css-variables" as vars;
 @use "../settings/sheet-tokens" as sheet;
 @use "../tools/breakpoints";
+@use "../tools/torn-paper";
 
 .login-form {
     width: 100%;
@@ -44,14 +45,7 @@
         border-top: none;
         border-bottom: none;
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
-        clip-path: polygon(
-            0 6px, 3% 0, 8% 5px, 14% 1px, 22% 4px, 30% 0, 38% 5px, 46% 2px,
-            54% 5px, 62% 0, 70% 4px, 78% 1px, 86% 5px, 94% 0, 100% 6px,
-            100% calc(100% - 6px), 94% 100%, 86% calc(100% - 5px), 78% calc(100% - 1px),
-            70% calc(100% - 4px), 62% 100%, 54% calc(100% - 5px), 46% calc(100% - 2px),
-            38% calc(100% - 5px), 30% 100%, 22% calc(100% - 4px), 14% calc(100% - 1px),
-            8% calc(100% - 5px), 3% 100%, 0 calc(100% - 6px)
-        );
+        @extend %torn-paper;
         padding: 1rem;
         margin-bottom: 0;
 

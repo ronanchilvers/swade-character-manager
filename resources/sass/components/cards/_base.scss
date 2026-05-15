@@ -1,4 +1,5 @@
 @use "../../settings/css-variables" as vars;
+@use "../../settings/sheet-tokens";
 @use "variables" as card;
 @use "../../tools/breakpoints";
 
@@ -44,14 +45,10 @@
     }
 
     .card__title {
+        @extend %sheet-heading;
         flex: 0 0 auto;
-        font-family: card.$card-title-font;
-        font-size: card.$card-title-font-size;
-        color: card.$card-title-color;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
         font-size: 1.25rem;
+        letter-spacing: 0.08em;
         padding-bottom: 0.75rem;
     }
     .card__title--collapsible {
@@ -82,13 +79,9 @@
         display: none;
     }
     .card__subtitle {
-        font-family: card.$card-title-font;
-        font-size: card.$card-title-font-size;
-        color: card.$card-title-color;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
+        @extend %sheet-heading;
         font-size: 1.1rem;
+        letter-spacing: 0.08em;
     }
     .card__content {
         flex: 1 1 auto;

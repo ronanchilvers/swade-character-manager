@@ -1,4 +1,5 @@
 @use "../../settings/css-variables" as vars;
+@use "../../settings/sheet-tokens";
 @use "variables" as card;
 @use "../../tools/breakpoints";
 
@@ -23,12 +24,9 @@
     }
 
     &__title {
+        @extend %sheet-heading;
         margin: 0;
-        font-family: card.$card-title-font;
         font-size: 1.35rem;
-        font-weight: 400;
-        color: var(--c-sheet-heading);
-        text-transform: uppercase;
     }
 
     &__body {
@@ -75,12 +73,10 @@
     color: var(--c-sheet-ink);
 
     &__title {
+        @extend %sheet-heading;
         margin: 0 0 0.5rem;
-        font-family: card.$card-title-font;
         font-size: card.$card-title-font-size;
-        text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--c-sheet-heading);
     }
 
     &__body {
