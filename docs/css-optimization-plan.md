@@ -1,6 +1,8 @@
 # CSS Optimisation Plan
 
-Status: draft — not yet implemented.
+Status: implemented on branch `claude/optimize-css-2AlNv`. See
+"Outcome" at the bottom for the actual numbers and any deviations from
+the original plan.
 
 Goal: reduce compiled CSS bytes per page (and source duplication) without
 changing any visual output.
@@ -257,3 +259,70 @@ After each phase:
   heading recipe and torn-paper recipe.
 
 No visual changes expected.
+
+## Outcome (after implementation)
+
+Decisions taken at implementation time:
+
+- **Phase 2** — Option A (trim `@use` lines in secondary entries).
+- **Phase 3** — `%sheet-heading` covers font-family + color +
+  font-weight + text-transform only. Letter-spacing varies per call
+  site and stays at the call site. `.panel__title` was intentionally
+  excluded because its templates render mixed-case text and the
+  placeholder would force uppercase.
+- **Phase 4** — implemented as `%torn-paper` (placeholder, not mixin) so
+  the polygon is emitted once with a combined selector inside each
+  compiled stylesheet. The help dialog's slightly jagged 7px variant is
+  normalised to the same 6px shape as the other two.
+- **Phase 5** — all three incidental bugs (panels `justfy-content`,
+  buttons `opacity: none`, obsolete `-webkit-transition`) fixed in the
+  Phase 1 commit.
+
+Additional small change: merged `_colours.scss` into the single
+`:root` block in `_sheet-theme.scss` and deleted `_colours.scss`. The
+sheet tokens were also split into `_sheet-tokens.scss` (Sass scalar
+vars, no CSS output) so partials can pull token values without
+re-emitting the `:root` block in every compiled stylesheet.
+
+### Final per-file sizes (compressed)
+
+| File          | Before  | After   | Δ        |
+|---------------|---------|---------|----------|
+| `styles.css`  | 18,255  | 17,100  | -1,155 B |
+| `sheet.css`   | 26,161  | 14,783  | -11,378 B |
+| `admin.css`   |  5,627  |  4,872  |    -755 B |
+| `login.css`   |  3,662  |  1,215  |  -2,447 B |
+| `builder.css` |  1,588  |    937  |    -651 B |
+| `campaign.css`|    963  |    793  |    -170 B |
+| **total**     | 56,256  | 39,700  | **-16,556 B (-29.4%)** |
+
+### Per-page bytes loaded (CSS only; both files where applicable)
+
+| Page          | Before | After  | Δ        |
+|---------------|--------|--------|----------|
+| Home          | 18,255 | 17,100 |  -6.3%   |
+| Builder       | 19,843 | 18,037 |  -9.1%   |
+| Sheet         | 44,416 | 31,883 | **-28.2%** |
+| Login         | 21,917 | 18,315 | -16.4%   |
+| Admin         | 23,882 | 21,972 |  -8.0%   |
+| Campaign view | 19,218 | 17,893 |  -6.9%   |
+
+### Source changes
+
+- 4 dead partials removed: `_box-sizing.scss`, `_pill.scss`,
+  `_progress.scss`, `_aside.scss`. `_colours.scss` folded into
+  `_sheet-theme.scss`.
+- 2 new partials: `settings/_sheet-tokens.scss` (Sass scalars +
+  `%sheet-heading`) and `tools/_torn-paper.scss` (`%torn-paper`).
+- All five secondary entry files now contain only the entry-specific
+  `@use` lines; settings/base/element/shared-component rules come from
+  `styles.css` (which `base.twig` always loads first).
+- 10 heading rules now `@extend %sheet-heading` instead of repeating the
+  four-property recipe.
+- 3 torn-paper polygons now `@extend %torn-paper`; sheet.css emits one
+  shared rule for `.sheet__panel--torn, .sheet__help-dialog`.
+- Incidental bugs fixed: `justfy-content` typo, invalid `opacity: none`,
+  obsolete `-webkit-transition`.
+
+No template, JS, or PHP changes were required.
+
