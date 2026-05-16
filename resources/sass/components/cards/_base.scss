@@ -18,6 +18,10 @@
     @include breakpoints.at(phablet) {
         grid-template-columns: 1fr;
     }
+
+    &--uniform {
+        align-items: stretch;
+    }
 }
 
 .card {
