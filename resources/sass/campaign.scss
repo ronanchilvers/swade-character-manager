@@ -1,8 +1,5 @@
 /** Campaigns Stylesheet **/
-
-/** Settings **/
-@use "settings/css-variables";
-@use "settings/colours";
+/** Loaded alongside styles.css; only campaign-specific rules live here. */
 
 @use "components/campaign/invite-link";
 @use "components/campaign/roster";

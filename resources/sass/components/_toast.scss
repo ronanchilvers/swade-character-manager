@@ -1,4 +1,4 @@
-@use "../settings/sheet-theme" as sheet;
+@use "../settings/sheet-tokens" as sheet;
 @use "../tools/breakpoints";
 
 $toast-heading-font: sheet.$sheet-title-font;

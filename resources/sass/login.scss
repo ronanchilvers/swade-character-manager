@@ -1,9 +1,4 @@
-/** Characters Stylesheet **/
+/** Login Stylesheet **/
+/** Loaded alongside styles.css; only login-specific rules live here. */
 
-/** Settings **/
-@use "settings/css-variables";
-@use "settings/colours";
-
-/** Components **/
-@use "components/panels";
 @use "components/login-form";

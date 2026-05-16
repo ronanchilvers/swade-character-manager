@@ -1,5 +1,5 @@
 @use "../settings/css-variables" as vars;
-@use "../settings/sheet-theme" as sheet;
+@use "../settings/sheet-tokens" as sheet;
 @use "../tools/breakpoints";
 
 $panel-padding: 2rem;
@@ -123,7 +123,7 @@ $panel-padding: 2rem;
 
         @include breakpoints.at('phablet') {
             flex-direction: column;
-            justfy-content: center;
+            justify-content: center;
         }
     }
 }

@@ -1,5 +1,5 @@
 @use "../settings/css-variables" as vars;
-@use "../settings/sheet-theme" as sheet;
+@use "../settings/sheet-tokens" as sheet;
 @use "../tools/breakpoints";
 
 .admin-view {
@@ -12,13 +12,10 @@
     color: var(--c-sheet-ink);
 
     &__title {
+        @extend %sheet-heading;
         margin: 0 0 1rem;
-        font-family: sheet.$sheet-title-font;
         font-size: 1.5rem;
-        font-weight: 400;
         letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--c-sheet-heading);
     }
 
     &__intro {
@@ -53,12 +50,9 @@
     }
 
     &__table th {
-        font-family: sheet.$sheet-title-font;
+        @extend %sheet-heading;
         font-size: 0.95rem;
-        font-weight: 400;
         letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--c-sheet-heading);
         background: rgba(255, 255, 255, 0.55);
     }
 
@@ -200,13 +194,10 @@
     }
 
     &__title {
+        @extend %sheet-heading;
         margin: 0;
-        font-family: sheet.$sheet-title-font;
         font-size: 1.2rem;
-        font-weight: 400;
         letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--c-sheet-heading);
     }
 
     &__meta,
@@ -253,13 +244,10 @@
     }
 
     &__title {
+        @extend %sheet-heading;
         margin: 0;
-        font-family: sheet.$sheet-title-font;
         font-size: 1.05rem;
-        font-weight: 400;
         letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--c-sheet-heading);
     }
 
     &__meta,

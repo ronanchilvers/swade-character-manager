@@ -1,7 +1,6 @@
 @use "../settings/css-variables" as vars;
 
 .dropdown {
-    /* overflow: hidden; */
     position: relative;
     .dropdown__menu {
         position: absolute;
