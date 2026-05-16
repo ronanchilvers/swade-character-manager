@@ -132,7 +132,7 @@ class Sheet
                 'key' => $key,
                 'name' => $entry['name'] ?? $this->humanise($key),
                 'summary' => $entry['summary'] ?? '',
-                'effects_by_level' => $entry['effects_by_level'],
+                'effects_by_level' => $entry['effects_by_level'] ?? [],
                 'level' => (string) ($hindrance->level ?? ''),
             ];
         }
