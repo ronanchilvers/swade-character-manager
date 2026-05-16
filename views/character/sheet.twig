@@ -199,8 +199,8 @@
             <ul class="sheet__skills__list">
                 <li class="sheet__skills__row sheet__skills__row--header">
                     {{ m.die_header_strip(skill.die_faces, skill.die) }}
-                    <span>Skill</span>
-                    <span>Attribute</span>
+                    <span>Skill & Attribute</span>
+                    <span></span>
                 </li>
                 {% for skill in sheet.skills %}
                 <li class="sheet__skills__row{% if skill.is_core %} sheet__skills__row--core{% endif %}">

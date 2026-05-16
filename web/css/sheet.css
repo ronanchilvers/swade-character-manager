@@ -344,6 +344,10 @@
 .sheet__skills__row--core {
   color: var(--c-sheet-ink);
 }
+.sheet__skills__row--header {
+  grid-template-columns: 10rem 1fr;
+  align-items: baseline;
+}
 .sheet__skills__row--header span,
 .sheet__skills__row--header svg {
   color: var(--c-sheet-muted);

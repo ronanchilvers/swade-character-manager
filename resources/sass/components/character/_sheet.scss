@@ -352,6 +352,8 @@ $border-color-light: #EEE;
             }
         }
         &__row--header {
+            grid-template-columns: 10rem 1fr;
+            align-items: baseline;
             span,
             svg {
                 color: var(--c-sheet-muted);
