@@ -52,6 +52,29 @@ class CampaignTest extends TestCase
         self::assertSame($hash, $campaign->hash);
     }
 
+    public function testByIdFindsCampaignById(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchRow')
+            ->with(
+                'SELECT * FROM campaigns WHERE campaign_id = ?',
+                [12],
+            )
+            ->willReturn(new Collection([
+                'campaign_id' => 12,
+                'campaign_hash' => 'testhash',
+                'campaign_user' => 7,
+                'campaign_name' => 'The Flood',
+            ]));
+
+        $campaign = $this->factory($pdo)->byId(12);
+
+        self::assertInstanceOf(Entity::class, $campaign);
+        self::assertSame(12, $campaign->id);
+        self::assertSame('testhash', $campaign->hash);
+    }
+
     public function testForUserAndForMemberUserUseExpectedQueries(): void
     {
         $pdo = $this->createMock(SimplePdo::class);

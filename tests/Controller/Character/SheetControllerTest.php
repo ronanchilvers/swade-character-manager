@@ -7,6 +7,8 @@ namespace Tests\Controller\Character;
 use App\Character\Sheet as SheetPresenter;
 use App\Controller\Character\Sheet;
 use App\Entity;
+use App\Entity\Factory\Campaign as FactoryCampaign;
+use App\Entity\Factory\Campaign\Member as FactoryMember;
 use App\Entity\Factory\Character;
 use App\Entity\Factory\Edge;
 use App\Entity\Factory\Gear;
@@ -50,6 +52,88 @@ class SheetControllerTest extends ControllerTestCase
 
         try {
             $this->controller($this->characterLookup($character))->index('charhash');
+            self::fail('Expected redirect');
+        } catch (RedirectedResponse $redirected) {
+            self::assertSame('/', $redirected->url);
+        }
+
+        self::assertSame(['Unable to find character'], $session->errors);
+    }
+
+    public function testIndexAllowsCampaignMemberAsReadOnly(): void
+    {
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7, 'campaign' => 5, 'name' => 'Mara']);
+        $campaign = new Entity(['id' => 5]);
+
+        $campaignFactory = $this->getMockBuilder(FactoryCampaign::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['byId'])
+            ->getMock();
+        $campaignFactory->expects(self::once())
+            ->method('byId')
+            ->with(5)
+            ->willReturn($campaign);
+
+        $memberFactory = $this->getMockBuilder(FactoryMember::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['isMember'])
+            ->getMock();
+        $memberFactory->expects(self::once())
+            ->method('isMember')
+            ->with($campaign, 8)
+            ->willReturn(true);
+
+        $this->mapUser((object) ['id' => 8], false, false);
+        $this->mapRenderToException();
+
+        try {
+            $this->controller(
+                characterFactory: $this->characterLookup($character),
+                campaignFactory: $campaignFactory,
+                memberFactory: $memberFactory,
+                presenter: $this->presenterReturning([]),
+            )->index('charhash');
+            self::fail('Expected render');
+        } catch (RenderedResponse $rendered) {
+            self::assertSame('character/sheet.twig', $rendered->template);
+            self::assertTrue($rendered->data['read_only']);
+        }
+    }
+
+    public function testIndexRedirectsNonMemberCampaignViewer(): void
+    {
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7, 'campaign' => 5]);
+        $campaign = new Entity(['id' => 5]);
+
+        $campaignFactory = $this->getMockBuilder(FactoryCampaign::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['byId'])
+            ->getMock();
+        $campaignFactory->expects(self::once())
+            ->method('byId')
+            ->with(5)
+            ->willReturn($campaign);
+
+        $memberFactory = $this->getMockBuilder(FactoryMember::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['isMember'])
+            ->getMock();
+        $memberFactory->expects(self::once())
+            ->method('isMember')
+            ->with($campaign, 8)
+            ->willReturn(false);
+
+        $session = $this->mapSession();
+        $this->mapUser((object) ['id' => 8], false, false);
+        $this->mapRedirectToException();
+        $this->mapUrls(['home_page' => '/']);
+
+        try {
+            $this->controller(
+                characterFactory: $this->characterLookup($character),
+                campaignFactory: $campaignFactory,
+                memberFactory: $memberFactory,
+            )->index('charhash');
             self::fail('Expected redirect');
         } catch (RedirectedResponse $redirected) {
             self::assertSame('/', $redirected->url);
@@ -104,6 +188,7 @@ class SheetControllerTest extends ControllerTestCase
             self::assertSame($character, $rendered->data['entity']);
             self::assertFalse($rendered->data['user']);
             self::assertSame(['identity' => ['name' => 'Mara']], $rendered->data['sheet']);
+            self::assertFalse($rendered->data['read_only']);
         }
     }
 
@@ -132,12 +217,13 @@ class SheetControllerTest extends ControllerTestCase
             self::fail('Expected render');
         } catch (RenderedResponse $rendered) {
             self::assertSame($owner, $rendered->data['user']);
+            self::assertFalse($rendered->data['read_only']);
         }
     }
 
     public function testUpdateStateClampsKnownFieldsAndReturnsJsonSuccess(): void
     {
-        $character = new Entity(['id' => 3, 'hash' => 'charhash']);
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $characterFactory = $this->getMockBuilder(Character::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['forHash', 'update'])
@@ -153,6 +239,7 @@ class SheetControllerTest extends ControllerTestCase
                 && !isset($entity->ignored)))
             ->willReturn(new Result());
 
+        $this->mapUser((object) ['id' => 7], false, false);
         $response = $this->mapJsonToResponse();
         $this->mapRequest('POST', body: json_encode([
             'wounds' => -2,
@@ -170,7 +257,7 @@ class SheetControllerTest extends ControllerTestCase
 
     public function testUpdateNotesStoresStringAndReturnsJsonSuccess(): void
     {
-        $character = new Entity(['id' => 3, 'hash' => 'charhash']);
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $characterFactory = $this->getMockBuilder(Character::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['forHash', 'update'])
@@ -182,6 +269,7 @@ class SheetControllerTest extends ControllerTestCase
             ->with(self::callback(fn (Entity $entity): bool => 'Session notes' === $entity->notes))
             ->willReturn(new Result());
 
+        $this->mapUser((object) ['id' => 7], false, false);
         $response = $this->mapJsonToResponse();
         $this->mapRequest('POST', body: json_encode(['notes' => 'Session notes']));
 
@@ -192,7 +280,7 @@ class SheetControllerTest extends ControllerTestCase
 
     public function testJsonUpdateReturnsErrorsForFailedResult(): void
     {
-        $character = new Entity(['id' => 3, 'hash' => 'charhash']);
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $characterFactory = $this->getMockBuilder(Character::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['forHash', 'update'])
@@ -204,6 +292,7 @@ class SheetControllerTest extends ControllerTestCase
             ->method('update')
             ->willReturn(new Result(['database failed']));
 
+        $this->mapUser((object) ['id' => 7], false, false);
         $response = $this->mapJsonToResponse();
         $this->mapRequest('POST', body: '{}');
 
@@ -259,7 +348,7 @@ class SheetControllerTest extends ControllerTestCase
 
     public function testUpdateGearPassesRowsArray(): void
     {
-        $character = new Entity(['id' => 3, 'hash' => 'charhash']);
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $rows = [['name' => 'Rope']];
         $gearFactory = $this->getMockBuilder(Gear::class)
             ->disableOriginalConstructor()
@@ -270,6 +359,7 @@ class SheetControllerTest extends ControllerTestCase
             ->with($character, $rows)
             ->willReturn(new Result());
 
+        $this->mapUser((object) ['id' => 7], false, false);
         $this->mapJsonToResponse();
         $this->mapRequest('POST', body: json_encode(['rows' => $rows]));
 
@@ -281,7 +371,7 @@ class SheetControllerTest extends ControllerTestCase
 
     public function testUpdateGearTreatsNonArrayRowsAsEmptyArray(): void
     {
-        $character = new Entity(['id' => 3, 'hash' => 'charhash']);
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $gearFactory = $this->getMockBuilder(Gear::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['syncForCharacter'])
@@ -291,6 +381,7 @@ class SheetControllerTest extends ControllerTestCase
             ->with($character, [])
             ->willReturn(new Result());
 
+        $this->mapUser((object) ['id' => 7], false, false);
         $this->mapJsonToResponse();
         $this->mapRequest('POST', body: json_encode(['rows' => 'not-array']));
 
@@ -302,7 +393,7 @@ class SheetControllerTest extends ControllerTestCase
 
     public function testUpdateWeaponsPassesRowsArray(): void
     {
-        $character = new Entity(['id' => 3, 'hash' => 'charhash']);
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $rows = [['name' => 'Knife']];
         $weaponFactory = $this->getMockBuilder(Weapon::class)
             ->disableOriginalConstructor()
@@ -313,6 +404,7 @@ class SheetControllerTest extends ControllerTestCase
             ->with($character, $rows)
             ->willReturn(new Result());
 
+        $this->mapUser((object) ['id' => 7], false, false);
         $this->mapJsonToResponse();
         $this->mapRequest('POST', body: json_encode(['rows' => $rows]));
 
@@ -324,7 +416,7 @@ class SheetControllerTest extends ControllerTestCase
 
     public function testUpdateWeaponsTreatsNonArrayRowsAsEmptyArray(): void
     {
-        $character = new Entity(['id' => 3, 'hash' => 'charhash']);
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $weaponFactory = $this->getMockBuilder(Weapon::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['syncForCharacter'])
@@ -334,6 +426,7 @@ class SheetControllerTest extends ControllerTestCase
             ->with($character, [])
             ->willReturn(new Result());
 
+        $this->mapUser((object) ['id' => 7], false, false);
         $this->mapJsonToResponse();
         $this->mapRequest('POST', body: json_encode(['rows' => 'not-array']));
 
@@ -343,7 +436,7 @@ class SheetControllerTest extends ControllerTestCase
         )->updateWeapons('charhash');
     }
 
-    public function testJsonUpdateCurrentlyAllowsNonOwnerWhenHashExists(): void
+    public function testJsonUpdateBlocksNonOwner(): void
     {
         $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
         $characterFactory = $this->getMockBuilder(Character::class)
@@ -352,18 +445,17 @@ class SheetControllerTest extends ControllerTestCase
             ->getMock();
         $characterFactory->method('forHash')
             ->willReturn($character);
-        $characterFactory->expects(self::once())
-            ->method('update')
-            ->willReturn(new Result());
+        $characterFactory->expects(self::never())
+            ->method('update');
 
         $this->mapUser((object) ['id' => 99], false, false);
         $response = $this->mapJsonToResponse();
-        $this->mapRequest('POST', body: json_encode(['notes' => 'Allowed by current resolveForJson']));
+        $this->mapRequest('POST', body: '{}');
 
         $this->controller(characterFactory: $characterFactory)->updateNotes('charhash');
 
-        self::assertSame(200, $response->statusCode);
-        self::assertSame('Allowed by current resolveForJson', $character->notes);
+        self::assertSame(404, $response->statusCode);
+        self::assertSame('{"ok":false,"errors":["Not found"]}', $response->body);
     }
 
     private function mapUser(object $user, bool $isSuperUser, bool $isSuperSession): void
@@ -419,6 +511,8 @@ class SheetControllerTest extends ControllerTestCase
         ?User $userFactory = null,
         ?Manager $manager = null,
         ?SheetPresenter $presenter = null,
+        ?FactoryCampaign $campaignFactory = null,
+        ?FactoryMember $memberFactory = null,
     ): Sheet {
         return new Sheet(
             $characterFactory ?? $this->createStub(Character::class),
@@ -430,6 +524,8 @@ class SheetControllerTest extends ControllerTestCase
             $userFactory ?? $this->createStub(User::class),
             $manager ?? $this->createStub(Manager::class),
             $presenter ?? $this->presenterReturning([]),
+            $campaignFactory ?? $this->createStub(FactoryCampaign::class),
+            $memberFactory ?? $this->createStub(FactoryMember::class),
         );
     }
 }
