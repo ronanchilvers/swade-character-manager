@@ -176,6 +176,13 @@ $border-color-light: #EEE;
             font-size: 0.8rem;
             font-weight: 400;
             color: var(--c-sheet-muted);
+
+            @include breakpoints.at('tablet') {
+                display: none;
+            }
+            @include breakpoints.at('phablet') {
+                display: inline;
+            }
         }
     }
 
@@ -338,18 +345,25 @@ $border-color-light: #EEE;
             border-bottom: 1px solid var(--c-sheet-muted);
             padding: 0.25rem 0;
             min-height: 1.6rem;
+            font-family: $title-font;
 
             &--core {
                 color: var(--c-sheet-ink);
             }
         }
+        &__row--header {
+            span,
+            svg {
+                color: var(--c-sheet-muted);
+            }
+        }
 
         &__name {
-            font-family: $title-font;
+            /* font-family: $title-font; */
         }
 
         &__attribute {
-            font-family: $title-font;
+            /* font-family: $title-font; */
             color: var(--c-sheet-muted);
             font-size: 0.8em;
             line-height: 2;

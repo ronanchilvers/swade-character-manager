@@ -9,6 +9,16 @@
 {% set hide_submit = true %}
 {% set edge_tiers = ['', '', 'N','N','N','S','S','S','S','V','V','V','V','H','H','H','H','L','L','L','L'] %}
 
+{% macro die_header_strip() %}
+    <span class="sheet__die-strip">
+    {% for face in [4,6,8,10,12] %}
+        <span class="sheet__die-strip__step">
+            <svg class="die"><use href="/images/icons/dice.svg#d{{ face }}"/></svg>
+            d{{ face }}
+        </span>
+    {% endfor %}
+    </span>
+{% endmacro %}
 {% macro die_strip(faces, selected) %}
     <span class="sheet__die-strip">
     {% for face in faces %}
@@ -187,6 +197,11 @@
         <div class="sheet__panel sheet__panel--torn sheet__skills">
             <h2 class="sheet__title">Skills <a class="button button--small" href="{{ get_url('characters_skills', {hash: entity.hash}) }}">Edit</a></h2>
             <ul class="sheet__skills__list">
+                <li class="sheet__skills__row sheet__skills__row--header">
+                    {{ m.die_header_strip(skill.die_faces, skill.die) }}
+                    <span>Skill</span>
+                    <span>Attribute</span>
+                </li>
                 {% for skill in sheet.skills %}
                 <li class="sheet__skills__row{% if skill.is_core %} sheet__skills__row--core{% endif %}">
                     {{ m.die_strip(skill.die_faces, skill.die) }}
