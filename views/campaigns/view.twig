@@ -54,14 +54,14 @@
                     </p>
                     {% if character.concept|length > 0 %}<p>{{ character.concept }}</p>{% else %}<p>No concept yet</p>{% endif %}
                 </div>
-                {% if character.user == session.user.id %}
                 <div class="card__footer">
                     <a class="button" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
+                    {% if character.user == session.user.id %}
                     <form method="post" action="{{ get_url('campaigns_leave_character', {hash: campaign.hash, character_hash: character.hash}) }}">
                         <button class="button" type="submit">Remove from campaign</button>
                     </form>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
     {% endfor %}

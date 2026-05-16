@@ -6,6 +6,8 @@ namespace App\Controller\Character;
 
 use App\Character\Sheet as SheetPresenter;
 use App\Entity;
+use App\Entity\Factory\Campaign as FactoryCampaign;
+use App\Entity\Factory\Campaign\Member as FactoryMember;
 use App\Entity\Factory\Character as FactoryCharacter;
 use App\Entity\Factory\Edge as FactoryEdge;
 use App\Entity\Factory\Gear as FactoryGear;
@@ -31,14 +33,31 @@ class Sheet
         private FactoryUser $userFactory,
         private Manager $manager,
         private SheetPresenter $presenter,
+        private FactoryCampaign $campaignFactory,
+        private FactoryMember $memberFactory,
     ) {
     }
 
     public function index(string $hash): void
     {
-        $entity = $this->resolve($hash);
+        $entity = $this->factory->forHash($hash);
         if (!$entity instanceof Entity) {
+            Flight::session()->error('Unable to find character');
+            Flight::redirect(Flight::getUrl('home_page'));
             return;
+        }
+
+        $currentUser = Flight::user();
+        $isOwner = Flight::isSuperUser($currentUser) || ($entity->user == $currentUser->id);
+        $readOnly = false;
+
+        if (!$isOwner) {
+            if (!$this->canViewAsCampaignMember($entity, (int) $currentUser->id)) {
+                Flight::session()->error('Unable to find character');
+                Flight::redirect(Flight::getUrl('home_page'));
+                return;
+            }
+            $readOnly = true;
         }
 
         $user = false;
@@ -69,6 +88,7 @@ class Sheet
             'entity' => $entity,
             'user' => $user,
             'sheet' => $sheet,
+            'read_only' => $readOnly,
         ]);
     }
 
@@ -122,24 +142,6 @@ class Sheet
         $this->respond($this->weaponFactory->syncForCharacter($entity, is_array($rows) ? $rows : []));
     }
 
-    private function resolve(string $hash): ?Entity
-    {
-        $entity = $this->factory->forHash($hash);
-        if (!$entity instanceof Entity) {
-            Flight::session()->error('Unable to find character');
-            Flight::redirect(Flight::getUrl('home_page'));
-            return null;
-        }
-        $user = Flight::user();
-        if (!Flight::isSuperUser($user) && ($entity->user != $user->id)) {
-            Flight::session()->error('Unable to find character');
-            Flight::redirect(Flight::getUrl('home_page'));
-            return null;
-        }
-
-        return $entity;
-    }
-
     private function resolveForJson(string $hash): ?Entity
     {
         $entity = $this->factory->forHash($hash);
@@ -147,8 +149,25 @@ class Sheet
             Flight::json(['ok' => false, 'errors' => ['Not found']], 404);
             return null;
         }
+        $user = Flight::user();
+        if (!Flight::isSuperUser($user) && ($entity->user != $user->id)) {
+            Flight::json(['ok' => false, 'errors' => ['Not found']], 404);
+            return null;
+        }
 
         return $entity;
+    }
+
+    private function canViewAsCampaignMember(Entity $character, int $userId): bool
+    {
+        if (!$character->campaign) {
+            return false;
+        }
+        $campaign = $this->campaignFactory->byId((int) $character->campaign);
+        if (!$campaign instanceof Entity) {
+            return false;
+        }
+        return $this->memberFactory->isMember($campaign, $userId);
     }
 
     private function jsonBody(): array
