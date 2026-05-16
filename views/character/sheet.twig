@@ -35,31 +35,35 @@
     {% endfor %}
 {% endmacro %}
 
-{% macro gear_row(item) %}
+{% macro gear_row(item, read_only) %}
     <li class="sheet__list__row sheet__gear__row" data-gear-row>
         <span class="sheet__gear__name"
-              contenteditable="true"
+              {% if not read_only %}contenteditable="true"{% endif %}
               data-cell="name"
               data-placeholder="Add gear…">{{ item.name ?? '' }}</span>
+        {% if not read_only %}
         <button class="sheet__row__remove"
                 type="button"
                 aria-label="Remove gear row">&times;</button>
+        {% endif %}
     </li>
 {% endmacro %}
 
-{% macro weapon_row(weapon) %}
+{% macro weapon_row(weapon, read_only) %}
     <tr class="sheet__weapons__row" data-weapon-row>
-        <td contenteditable="true" data-cell="name" data-placeholder="Weapon name">{{ weapon.name ?? '' }}</td>
-        <td contenteditable="true" data-cell="range">{{ weapon.range ?? '' }}</td>
-        <td contenteditable="true" data-cell="damage">{{ weapon.damage ?? '' }}</td>
-        <td contenteditable="true" data-cell="ap">{{ weapon.ap ?? '' }}</td>
-        <td contenteditable="true" data-cell="rof">{{ weapon.rof ?? '' }}</td>
-        <td contenteditable="true" data-cell="weight">{{ weapon.weight ?? '' }}</td>
-        <td contenteditable="true" data-cell="notes" class="sheet__weapons__notes-cell">{{ weapon.notes ?? '' }}</td>
+        <td {% if not read_only %}contenteditable="true" {% endif %}data-cell="name" data-placeholder="Weapon name">{{ weapon.name ?? '' }}</td>
+        <td {% if not read_only %}contenteditable="true" {% endif %}data-cell="range">{{ weapon.range ?? '' }}</td>
+        <td {% if not read_only %}contenteditable="true" {% endif %}data-cell="damage">{{ weapon.damage ?? '' }}</td>
+        <td {% if not read_only %}contenteditable="true" {% endif %}data-cell="ap">{{ weapon.ap ?? '' }}</td>
+        <td {% if not read_only %}contenteditable="true" {% endif %}data-cell="rof">{{ weapon.rof ?? '' }}</td>
+        <td {% if not read_only %}contenteditable="true" {% endif %}data-cell="weight">{{ weapon.weight ?? '' }}</td>
+        <td {% if not read_only %}contenteditable="true" {% endif %}data-cell="notes" class="sheet__weapons__notes-cell">{{ weapon.notes ?? '' }}</td>
         <td class="sheet__weapons__actions-cell">
+            {% if not read_only %}
             <button class="sheet__row__remove"
                     type="button"
                     aria-label="Remove weapon row">&times;</button>
+            {% endif %}
         </td>
     </tr>
 {% endmacro %}
@@ -108,7 +112,7 @@
 
     <div class="sheet__top">
         <div class="sheet__panel sheet__identity">
-            <h2 class="sheet__title">Identity <a class="button button--small" href="{{ get_url('characters_concept', {hash: entity.hash}) }}">Edit</a></h2>
+            <h2 class="sheet__title">Identity {% if not read_only %}<a class="button button--small" href="{{ get_url('characters_concept', {hash: entity.hash}) }}">Edit</a>{% endif %}</h2>
             <dl class="sheet__identity__grid">
                 <div class="sheet__identity__row">
                     <dt>Name</dt>
@@ -125,7 +129,8 @@
             </dl>
 
             <div class="sheet__traits-circles">
-                <div class="sheet__circle sheet__circle--editable sheet__circle--bennies">
+                <div class="sheet__circle{% if not read_only %} sheet__circle--editable{% endif %} sheet__circle--bennies">
+                    {% if not read_only %}
                     <div class="sheet__counter" data-counter-control="bennies">
                         <button class="sheet__counter__button"
                                 type="button"
@@ -142,6 +147,9 @@
                                 data-counter-step="1"
                                 aria-label="Increase bennies">+</button>
                     </div>
+                    {% else %}
+                    <span class="sheet__circle__value">{{ sheet.state.bennies }}</span>
+                    {% endif %}
                     <span class="sheet__circle__label">Bennies</span>
                 </div>
                 <div class="sheet__circle">
@@ -159,7 +167,7 @@
             </div>
         </div>
         <div class="sheet__panel sheet__panel--torn sheet__attributes">
-            <h2 class="sheet__title">Attributes <a class="button button--small" href="{{ get_url('characters_attributes', {hash: entity.hash}) }}">Edit</a></h2>
+            <h2 class="sheet__title">Attributes {% if not read_only %}<a class="button button--small" href="{{ get_url('characters_attributes', {hash: entity.hash}) }}">Edit</a>{% endif %}</h2>
             <ul class="sheet__attributes__list">
                 {% for attr in sheet.attributes %}
                 <li class="sheet__attributes__row">
@@ -181,21 +189,19 @@
             <ul class="sheet__rail__list">
                 {% for n in 1..3 %}
                 <li class="sheet__rail__list__item{% if sheet.state.wounds >= n %} sheet__rail__list__item--selected{% endif %}"
-                    data-rail="wounds"
-                    data-rail-step="{{ n }}">&minus;{{ n }}</li>
+                    {% if not read_only %}data-rail="wounds" data-rail-step="{{ n }}"{% endif %}>&minus;{{ n }}</li>
                 {% endfor %}
                 <li class="sheet__rail__list__item sheet__rail__list__item--inc{% if sheet.state.incapacitated %} sheet__rail__list__item--selected{% endif %}"
-                    data-rail="incapacitated">Inc</li>
+                    {% if not read_only %}data-rail="incapacitated"{% endif %}>Inc</li>
                 {% for n in 2..1 %}
                 <li class="sheet__rail__list__item{% if sheet.state.fatigue >= n %} sheet__rail__list__item--selected{% endif %}"
-                    data-rail="fatigue"
-                    data-rail-step="{{ n }}">&minus;{{ n }}</li>
+                    {% if not read_only %}data-rail="fatigue" data-rail-step="{{ n }}"{% endif %}>&minus;{{ n }}</li>
                 {% endfor %}
             </ul>
             <span class="sheet__rail__label">Fatigue</span>
         </aside>
         <div class="sheet__panel sheet__panel--torn sheet__skills">
-            <h2 class="sheet__title">Skills <a class="button button--small" href="{{ get_url('characters_skills', {hash: entity.hash}) }}">Edit</a></h2>
+            <h2 class="sheet__title">Skills {% if not read_only %}<a class="button button--small" href="{{ get_url('characters_skills', {hash: entity.hash}) }}">Edit</a>{% endif %}</h2>
             <ul class="sheet__skills__list">
                 <li class="sheet__skills__row sheet__skills__row--header">
                     {{ m.die_header_strip(skill.die_faces, skill.die) }}
@@ -217,22 +223,26 @@
 
         <div class="sheet__panel sheet__gear">
             <h2 class="sheet__title">Gear</h2>
-            <ul class="sheet__list sheet__gear__list" data-editable="gear">
+            <ul class="sheet__list sheet__gear__list" {% if not read_only %}data-editable="gear"{% endif %}>
                 {% for item in sheet.gear %}
-                    {{ m.gear_row(item) }}
+                    {{ m.gear_row(item, read_only) }}
                 {% endfor %}
+                {% if not read_only %}
                 <li class="sheet__list__row sheet__list__row--add">
                     <button class="button button--full" type="button" data-add="gear">+ Add gear</button>
                 </li>
+                {% endif %}
             </ul>
+            {% if not read_only %}
             <template data-row-template="gear">
                 {{ m.gear_row({name: '', notes: ''}) }}
             </template>
+            {% endif %}
         </div>
 
         <div class="sheet__right">
             <div class="sheet__panel sheet__panel--torn sheet__hindrances">
-                <h2 class="sheet__title">Hindrances <a class="button button--small" href="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">Edit</a></h2>
+                <h2 class="sheet__title">Hindrances {% if not read_only %}<a class="button button--small" href="{{ get_url('characters_hindrances', {hash: entity.hash}) }}">Edit</a>{% endif %}</h2>
                 <ul class="sheet__list">
                     {% for hindrance in sheet.hindrances %}
                     <li class="sheet__list__row">
@@ -251,7 +261,7 @@
             </div>
 
             <div class="sheet__panel sheet__panel--torn sheet__edges">
-                <h2 class="sheet__title">Edges &amp; Advances <a class="button button--small" href="{{ get_url('characters_edges', {hash: entity.hash}) }}">Edit</a></h2>
+                <h2 class="sheet__title">Edges &amp; Advances {% if not read_only %}<a class="button button--small" href="{{ get_url('characters_edges', {hash: entity.hash}) }}">Edit</a>{% endif %}</h2>
                 <ul class="sheet__list">
                     {% for edge in sheet.edges %}
                     <li class="sheet__list__row">
@@ -277,7 +287,7 @@
     <div class="sheet__bottom">
         <div class="sheet__panel sheet__weapons">
             <h2 class="sheet__title">Weapon</h2>
-            <table class="sheet__weapons__table" data-editable="weapons">
+            <table class="sheet__weapons__table" {% if not read_only %}data-editable="weapons"{% endif %}>
                 <thead>
                     <tr>
                         <th class="sheet__weapons__table__name">Name</th>
@@ -292,9 +302,10 @@
                 </thead>
                 <tbody>
                     {% for weapon in sheet.weapons %}
-                        {{ m.weapon_row(weapon) }}
+                        {{ m.weapon_row(weapon, read_only) }}
                     {% endfor %}
                 </tbody>
+                {% if not read_only %}
                 <tfoot>
                     <tr>
                         <td colspan="8" class="sheet__weapons__add-cell">
@@ -302,10 +313,13 @@
                         </td>
                     </tr>
                 </tfoot>
+                {% endif %}
             </table>
+            {% if not read_only %}
             <template data-row-template="weapons">
                 {{ m.weapon_row({name: '', range: '', damage: '', ap: '', rof: '', weight: '', notes: ''}) }}
             </template>
+            {% endif %}
         </div>
 
         <div class="sheet__panel sheet__notes">
@@ -313,6 +327,7 @@
             <textarea class="sheet__notes__input"
                       data-notes
                       rows="6"
+                      {% if read_only %}readonly{% endif %}
                       placeholder="Session notes, backstory, reminders…">{{ sheet.state.notes }}</textarea>
         </div>
     </div>

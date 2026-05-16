@@ -22,6 +22,14 @@ class Campaign extends Factory
         parent::__construct($pdo, $validator);
     }
 
+    public function byId(int $id): ?Entity
+    {
+        return $this->one(
+            $this->prefix('id') . ' = ?',
+            [$id],
+        );
+    }
+
     public function forHash(string $hash): ?Entity
     {
         return $this->one(
