@@ -80,6 +80,16 @@
         <span class="sheet__status" data-sheet-status aria-live="polite"></span>
     </header>
     #}
+{% if campaign %}
+    <div class="sheet__campaign-banner">
+        <span class="sheet__campaign-banner__label">Campaign</span>
+        <a class="sheet__campaign-banner__name" href="{{ get_url('campaigns_view', {hash: campaign.hash}) }}">{{ campaign.name }}</a>
+        {% if campaign_owner %}
+            <span class="sheet__campaign-banner__gm">GM: {{ campaign_owner.firstname }} {{ campaign_owner.lastname }}</span>
+        {% endif %}
+    </div>
+{% endif %}
+
 {% if false != user %}
     <div class="sheet__top sheet__top--admin">
         <div class="sheet__panel">
