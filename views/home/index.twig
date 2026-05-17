@@ -16,12 +16,20 @@
             <div class="card__footer">
                 <a class="button" href="{{ get_url('characters_sheet', {hash: character.hash}) }}">View sheet</a>
                 <a class="button" href="{{ get_url('characters_concept', {hash: character.hash}) }}">Edit</a>
+                {% if character.campaign %}
+                <button class="button button--danger"
+                        type="button"
+                        disabled
+                        title="Leave the campaign before deleting this character">Delete</button>
+                {% else %}
                 <button class="button button--danger"
                         type="button"
                         data-character-delete-open="{{ character.hash }}">Delete</button>
+                {% endif %}
             </div>
         </div>
     </div>
+    {% if not character.campaign %}
     <dialog class="character-delete"
             aria-labelledby="character-delete-title-{{ character.hash }}"
             data-character-delete-dialog="{{ character.hash }}"
@@ -47,6 +55,7 @@
             </div>
         </form>
     </dialog>
+    {% endif %}
 {% endfor %}
     <div class="card">
         <div class="card__inner">
