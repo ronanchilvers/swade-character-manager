@@ -31,9 +31,8 @@ $border-color-light: #EEE;
         gap: 0.75rem;
         padding: 0.35rem 0.75rem;
         margin-bottom: 0.75rem;
-        background: var(--c-parchment);
-        border: 1px solid var(--c-parchment-dark);
-        border-left: 3px solid var(--c-sheet-heading);
+        background: var(--c-white);
+        border: 1px solid $border-color;
         font-family: $title-font;
         font-size: 0.85rem;
         letter-spacing: 0.06em;
@@ -50,7 +49,10 @@ $border-color-light: #EEE;
             font-size: 1rem;
             text-decoration: none;
 
-            &:hover {
+            & a {
+                font-size: 0.8rem;
+            }
+            & a:hover {
                 color: var(--c-sheet-heading);
                 text-decoration: underline;
             }
@@ -59,7 +61,6 @@ $border-color-light: #EEE;
         &__gm {
             margin-left: auto;
             font-size: 0.8rem;
-            color: var(--c-sheet-muted);
         }
     }
 
