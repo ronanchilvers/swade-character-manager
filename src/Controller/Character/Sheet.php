@@ -66,6 +66,16 @@ class Sheet
                 $user = $this->userFactory->byId((int) $entity->user);
             }
         }
+
+        $campaign = null;
+        $campaignOwner = null;
+        if ($entity->campaign) {
+            $campaign = $this->campaignFactory->byId((int) $entity->campaign);
+            if ($campaign instanceof Entity) {
+                $campaignOwner = $this->userFactory->byId((int) $campaign->user);
+            }
+        }
+
         $hindrances = $this->hindranceFactory->forCharacter($entity);
         $skills = $this->skillFactory->forCharacter($entity);
         $edges = $this->edgeFactory->forCharacter($entity);
@@ -89,6 +99,8 @@ class Sheet
             'user' => $user,
             'sheet' => $sheet,
             'read_only' => $readOnly,
+            'campaign' => $campaign,
+            'campaign_owner' => $campaignOwner,
         ]);
     }
 
