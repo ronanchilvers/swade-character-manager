@@ -69,7 +69,8 @@ class SheetControllerTest extends ControllerTestCase
             ->disableOriginalConstructor()
             ->onlyMethods(['byId'])
             ->getMock();
-        $campaignFactory->expects(self::once())
+        // byId(5) is called twice: once in canViewAsCampaignMember and once to load the campaign banner
+        $campaignFactory->expects(self::exactly(2))
             ->method('byId')
             ->with(5)
             ->willReturn($campaign);

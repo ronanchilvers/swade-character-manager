@@ -257,6 +257,123 @@ class BaseTest extends ControllerTestCase
         self::assertSame(['Deleted character Mara successfully'], $session->successes);
     }
 
+    public function testToggleSharingReturnsNotFoundForMissingCharacter(): void
+    {
+        $factory = $this->getMockBuilder(Character::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['forUserHash'])
+            ->getMock();
+        $factory->expects(self::once())
+            ->method('forUserHash')
+            ->with(7, 'missing')
+            ->willReturn(null);
+
+        $session = $this->mapSession();
+        $session->user = (object) ['id' => 7];
+        $response = $this->mapJsonToResponse();
+        $this->mapRequest('POST');
+
+        (new Base($factory))->toggleSharing('missing');
+
+        self::assertSame(404, $response->statusCode);
+        self::assertSame('{"ok":false,"errors":["Not found"]}', $response->body);
+    }
+
+    public function testToggleSharingEnablesWhenCurrentlyDisabled(): void
+    {
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'share_enabled' => 0]);
+
+        $factory = $this->getMockBuilder(Character::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['forUserHash', 'toggleSharing'])
+            ->getMock();
+        $factory->expects(self::once())
+            ->method('forUserHash')
+            ->with(7, 'charhash')
+            ->willReturn($character);
+        $factory->expects(self::once())
+            ->method('toggleSharing')
+            ->with($character, true)
+            ->willReturnCallback(function (Entity $entity): Result {
+                $entity->share_enabled = 1;
+                $entity->share_token = str_repeat('a', 32);
+
+                return new Result();
+            });
+
+        $session = $this->mapSession();
+        $session->user = (object) ['id' => 7];
+        $response = $this->mapJsonToResponse();
+        $this->mapRequest('POST');
+
+        (new Base($factory))->toggleSharing('charhash');
+
+        self::assertSame(200, $response->statusCode);
+        $body = json_decode($response->body, true);
+        self::assertTrue($body['ok']);
+        self::assertTrue($body['enabled']);
+        self::assertStringContainsString('/share/', $body['url']);
+    }
+
+    public function testToggleSharingDisablesWhenCurrentlyEnabled(): void
+    {
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'share_enabled' => 1, 'share_token' => str_repeat('a', 32)]);
+
+        $factory = $this->getMockBuilder(Character::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['forUserHash', 'toggleSharing'])
+            ->getMock();
+        $factory->expects(self::once())
+            ->method('forUserHash')
+            ->with(7, 'charhash')
+            ->willReturn($character);
+        $factory->expects(self::once())
+            ->method('toggleSharing')
+            ->with($character, false)
+            ->willReturnCallback(function (Entity $entity, bool $enable): Result {
+                $entity->share_enabled = 0;
+
+                return new Result();
+            });
+
+        $session = $this->mapSession();
+        $session->user = (object) ['id' => 7];
+        $response = $this->mapJsonToResponse();
+        $this->mapRequest('POST');
+
+        (new Base($factory))->toggleSharing('charhash');
+
+        self::assertSame(200, $response->statusCode);
+        $body = json_decode($response->body, true);
+        self::assertTrue($body['ok']);
+        self::assertFalse($body['enabled']);
+        self::assertNull($body['url']);
+    }
+
+    public function testToggleSharingReturnsErrorOnFactoryFailure(): void
+    {
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'share_enabled' => 0]);
+
+        $factory = $this->getMockBuilder(Character::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['forUserHash', 'toggleSharing'])
+            ->getMock();
+        $factory->method('forUserHash')
+            ->willReturn($character);
+        $factory->method('toggleSharing')
+            ->willReturn(new Result(['db error']));
+
+        $session = $this->mapSession();
+        $session->user = (object) ['id' => 7];
+        $response = $this->mapJsonToResponse();
+        $this->mapRequest('POST');
+
+        (new Base($factory))->toggleSharing('charhash');
+
+        self::assertSame(422, $response->statusCode);
+        self::assertSame('{"ok":false,"errors":["db error"]}', $response->body);
+    }
+
     public function testDeleteFlashesFailure(): void
     {
         $_POST = ['confirm_name' => 'Mara'];

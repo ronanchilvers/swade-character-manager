@@ -13,6 +13,7 @@ use App\Controller\Character\Attributes;
 use App\Controller\Character\Base;
 use App\Controller\Character\Edges;
 use App\Controller\Character\Hindrances;
+use App\Controller\Character\Share;
 use App\Controller\Character\Sheet;
 use App\Controller\Character\Skills;
 use App\Controller\Home;
@@ -59,6 +60,8 @@ class RoutesTest extends ControllerTestCase
             'characters_sheet_notes' => ['/characters/sheet/@hash:[a-z0-9]{32}/notes', [Sheet::class, 'updateNotes'], [AuthMiddleware::class]],
             'characters_sheet_gear' => ['/characters/sheet/@hash:[a-z0-9]{32}/gear', [Sheet::class, 'updateGear'], [AuthMiddleware::class]],
             'characters_sheet_weapons' => ['/characters/sheet/@hash:[a-z0-9]{32}/weapons', [Sheet::class, 'updateWeapons'], [AuthMiddleware::class]],
+            'characters_share_view'    => ['/share/@token:[a-z0-9]{32}', [Share::class, 'index'], []],
+            'characters_share_toggle'  => ['/characters/share/@hash:[a-z0-9]{32}', [Base::class, 'toggleSharing'], [AuthMiddleware::class]],
         ];
 
         foreach ($expected as $alias => [$pattern, $callback, $middleware]) {
