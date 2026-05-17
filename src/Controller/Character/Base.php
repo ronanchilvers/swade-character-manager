@@ -71,6 +71,29 @@ class Base
         Flight::redirect(Flight::getUrl('home_page'));
     }
 
+    public function toggleSharing(string $hash): void
+    {
+        $entity = $this->factory->forUserHash(
+            (int) Flight::session()->user->id,
+            $hash
+        );
+        if (!$entity instanceof Entity) {
+            Flight::json(['ok' => false, 'errors' => ['Not found']], 404);
+            return;
+        }
+
+        $enable = !((int) ($entity->share_enabled ?? 0) === 1);
+        $result = $this->factory->toggleSharing($entity, $enable);
+
+        if (!$result->isSuccess()) {
+            Flight::json(['ok' => false, 'errors' => $result->errors()], 422);
+            return;
+        }
+
+        $url = $enable ? '/share/' . $entity->share_token : null;
+        Flight::json(['ok' => true, 'enabled' => $enable, 'url' => $url]);
+    }
+
     protected function createOrConcept(Entity $entity): void
     {
         $errors = [];

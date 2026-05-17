@@ -3,6 +3,9 @@
 
 {% do add_stylesheet('/css/sheet.css') %}
 {% do add_script('/javascript/sheet.js') %}
+{% if not read_only %}
+{% do add_script('/javascript/character-share.js') %}
+{% endif %}
 
 {% set back_label = "Edit in character builder" %}
 {% set back_url = get_url('characters_edges', {hash: entity.hash}) %}
@@ -74,12 +77,29 @@
 <section class="sheet"
          data-character-hash="{{ entity.hash }}"
          data-sheet-root>
-    {#
-    <header class="sheet__topbar">
-        <a class="button" href="{{ back_url }}">&laquo; Back to builder</a>
-        <span class="sheet__status" data-sheet-status aria-live="polite"></span>
-    </header>
-    #}
+
+{% if not read_only %}
+    <div class="sheet__share-panel" data-share-panel>
+        <span class="sheet__share-panel__label">Sharing</span>
+        {% if entity.share_enabled %}
+        <span class="sheet__share-panel__status sheet__share-panel__status--on">On</span>
+        <input class="sheet__share-panel__url"
+               type="text"
+               readonly
+               value="{{ share_url }}"
+               data-share-url
+               aria-label="Share link">
+        <button class="button button--small" type="button" data-share-copy>Copy link</button>
+        <button class="button button--small button--danger" type="button"
+                data-share-toggle="{{ entity.hash }}">Disable</button>
+        {% else %}
+        <span class="sheet__share-panel__status sheet__share-panel__status--off">Off</span>
+        <button class="button button--small button--primary" type="button"
+                data-share-toggle="{{ entity.hash }}">Enable sharing</button>
+        {% endif %}
+    </div>
+{% endif %}
+
 {% if campaign %}
     <div class="sheet__campaign-banner">
         <span class="sheet__campaign-banner__label">Campaign</span>

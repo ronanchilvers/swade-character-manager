@@ -11,6 +11,7 @@ use App\Controller\Character\Base;
 use App\Controller\Character\Hindrances;
 use App\Controller\Character\Attributes;
 use App\Controller\Character\Edges;
+use App\Controller\Character\Share;
 use App\Controller\Character\Sheet;
 use App\Controller\Character\Skills;
 use App\Controller\Home;
@@ -27,6 +28,10 @@ use App\Middleware\Superuser as MiddlewareSuperuser;
 Flight::route('GET /', [Home::class, 'index'])
     ->setAlias('home_page')
     ->addMiddleware(MiddlewareAuth::class);
+
+// Public character share (no authentication required)
+Flight::route('GET /share/@token:[a-z0-9]{32}', [Share::class, 'index'])
+    ->setAlias('characters_share_view');
 
 // Authentication
 Flight::group('/auth', function () {
@@ -107,4 +112,6 @@ Flight::group('/characters', function () {
         ->setAlias('characters_sheet_gear');
     Flight::route('POST /sheet/@hash:[a-z0-9]{32}/weapons', [Sheet::class, 'updateWeapons'])
         ->setAlias('characters_sheet_weapons');
+    Flight::route('POST /share/@hash:[a-z0-9]{32}', [Base::class, 'toggleSharing'])
+        ->setAlias('characters_share_toggle');
 }, [ MiddlewareAuth::class ]);

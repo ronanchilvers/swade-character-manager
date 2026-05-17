@@ -124,4 +124,23 @@
     &--selected &__inner h4 {
         color: card.$card-selected-color;
     }
+
+    .card__share {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.75rem;
+        border-top: card.$card-border-dotted;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .card__share__badge {
+        padding: 0.1rem 0.45rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+
+        &--on  { background: #d4edda; color: #155724; }
+    }
 }

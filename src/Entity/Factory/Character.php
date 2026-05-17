@@ -98,6 +98,37 @@ class Character extends Factory
         );
     }
 
+    public function forShareToken(string $token): ?Entity
+    {
+        return $this->one(
+            $this->prefix('share_token') . ' = ? AND ' . $this->prefix('share_enabled') . ' = 1',
+            [$token],
+        );
+    }
+
+    public function toggleSharing(Entity $character, bool $enable): Result
+    {
+        try {
+            $updates = [$this->prefix('share_enabled') => $enable ? 1 : 0];
+            if ($enable && empty($character->share_token)) {
+                $token = Str::token(32);
+                $updates[$this->prefix('share_token')] = $token;
+                $character->share_token = $token;
+            }
+            $character->share_enabled = $enable ? 1 : 0;
+            $this->pdo->update(
+                $this->getTableName(),
+                $updates,
+                $this->prefix('id') . ' = ?',
+                [(int) $character->id],
+            );
+
+            return new Result();
+        } catch (\Exception $ex) {
+            return new Result()->addError($ex->getMessage());
+        }
+    }
+
     public function forCampaignAndUser(Entity $campaign, int $userId): array
     {
         return $this->find(

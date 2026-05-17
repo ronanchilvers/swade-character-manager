@@ -93,6 +93,12 @@ class Sheet
             $weapons,
         );
 
+        $shareUrl = null;
+        if ((int) ($entity->share_enabled ?? 0) === 1 && !empty($entity->share_token)) {
+            $req = Flight::request();
+            $shareUrl = $req->scheme . '://' . $req->host . '/share/' . $entity->share_token;
+        }
+
         Flight::render('character/sheet.twig', [
             'page_title' => $entity->name,
             'entity' => $entity,
@@ -101,6 +107,7 @@ class Sheet
             'read_only' => $readOnly,
             'campaign' => $campaign,
             'campaign_owner' => $campaignOwner,
+            'share_url' => $shareUrl,
         ]);
     }
 

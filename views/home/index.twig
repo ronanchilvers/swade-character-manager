@@ -1,6 +1,7 @@
 {% extends 'layouts/default.twig' %}
 
 {% do add_script('/javascript/character-delete.js') %}
+{% do add_script('/javascript/character-share.js') %}
 
 {% block content %}
 <h2>Characters</h2>
@@ -19,6 +20,18 @@
                 <button class="button button--danger"
                         type="button"
                         data-character-delete-open="{{ character.hash }}">Delete</button>
+            </div>
+            <div class="card__share" data-share-card="{{ character.hash }}">
+                {% if character.share_enabled %}
+                <span class="card__share__badge card__share__badge--on">Shared</span>
+                <button class="button button--small" type="button"
+                        data-share-toggle="{{ character.hash }}"
+                        data-share-path="/share/{{ character.share_token }}">Disable sharing</button>
+                {% else %}
+                <button class="button button--small" type="button"
+                        data-share-toggle="{{ character.hash }}"
+                        data-share-path="">Enable sharing</button>
+                {% endif %}
             </div>
         </div>
     </div>

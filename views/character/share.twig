@@ -1,0 +1,200 @@
+{% extends 'layouts/default.twig' %}
+
+{% do add_stylesheet('/css/sheet.css') %}
+
+{% set edge_tiers = ['', '', 'N','N','N','S','S','S','S','V','V','V','V','H','H','H','H','L','L','L','L'] %}
+
+{% macro die_header_strip() %}
+    <span class="sheet__die-strip">
+    {% for face in [4,6,8,10,12] %}
+        <span class="sheet__die-strip__step">
+            <svg class="die"><use href="/images/icons/dice.svg#d{{ face }}"/></svg>
+            d{{ face }}
+        </span>
+    {% endfor %}
+    </span>
+{% endmacro %}
+{% macro die_strip(faces, selected) %}
+    <span class="sheet__die-strip">
+    {% for face in faces %}
+        <span class="sheet__die-strip__step{% if selected == face %} sheet__die-strip__step--active{% endif %}">
+            <svg class="die"><use href="/images/icons/dice.svg#d{{ face }}"/></svg>
+        </span>
+    {% endfor %}
+    </span>
+{% endmacro %}
+
+{% macro empty_lines(count) %}
+    {% for _ in 1..count %}
+        <li class="sheet__list__row sheet__list__row--empty">&nbsp;</li>
+    {% endfor %}
+{% endmacro %}
+
+{% import _self as m %}
+
+{% block content %}
+<section class="sheet">
+    <div class="sheet__share-banner">
+        <span class="sheet__share-banner__icon" aria-hidden="true">&#128279;</span>
+        Shared character sheet &mdash; read only
+    </div>
+
+    <div class="sheet__top">
+        <div class="sheet__panel sheet__identity">
+            <h2 class="sheet__title">Identity</h2>
+            <dl class="sheet__identity__grid">
+                <div class="sheet__identity__row">
+                    <dt>Name</dt>
+                    <dd>{{ sheet.identity.name }}</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Race</dt>
+                    <dd>Human</dd>
+                </div>
+                <div class="sheet__identity__row">
+                    <dt>Concept</dt>
+                    <dd>{{ sheet.identity.concept }}</dd>
+                </div>
+            </dl>
+
+            <div class="sheet__traits-circles">
+                <div class="sheet__circle sheet__circle--bennies">
+                    <span class="sheet__circle__value">{{ sheet.state.bennies }}</span>
+                    <span class="sheet__circle__label">Bennies</span>
+                </div>
+                <div class="sheet__circle">
+                    <span class="sheet__circle__value">{{ sheet.identity.pace ?? '—' }}</span>
+                    <span class="sheet__circle__label">Pace</span>
+                </div>
+                <div class="sheet__circle">
+                    <span class="sheet__circle__value">{{ sheet.identity.parry ?? '—' }}</span>
+                    <span class="sheet__circle__label">Parry</span>
+                </div>
+                <div class="sheet__circle">
+                    <span class="sheet__circle__value">{{ sheet.identity.toughness ?? '—' }}</span>
+                    <span class="sheet__circle__label">Toughness</span>
+                </div>
+            </div>
+        </div>
+        <div class="sheet__panel sheet__panel--torn sheet__attributes">
+            <h2 class="sheet__title">Attributes</h2>
+            <ul class="sheet__attributes__list">
+                {% for attr in sheet.attributes %}
+                <li class="sheet__attributes__row">
+                    <svg class="die" title="{{ attr.die }} sided die"><use href="/images/icons/dice.svg#d{{ attr.die }}"/></svg>
+                    <span class="sheet__attributes__label">{{ attr.label|upper }}</span>
+                    <span class="sheet__attributes__description">{{ attr.description }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="sheet__middle">
+        <aside class="sheet__rail sheet__panel sheet__rail--wounds">
+            <span class="sheet__rail__label">Wounds</span>
+            <ul class="sheet__rail__list">
+                {% for n in 1..3 %}
+                <li class="sheet__rail__list__item{% if sheet.state.wounds >= n %} sheet__rail__list__item--selected{% endif %}">&minus;{{ n }}</li>
+                {% endfor %}
+                <li class="sheet__rail__list__item sheet__rail__list__item--inc{% if sheet.state.incapacitated %} sheet__rail__list__item--selected{% endif %}">Inc</li>
+                {% for n in 2..1 %}
+                <li class="sheet__rail__list__item{% if sheet.state.fatigue >= n %} sheet__rail__list__item--selected{% endif %}">&minus;{{ n }}</li>
+                {% endfor %}
+            </ul>
+            <span class="sheet__rail__label">Fatigue</span>
+        </aside>
+        <div class="sheet__panel sheet__panel--torn sheet__skills">
+            <h2 class="sheet__title">Skills</h2>
+            <ul class="sheet__skills__list">
+                <li class="sheet__skills__row sheet__skills__row--header">
+                    {{ m.die_header_strip() }}
+                    <span>Skill &amp; Attribute</span>
+                    <span></span>
+                </li>
+                {% for skill in sheet.skills %}
+                <li class="sheet__skills__row{% if skill.is_core %} sheet__skills__row--core{% endif %}">
+                    {{ m.die_strip(skill.die_faces, skill.die) }}
+                    <span class="sheet__skills__name">{{ skill.name }}</span>
+                    <span class="sheet__skills__attribute">{{ skill.linked_attribute|capitalize }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="sheet__panel sheet__gear">
+            <h2 class="sheet__title">Gear</h2>
+            <ul class="sheet__list sheet__gear__list">
+                {% for item in sheet.gear %}
+                <li class="sheet__list__row sheet__gear__row">
+                    <span class="sheet__gear__name">{{ item.name ?? '' }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="sheet__right">
+            <div class="sheet__panel sheet__panel--torn sheet__hindrances">
+                <h2 class="sheet__title">Hindrances</h2>
+                <ul class="sheet__list">
+                    {% for hindrance in sheet.hindrances %}
+                    <li class="sheet__list__row">
+                        <span class="sheet__hindrances__level sheet__hindrances__level--{{ hindrance.level }}">
+                            {{ hindrance.level|title }}
+                        </span>
+                        <span class="sheet__hindrances__name">{{ hindrance.name }}</span>
+                        <a class="sheet__hindrances__info help-icon" href="#" data-name="{{ hindrance.name }}" data-summary="{{ hindrance.summary }}" data-effects="{{ hindrance.effects_by_level[hindrance.level]|join(' ') }}">?</a>
+                    </li>
+                    {% endfor %}
+                    {{ m.empty_lines(1) }}
+                </ul>
+            </div>
+
+            <div class="sheet__panel sheet__panel--torn sheet__edges">
+                <h2 class="sheet__title">Edges &amp; Advances</h2>
+                <ul class="sheet__list">
+                    {% for edge in sheet.edges %}
+                    <li class="sheet__list__row">
+                        <span class="sheet__edges__rank">{{ edge_tiers[loop.index0] }}</span>
+                        <span class="sheet__edges__name">{{ edge.name }} {% if edge.count > 1 %}&times;{{ edge.count }}{% endif %}</span>
+                        <a class="sheet__edges__info help-icon" href="#" data-name="{{ edge.name }}" data-summary="{{ edge.summary }}" data-effects="{{ edge.effects|join(' ') }}">?</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet__bottom">
+        <div class="sheet__panel sheet__weapons">
+            <h2 class="sheet__title">Weapons</h2>
+            <table class="sheet__weapons__table">
+                <thead>
+                    <tr>
+                        <th class="sheet__weapons__table__name">Name</th>
+                        <th class="sheet__weapons__table__range">Range</th>
+                        <th class="sheet__weapons__table__damage">Damage</th>
+                        <th class="sheet__weapons__table__ap">AP</th>
+                        <th class="sheet__weapons__table__rof">RoF</th>
+                        <th class="sheet__weapons__table__wt">WT</th>
+                        <th class="sheet__weapons__table__notes">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for weapon in sheet.weapons %}
+                    <tr class="sheet__weapons__row">
+                        <td>{{ weapon.name ?? '' }}</td>
+                        <td>{{ weapon.range ?? '' }}</td>
+                        <td>{{ weapon.damage ?? '' }}</td>
+                        <td>{{ weapon.ap ?? '' }}</td>
+                        <td>{{ weapon.rof ?? '' }}</td>
+                        <td>{{ weapon.weight ?? '' }}</td>
+                        <td class="sheet__weapons__notes-cell">{{ weapon.notes ?? '' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
