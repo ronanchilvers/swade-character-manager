@@ -1,15 +1,16 @@
+@use "colors" as color;
 /**
  * Sass-only tokens for the sheet theme.
  *
  * Importing this module emits no CSS unless %sheet-heading is
  * @extend-ed, so partials can pull in the scalar values without
  * dragging unwanted rules into every compiled stylesheet. The matching
- * CSS custom properties live in _sheet-theme.scss and are emitted once
- * via styles.scss.
+ * Colour values live in _colors.scss so compiled stylesheets do not
+ * depend on runtime CSS custom properties for theme colours.
  */
 
 $sheet-title-font: "Staatliches", "Courier New", monospace;
-$sheet-title-color: var(--c-sheet-heading);
+$sheet-title-color: color.$sheet-heading;
 $sheet-text-font: "Mynerve", cursive;
 $sheet-text-font-size: 1.2rem;
 $sheet-plain-font: "Roboto", sans-serif;
@@ -17,7 +18,7 @@ $sheet-plain-font-size: 1rem;
 
 %sheet-heading {
     font-family: $sheet-title-font;
-    color: var(--c-sheet-heading);
+    color: color.$sheet-heading;
     font-weight: 400;
     text-transform: uppercase;
 }

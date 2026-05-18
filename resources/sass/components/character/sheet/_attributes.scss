@@ -1,0 +1,64 @@
+@use "../../../tools/breakpoints";
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__attributes {
+        &__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.4rem;
+        }
+
+        &__row {
+            display: grid;
+            grid-template-columns: 3rem 5rem 1fr;
+            align-items: center;
+            gap: 0.4rem;
+            border-bottom: 1px solid color.$sheet-muted;
+            padding-bottom: 0.2rem;
+
+            .die {
+                width: 40px;
+                height: 40px;
+                color: color.$sheet-rail-item-border-active;
+            }
+        }
+
+        &__die,
+        &__max {
+            font-family: $title-font;
+            text-align: left;
+            min-width: 2.2rem;
+        }
+
+        &__max {
+            color: color.$sheet-muted;
+            font-size: 0.85em;
+        }
+
+        &__label,
+        &__description {
+            font-family: $title-font;
+        }
+        &__label {
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
+        }
+        &__description {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: color.$sheet-muted;
+
+            @include breakpoints.at('tablet') {
+                display: none;
+            }
+            @include breakpoints.at('phablet') {
+                display: inline;
+            }
+        }
+    }
+}

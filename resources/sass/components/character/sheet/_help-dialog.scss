@@ -1,0 +1,110 @@
+@use "../../../settings/sheet-tokens" as sheet;
+@use "../../../tools/torn-paper";
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.help-icon {
+    font-family: $title-font;
+    font-size: 1rem;
+    width: 25px;
+    height: 25px;
+    border: 1px solid color.$sheet-muted;
+    border-radius: 999px;
+    text-align: center;
+    color: color.$sheet-muted;
+
+    &:active,
+    &:hover {
+        background-color: color.$sheet-heading;
+        border-color: color.$sheet-heading;
+        color: color.$white;
+        text-decoration: none;
+    }
+}
+
+.sheet__help-dialog {
+    width: min(34rem, calc(100vw - 2rem));
+    max-width: 100%;
+    padding: 0;
+    color: color.$sheet-ink;
+    background: color.$parchment url(/images/backgrounds/paper-tileable.png) repeat top left;
+    border: 1px dashed $border-color;
+    border-top: none;
+    border-bottom: none;
+    box-shadow: 0 18px 50px color.$overlay-black-35;
+    @extend %torn-paper;
+
+    &::backdrop {
+        background: color.$overlay-ink-55;
+        backdrop-filter: blur(2px);
+    }
+
+    &__content {
+        margin: 0;
+        padding: 1.35rem 1.45rem 1.45rem;
+    }
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 0.85rem;
+        padding-bottom: 0.45rem;
+        border-bottom: 1px solid color.$sheet-muted;
+    }
+
+    &__title {
+        @extend %sheet-heading;
+        margin: 0;
+        font-size: 1.55rem;
+        letter-spacing: 0.08em;
+        line-height: 1.1;
+    }
+
+    &__close {
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        padding: 0.05rem 0 0;
+        color: color.$sheet-muted;
+        background: color.$overlay-white-35;
+        border: 1px solid color.$sheet-muted;
+        border-radius: 999px;
+        cursor: pointer;
+        font-family: $title-font;
+        font-size: 1.25rem;
+        line-height: 1;
+        text-align: center;
+        transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+
+        &:hover,
+        &:focus-visible {
+            color: color.$white;
+            background: color.$sheet-heading;
+            border-color: color.$sheet-heading;
+            outline: none;
+        }
+    }
+
+    &__body {
+        display: grid;
+        gap: 0.85rem;
+        font-family: $text-font;
+        font-size: $text-font-size;
+        line-height: 1.45;
+    }
+
+    &__summary,
+    &__effects {
+        margin: 0;
+    }
+
+    &__effects {
+        padding: 0.7rem 0.8rem;
+        background: color.$overlay-white-35;
+        border: 1px dashed color.$sheet-muted;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 0.95rem;
+    }
+}

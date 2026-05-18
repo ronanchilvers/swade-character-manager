@@ -1,0 +1,16 @@
+@use "../../settings/css-variables" as vars;
+@use "../../settings/colors" as color;
+
+$button-text-colour: color.$button-text;
+$button-border: color.$button-border;
+$button-border-hover: color.$button-border-hover;
+$button-border-radius-default: vars.$border-radius-default;
+$button-background: color.$button-background;
+$button-background-hover: color.$button-background-hover;
+$button-background-toggle: color.$button-background;
+$button-background-toggle-on: color.$button-background-toggle-on;
+
+$led-size: 12px;
+$led-on: color.$led-on;
+$led-off: color.$led-off;
+$led-disabled: color.$led-disabled;

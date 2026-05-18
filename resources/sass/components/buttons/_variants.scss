@@ -1,0 +1,41 @@
+@use "../../settings/colors" as color;
+.button--full {
+    width: 100%;
+}
+
+.button--primary {
+    background: color.$transparent;
+    border: 1px solid color.$primary-action;
+    color: color.$primary-action;
+
+    &:hover,
+    &:focus-visible {
+        background: color.$overlay-danger-10;
+        border-color: color.$danger;
+        border-style: solid;
+        color: color.$danger;
+    }
+}
+
+.button--danger {
+    background: color.$transparent;
+    border: 1px dashed color.$danger;
+    color: color.$danger;
+
+    &:hover,
+    &:focus-visible {
+        background: color.$sheet-rail-item-active;
+        border-color: color.$sheet-rail-item-border-active;
+        border-style: solid;
+        color: color.$white;
+    }
+}
+
+.button--large {
+    padding: 1rem 1.4rem 0.7rem;
+    font-size: 1rem;
+}
+.button--small {
+    padding: 0.35rem 0.6rem 0.2rem;
+    font-size: 0.75rem;
+}

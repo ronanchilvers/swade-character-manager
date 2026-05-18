@@ -1,0 +1,26 @@
+@use "../../../settings/colors" as color;
+@media print {
+    body {
+        background: color.$white;
+    }
+
+    .sheet {
+        margin: 0;
+        max-width: none;
+
+        &__topbar {
+            display: none;
+        }
+
+        &__status,
+        &__row__remove,
+        &__list__row--add,
+        &__weapons__add-cell {
+            display: none;
+        }
+
+        .button {
+            display: none;
+        }
+    }
+}

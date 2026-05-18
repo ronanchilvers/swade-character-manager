@@ -1,0 +1,94 @@
+@use "../../../tools/breakpoints";
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__traits-circles {
+        display: flex;
+        gap: 1rem;
+        padding-top: 0.5rem;
+        @include breakpoints.at('phablet') {
+            gap: 0;
+        }
+        @include breakpoints.at('mobile') {
+            gap: 0;
+        }
+    }
+
+    &__circle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 4rem;
+
+        &__value {
+            width: 3.2rem;
+            height: 3.2rem;
+            border: 2px solid color.$sheet-ink;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: $title-font;
+            font-size: 1.3rem;
+            padding-top: 0.3rem;
+            cursor: default;
+        }
+
+        &__label {
+            margin-top: 0.25rem;
+            font-family: $title-font;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        &--bennies {
+            margin-right: 2rem;
+            width: auto;
+
+            @include breakpoints.at('mobile') {
+                margin-right: 1rem;
+            }
+        }
+        &--bennies &__value,
+        &--bennies &__label {
+            border-color: color.$sheet-ink;
+            color: color.$sheet-ink;
+        }
+    }
+
+    &__counter {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        &__button {
+            width: 1.75rem;
+            height: 1.75rem;
+            border: 2px solid color.$sheet-ink;
+            border-radius: 50%;
+            background: color.$overlay-white-65;
+            color: color.$sheet-ink;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-family: $title-font;
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: manipulation;
+
+            &:hover,
+            &:focus-visible {
+                background: color.$sheet-ink;
+                color: color.$sheet-paper;
+            }
+
+            &:focus-visible {
+                outline: 2px solid color.$sheet-rail-item-selected;
+                outline-offset: 2px;
+            }
+        }
+    }
+}

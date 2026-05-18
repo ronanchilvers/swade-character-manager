@@ -1,0 +1,9 @@
+@use "../../../settings/sheet-tokens" as sheet;
+@use "../../../settings/colors" as color;
+
+$title-font: sheet.$sheet-title-font;
+$text-font: sheet.$sheet-text-font;
+$text-font-size: sheet.$sheet-text-font-size;
+
+$border-color: color.$border-medium;
+$border-color-light: color.$border-pale;

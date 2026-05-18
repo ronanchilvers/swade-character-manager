@@ -2,7 +2,6 @@
 
 /** Settings **/
 @use "settings/css-variables";
-@use "settings/sheet-theme";
 
 /** Base rules **/
 @use "base/reset";
@@ -19,7 +18,7 @@
 @use "components/menu";
 @use "components/dropdown";
 @use "components/form";
-@use "components/buttons";
+@use "components/buttons/index" as *;
 @use "components/toast";
-@use "components/cards";
+@use "components/cards/index" as *;
 @use "components/panels";

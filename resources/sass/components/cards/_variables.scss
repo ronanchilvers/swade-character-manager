@@ -1,16 +1,17 @@
 @use "../../settings/sheet-tokens" as sheet;
 
-$card-border: 1px solid #222 !default;
-$card-border-dotted: 1px dashed #222 !default;
-$card-background: rgba(245, 245, 245, 0.5) !default;
-$card-selected-background: rgb(255,255,255) !default;
-$card-selected-border: rgba(0, 0, 0, 1) !default;
-$card-selected-color: rgba(0, 0, 0, 1) !default;
+@use "../../settings/colors" as color;
+$card-border: 1px solid color.$border-strong !default;
+$card-border-dotted: 1px dashed color.$border-strong !default;
+$card-background: color.$overlay-paper-50 !default;
+$card-selected-background: color.$white !default;
+$card-selected-border: color.$overlay-black-solid !default;
+$card-selected-color: color.$overlay-black-solid !default;
 
 $card-title-font: "Staatliches", "Courier New", monospace !default;
 $card-title-font-size: 1.2rem !default;
-$card-title-color: var(--c-sheet-heading);
+$card-title-color: color.$sheet-heading;
 
 $card-text-font: "Roboto", "Monaco", sans-serif !default;
 $card-text-font-size: 1rem !default;
-$card-text-color: var(--c-sheet-ink);
+$card-text-color: color.$sheet-ink;

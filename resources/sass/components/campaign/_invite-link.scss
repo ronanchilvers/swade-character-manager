@@ -1,7 +1,8 @@
 @use "../../tools/breakpoints";
+@use "../../settings/colors" as color;
 
-$invite-link-background-color: rgba(255, 255, 255, 0.5);
-$invite-link-border: 1px dotted #666;
+$invite-link-background-color: color.$overlay-white-50;
+$invite-link-border: 1px dotted color.$border-muted;
 
 .invite-link {
     padding: 0.75rem 1.25rem;
@@ -16,7 +17,7 @@ $invite-link-border: 1px dotted #666;
     }
 
     &__url {
-        color: #007bff;
+        color: color.$link-blue;
     }
     &__panel {
         display: flex;

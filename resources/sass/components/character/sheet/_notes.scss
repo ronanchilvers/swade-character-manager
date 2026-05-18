@@ -1,0 +1,26 @@
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__notes {
+        &__input {
+            width: 100%;
+            min-height: 6rem;
+            border: 1px dashed $border-color-light;
+            background: color.$transparent;
+            padding: 0.5rem 0.6rem;
+            font-family: $text-font;
+            font-size: $text-font-size;
+            color: color.$sheet-ink;
+            resize: none;
+            overflow: hidden;
+            box-sizing: border-box;
+
+            &:focus {
+                outline: none;
+                background: color.$overlay-white-50;
+                border-color: color.$sheet-muted;
+            }
+        }
+    }
+}

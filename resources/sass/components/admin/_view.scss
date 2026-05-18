@@ -1,0 +1,31 @@
+@use "../../settings/css-variables" as vars;
+@use "../../settings/sheet-tokens" as sheet;
+
+@use "../../settings/colors" as color;
+.admin-view {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: color.$parchment;
+    border: 1px solid color.$parchment-dark;
+    border-radius: vars.$border-radius-default;
+    box-shadow: 0 2px 6px color.$overlay-black-08;
+    color: color.$sheet-ink;
+
+    &__title {
+        @extend %sheet-heading;
+        margin: 0 0 1rem;
+        font-size: 1.5rem;
+        letter-spacing: 0.08em;
+    }
+
+    &__intro {
+        margin: 0 0 1.25rem;
+        font-family: sheet.$sheet-plain-font;
+        font-size: sheet.$sheet-plain-font-size;
+        color: color.$overlay-ink-80;
+    }
+
+    &__back {
+        margin-bottom: 1rem;
+    }
+}

@@ -1,3 +1,4 @@
+@use "../settings/colors" as color;
 html {
     font-size: 100%;
     min-height: 100%;
@@ -13,11 +14,11 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     position: relative;
-    color: var(--c-black);
+    color: color.$black;
     min-height: 100vh;
-    background-color: #ccc;
+    background-color: color.$body-background;
 }
 body.login {
-    background: rgb(67, 167, 233) url(/images/backgrounds/blue-background-tileable.png) repeat top left;
+    background: color.$login-background url(/images/backgrounds/blue-background-tileable.png) repeat top left;
     background-size: cover;
 }

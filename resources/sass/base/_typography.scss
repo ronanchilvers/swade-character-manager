@@ -1,3 +1,4 @@
+@use "../settings/colors" as color;
 body {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
@@ -19,7 +20,7 @@ a {
         font-size: 2.5rem - (($level - 1) * 0.4rem);
         font-family: "Staatliches", system-ui;
         font-weight: 400;
-        color: var(--c-sheet-heading);
+        color: color.$sheet-heading;
     }
 }
 p,ul,ol,dl {

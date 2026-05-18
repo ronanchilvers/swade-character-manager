@@ -1,0 +1,27 @@
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__edges {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+
+        .sheet__list__row {
+            display: grid;
+            grid-template-columns: 1rem 1fr auto;
+        }
+
+        &__rank {
+            font-family: $title-font;
+            font-size: $text-font-size;
+            color: color.$sheet-ink;
+        }
+
+        &__name {
+            font-family: $text-font;
+            font-size: $text-font-size;
+        }
+
+    }
+}

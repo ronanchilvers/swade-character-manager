@@ -1,0 +1,110 @@
+// Core palette
+$white: #ffffff;
+$light-grey: #cccccc;
+$medium-grey: #999999;
+$dark-grey: #666666;
+$black: #000000;
+$red: #ff0000;
+$green: #00ff00;
+$blue: #0000ff;
+$transparent: rgba(0, 0, 0, 0);
+
+// Sheet theme
+$sheet-heading: rgb(135, 28, 22);
+$sheet-ink: #1d1208;
+$sheet-muted: #8b7a5b;
+$sheet-muted-pale: #d3ccbe;
+$sheet-paper: #fbf6ea;
+$sheet-rail: rgb(245, 245, 245);
+$sheet-rail-item-hover: rgba(166, 30, 30, 0.5);
+$sheet-rail-item-selected: rgb(166, 30, 30);
+$sheet-rail-item-active: rgba(166, 30, 30, 0.75);
+$sheet-rail-item-border-active: rgb(116, 0, 0);
+$parchment: #f6ecd5;
+$parchment-dark: #e8d9b0;
+$button-hover: rgba(166, 30, 30, 0.25);
+
+// Shared surfaces and borders
+$body-background: #cccccc;
+$login-background: rgb(67, 167, 233);
+$border-strong: #222222;
+$border-medium: #555555;
+$border-muted: #666666;
+$border-pale: #eeeeee;
+$text-soft: #333333;
+$tabs-background: #dddddd;
+$card-control-background: #f6f6f6;
+$panel-danger: #8c1414;
+$danger: #aa0000;
+$primary-action: #cc4444;
+$link-blue: #007bff;
+$success: #305f39;
+$success-surface: rgba(72, 132, 84, 0.14);
+$success-border: rgba(72, 132, 84, 0.3);
+
+// Button and control colours
+$button-text: rgba($border-strong, 0.9);
+$button-border: rgba($border-strong, 0.5);
+$button-border-hover: rgba($border-strong, 1);
+$button-background: rgba($white, 0.5);
+$button-background-hover: rgba($white, 0.8);
+$button-background-toggle: rgba($white, 0.5);
+$button-background-toggle-on: rgba($white, 0.7);
+$led-on: #3fb950;
+$led-off: #eeeeee;
+$led-disabled: #e5e5e5;
+
+// Toast accents
+$toast-accent-success: #5c3f17;
+$toast-accent-info: #7a4a24;
+$toast-accent-warning: #8f4b12;
+$toast-accent-error: #8a0000;
+
+// Common overlays
+$overlay-black-03: rgba($black, 0.03);
+$overlay-black-08: rgba($black, 0.08);
+$overlay-black-10: rgba($black, 0.1);
+$overlay-black-12: rgba($black, 0.12);
+$overlay-black-14: rgba($black, 0.14);
+$overlay-black-15: rgba($black, 0.15);
+$overlay-black-18: rgba($black, 0.18);
+$overlay-black-22: rgba($black, 0.22);
+$overlay-black-25: rgba($black, 0.25);
+$overlay-black-35: rgba($black, 0.35);
+$overlay-black-40: rgba($black, 0.4);
+$overlay-black-45: rgba($black, 0.45);
+$overlay-black-50: rgba($black, 0.5);
+$overlay-black-solid: rgba($black, 1);
+$overlay-border-08: rgba($border-strong, 0.08);
+$overlay-border-12: rgba($border-strong, 0.12);
+$overlay-border-14: rgba($border-strong, 0.14);
+$overlay-border-18: rgba($border-strong, 0.18);
+$overlay-border-25: rgba($border-strong, 0.25);
+$overlay-white-08: rgba($white, 0.08);
+$overlay-white-22: rgba($white, 0.22);
+$overlay-white-25: rgba($white, 0.25);
+$overlay-white-32: rgba($white, 0.32);
+$overlay-white-35: rgba($white, 0.35);
+$overlay-white-38: rgba($white, 0.38);
+$overlay-white-42: rgba($white, 0.42);
+$overlay-white-45: rgba($white, 0.45);
+$overlay-white-48: rgba($white, 0.48);
+$overlay-white-50: rgba($white, 0.5);
+$overlay-white-55: rgba($white, 0.55);
+$overlay-white-65: rgba($white, 0.65);
+$overlay-white-70: rgba($white, 0.7);
+$overlay-white-80: rgba($white, 0.8);
+$overlay-white-transparent: rgba($white, 0);
+$overlay-paper-50: rgba($sheet-rail, 0.5);
+$overlay-danger-10: rgba($primary-action, 0.1);
+$overlay-danger-panel: rgba(255, 220, 220, 0.25);
+$overlay-ink-55: rgba($sheet-ink, 0.55);
+$overlay-ink-72: rgba($sheet-ink, 0.72);
+$overlay-ink-80: rgba($sheet-ink, 0.8);
+$overlay-shadow: rgba($sheet-ink, 0.16);
+$overlay-sheet-heading-06: rgba(166, 30, 30, 0.06);
+$overlay-sheet-heading-transparent: rgba(166, 30, 30, 0);
+$led-off-glow: rgba($led-off, 0.75);
+$led-on-glow: rgba($led-on, 1);
+$led-on-glow-soft: rgba($led-on, 0.85);
+$slider-thumb-shadow: rgba(100, 100, 100, 0.85);
