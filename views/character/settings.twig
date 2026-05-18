@@ -5,5 +5,46 @@
 {% set next_url = get_url('characters_concept', {hash: entity.hash}) %}
 
 {% block page %}
-settings
+
+<div class="panel panel--collapsible panel--collapsed panel--helpable">
+    <h2 class="panel__title">Character Settings</h2>
+    <div class="panel__content">
+    <p>Use this page to control the options available for your character as well as things like public sharing links, etc</p>
+    </div>
+</div>
+
+<div class="panel">
+    <h2 class="panel__title">Sources</h2>
+    <div class="panel__content">
+        <p>Select which published suplements are available when building your character.</p>
+
+        <div class="panel__grid">
+        {% set selectedSources = entity.sources|split(',') %}
+        {% for source, title in sources %}
+            {% set is_core = 'core' == source %}
+            <label class="button button--slider{% if is_core %} button--slider-disabled{% endif %}">
+                <input type="checkbox" name="sources[{{ source }}]"{% if source in selectedSources %} checked{% endif %}{% if is_core %} disabled{% endif %}>
+                <span class="button__slide"></span>
+                {{ title }}
+            </label>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <h2 class="panel__title">Sharing</h2>
+    <div class="panel__content">
+        <p>These settings allow you to enable or disable a public sharing link for your character.</p>
+
+        <div class="panel__grid">
+            <label class="button button--slider">
+                <input type="checkbox" name="sharing"{% if entity.sharing %} checked{% endif %}>
+                <span class="button__slide"></span>
+                Enable public sharing link?
+            </label>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

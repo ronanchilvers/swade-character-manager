@@ -5,7 +5,7 @@
     position: relative;
     border: none;
     background: color.$transparent;
-    padding-left: 40px;
+    padding-left: 50px;
 
     .button__slide {
         border-color: $button-border;
@@ -38,6 +38,10 @@
         }
     }
 
+    &-disabled span {
+        opacity: 0.5;
+    }
+
     input:checked + .button__slide:before {
         right: 1px;
         left: auto;
@@ -52,4 +56,6 @@
         width: 0;
         height: 0;
     }
+
+
 }

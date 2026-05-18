@@ -6,6 +6,8 @@ namespace App\Controller\Character;
 
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
+use App\Filter;
+use App\Service\Sources;
 use Flight;
 
 class Settings
@@ -26,32 +28,34 @@ class Settings
         }
 
         $errors = false;
-        // if ("POST" == Flight::request()->getMethod()) {
-        //     $entity->name = Filter::noTags($_POST['name']);
-        //     $entity->concept = Filter::noTags($_POST['concept'] ?? '');
-        //     $errors = $this->factory->validate($entity);
-        //     if (!$errors) {
-        //         $result = $this->factory->upsert($entity);
-        //         $errors = $result->errors();
-        //     }
-        //     if (!$errors) {
-        //         Flight::session()->success(
-        //             sprintf('Saved character %s successfully', $entity->name)
-        //         );
-        //         Flight::redirect(
-        //             Flight::getUrl('characters_concept', ['hash' => $entity->hash])
-        //         );
-        //         return;
-        //     }
-        //     Flight::session()->error(
-        //         sprintf('Sorry! There was a problem!')
-        //     );
-        // }
+        if ("POST" == Flight::request()->getMethod()) {
+            $sourcesPost = Sources::filter(isset($_POST['sources']) ? array_keys($_POST['sources']) : []);
+            $sharingPost = isset($_POST['sharing']) && $_POST['sharing'] === 'on';
+            $entity->sharing = true == $sharingPost ? 1 : 0;
+            $entity->sources = implode(',', $sourcesPost);
+            $errors = $this->factory->validate($entity);
+            if (!$errors) {
+                $result = $this->factory->update($entity);
+                $errors = $result->errors();
+            }
+            if (!$errors) {
+                Flight::session()->success(
+                    sprintf('Saved character %s successfully', $entity->name)
+                );
+                Flight::reload();
+                return;
+            }
+            Flight::session()->error(
+                sprintf('Sorry! There was a problem!')
+            );
+        }
+        $sources = Sources::all();
 
         Flight::render('character/settings.twig', [
             'page_title' => 'Settings',
             'entity' => $entity,
             'errors' => $errors,
+            'sources' => $sources,
         ]);
     }
 }

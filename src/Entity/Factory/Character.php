@@ -170,6 +170,7 @@ class Character extends Factory
             'strength' => v::intVal()->in([4, 6, 8, 10, 12]),
             'vigor' => v::intVal()->in([4, 6, 8, 10, 12]),
             'campaign' => v::oneOf(v::nullType(), v::intVal()->greaterThan(0)),
+            'sharing' => v::intVal()->in([0,1]),
         ];
     }
 
