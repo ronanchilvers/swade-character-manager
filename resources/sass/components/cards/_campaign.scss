@@ -1,0 +1,20 @@
+@use "variables" as card;
+@use "../../settings/colors" as color;
+@use "../character/sheet/tokens" as *;
+
+.card {
+    &__campaign {
+        padding: 0.25rem 1rem;
+        border-top: card.$card-border-dotted;
+        background-color: card.$card-background;
+        color: color.$sheet-heading;
+        font-family: $title-font;
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+
+        span {
+            color: color.$black;
+            font-size: 1rem;
+        }
+    }
+}

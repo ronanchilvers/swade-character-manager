@@ -69,7 +69,7 @@ class SheetControllerTest extends ControllerTestCase
             ->disableOriginalConstructor()
             ->onlyMethods(['byId'])
             ->getMock();
-        $campaignFactory->expects(self::once())
+        $campaignFactory->expects(self::exactly(2))
             ->method('byId')
             ->with(5)
             ->willReturn($campaign);
