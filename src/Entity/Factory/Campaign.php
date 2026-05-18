@@ -30,6 +30,22 @@ class Campaign extends Factory
         );
     }
 
+    public function namesForIds(array $ids): array
+    {
+        $result = $this->pdo->fetchAll(
+            'SELECT campaign_id, campaign_name, campaign_hash FROM campaigns WHERE campaign_id IN (' . implode(',', $ids) . ')'
+        );
+        $data = [];
+        foreach ($result as $row) {
+            $data[$row['campaign_id']] = [
+                'name' => $row['campaign_name'],
+                'hash' => $row['campaign_hash']
+            ];
+        }
+
+        return $data;
+    }
+
     public function forHash(string $hash): ?Entity
     {
         return $this->one(
