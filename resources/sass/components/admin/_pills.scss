@@ -1,0 +1,28 @@
+@use "../../settings/sheet-tokens" as sheet;
+@use "../../settings/colors" as color;
+
+.admin-pill {
+    display: inline-block;
+    padding: 0.3rem 0.55rem 0.2rem;
+    border-radius: 999px;
+    border: 1px solid color.$overlay-border-18;
+    font-family: sheet.$sheet-title-font;
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+
+    &--status-active,
+    &--superuser {
+        background: color.$success-surface;
+        color: color.$success;
+        border-color: color.$success-border;
+    }
+
+    &--status-inactive,
+    &--standard {
+        background: color.$overlay-border-08;
+        color: color.$overlay-ink-72;
+        border-color: color.$overlay-border-14;
+    }
+}

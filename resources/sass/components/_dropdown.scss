@@ -1,16 +1,17 @@
 @use "../settings/css-variables" as vars;
 
+@use "../settings/colors" as color;
 .dropdown {
     position: relative;
     .dropdown__menu {
         position: absolute;
         top: 100%;
         right: 0;
-        background-color: var(--c-white);
+        background-color: color.$white;
         display: none;
         width: auto;
         padding: 1rem 1.5rem;
-        border: 1px solid var(--c-black);
+        border: 1px solid color.$black;
         border-radius: vars.$border-radius-default;
     }
     .dropdown__menu__item {

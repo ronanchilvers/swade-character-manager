@@ -1,7 +1,8 @@
 @use "../tools/breakpoints";
 @use "../settings/css-variables" as vars;
 
-$topbar-border-colour: #cccccc;
+@use "../settings/colors" as color;
+$topbar-border-colour: color.$light-grey;
 
 .topbar {
     position: sticky;
@@ -9,10 +10,10 @@ $topbar-border-colour: #cccccc;
     justify-content: flex-start;
     flex-direction: column;
     padding: 1rem;
-    background: var(--c-white) url(/images/backgrounds/blue-background-tileable.png) repeat top left;
+    background: color.$white url(/images/backgrounds/blue-background-tileable.png) repeat top left;
     background-size: cover;
     z-index: 30;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px color.$overlay-black-10;
     min-width: vars.$page-min-width;
     width: 100%;
 

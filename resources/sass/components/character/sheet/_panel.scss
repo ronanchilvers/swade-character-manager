@@ -1,0 +1,22 @@
+@use "../../../tools/torn-paper";
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__panel {
+        position: relative;
+        background: color.$white;
+        padding: 1rem 1.1rem;
+        border: 1px solid $border-color;
+        box-shadow: 0 2px 4px color.$overlay-black-08;
+
+        &--torn {
+            background: color.$parchment url(/images/backgrounds/paper-tileable.png) repeat top left;
+            border: 1px dashed $border-color;
+            border-top: none;
+            border-bottom: none;
+            @extend %torn-paper;
+            padding: 1.4rem 1.1rem;
+        }
+    }
+}

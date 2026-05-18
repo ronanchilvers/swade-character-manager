@@ -3,6 +3,7 @@
 @use "variables" as card;
 @use "../../tools/breakpoints";
 
+@use "../../settings/colors" as color;
 /** Cards **/
 .cards {
     display: grid;
@@ -69,7 +70,7 @@
         text-align: right;
     }
     .card__title--collapsible:focus-visible {
-        outline: 2px solid var(--c-black);
+        outline: 2px solid color.$black;
         outline-offset: -2px;
     }
     .card__title--collapsed::after {

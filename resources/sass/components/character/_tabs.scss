@@ -1,15 +1,16 @@
 @use "../../settings/css-variables" as vars;
 @use "../../settings/sheet-tokens" as sheet;
 @use "../../tools/breakpoints";
+@use "../../settings/colors" as color;
 
 $tabs-border-radius: 4px;
-$tabs-border-colour: rgb(0, 0, 0, 0.25);
-$tabs-border-colour-active: rgb(0, 0, 0, 0.5);
-$tabs-background-colour: #ddd;
-$tabs-background-colour-active: #fff;
-$tabs-text-color: #666;
-$tabs-text-color-active: #333;
-$tabs-text-color-disabled: #999;
+$tabs-border-colour: color.$overlay-black-25;
+$tabs-border-colour-active: color.$overlay-black-50;
+$tabs-background-colour: color.$tabs-background;
+$tabs-background-colour-active: color.$white;
+$tabs-text-color: color.$border-muted;
+$tabs-text-color-active: color.$text-soft;
+$tabs-text-color-disabled: color.$medium-grey;
 
 .character-tabs {
     display: flex;
@@ -66,7 +67,7 @@ $tabs-text-color-disabled: #999;
         &--active {
             background-color: $tabs-background-colour-active;
             color: $tabs-text-color-active;
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 0 4px color.$overlay-black-25;
             border-color: $tabs-border-colour-active;
         }
     }

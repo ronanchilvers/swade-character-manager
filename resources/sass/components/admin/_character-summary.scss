@@ -1,0 +1,72 @@
+@use "../../settings/css-variables" as vars;
+@use "../../settings/sheet-tokens" as sheet;
+
+@use "../../settings/colors" as color;
+.admin-characters {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.admin-character {
+    padding: 1rem;
+    border-radius: vars.$border-radius-default;
+    background: color.$overlay-white-48;
+    border: 1px solid color.$overlay-border-08;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    &__title {
+        @extend %sheet-heading;
+        margin: 0;
+        font-size: 1.05rem;
+        letter-spacing: 0.05em;
+    }
+
+    &__meta,
+    &__concept {
+        margin: 0.25rem 0 0;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 0.95rem;
+        color: color.$overlay-ink-80;
+    }
+
+    &__concept {
+        margin-top: 0.75rem;
+    }
+
+    &__stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.65rem;
+        margin-top: 0.9rem;
+    }
+
+    &__stat {
+        padding: 0.55rem 0.65rem;
+        border-radius: vars.$border-radius-default;
+        background: color.$overlay-white-55;
+        border: 1px solid color.$overlay-border-08;
+    }
+
+    &__stat dt {
+        margin: 0 0 0.2rem;
+        font-family: sheet.$sheet-title-font;
+        font-size: 0.78rem;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: color.$sheet-muted;
+    }
+
+    &__stat dd {
+        margin: 0;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 1rem;
+        font-weight: 600;
+        color: color.$sheet-ink;
+    }
+}

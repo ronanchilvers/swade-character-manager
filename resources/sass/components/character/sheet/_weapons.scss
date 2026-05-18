@@ -1,0 +1,63 @@
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__weapons {
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+            height: 8px;
+            -webkit-appearance: none;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: color.$sheet-muted;
+            border-radius: 4px;
+        }
+        &::-webkit-scrollbar-track {
+            background: color.$transparent;
+        }
+        &__table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th {
+                font-family: $title-font;
+                color: color.$sheet-heading;
+                text-transform: uppercase;
+                text-align: left;
+                font-size: 0.85rem;
+                padding: 0.25rem 0.5rem;
+                border-bottom: 1px solid color.$sheet-muted;
+                width: 10%;
+            }
+
+            td {
+                border-bottom: 1px solid color.$sheet-muted;
+                padding: 0.35rem 0.5rem;
+                min-height: 1.6rem;
+            }
+            tbody td {
+                font-family: $text-font;
+                font-size: $text-font-size;
+            }
+
+            th#{&}__name {
+                width: 20%;
+            }
+            th#{&}__range {
+                width: 15%;
+            }
+            th#{&}__damage {
+                width: 15%;
+            }
+            th#{&}__ap,
+            th#{&}__rof,
+            th#{&}__wt {
+                width: 5%;
+            }
+            th#{&}__notes {
+                width: auto;
+            }
+        }
+    }
+}

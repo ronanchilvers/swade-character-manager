@@ -1,0 +1,122 @@
+@use "../../settings/css-variables" as vars;
+@use "../../settings/sheet-tokens" as sheet;
+@use "../../tools/breakpoints";
+
+@use "../../settings/colors" as color;
+.admin-users {
+    overflow-x: auto;
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: sheet.$sheet-plain-font;
+        font-size: 0.95rem;
+        background: color.$overlay-white-45;
+    }
+
+    &__table th,
+    &__table td {
+        padding: 0.85rem 1rem;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid color.$overlay-border-12;
+    }
+
+    &__table th {
+        @extend %sheet-heading;
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+        background: color.$overlay-white-55;
+    }
+
+    &__table tbody tr:nth-child(even) {
+        background: color.$overlay-white-22;
+    }
+
+    &__table tbody tr:hover {
+        background: color.$overlay-white-38;
+    }
+
+    &__name {
+        font-weight: 600;
+    }
+
+    &__meta {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 0.82rem;
+        color: color.$sheet-muted;
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &__actions .button {
+        margin-right: 0;
+    }
+
+    &__actions form {
+        margin: 0;
+    }
+
+    &__current {
+        font-family: sheet.$sheet-title-font;
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: color.$sheet-muted;
+    }
+
+    &__empty {
+        margin: 0;
+        font-family: sheet.$sheet-plain-font;
+    }
+
+    @include breakpoints.at(tablet) {
+        &__table,
+        &__table thead,
+        &__table tbody,
+        &__table tr,
+        &__table th,
+        &__table td {
+            display: block;
+        }
+
+        &__table thead {
+            display: none;
+        }
+
+        &__table tbody {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        &__table tr {
+            padding: 0.25rem 0;
+            border: 1px solid color.$overlay-border-12;
+            border-radius: vars.$border-radius-default;
+            background: color.$overlay-white-42;
+        }
+
+        &__table td {
+            border-bottom: 0;
+            padding: 0.45rem 0.9rem;
+        }
+
+        &__table td::before {
+            content: attr(data-label);
+            display: block;
+            margin-bottom: 0.2rem;
+            font-family: sheet.$sheet-title-font;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: color.$sheet-muted;
+        }
+    }
+}

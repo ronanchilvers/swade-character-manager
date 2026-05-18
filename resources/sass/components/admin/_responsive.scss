@@ -1,0 +1,15 @@
+@use "../../tools/breakpoints";
+
+@include breakpoints.at(tablet) {
+    .admin-group__header {
+        flex-direction: column;
+    }
+
+    .admin-group__summary {
+        justify-content: flex-start;
+    }
+
+    .admin-character__stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

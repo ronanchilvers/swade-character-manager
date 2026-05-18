@@ -1,0 +1,33 @@
+@use "../../../settings/css-variables" as vars;
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__hindrances {
+        margin-bottom: 1rem;
+        &__name {
+            font-family: $text-font;
+            font-size: $text-font-size;
+        }
+
+        &__level {
+            font-family: $title-font;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 0.3rem 0.45rem 0 0.45rem;
+            border-radius: vars.$border-radius-default;
+            border: 1px solid color.$sheet-heading;
+
+            &--major {
+                background: color.$sheet-heading;
+                color: color.$white;
+                border-color: color.$sheet-heading;
+            }
+
+            &--minor {
+                background: color.$transparent;
+                color: color.$sheet-heading;
+            }
+        }
+    }
+}

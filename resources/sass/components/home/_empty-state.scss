@@ -1,0 +1,29 @@
+@use "../../settings/css-variables" as vars;
+@use "../../settings/sheet-tokens";
+@use "../cards/variables" as card;
+
+@use "../../settings/colors" as color;
+.home__empty {
+    max-width: 34rem;
+    margin: 3rem auto;
+    padding: 2rem 2rem 1.5rem;
+    background: color.$parchment;
+    border: 1px solid color.$parchment-dark;
+    border-radius: vars.$border-radius-default;
+    box-shadow: 0 2px 4px color.$overlay-black-08;
+    text-align: center;
+    color: color.$sheet-ink;
+
+    &__title {
+        @extend %sheet-heading;
+        margin: 0 0 0.5rem;
+        font-size: card.$card-title-font-size;
+        letter-spacing: 0.08em;
+    }
+
+    &__body {
+        font-family: card.$card-text-font;
+        font-size: card.$card-text-font-size;
+        margin: 0 0 1.25rem;
+    }
+}

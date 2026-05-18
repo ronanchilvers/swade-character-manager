@@ -2,16 +2,17 @@
 @use "../settings/sheet-tokens" as sheet;
 @use "../tools/breakpoints";
 
+@use "../settings/colors" as color;
 $panel-padding: 2rem;
 
 .panel {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: rgba(255,255,255,1);
-    border: 1px solid #222;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    color: var(--c-sheet-ink);
+    background: color.$white;
+    border: 1px solid color.$border-strong;
+    box-shadow: 0 2px 4px color.$overlay-black-08;
+    color: color.$sheet-ink;
     font-family: sheet.$sheet-title-font;
     margin-bottom: 1.5rem;
 
@@ -19,7 +20,7 @@ $panel-padding: 2rem;
         padding: 1rem 1rem 0 1rem;
         font-family: sheet.$sheet-title-font;
         letter-spacing: 0.08em;
-        color: var(--c-sheet-heading);
+        color: color.$sheet-heading;
         font-size: 1.25rem;
     }
 
@@ -42,7 +43,7 @@ $panel-padding: 2rem;
         }
 
         .panel__title:focus-visible {
-            outline: 2px solid var(--c-black);
+            outline: 2px solid color.$black;
             outline-offset: -2px;
         }
     }
@@ -59,10 +60,10 @@ $panel-padding: 2rem;
             font-size: 1.3rem;
             width: 1.5rem;
             height: 1.6rem;
-            border: 1px solid #000;
+            border: 1px solid color.$black;
             border-radius: 50%;
-            background-color: #000;
-            color: #fff;
+            background-color: color.$black;
+            color: color.$white;
             padding-left: 0.15rem;
             padding-top: 0.08rem;
         }
@@ -80,8 +81,8 @@ $panel-padding: 2rem;
         &.panel--helpable {
             > .panel__title::after {
                 content: "?";
-                background-color: transparent;
-                color: #000;
+                background-color: color.$transparent;
+                color: color.$black;
             }
         }
 
@@ -102,16 +103,16 @@ $panel-padding: 2rem;
     }
 
     &--dark {
-        background: rgb(245, 245, 245);
+        background: color.$sheet-rail;
     }
 
     &--danger {
-        background: rgba(255, 220, 220, 0.25);
-        border-color: #8c1414;
-        color: #8c1414;
+        background: color.$overlay-danger-panel;
+        border-color: color.$panel-danger;
+        color: color.$panel-danger;
 
         .panel__title {
-            color: #8c1414;
+            color: color.$panel-danger;
         }
     }
 

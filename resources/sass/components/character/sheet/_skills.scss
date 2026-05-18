@@ -1,0 +1,72 @@
+@use "tokens" as *;
+
+@use "../../../settings/colors" as color;
+.sheet {
+    &__skills {
+        &__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        &__row {
+            display: grid;
+            grid-template-columns: 10rem 6rem 1fr;
+            gap: 0.5rem;
+            align-items: center;
+            border-bottom: 1px solid color.$sheet-muted;
+            padding: 0.25rem 0;
+            min-height: 1.6rem;
+            font-family: $title-font;
+
+            &--core {
+                color: color.$sheet-ink;
+            }
+        }
+        &__row--header {
+            grid-template-columns: 10rem 1fr;
+            align-items: baseline;
+            span,
+            svg {
+                color: color.$sheet-muted;
+            }
+        }
+
+        &__name {
+            /* font-family: $title-font; */
+        }
+
+        &__attribute {
+            /* font-family: $title-font; */
+            color: color.$sheet-muted;
+            font-size: 0.8em;
+            line-height: 2;
+        }
+    }
+
+    &__die-strip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.1rem;
+
+        &__step {
+            display: inline-block;
+            font-family: $title-font;
+            font-size: 0.9rem;
+            min-width: 1.4rem;
+            padding-top: 0.1rem;
+            line-height: 1.2;
+            text-align: center;
+            color: color.$sheet-muted-pale;
+
+            svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            &--active {
+                color: color.$sheet-rail-item-border-active;
+            }
+        }
+    }
+}

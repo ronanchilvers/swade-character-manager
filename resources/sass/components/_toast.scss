@@ -1,22 +1,23 @@
 @use "../settings/sheet-tokens" as sheet;
 @use "../tools/breakpoints";
 
+@use "../settings/colors" as color;
 $toast-heading-font: sheet.$sheet-title-font;
 $toast-heading-font-size: sheet.$sheet-title-font;
 $toast-heading-color: sheet.$sheet-title-color;
 $toast-body-font: sheet.$sheet-plain-font;
 $toast-body-font-size: sheet.$sheet-plain-font-size;
 
-$toast-paper: var(--c-parchment);
-$toast-paper-deep: var(--c-sheet-paper);
-$toast-ink: var(--c-sheet-ink);
-$toast-muted: var(--c-sheet-muted);
-$toast-accent-default: var(--c-sheet-heading);
-$toast-accent-success: #5c3f17;
-$toast-accent-info: #7a4a24;
-$toast-accent-warning: #8f4b12;
-$toast-accent-error: #8a0000;
-$toast-shadow: rgba(29, 18, 8, 0.16);
+$toast-paper: color.$parchment;
+$toast-paper-deep: color.$sheet-paper;
+$toast-ink: color.$sheet-ink;
+$toast-muted: color.$sheet-muted;
+$toast-accent-default: color.$sheet-heading;
+$toast-accent-success: color.$toast-accent-success;
+$toast-accent-info: color.$toast-accent-info;
+$toast-accent-warning: color.$toast-accent-warning;
+$toast-accent-error: color.$toast-accent-error;
+$toast-shadow: color.$overlay-shadow;
 
 .toast__container {
     position: fixed;
@@ -43,10 +44,10 @@ $toast-shadow: rgba(29, 18, 8, 0.16);
     position: relative;
     overflow: hidden;
     padding: 1rem 2rem 1rem 1rem;
-    border: 1px solid var(--c-parchment-dark);
+    border: 1px solid color.$parchment-dark;
     border-left: 0.45rem solid $toast-accent-default;
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0)) 0 0 / 100% 100%,
+        linear-gradient(180deg, color.$overlay-white-45, color.$overlay-white-transparent) 0 0 / 100% 100%,
         linear-gradient(135deg, $toast-paper 0%, $toast-paper-deep 100%);
     color: $toast-ink;
     box-shadow: 0 0.5rem 1rem $toast-shadow;
@@ -61,13 +62,13 @@ $toast-shadow: rgba(29, 18, 8, 0.16);
         inset: 0;
         pointer-events: none;
         background:
-            linear-gradient(90deg, rgba(166, 30, 30, 0.06), rgba(166, 30, 30, 0) 30%),
+            linear-gradient(90deg, color.$overlay-sheet-heading-06, color.$overlay-sheet-heading-transparent 30%),
             repeating-linear-gradient(
                 180deg,
-                rgba(255, 255, 255, 0.08) 0,
-                rgba(255, 255, 255, 0.08) 2px,
-                rgba(0, 0, 0, 0) 2px,
-                rgba(0, 0, 0, 0) 8px
+                color.$overlay-white-08 0,
+                color.$overlay-white-08 2px,
+                color.$transparent 2px,
+                color.$transparent 8px
             );
         opacity: 0.65;
     }
@@ -85,7 +86,7 @@ $toast-shadow: rgba(29, 18, 8, 0.16);
         height: 1rem;
         padding: 0;
         border: none;
-        background: transparent;
+        background: color.$transparent;
         color: $toast-muted;
         font-family: $toast-heading-font;
         font-size: 1.5rem;
@@ -96,7 +97,7 @@ $toast-shadow: rgba(29, 18, 8, 0.16);
         &:hover,
         &:focus-visible {
             color: $toast-accent-default;
-            background: rgba(255, 255, 255, 0.35);
+            background: color.$overlay-white-35;
             outline: none;
         }
     }
@@ -112,7 +113,7 @@ $toast-shadow: rgba(29, 18, 8, 0.16);
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: $toast-accent-default;
-        background: rgba(255, 255, 255, 0.25);
+        background: color.$overlay-white-25;
     }
 
     &__heading {

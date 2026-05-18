@@ -1,5 +1,6 @@
 @use "variables" as card_vars;
 
+@use "../../settings/colors" as color;
 .edge-counter {
     display: flex;
     align-items: stretch;
@@ -16,8 +17,8 @@
     flex: 0 0 4rem;
     border: none;
     border-right: card_vars.$card-border;
-    background: #f6f6f6;
-    color: var(--c-black);
+    background: color.$card-control-background;
+    color: color.$black;
     font-size: 1.75rem;
     line-height: 1;
     cursor: pointer;
@@ -28,7 +29,7 @@
     }
 
     &:disabled {
-        color: var(--c-medium-grey);
+        color: color.$medium-grey;
         cursor: default;
     }
 }
@@ -38,7 +39,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--c-white);
+    background: color.$white;
 }
 
 .edge-counter__count {
