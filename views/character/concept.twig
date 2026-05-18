@@ -1,7 +1,7 @@
 {% extends 'layouts/character/builder.twig' %}
 
-{% set back_label = 'Your Characters' %}
-{% set back_url = get_url('home_page') %}
+{% set back_url = get_url('characters_settings', {hash: entity.hash}) %}
+{% set next_url = get_url('characters_hindrances', {hash: entity.hash}) %}
 
 {% block page %}
 

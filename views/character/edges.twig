@@ -3,7 +3,8 @@
 {% do add_script('/javascript/edges.js') %}
 
 {% set back_url = get_url('characters_skills', {hash: entity.hash}) %}
-{% set next_label = "Save and view sheet &raquo;" %}
+{% set next_label = "View sheet" %}
+{% set next_url = get_url('characters_sheet', {hash: entity.hash}) %}
 
 {% block page %}
 <div class="panel panel--collapsible panel--collapsed panel--helpable">

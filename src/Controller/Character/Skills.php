@@ -54,7 +54,8 @@ class Skills
                 Flight::session()->success(
                     sprintf('Saved character %s successfully', $entity->name)
                 );
-                Flight::redirect(Flight::getUrl('characters_edges', ['hash' => $entity->hash]));
+                Flight::reload();
+                // Flight::redirect(Flight::getUrl('characters_edges', ['hash' => $entity->hash]));
                 return;
             } catch (Exception $e) {
                 Flight::session()->error(

@@ -40,7 +40,8 @@ class Hindrances
                 Flight::session()->success(
                     sprintf('Saved character %s successfully', $entity->name)
                 );
-                Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
+                Flight::reload();
+                // Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
                 return;
             }
             $errors = $result->errors();

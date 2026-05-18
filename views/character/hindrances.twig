@@ -4,6 +4,7 @@
 
 {% set levels = [ 'minor', 'major' ] %}
 {% set back_url = get_url('characters_concept', {hash: entity.hash}) %}
+{% set next_url = get_url('characters_attributes', {hash: entity.hash}) %}
 
 {% block page %}
 <div class="panel panel--collapsible panel--collapsed panel--helpable">

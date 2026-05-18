@@ -86,9 +86,10 @@ class Base
                 Flight::session()->success(
                     sprintf('Saved character %s successfully', $entity->name)
                 );
-                Flight::redirect(
-                    Flight::getUrl('characters_hindrances', ['hash' => $entity->hash])
-                );
+                Flight::reload();
+                // Flight::redirect(
+                //     Flight::getUrl('characters_hindrances', ['hash' => $entity->hash])
+                // );
                 return;
             }
             Flight::session()->error(

@@ -15,6 +15,11 @@ use Twig\Environment;
 /* @var $container \flight\Container */
 
 // Mapped methods
+Flight::map('reload', function () use ($container) {
+    $request = Flight::request();
+
+    Flight::redirect($request->url);
+});
 Flight::map('session', function () use ($container) {
     return $container->get(Session::class);
 });
