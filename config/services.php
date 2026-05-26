@@ -23,6 +23,7 @@ use App\Service\Data\Edges;
 use App\Service\Data\Hindrances;
 use App\Service\Data\Skills;
 use App\Service\Data\Manager;
+use App\Service\Sources;
 use App\Twig\AssetExtension;
 use App\Twig\FieldExtension;
 use App\Twig\RoutingExtension;
@@ -123,6 +124,13 @@ $container->singleton(
         $manager->addType(Skills::class);
 
         return $manager;
+    }
+);
+
+$container->singleton(
+    Sources::class,
+    function () use ($container) {
+        return new Sources($container->get(SimplePdo::class));
     }
 );
 

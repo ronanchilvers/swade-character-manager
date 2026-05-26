@@ -93,6 +93,21 @@ class HindrancesTest extends TestCase
         self::assertNull($service->forId('missing'));
     }
 
+    public function testCatalogCanBeFilteredBySource(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                $this->row('core_hindrance', 'core'),
+                $this->row('fantasy_hindrance', 'fantasy'),
+            ]);
+
+        $entries = (new Hindrances(__DIR__ . '/../../../data', $pdo))->forBuilder(['core']);
+
+        self::assertSame(['core_hindrance'], array_column($entries, 'id'));
+    }
+
     public function testFileCatalogIsUsedWhenDatabaseRowsAreUnavailable(): void
     {
         $throwingPdo = $this->createMock(SimplePdo::class);
@@ -173,5 +188,20 @@ class HindrancesTest extends TestCase
             $entry['effects_by_level'],
         );
         self::assertCount(5, $entry['effects']);
+    }
+
+    private function row(string $key, string $source): array
+    {
+        return [
+            'hindrance_catalog_key' => $key,
+            'hindrance_catalog_source' => $source,
+            'hindrance_catalog_name' => ucfirst($key),
+            'hindrance_catalog_summary' => '',
+            'hindrance_catalog_levels' => '["minor"]',
+            'hindrance_catalog_requirements' => '[]',
+            'hindrance_catalog_effects' => '[]',
+            'hindrance_catalog_notes' => '[]',
+            'hindrance_catalog_source_pages' => '[]',
+        ];
     }
 }

@@ -125,6 +125,96 @@ class CharacterTest extends TestCase
         self::assertSame(3, $factory->forUserWithoutCampaign(7)[0]->id);
     }
 
+    public function testForShareTokenOnlyFindsEnabledSharedCharacters(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchRow')
+            ->with(
+                'SELECT * FROM characters WHERE character_share_token = ? AND character_sharing = ?',
+                [str_repeat('a', 64), 1],
+            )
+            ->willReturn(new Collection([
+                'character_id' => 10,
+                'character_share_token' => str_repeat('a', 64),
+                'character_sharing' => 1,
+                'character_name' => 'Mara',
+            ]));
+
+        $entity = $this->factory($pdo)->forShareToken(str_repeat('a', 64));
+
+        self::assertInstanceOf(Entity::class, $entity);
+        self::assertSame(10, $entity->id);
+        self::assertSame(str_repeat('a', 64), $entity->share_token);
+    }
+
+    public function testUpdateGeneratesShareTokenWhenSharingIsEnabled(): void
+    {
+        $skillFactory = $this->createStub(Skill::class);
+        $skillFactory->method('forCharacterAndKey')
+            ->willReturn(null);
+
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('update')
+            ->with(
+                'characters',
+                self::callback(function (array $values): bool {
+                    return 1 === $values['character_sharing']
+                        && isset($values['character_share_token'])
+                        && is_string($values['character_share_token'])
+                        && 64 === strlen($values['character_share_token'])
+                        && ctype_xdigit($values['character_share_token']);
+                }),
+                'character_id = ?',
+                [10],
+            )
+            ->willReturn(1);
+
+        $character = new Entity([
+            'id' => 10,
+            'name' => 'Mara',
+            'sharing' => 1,
+            'share_token' => '',
+            'vigor' => 4,
+        ]);
+        $result = $this->factory($pdo, $skillFactory)->update($character);
+
+        self::assertTrue($result->isSuccess());
+        self::assertSame(64, strlen($character->share_token));
+    }
+
+    public function testUpdateKeepsExistingShareToken(): void
+    {
+        $skillFactory = $this->createStub(Skill::class);
+        $skillFactory->method('forCharacterAndKey')
+            ->willReturn(null);
+
+        $existingToken = str_repeat('b', 64);
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('update')
+            ->with(
+                'characters',
+                self::callback(fn (array $values): bool => $existingToken === $values['character_share_token']),
+                'character_id = ?',
+                [10],
+            )
+            ->willReturn(1);
+
+        $character = new Entity([
+            'id' => 10,
+            'name' => 'Mara',
+            'sharing' => 1,
+            'share_token' => $existingToken,
+            'vigor' => 4,
+        ]);
+        $result = $this->factory($pdo, $skillFactory)->update($character);
+
+        self::assertTrue($result->isSuccess());
+        self::assertSame($existingToken, $character->share_token);
+    }
+
     public function testDeleteRemovesCharacterById(): void
     {
         $pdo = $this->createMock(SimplePdo::class);

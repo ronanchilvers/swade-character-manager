@@ -4,6 +4,7 @@
 
 {% set selected_keys = selected|keys %}
 {% set back_url = get_url('characters_attributes', {hash: entity.hash}) %}
+{% set next_url = get_url('characters_edges', {hash: entity.hash}) %}
 
 {% block page %}
 

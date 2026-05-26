@@ -11,6 +11,8 @@ use App\Entity\Factory\Edge;
 use App\Entity\Factory\Result;
 use App\Service\Data\Edges as EdgesData;
 use App\Service\Data\Manager;
+use App\Service\Sources;
+use flight\database\SimplePdo;
 use Tests\Support\ControllerTestCase;
 use Tests\Support\RedirectedResponse;
 use Tests\Support\RenderedResponse;
@@ -73,15 +75,16 @@ class EdgesTest extends ControllerTestCase
             ->willReturn(new Result());
 
         $session = $this->mapSession();
-        $this->mapRequest('POST');
-        $this->mapRedirectToException();
-        $this->mapUrls(['characters_sheet' => '/characters/sheet/{hash}']);
+        $this->mapRequest('POST', url: '/characters/edges/charhash');
+        \Flight::map('reload', function (): void {
+            throw new RedirectedResponse(\Flight::request()->url);
+        });
 
         try {
             $this->controller($character, $edgeFactory)->index('charhash');
             self::fail('Expected redirect');
         } catch (RedirectedResponse $redirected) {
-            self::assertSame('/characters/sheet/charhash', $redirected->url);
+            self::assertSame('/characters/edges/charhash', $redirected->url);
         }
 
         self::assertSame(['Saved character Mara successfully'], $session->successes);
@@ -114,20 +117,70 @@ class EdgesTest extends ControllerTestCase
         self::assertSame(['Sorry! There was a problem!'], $session->errors);
     }
 
-    private function controller(?Entity $character, ?Edge $edgeFactory = null): Edges
+    public function testGetFiltersCatalogByCharacterSources(): void
+    {
+        $character = new Entity(['hash' => 'charhash', 'name' => 'Mara', 'sources' => 'core']);
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                $this->catalogRow('alertness', 'core', 'Alertness', 'background'),
+                $this->catalogRow('fantasy_edge', 'fantasy', 'Fantasy Edge', 'fantasy'),
+            ]);
+
+        $manager = $this->createStub(Manager::class);
+        $manager->method('getType')
+            ->willReturn(new EdgesData(__DIR__ . '/../../../data', $pdo));
+
+        $this->mapRequest('GET');
+        $this->mapRenderToException();
+
+        try {
+            $this->controller($character, manager: $manager)->index('charhash');
+            self::fail('Expected render');
+        } catch (RenderedResponse $rendered) {
+            self::assertSame(['background'], array_keys($rendered->data['edges_by_category']));
+            self::assertSame('alertness', $rendered->data['edges_by_category']['background'][0]['id']);
+        }
+    }
+
+    private function controller(
+        ?Entity $character,
+        ?Edge $edgeFactory = null,
+        ?Manager $manager = null,
+    ): Edges
     {
         $characterFactory = $this->createStub(Character::class);
         $characterFactory->method('forHash')
             ->willReturn($character);
 
-        $manager = $this->createStub(Manager::class);
-        $manager->method('getType')
-            ->willReturn(new EdgesData(__DIR__ . '/../../../data'));
+        if (!$manager instanceof Manager) {
+            $manager = $this->createStub(Manager::class);
+            $manager->method('getType')
+                ->willReturn(new EdgesData(__DIR__ . '/../../../data'));
+        }
 
         return new Edges(
             $characterFactory,
             $edgeFactory ?? $this->createStub(Edge::class),
             $manager,
+            new Sources(),
         );
+    }
+
+    private function catalogRow(string $key, string $source, string $name, string $category): array
+    {
+        return [
+            'edge_catalog_key' => $key,
+            'edge_catalog_source' => $source,
+            'edge_catalog_name' => $name,
+            'edge_catalog_category' => $category,
+            'edge_catalog_repeatable' => '0',
+            'edge_catalog_summary' => '',
+            'edge_catalog_requirements' => '[]',
+            'edge_catalog_effects' => '[]',
+            'edge_catalog_notes' => '[]',
+            'edge_catalog_source_pages' => '[]',
+        ];
     }
 }

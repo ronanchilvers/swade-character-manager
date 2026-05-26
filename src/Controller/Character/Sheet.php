@@ -60,48 +60,18 @@ class Sheet
             $readOnly = true;
         }
 
-        $user = false;
-        if (Flight::isSuperSession()) {
-            if (Flight::user() && (Flight::user()->id != $entity->user)) {
-                $user = $this->userFactory->byId((int) $entity->user);
-            }
+        $this->renderSheet($entity, $readOnly);
+    }
+
+    public function shared(string $token): void
+    {
+        $entity = $this->factory->forShareToken($token);
+        if (!$entity instanceof Entity) {
+            Flight::notFound();
+            return;
         }
 
-        $campaign = null;
-        $campaignOwner = null;
-        if ($entity->campaign) {
-            $campaign = $this->campaignFactory->byId((int) $entity->campaign);
-            if ($campaign instanceof Entity) {
-                $campaignOwner = $this->userFactory->byId((int) $campaign->user);
-            }
-        }
-
-        $hindrances = $this->hindranceFactory->forCharacter($entity);
-        $skills = $this->skillFactory->forCharacter($entity);
-        $edges = $this->edgeFactory->forCharacter($entity);
-        $gear = $this->gearFactory->forCharacter($entity);
-        $weapons = $this->weaponFactory->forCharacter($entity);
-
-        $sheet = $this->presenter->build(
-            $entity,
-            $hindrances,
-            $skills,
-            $edges,
-            $this->manager,
-            $this->factory,
-            $gear,
-            $weapons,
-        );
-
-        Flight::render('character/sheet.twig', [
-            'page_title' => $entity->name,
-            'entity' => $entity,
-            'user' => $user,
-            'sheet' => $sheet,
-            'read_only' => $readOnly,
-            'campaign' => $campaign,
-            'campaign_owner' => $campaignOwner,
-        ]);
+        $this->renderSheet($entity, true, publicSheet: true, showCampaign: false);
     }
 
     public function updateState(string $hash): void
@@ -180,6 +150,57 @@ class Sheet
             return false;
         }
         return $this->memberFactory->isMember($campaign, $userId);
+    }
+
+    private function renderSheet(
+        Entity $entity,
+        bool $readOnly,
+        bool $publicSheet = false,
+        bool $showCampaign = true,
+    ): void {
+        $user = false;
+        if (!$publicSheet && Flight::isSuperSession()) {
+            if (Flight::user() && (Flight::user()->id != $entity->user)) {
+                $user = $this->userFactory->byId((int) $entity->user);
+            }
+        }
+
+        $campaign = null;
+        $campaignOwner = null;
+        if ($showCampaign && $entity->campaign) {
+            $campaign = $this->campaignFactory->byId((int) $entity->campaign);
+            if ($campaign instanceof Entity) {
+                $campaignOwner = $this->userFactory->byId((int) $campaign->user);
+            }
+        }
+
+        $hindrances = $this->hindranceFactory->forCharacter($entity);
+        $skills = $this->skillFactory->forCharacter($entity);
+        $edges = $this->edgeFactory->forCharacter($entity);
+        $gear = $this->gearFactory->forCharacter($entity);
+        $weapons = $this->weaponFactory->forCharacter($entity);
+
+        $sheet = $this->presenter->build(
+            $entity,
+            $hindrances,
+            $skills,
+            $edges,
+            $this->manager,
+            $this->factory,
+            $gear,
+            $weapons,
+        );
+
+        Flight::render('character/sheet.twig', [
+            'page_title' => $entity->name,
+            'entity' => $entity,
+            'user' => $user,
+            'sheet' => $sheet,
+            'read_only' => $readOnly,
+            'public_sheet' => $publicSheet,
+            'campaign' => $campaign,
+            'campaign_owner' => $campaignOwner,
+        ]);
     }
 
     private function jsonBody(): array

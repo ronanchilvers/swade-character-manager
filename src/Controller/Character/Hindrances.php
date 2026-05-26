@@ -10,6 +10,7 @@ use App\Entity\Factory\Hindrance;
 use App\Filter;
 use App\Service\Data\Manager;
 use App\Service\Data\Hindrances as HindrancesData;
+use App\Service\Sources;
 use Flight;
 
 class Hindrances
@@ -18,6 +19,7 @@ class Hindrances
         private FactoryCharacter $factory,
         private Hindrance $hindranceFactory,
         private Manager $manager,
+        private Sources $sources,
     ) {
     }
 
@@ -40,7 +42,8 @@ class Hindrances
                 Flight::session()->success(
                     sprintf('Saved character %s successfully', $entity->name)
                 );
-                Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
+                Flight::reload();
+                // Flight::redirect(Flight::getUrl('characters_attributes', ['hash' => $entity->hash]));
                 return;
             }
             $errors = $result->errors();
@@ -57,10 +60,11 @@ class Hindrances
 
         /** @var HindrancesData $hindranceService */
         $hindranceService = $this->manager->getType(HindrancesData::class);
+        $enabledSources = $this->sources->selectedFromString($entity->sources ?? null);
         Flight::render('character/hindrances.twig', [
             'page_title' => 'Hindrances',
             'entity'     => $entity,
-            'hindrances' => $hindranceService->forBuilder(),
+            'hindrances' => $hindranceService->forBuilder($enabledSources),
             'selected'   => $selected,
             'errors'     => $errors,
         ]);

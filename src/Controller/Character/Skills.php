@@ -11,6 +11,7 @@ use App\Entity\Factory\Skill as FactorySkill;
 use App\Filter;
 use App\Service\Data\Manager;
 use App\Service\Data\Skills as SkillsData;
+use App\Service\Sources;
 use Exception;
 use Flight;
 
@@ -20,6 +21,7 @@ class Skills
         private FactoryCharacter $factory,
         private FactorySkill $skillFactory,
         private Manager $manager,
+        private Sources $sources,
     ) {
     }
 
@@ -54,7 +56,8 @@ class Skills
                 Flight::session()->success(
                     sprintf('Saved character %s successfully', $entity->name)
                 );
-                Flight::redirect(Flight::getUrl('characters_edges', ['hash' => $entity->hash]));
+                Flight::reload();
+                // Flight::redirect(Flight::getUrl('characters_edges', ['hash' => $entity->hash]));
                 return;
             } catch (Exception $e) {
                 Flight::session()->error(
@@ -68,8 +71,9 @@ class Skills
                 $selected[$skill->key] = $skill->die;
             }
         }
-        $coreSkills = $skillService->core();
-        $nonCoreSkills = $skillService->nonCore();
+        $enabledSources = $this->sources->selectedFromString($entity->sources ?? null);
+        $coreSkills = $skillService->coreForSources($enabledSources);
+        $nonCoreSkills = $skillService->nonCoreForSources($enabledSources);
         $diceOptions = Dice::validSizes();
         array_unshift($diceOptions, 0);
 

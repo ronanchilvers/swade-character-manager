@@ -73,15 +73,16 @@ class AttributesTest extends ControllerTestCase
             ->willReturn(new Result());
 
         $session = $this->mapSession();
-        $this->mapRequest('POST');
-        $this->mapRedirectToException();
-        $this->mapUrls(['characters_skills' => '/characters/skills/{hash}']);
+        $this->mapRequest('POST', url: '/characters/attributes/charhash');
+        \Flight::map('reload', function (): void {
+            throw new RedirectedResponse(\Flight::request()->url);
+        });
 
         try {
             (new Attributes($factory))->index('charhash');
             self::fail('Expected redirect');
         } catch (RedirectedResponse $redirected) {
-            self::assertSame('/characters/skills/charhash', $redirected->url);
+            self::assertSame('/characters/attributes/charhash', $redirected->url);
         }
 
         self::assertSame(['Saved character Mara successfully'], $session->successes);

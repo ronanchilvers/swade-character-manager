@@ -47,6 +47,14 @@ class SchemaConsistencyTest extends TestCase
             '/CREATE TABLE IF NOT EXISTS `?edge_catalog`?/',
             $this->readMigration('create_edge_catalog'),
         );
+        self::assertMatchesRegularExpression(
+            '/CREATE TABLE IF NOT EXISTS `?catalog_sources`?/',
+            $this->readMigration('create_catalog_sources'),
+        );
+        self::assertStringContainsString(
+            "'core', 'Core Rules (Always Enabled)'",
+            $this->readMigration('create_catalog_sources'),
+        );
     }
 
     public function testSelectionTablesUseStableCatalogKeyColumns(): void
@@ -54,6 +62,14 @@ class SchemaConsistencyTest extends TestCase
         self::assertStringContainsString('hindrance_key', file_get_contents(self::SCHEMA_DIR . '/030_hindrances.sql'));
         self::assertStringContainsString('skill_key', file_get_contents(self::SCHEMA_DIR . '/040_skills.sql'));
         self::assertStringContainsString('edge_key', file_get_contents(self::SCHEMA_DIR . '/050_edges.sql'));
+    }
+
+    public function testSharingMigrationAddsPublicShareToken(): void
+    {
+        $migration = $this->readMigration('add_character_share_token');
+
+        self::assertStringContainsString('character_share_token', $migration);
+        self::assertStringContainsString('uq_character_share_token', $migration);
     }
 
     public function testGearAndWeaponTablesReferenceCharacters(): void

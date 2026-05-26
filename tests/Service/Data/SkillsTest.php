@@ -93,6 +93,22 @@ class SkillsTest extends TestCase
         self::assertNull($service->attributeForSkill('not_real'));
     }
 
+    public function testCatalogCanBeFilteredBySource(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                $this->row('core_skill', 'core', true),
+                $this->row('fantasy_skill', 'fantasy', false),
+            ]);
+
+        $service = new Skills(__DIR__ . '/../../../data', $pdo);
+
+        self::assertSame(['core_skill'], array_keys($service->coreForSources(['core'])));
+        self::assertSame([], $service->nonCoreForSources(['core']));
+    }
+
     public function testFileCatalogIsUsedWhenDatabaseRowsAreUnavailable(): void
     {
         $throwingPdo = $this->createMock(SimplePdo::class);
@@ -181,5 +197,22 @@ class SkillsTest extends TestCase
         self::assertArrayNotHasKey('athletics', $service->core());
         self::assertArrayHasKey('custom_arcane', $service->nonCore());
         self::assertSame('spirit', $service->attributeForSkill('custom_arcane'));
+    }
+
+    private function row(string $key, string $source, bool $core): array
+    {
+        return [
+            'skill_catalog_key' => $key,
+            'skill_catalog_source' => $source,
+            'skill_catalog_name' => ucfirst($key),
+            'skill_catalog_linked_attribute' => 'agility',
+            'skill_catalog_core_skill' => $core ? '1' : '0',
+            'skill_catalog_arcane_background' => null,
+            'skill_catalog_summary' => '',
+            'skill_catalog_requirements' => '[]',
+            'skill_catalog_effects' => '[]',
+            'skill_catalog_notes' => '[]',
+            'skill_catalog_source_pages' => '[]',
+        ];
     }
 }

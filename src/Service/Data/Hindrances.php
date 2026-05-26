@@ -31,7 +31,7 @@ class Hindrances extends Data
         return parent::all();
     }
 
-    public function forBuilder(): array
+    public function forBuilder(array $sources = []): array
     {
         return array_map(
             fn (array $hindrance): array => $hindrance + [
@@ -39,7 +39,7 @@ class Hindrances extends Data
                     $hindrance['effects'] ?? []
                 ),
             ],
-            $this->all()
+            empty($sources) ? $this->all() : $this->forSources($sources),
         );
     }
 

@@ -52,6 +52,20 @@ class Skills extends Data
         return $this->nonCore;
     }
 
+    public function coreForSources(array $sources): array
+    {
+        [$core] = $this->partitionSkills($this->forSources($sources));
+
+        return $core;
+    }
+
+    public function nonCoreForSources(array $sources): array
+    {
+        [, $nonCore] = $this->partitionSkills($this->forSources($sources));
+
+        return $nonCore;
+    }
+
     public function attributeForSkill(string $skill): ?string
     {
         $iterator = new ArrayIterator($this->all());
@@ -66,15 +80,21 @@ class Skills extends Data
 
     protected function processSkills(): void
     {
-        $skills = $this->all();
-        $this->core = $this->nonCore = [];
+        [$this->core, $this->nonCore] = $this->partitionSkills($this->all());
+    }
+
+    private function partitionSkills(array $skills): array
+    {
+        $core = $nonCore = [];
         foreach ($skills as $skill) {
             if ($skill['core_skill']) {
-                $this->core[$skill['id']] = $skill;
+                $core[$skill['id']] = $skill;
                 continue;
             }
-            $this->nonCore[$skill['id']] = $skill;
+            $nonCore[$skill['id']] = $skill;
         }
+
+        return [$core, $nonCore];
     }
 
     private function databaseEntries(): ?array

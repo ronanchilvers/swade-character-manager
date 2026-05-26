@@ -80,6 +80,21 @@ class EdgesTest extends TestCase
         self::assertTrue($scholar['repeatable']);
     }
 
+    public function testCatalogCanBeFilteredBySource(): void
+    {
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                $this->rowWithSource('core_edge', 'core'),
+                $this->rowWithSource('fantasy_edge', 'fantasy'),
+            ]);
+
+        $entries = (new Edges(__DIR__ . '/../../../data', $pdo))->forSources(['core']);
+
+        self::assertSame(['core_edge'], array_column($entries, 'id'));
+    }
+
     public function testFileCatalogIsUsedWhenDatabaseRowsAreUnavailable(): void
     {
         $throwingPdo = $this->createMock(SimplePdo::class);
@@ -158,5 +173,13 @@ class EdgesTest extends TestCase
             'edge_catalog_notes' => '[]',
             'edge_catalog_source_pages' => '[]',
         ];
+    }
+
+    private function rowWithSource(string $key, string $source): array
+    {
+        $row = $this->row($key, '0');
+        $row['edge_catalog_source'] = $source;
+
+        return $row;
     }
 }

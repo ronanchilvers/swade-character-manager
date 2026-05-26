@@ -55,15 +55,16 @@ class BaseTest extends ControllerTestCase
             ->willReturn(new Result());
 
         $session = $this->mapSession();
-        $this->mapRequest('POST');
-        $this->mapRedirectToException();
-        $this->mapUrls(['characters_hindrances' => '/characters/hindrances/{hash}']);
+        $this->mapRequest('POST', url: '/characters/create');
+        \Flight::map('reload', function (): void {
+            throw new RedirectedResponse(\Flight::request()->url);
+        });
 
         try {
             (new Base($factory))->create();
             self::fail('Expected redirect');
         } catch (RedirectedResponse $redirected) {
-            self::assertSame('/characters/hindrances/charhash', $redirected->url);
+            self::assertSame('/characters/create', $redirected->url);
         }
 
         self::assertSame(['Saved character Mara successfully'], $session->successes);

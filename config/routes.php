@@ -11,6 +11,7 @@ use App\Controller\Character\Base;
 use App\Controller\Character\Hindrances;
 use App\Controller\Character\Attributes;
 use App\Controller\Character\Edges;
+use App\Controller\Character\Settings;
 use App\Controller\Character\Sheet;
 use App\Controller\Character\Skills;
 use App\Controller\Home;
@@ -27,6 +28,9 @@ use App\Middleware\Superuser as MiddlewareSuperuser;
 Flight::route('GET /', [Home::class, 'index'])
     ->setAlias('home_page')
     ->addMiddleware(MiddlewareAuth::class);
+
+Flight::route('GET /characters/shared/@token:[a-f0-9]{64}', [Sheet::class, 'shared'])
+    ->setAlias('characters_public_sheet');
 
 // Authentication
 Flight::group('/auth', function () {
@@ -87,6 +91,8 @@ Flight::group('/characters', function () {
         ->setAlias('characters_create');
     Flight::route('POST /delete/@hash:[a-z0-9]{32}', [Base::class, 'delete'])
         ->setAlias('characters_delete');
+    Flight::route('GET|POST /settings/@hash:[a-z0-9]{32}', [Settings::class, 'index'])
+        ->setAlias('characters_settings');
     Flight::route('GET|POST /concept/@hash:[a-z0-9]{32}', [Base::class, 'index'])
         ->setAlias('characters_concept');
     Flight::route('GET|POST /hindrances/@hash:[a-z0-9]{32}', [Hindrances::class, 'index'])
