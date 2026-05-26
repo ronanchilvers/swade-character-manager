@@ -81,6 +81,14 @@ class Character extends Factory
         );
     }
 
+    public function forShareToken(string $token): ?Entity
+    {
+        return $this->one(
+            $this->prefix('share_token') . ' = ? AND ' . $this->prefix('sharing') . ' = ?',
+            [$token, 1],
+        );
+    }
+
     public function forUserHash(int $userId, string $hash): ?Entity
     {
         return $this->one(
@@ -194,6 +202,10 @@ class Character extends Factory
 
     protected function beforeUpdate(Entity $entity): void
     {
+        if (1 === (int) ($entity->sharing ?? 0) && '' === (string) ($entity->share_token ?? '')) {
+            $entity->share_token = Str::token(64);
+        }
+
         $entity->pace = static::DEFAULT_PACE;
         $entity->toughness = 2 + ceil($entity->vigor / 2);
 

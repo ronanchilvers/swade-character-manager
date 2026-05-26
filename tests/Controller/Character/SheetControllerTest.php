@@ -221,6 +221,73 @@ class SheetControllerTest extends ControllerTestCase
         }
     }
 
+    public function testSharedRendersReadOnlyPublicSheet(): void
+    {
+        $character = new Entity([
+            'id' => 3,
+            'hash' => 'charhash',
+            'share_token' => str_repeat('a', 64),
+            'sharing' => 1,
+            'user' => 7,
+            'name' => 'Mara',
+            'campaign' => 5,
+        ]);
+        $characterFactory = $this->getMockBuilder(Character::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['forShareToken'])
+            ->getMock();
+        $characterFactory->expects(self::once())
+            ->method('forShareToken')
+            ->with(str_repeat('a', 64))
+            ->willReturn($character);
+
+        $campaignFactory = $this->getMockBuilder(FactoryCampaign::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['byId'])
+            ->getMock();
+        $campaignFactory->expects(self::never())
+            ->method('byId');
+
+        $this->mapRenderToException();
+
+        try {
+            $this->controller(
+                characterFactory: $characterFactory,
+                campaignFactory: $campaignFactory,
+                presenter: $this->presenterReturning(['identity' => ['name' => 'Mara']]),
+            )->shared(str_repeat('a', 64));
+            self::fail('Expected render');
+        } catch (RenderedResponse $rendered) {
+            self::assertSame('character/sheet.twig', $rendered->template);
+            self::assertTrue($rendered->data['read_only']);
+            self::assertTrue($rendered->data['public_sheet']);
+            self::assertNull($rendered->data['campaign']);
+            self::assertSame(['identity' => ['name' => 'Mara']], $rendered->data['sheet']);
+        }
+    }
+
+    public function testSharedReturnsNotFoundForMissingOrDisabledToken(): void
+    {
+        $characterFactory = $this->getMockBuilder(Character::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['forShareToken'])
+            ->getMock();
+        $characterFactory->expects(self::once())
+            ->method('forShareToken')
+            ->with(str_repeat('a', 64))
+            ->willReturn(null);
+        Flight::map('notFound', function (): void {
+            throw new SheetNotFound();
+        });
+
+        try {
+            $this->controller(characterFactory: $characterFactory)->shared(str_repeat('a', 64));
+            self::fail('Expected not found');
+        } catch (SheetNotFound) {
+            self::assertTrue(true);
+        }
+    }
+
     public function testUpdateStateClampsKnownFieldsAndReturnsJsonSuccess(): void
     {
         $character = new Entity(['id' => 3, 'hash' => 'charhash', 'user' => 7]);
@@ -528,4 +595,8 @@ class SheetControllerTest extends ControllerTestCase
             $memberFactory ?? $this->createStub(FactoryMember::class),
         );
     }
+}
+
+class SheetNotFound extends \Error
+{
 }

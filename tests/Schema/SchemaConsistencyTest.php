@@ -64,6 +64,14 @@ class SchemaConsistencyTest extends TestCase
         self::assertStringContainsString('edge_key', file_get_contents(self::SCHEMA_DIR . '/050_edges.sql'));
     }
 
+    public function testSharingMigrationAddsPublicShareToken(): void
+    {
+        $migration = $this->readMigration('add_character_share_token');
+
+        self::assertStringContainsString('character_share_token', $migration);
+        self::assertStringContainsString('uq_character_share_token', $migration);
+    }
+
     public function testGearAndWeaponTablesReferenceCharacters(): void
     {
         self::assertStringContainsString('gear_character_id', file_get_contents(self::SCHEMA_DIR . '/060_gear.sql'));

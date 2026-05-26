@@ -43,6 +43,13 @@
                 Enable public sharing link?
             </label>
         </div>
+        {% if entity.sharing and entity.share_token %}
+            <p>
+                <a href="{{ get_url('characters_public_sheet', {token: entity.share_token}) }}">
+                    {{ site.url|trim('/', 'right') }}{{ get_url('characters_public_sheet', {token: entity.share_token}) }}
+                </a>
+            </p>
+        {% endif %}
     </div>
 </div>
 

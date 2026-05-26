@@ -29,6 +29,7 @@ class RoutesTest extends ControllerTestCase
 
         $expected = [
             'home_page' => ['/', [Home::class, 'index'], [AuthMiddleware::class]],
+            'characters_public_sheet' => ['/characters/shared/@token:[a-f0-9]{64}', [Sheet::class, 'shared'], []],
             'auth_login' => ['/auth/', [Auth::class, 'index'], []],
             'auth_logout' => ['/auth/logout', [Auth::class, 'logout'], []],
             'admin_campaigns_index' => ['/admin/campaigns/', [AdminCampaigns::class, 'index'], [AuthMiddleware::class, Superuser::class]],

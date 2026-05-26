@@ -72,7 +72,9 @@
 
 {% block content %}
 <section class="sheet"
+         {% if not read_only %}
          data-character-hash="{{ entity.hash }}"
+         {% endif %}
          data-sheet-root>
     {#
     <header class="sheet__topbar">

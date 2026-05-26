@@ -29,6 +29,9 @@ Flight::route('GET /', [Home::class, 'index'])
     ->setAlias('home_page')
     ->addMiddleware(MiddlewareAuth::class);
 
+Flight::route('GET /characters/shared/@token:[a-f0-9]{64}', [Sheet::class, 'shared'])
+    ->setAlias('characters_public_sheet');
+
 // Authentication
 Flight::group('/auth', function () {
     Flight::route('GET /', [Auth::class, 'index'])->setAlias('auth_login');
