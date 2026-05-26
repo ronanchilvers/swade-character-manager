@@ -80,7 +80,7 @@
                         <h4 class="card__subtitle">Effects</h4>
                         <ul class="card__list">
                             {% for effect in edge.effects %}
-                            <li>{{ effect.details }}</li>
+                        <li>{{ effect.details|default(effect) }}</li>
                             {% endfor %}
                         </ul>
                     </div>

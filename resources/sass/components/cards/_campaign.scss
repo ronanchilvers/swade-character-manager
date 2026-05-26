@@ -5,7 +5,7 @@
 .card {
     &__campaign {
         padding: 0.25rem 1rem;
-        border-top: card.$card-border-dotted;
+        border-bottom: card.$card-border-dotted;
         background-color: card.$card-background;
         color: color.$sheet-heading;
         font-family: $title-font;
