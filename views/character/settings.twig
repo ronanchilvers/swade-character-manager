@@ -19,13 +19,12 @@
         <p>Select which published suplements are available when building your character.</p>
 
         <div class="panel__grid">
-        {% set selectedSources = entity.sources|split(',') %}
-        {% for source, title in sources %}
-            {% set is_core = 'core' == source %}
-            <label class="button button--slider{% if is_core %} button--slider-disabled{% endif %}">
-                <input type="checkbox" name="sources[{{ source }}]"{% if source in selectedSources %} checked{% endif %}{% if is_core %} disabled{% endif %}>
+        {% for source, details in sources %}
+            {% set is_locked = details.always_enabled %}
+            <label class="button button--slider{% if is_locked %} button--slider-disabled{% endif %}">
+                <input type="checkbox" name="sources[{{ source }}]"{% if source in selected_sources %} checked{% endif %}{% if is_locked %} disabled{% endif %}>
                 <span class="button__slide"></span>
-                {{ title }}
+                {{ details.name }}
             </label>
         {% endfor %}
         </div>

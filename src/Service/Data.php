@@ -34,5 +34,30 @@ abstract class Data
         return $this->data['entries'];
     }
 
+    public function forSources(array $sources): array
+    {
+        $sources = array_values(
+            array_unique(
+                array_filter(
+                    array_map('strval', $sources),
+                    static fn (string $source): bool => '' !== $source,
+                )
+            )
+        );
+
+        if (empty($sources)) {
+            return $this->all();
+        }
+
+        $allowed = array_flip($sources);
+
+        return array_values(
+            array_filter(
+                $this->all(),
+                static fn (array $entry): bool => isset($allowed[(string) ($entry['source'] ?? 'core')]),
+            )
+        );
+    }
+
     abstract protected function entryFromRow(mixed $row): array;
 }

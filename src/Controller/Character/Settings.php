@@ -6,7 +6,6 @@ namespace App\Controller\Character;
 
 use App\Entity;
 use App\Entity\Factory\Character as FactoryCharacter;
-use App\Filter;
 use App\Service\Sources;
 use Flight;
 
@@ -14,6 +13,7 @@ class Settings
 {
     public function __construct(
         private FactoryCharacter $factory,
+        private Sources $sources,
     ) {
     }
 
@@ -29,7 +29,7 @@ class Settings
 
         $errors = false;
         if ("POST" == Flight::request()->getMethod()) {
-            $sourcesPost = Sources::filter(isset($_POST['sources']) ? array_keys($_POST['sources']) : []);
+            $sourcesPost = $this->sources->filter(isset($_POST['sources']) ? array_keys($_POST['sources']) : []);
             $sharingPost = isset($_POST['sharing']) && $_POST['sharing'] === 'on';
             $entity->sharing = true == $sharingPost ? 1 : 0;
             $entity->sources = implode(',', $sourcesPost);
@@ -49,13 +49,13 @@ class Settings
                 sprintf('Sorry! There was a problem!')
             );
         }
-        $sources = Sources::all();
 
         Flight::render('character/settings.twig', [
             'page_title' => 'Settings',
             'entity' => $entity,
             'errors' => $errors,
-            'sources' => $sources,
+            'sources' => $this->sources->options(),
+            'selected_sources' => $this->sources->selectedFromString($entity->sources ?? null),
         ]);
     }
 }

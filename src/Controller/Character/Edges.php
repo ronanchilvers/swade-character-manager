@@ -10,6 +10,7 @@ use App\Entity\Factory\Edge as FactoryEdge;
 use App\Filter;
 use App\Service\Data\Edges as DataEdges;
 use App\Service\Data\Manager;
+use App\Service\Sources;
 use Flight;
 
 class Edges
@@ -18,6 +19,7 @@ class Edges
         private FactoryCharacter $factory,
         private FactoryEdge $edgeFactory,
         private Manager $manager,
+        private Sources $sources,
     ) {
     }
 
@@ -63,11 +65,12 @@ class Edges
                 $selected[$edge->key] = $edge->count;
             }
         }
+        $enabledSources = $this->sources->selectedFromString($entity->sources ?? null);
         Flight::render('character/edges.twig', [
             'page_title' => 'Edges',
             'entity' => $entity,
             'edges_by_category' => $this->groupByCategory(
-                $edgeService->all()
+                $edgeService->forSources($enabledSources)
             ),
             'errors' => $errors,
             'selected' => $selected,

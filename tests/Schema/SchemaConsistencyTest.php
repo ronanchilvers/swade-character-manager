@@ -47,6 +47,14 @@ class SchemaConsistencyTest extends TestCase
             '/CREATE TABLE IF NOT EXISTS `?edge_catalog`?/',
             $this->readMigration('create_edge_catalog'),
         );
+        self::assertMatchesRegularExpression(
+            '/CREATE TABLE IF NOT EXISTS `?catalog_sources`?/',
+            $this->readMigration('create_catalog_sources'),
+        );
+        self::assertStringContainsString(
+            "'core', 'Core Rules (Always Enabled)'",
+            $this->readMigration('create_catalog_sources'),
+        );
     }
 
     public function testSelectionTablesUseStableCatalogKeyColumns(): void

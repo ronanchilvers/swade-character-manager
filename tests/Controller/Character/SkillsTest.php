@@ -11,6 +11,8 @@ use App\Entity\Factory\Result;
 use App\Entity\Factory\Skill;
 use App\Service\Data\Manager;
 use App\Service\Data\Skills as SkillsData;
+use App\Service\Sources;
+use flight\database\SimplePdo;
 use Tests\Support\ControllerTestCase;
 use Tests\Support\RedirectedResponse;
 use Tests\Support\RenderedResponse;
@@ -81,17 +83,16 @@ class SkillsTest extends ControllerTestCase
             ->willReturn(new Result());
 
         $session = $this->mapSession();
-        $this->mapRequest('POST');
-        $this->mapUrls(['characters_edges' => '/characters/edges/{hash}']);
-        \Flight::map('redirect', function (string $url): void {
-            throw new SkillsControllerRedirected($url);
+        $this->mapRequest('POST', url: '/characters/skills/charhash');
+        \Flight::map('reload', function (): void {
+            throw new SkillsControllerRedirected(\Flight::request()->url);
         });
 
         try {
-            (new Skills($characterFactory, $skillFactory, $this->manager($skillService)))->index('charhash');
+            (new Skills($characterFactory, $skillFactory, $this->manager($skillService), new Sources()))->index('charhash');
             self::fail('Expected redirect');
         } catch (SkillsControllerRedirected $redirected) {
-            self::assertSame('/characters/edges/charhash', $redirected->url);
+            self::assertSame('/characters/skills/charhash', $redirected->url);
         }
 
         self::assertSame(['Saved character Mara successfully'], $session->successes);
@@ -119,7 +120,12 @@ class SkillsTest extends ControllerTestCase
         $this->mapRenderToException();
 
         try {
-            (new Skills($characterFactory, $skillFactory, $this->manager(new SkillsData(__DIR__ . '/../../../data'))))->index('charhash');
+            (new Skills(
+                $characterFactory,
+                $skillFactory,
+                $this->manager(new SkillsData(__DIR__ . '/../../../data')),
+                new Sources(),
+            ))->index('charhash');
             self::fail('Expected render');
         } catch (RenderedResponse $rendered) {
             self::assertSame('character/skills.twig', $rendered->template);
@@ -152,7 +158,12 @@ class SkillsTest extends ControllerTestCase
         $this->mapRenderToException();
 
         try {
-            (new Skills($characterFactory, $skillFactory, $this->manager(new SkillsData(__DIR__ . '/../../../data'))))->index('charhash');
+            (new Skills(
+                $characterFactory,
+                $skillFactory,
+                $this->manager(new SkillsData(__DIR__ . '/../../../data')),
+                new Sources(),
+            ))->index('charhash');
             self::fail('Expected render');
         } catch (RenderedResponse $rendered) {
             self::assertSame('character/skills.twig', $rendered->template);
@@ -161,12 +172,40 @@ class SkillsTest extends ControllerTestCase
         self::assertSame(['Unable to update character'], $session->errors);
     }
 
+    public function testGetFiltersCatalogByCharacterSources(): void
+    {
+        $character = new Entity(['hash' => 'charhash', 'name' => 'Mara', 'sources' => 'core', 'agility' => 4, 'spirit' => 4]);
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('fetchAll')
+            ->willReturn([
+                $this->catalogRow('athletics', 'core', 'Athletics', 'agility', true),
+                $this->catalogRow('fantasy_magic', 'fantasy', 'Fantasy Magic', 'spirit', false),
+            ]);
+
+        $this->mapRequest('GET');
+        $this->mapRenderToException();
+
+        try {
+            (new Skills(
+                $this->characterFactory($character),
+                $this->createStub(Skill::class),
+                $this->manager(new SkillsData(__DIR__ . '/../../../data', $pdo)),
+                new Sources(),
+            ))->index('charhash');
+            self::fail('Expected render');
+        } catch (RenderedResponse $rendered) {
+            self::assertSame(['athletics'], array_keys($rendered->data['skills']));
+        }
+    }
+
     private function controller(?Entity $character, ?Skill $skillFactory = null): Skills
     {
         return new Skills(
             $this->characterFactory($character),
             $skillFactory ?? $this->createStub(Skill::class),
             $this->manager(new SkillsData(__DIR__ . '/../../../data')),
+            new Sources(),
         );
     }
 
@@ -190,6 +229,28 @@ class SkillsTest extends ControllerTestCase
             ->willReturn($skills);
 
         return $manager;
+    }
+
+    private function catalogRow(
+        string $key,
+        string $source,
+        string $name,
+        string $attribute,
+        bool $core,
+    ): array {
+        return [
+            'skill_catalog_key' => $key,
+            'skill_catalog_source' => $source,
+            'skill_catalog_name' => $name,
+            'skill_catalog_linked_attribute' => $attribute,
+            'skill_catalog_core_skill' => $core ? '1' : '0',
+            'skill_catalog_arcane_background' => null,
+            'skill_catalog_summary' => '',
+            'skill_catalog_requirements' => '[]',
+            'skill_catalog_effects' => '[]',
+            'skill_catalog_notes' => '[]',
+            'skill_catalog_source_pages' => '[]',
+        ];
     }
 }
 
