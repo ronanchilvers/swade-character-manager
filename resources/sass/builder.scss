@@ -2,3 +2,4 @@
 /** Loaded alongside styles.css; only builder-specific rules live here. */
 
 @use "components/character/tabs";
+@use "components/character/builder-fields";

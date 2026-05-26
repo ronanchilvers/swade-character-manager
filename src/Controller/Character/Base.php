@@ -75,7 +75,9 @@ class Base
     {
         $errors = [];
         if ("POST" == Flight::request()->getMethod()) {
-            $entity->name = Filter::noTags($_POST['name']);
+            if (array_key_exists('name', $_POST)) {
+                $entity->name = Filter::noTags($_POST['name']);
+            }
             $entity->concept = Filter::noTags($_POST['concept'] ?? '');
             $errors = $this->factory->validate($entity);
             if (!$errors) {

@@ -146,6 +146,45 @@ class BaseTest extends ControllerTestCase
         }
     }
 
+    public function testIndexPostUpdatesConceptWithoutRenamingCharacter(): void
+    {
+        $_POST = [
+            'concept' => '<i>Scout</i>',
+        ];
+        $character = new Entity(['id' => 3, 'hash' => 'charhash', 'name' => 'Mara']);
+        $factory = $this->getMockBuilder(Character::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['forHash', 'validate', 'upsert'])
+            ->getMock();
+        $factory->expects(self::once())
+            ->method('forHash')
+            ->with('charhash')
+            ->willReturn($character);
+        $factory->expects(self::once())
+            ->method('validate')
+            ->with(self::callback(fn (Entity $entity): bool => 'Mara' === $entity->name && 'Scout' === $entity->concept))
+            ->willReturn([]);
+        $factory->expects(self::once())
+            ->method('upsert')
+            ->with(self::callback(fn (Entity $entity): bool => 'Mara' === $entity->name && 'Scout' === $entity->concept))
+            ->willReturn(new Result());
+
+        $session = $this->mapSession();
+        $this->mapRequest('POST', url: '/characters/concept/charhash');
+        \Flight::map('reload', function (): void {
+            throw new RedirectedResponse('/characters/concept/charhash');
+        });
+
+        try {
+            (new Base($factory))->index('charhash');
+            self::fail('Expected reload');
+        } catch (RedirectedResponse $redirected) {
+            self::assertSame('/characters/concept/charhash', $redirected->url);
+        }
+
+        self::assertSame(['Saved character Mara successfully'], $session->successes);
+    }
+
     public function testDeleteRedirectsWhenCharacterIsMissing(): void
     {
         $factory = $this->getMockBuilder(Character::class)

@@ -186,6 +186,7 @@ class Character extends Factory
     {
         $entity->user = Flight::session()->user->id;
         $entity->hash = Str::token(32);
+        $this->ensureShareToken($entity);
     }
 
     protected function afterInsert(Entity $entity): void
@@ -202,9 +203,7 @@ class Character extends Factory
 
     protected function beforeUpdate(Entity $entity): void
     {
-        if (1 === (int) ($entity->sharing ?? 0) && '' === (string) ($entity->share_token ?? '')) {
-            $entity->share_token = Str::token(64);
-        }
+        $this->ensureShareToken($entity);
 
         $entity->pace = static::DEFAULT_PACE;
         $entity->toughness = 2 + ceil($entity->vigor / 2);
@@ -237,6 +236,13 @@ class Character extends Factory
             return new Result();
         } catch (\Exception $ex) {
             return new Result()->addError($ex->getMessage());
+        }
+    }
+
+    private function ensureShareToken(Entity $entity): void
+    {
+        if (1 === (int) ($entity->sharing ?? 0) && '' === (string) ($entity->share_token ?? '')) {
+            $entity->share_token = Str::token(64);
         }
     }
 }

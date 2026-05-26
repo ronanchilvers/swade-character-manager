@@ -2,7 +2,7 @@
 
 {% set back_label = 'Your Characters' %}
 {% set back_url = get_url('home_page') %}
-{% set next_url = get_url('characters_concept', {hash: entity.hash}) %}
+{% set next_url = entity.hash|default('') ? get_url('characters_concept', {hash: entity.hash}) : null %}
 
 {% block page %}
 
@@ -10,6 +10,13 @@
     <h2 class="panel__title">Character Settings</h2>
     <div class="panel__content">
     <p>Use this page to control the options available for your character as well as things like public sharing links, etc</p>
+    </div>
+</div>
+
+<div class="field field--builder-text field--builder-name {% if field_has_error('name', errors) %}field--error{% endif %}">
+    <label class="field__label">Your character's name</label>
+    <div class="field__inner">
+        <input class="field__input" type="text" name="name" maxlength="128" value="{{ entity.name }}"/>
     </div>
 </div>
 

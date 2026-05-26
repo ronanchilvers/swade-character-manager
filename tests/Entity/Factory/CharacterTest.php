@@ -399,6 +399,41 @@ class CharacterTest extends TestCase
         self::assertSame('10', $entity->id);
     }
 
+    public function testInsertGeneratesShareTokenWhenSharingIsEnabled(): void
+    {
+        $this->mapSessionUser(7);
+        $skillService = new Skills(self::DATA_DIR);
+
+        $manager = $this->createStub(Manager::class);
+        $manager->method('getType')
+            ->willReturn($skillService);
+
+        $skillFactory = $this->createStub(Skill::class);
+        $skillFactory->method('insertCoreForCharacter')
+            ->willReturn(new Result());
+
+        $pdo = $this->createMock(SimplePdo::class);
+        $pdo->expects(self::once())
+            ->method('insert')
+            ->with(
+                'characters',
+                self::callback(function (array $values): bool {
+                    return 1 === $values['character_sharing']
+                        && isset($values['character_share_token'])
+                        && is_string($values['character_share_token'])
+                        && 64 === strlen($values['character_share_token'])
+                        && ctype_xdigit($values['character_share_token']);
+                })
+            )
+            ->willReturn('10');
+
+        $entity = new Entity(['name' => 'Mara', 'sharing' => 1]);
+        $result = $this->factory($pdo, $skillFactory, $manager)->insert($entity);
+
+        self::assertTrue($result->isSuccess());
+        self::assertSame(64, strlen($entity->share_token));
+    }
+
     public function testInsertReturnsErrorWhenCoreSkillCreationFails(): void
     {
         $this->mapSessionUser(7);

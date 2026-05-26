@@ -87,7 +87,7 @@ Flight::group('/campaigns', function () {
 
 // Characters
 Flight::group('/characters', function () {
-    Flight::route('GET|POST /create', [Base::class, 'create'])
+    Flight::route('GET|POST /create', [Settings::class, 'create'])
         ->setAlias('characters_create');
     Flight::route('POST /delete/@hash:[a-z0-9]{32}', [Base::class, 'delete'])
         ->setAlias('characters_delete');

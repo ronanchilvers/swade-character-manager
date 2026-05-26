@@ -15,6 +15,7 @@ use App\Controller\Character\Edges;
 use App\Controller\Character\Hindrances;
 use App\Controller\Character\Sheet;
 use App\Controller\Character\Skills;
+use App\Controller\Character\Settings;
 use App\Controller\Home;
 use App\Middleware\Auth as AuthMiddleware;
 use App\Middleware\Superuser;
@@ -48,7 +49,7 @@ class RoutesTest extends ControllerTestCase
             'campaigns_leave_character' => ['/campaigns/@hash:[a-z0-9]{32}/characters/@character_hash:[a-z0-9]{32}/leave', [Campaigns::class, 'leaveCharacter'], [AuthMiddleware::class]],
             'campaigns_leave' => ['/campaigns/@hash:[a-z0-9]{32}/leave', [Campaigns::class, 'leave'], [AuthMiddleware::class]],
             'campaigns_reset' => ['/campaigns/@hash:[a-z0-9]{32}/reset', [Campaigns::class, 'reset'], [AuthMiddleware::class]],
-            'characters_create' => ['/characters/create', [Base::class, 'create'], [AuthMiddleware::class]],
+            'characters_create' => ['/characters/create', [Settings::class, 'create'], [AuthMiddleware::class]],
             'characters_delete' => ['/characters/delete/@hash:[a-z0-9]{32}', [Base::class, 'delete'], [AuthMiddleware::class]],
             'characters_concept' => ['/characters/concept/@hash:[a-z0-9]{32}', [Base::class, 'index'], [AuthMiddleware::class]],
             'characters_hindrances' => ['/characters/hindrances/@hash:[a-z0-9]{32}', [Hindrances::class, 'index'], [AuthMiddleware::class]],

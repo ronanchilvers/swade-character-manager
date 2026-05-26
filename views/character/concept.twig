@@ -8,18 +8,11 @@
 <div class="panel panel--collapsible panel--collapsed panel--helpable">
     <h2 class="panel__title">Character Concept</h2>
     <div class="panel__content">
-    <p>Your character name and concept spell out who your character is. A tough fighter who leads with their fists? A quiet bookworm with odd psionic powers? Your concept should conjure up an image of your character, ready to step forth into adventure!!</p>
+    <p>Your character concept spells out who your character is. A tough fighter who leads with their fists? A quiet bookworm with odd psionic powers? Your concept should conjure up an image of your character, ready to step forth into adventure!!</p>
     </div>
 </div>
 
-<div class="field {% if field_has_error('name', errors) %}field--error{% endif %}">
-    <label class="field__label">Your character's name</label>
-    <div class="field__inner">
-        <input class="field__input" type="text" name="name" value="{{ entity.name }}"/>
-    </div>
-</div>
-
-<div class="field {% if field_has_error('concept', errors) %}field--error{% endif %}">
+<div class="field field--builder-text field--builder-concept {% if field_has_error('concept', errors) %}field--error{% endif %}">
     <label class="field__label">Concept</label>
     <div class="field__inner">
         <textarea class="field__input" name="concept" rows="5" maxlength="255">{{ entity.concept }}</textarea>

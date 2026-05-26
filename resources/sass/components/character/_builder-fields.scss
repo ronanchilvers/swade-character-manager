@@ -1,0 +1,93 @@
+@use "../../settings/css-variables" as vars;
+@use "../../settings/colors" as color;
+@use "../../settings/sheet-tokens" as sheet;
+@use "../../tools/breakpoints";
+
+.field--builder-text {
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    width: 100%;
+    border: 1px solid color.$parchment-dark;
+    border-left: 0.35rem solid color.$sheet-heading;
+    border-radius: vars.$border-radius-default;
+    background:
+        linear-gradient(180deg, color.$overlay-white-65, color.$overlay-white-35),
+        color.$sheet-paper;
+    box-shadow:
+        0 2px 4px color.$overlay-black-08,
+        inset 0 0 0 1px color.$overlay-white-48;
+
+    .field__label {
+        display: block;
+        margin-bottom: 0.45rem;
+        color: color.$sheet-heading;
+        font-family: sheet.$sheet-title-font;
+        font-size: 1.1rem;
+        line-height: 1.1;
+    }
+
+    .field__inner {
+        box-sizing: border-box;
+        position: relative;
+        width: 100%;
+    }
+
+    .field__input {
+        box-sizing: border-box;
+        display: block;
+        max-width: 100%;
+        background: color.$overlay-white-70;
+        border-color: color.$overlay-border-25;
+        color: color.$sheet-ink;
+        box-shadow: inset 0 1px 2px color.$overlay-black-08;
+        transition:
+            background 120ms ease,
+            border-color 120ms ease,
+            box-shadow 120ms ease;
+
+        &:focus {
+            outline: none;
+            background: color.$white;
+            border-color: color.$sheet-heading;
+            box-shadow:
+                0 0 0 3px color.$overlay-sheet-heading-06,
+                inset 0 1px 2px color.$overlay-black-08;
+        }
+    }
+
+    textarea.field__input {
+        min-height: 9rem;
+        line-height: 1.5;
+        resize: vertical;
+    }
+
+    &.field--error {
+        border-left-color: color.$danger;
+        background:
+            linear-gradient(180deg, color.$overlay-white-65, color.$overlay-white-35),
+            color.$overlay-danger-panel;
+
+        .field__label {
+            color: color.$danger;
+        }
+
+        .field__input {
+            border-color: color.$danger;
+        }
+    }
+
+    @include breakpoints.at("mobile") {
+        padding: 0.85rem;
+    }
+}
+
+.field--builder-name {
+    .field__input {
+        padding: 0.7rem 0.75rem 0.55rem;
+        color: color.$sheet-heading;
+        font-family: sheet.$sheet-title-font;
+        font-size: 1.45rem;
+        line-height: 1.1;
+    }
+}
