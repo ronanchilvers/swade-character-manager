@@ -25,7 +25,6 @@
 - Prefer PHPUnit tests named `*Test.php` under `tests/`, covering the implementation that actually exists in `src/`.
 
 ## References
-- Current repository state: `docs/codebase-review.md`.
 - Builder flow: `config/routes.php`, `src/Controller/Character/`, and `views/character/`.
 - Data and persistence work: `src/Service/Data/`, `src/Entity/Factory/`, and `schema/`.
 - Sass sources are in `resources/sass/`; compiled public CSS is in `web/css/`.
