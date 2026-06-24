@@ -39,12 +39,24 @@ function updateEdgeToggle(toggle) {
   updateEdgeTitleSelectionState(toggle, value === 1);
 }
 
-function applySelectedFilter(showSelectedOnly) {
-  document.querySelectorAll('.cards .card:not(.card--selected)').forEach((card) => {
-    card.style.display = showSelectedOnly ? 'none' : '';
+function applyFilters() {
+  const rankSelect = document.querySelector('.js-filter-rank');
+  const selectedToggle = document.querySelector('.js-filter-selected');
+  const rank = rankSelect ? rankSelect.value : '';
+  const showSelectedOnly = selectedToggle ? selectedToggle.checked : false;
+
+  document.querySelectorAll('.cards .card').forEach((card) => {
+    const cardRank = card.dataset.rank || '';
+    const passesRank = rank === '' || cardRank === '' || cardRank === rank;
+    const passesSelected = !showSelectedOnly || card.classList.contains('card--selected');
+    card.style.display = passesRank && passesSelected ? '' : 'none';
   });
-  document.querySelectorAll('.edges-group:not(.edges-group--selected)').forEach((group) => {
-    group.style.display = showSelectedOnly ? 'none' : '';
+
+  document.querySelectorAll('.edges-group').forEach((group) => {
+    const hasVisible = Array.from(group.querySelectorAll('.cards .card')).some(
+      (card) => card.style.display !== 'none',
+    );
+    group.style.display = hasVisible ? '' : 'none';
   });
 }
 
@@ -78,6 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const filterToggle = document.querySelector('.js-filter-selected');
   if (filterToggle) {
-    filterToggle.addEventListener('change', () => applySelectedFilter(filterToggle.checked));
+    filterToggle.addEventListener('change', applyFilters);
+  }
+
+  const rankSelect = document.querySelector('.js-filter-rank');
+  if (rankSelect) {
+    rankSelect.addEventListener('change', applyFilters);
   }
 });

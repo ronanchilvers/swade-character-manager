@@ -16,7 +16,16 @@
 </div>
 
 <div class="panel panel--controls">
-    <div class="panel__subpanel"></div>
+    <div class="panel__subpanel">
+        <select class="js-filter-rank filter-select">
+            <option value="">All ranks</option>
+            <option value="Novice">Novice</option>
+            <option value="Seasoned">Seasoned</option>
+            <option value="Veteran">Veteran</option>
+            <option value="Heroic">Heroic</option>
+            <option value="Legendary">Legendary</option>
+        </select>
+    </div>
     <div class="panel__subpanel">
         <label class="button button--slider">
             <input type="checkbox" class="js-filter-selected">
@@ -32,7 +41,9 @@
     <div class="cards">
         {% for edge in edges %}
         {% set isSelected = selected[edge.id]|default(0) > 0 %}
-        <div class="card card--dotted card--edge">
+        {% set edge_rank = '' %}
+        {% for req in edge.requirements %}{% if req.type == 'rank' %}{% set edge_rank = req.value is iterable ? req.value|first : req.value %}{% endif %}{% endfor %}
+        <div class="card card--dotted card--edge" data-rank="{{ edge_rank }}">
             <div class="card__inner">
                 <div class="card__title card__title--collapsible card__title--collapsed{% if isSelected %} card__title--selected{% endif %}">{{ edge.name }}</div>
                 <div class="card__content">
