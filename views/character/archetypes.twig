@@ -8,26 +8,15 @@
         {% for archetype in archetypes %}
         <div class="card card--archetype">
             <div class="card__inner">
+                {% if archetype.image %}
+                <div class="archetype-card__image" style="background-image: url('/images/archetypes/{{ archetype.image|e }}')"></div>
+                {% endif %}
                 <div class="card__title">{{ archetype.name }}</div>
                 <div class="card__content">
-                    <p>{{ archetype.summary }}</p>
-                    <dl class="archetype-card__attributes">
-                        <div class="archetype-card__attr">
-                            <dt>AGI</dt><dd>d{{ archetype.attributes.agility ?? 4 }}</dd>
-                        </div>
-                        <div class="archetype-card__attr">
-                            <dt>SMT</dt><dd>d{{ archetype.attributes.smarts ?? 4 }}</dd>
-                        </div>
-                        <div class="archetype-card__attr">
-                            <dt>SPI</dt><dd>d{{ archetype.attributes.spirit ?? 4 }}</dd>
-                        </div>
-                        <div class="archetype-card__attr">
-                            <dt>STR</dt><dd>d{{ archetype.attributes.strength ?? 4 }}</dd>
-                        </div>
-                        <div class="archetype-card__attr">
-                            <dt>VIG</dt><dd>d{{ archetype.attributes.vigor ?? 4 }}</dd>
-                        </div>
-                    </dl>
+                    <p class="archetype-card__summary">{{ archetype.summary }}</p>
+                    {% if archetype.description %}
+                    <p class="archetype-card__description">{{ archetype.description }}</p>
+                    {% endif %}
                 </div>
                 <div class="card__footer">
                     <form method="post" action="{{ get_url('characters_new_apply') }}">
