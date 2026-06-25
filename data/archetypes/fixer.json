@@ -3,20 +3,20 @@
   "summary": "When something is broken — a deal, a plan, a situation — the Fixer makes it right.",
   "description": "Fixers move through back-channels and social networks, calling in favours and solving problems before they become crises. They know people, and those people know them.",
   "image": "fixer2.png",
-  "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
+  "attributes": { "agility": 6, "smarts": 8, "spirit": 8, "strength": 4, "vigor": 6 },
   "skills": [
-    { "key": "stealth", "die": 8 },
+    { "key": "persuasion", "die": 8 },
     { "key": "notice", "die": 8 },
-    { "key": "shooting", "die": 6 },
-    { "key": "athletics", "die": 6 },
-    { "key": "survival", "die": 6 }
+    { "key": "taunt", "die": 6 },
+    { "key": "stealth", "die": 6 },
+    { "key": "thievery", "die": 6 }
   ],
   "hindrances": [
-    { "key": "outsider", "level": "minor" },
-    { "key": "poverty", "level": "minor" }
+    { "key": "big_mouth", "level": "minor" },
+    { "key": "wanted", "level": "minor" }
   ],
   "edges": [
-    { "key": "woodsman" }
+    { "key": "connections" }
   ],
-  "names": ["Kira", "Sable", "Talon", "Vex", "Wren"]
+  "names": ["Anya", "Felix", "Jade", "Marcos", "Remi"]
 }

@@ -25,12 +25,20 @@ class Archetypes extends Data
 
     public function all(): array
     {
-        return array_values($this->entries);
+        return array_values(array_filter(
+            $this->entries,
+            fn (array $entry): bool => $entry['active'] ?? true,
+        ));
     }
 
     public function forId(string $id): ?array
     {
-        return $this->entries[$id] ?? null;
+        $entry = $this->entries[$id] ?? null;
+        if ($entry === null || !($entry['active'] ?? true)) {
+            return null;
+        }
+
+        return $entry;
     }
 
     public function forSources(array $sources): array

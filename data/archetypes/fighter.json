@@ -3,20 +3,19 @@
   "summary": "A disciplined combatant, trained to handle danger in all its forms.",
   "description": "Fighters have honed their reflexes and capabilities into a reliable set of tools. They adapt their approach to whatever a confrontation demands, prepared for nearly anything.",
   "image": "fighter.png",
-  "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
+  "attributes": { "agility": 8, "smarts": 4, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [
-    { "key": "stealth", "die": 8 },
-    { "key": "notice", "die": 8 },
+    { "key": "fighting", "die": 8 },
     { "key": "shooting", "die": 6 },
     { "key": "athletics", "die": 6 },
-    { "key": "survival", "die": 6 }
+    { "key": "notice", "die": 6 }
   ],
   "hindrances": [
-    { "key": "outsider", "level": "minor" },
-    { "key": "poverty", "level": "minor" }
+    { "key": "driven", "level": "minor" },
+    { "key": "code_of_honor", "level": "major" }
   ],
   "edges": [
-    { "key": "woodsman" }
+    { "key": "soldier" }
   ],
-  "names": ["Kira", "Sable", "Talon", "Vex", "Wren"]
+  "names": ["Brynn", "Dario", "Marcus", "Reza", "Yael"]
 }

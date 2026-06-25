@@ -3,20 +3,19 @@
   "summary": "What others cannot sense, they feel. What others cannot move, they shift.",
   "description": "Psychics possess an innate connection to forces beyond ordinary perception. Whether they call it talent, training, or something stranger, their mind reaches where no hand can.",
   "image": "psychic.png",
-  "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
+  "attributes": { "agility": 6, "smarts": 8, "spirit": 10, "strength": 4, "vigor": 4 },
   "skills": [
-    { "key": "stealth", "die": 8 },
+    { "key": "focus", "die": 8 },
     { "key": "notice", "die": 8 },
-    { "key": "shooting", "die": 6 },
-    { "key": "athletics", "die": 6 },
-    { "key": "survival", "die": 6 }
+    { "key": "intimidation", "die": 6 },
+    { "key": "persuasion", "die": 6 }
   ],
   "hindrances": [
     { "key": "outsider", "level": "minor" },
-    { "key": "poverty", "level": "minor" }
+    { "key": "delusional", "level": "minor" }
   ],
   "edges": [
-    { "key": "woodsman" }
+    { "key": "danger_sense" }
   ],
-  "names": ["Kira", "Sable", "Talon", "Vex", "Wren"]
+  "names": ["Asha", "Dorian", "Lyra", "Silas", "Vesper"]
 }
