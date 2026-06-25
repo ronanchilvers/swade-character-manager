@@ -1,7 +1,7 @@
 {
   "name": "Fighter",
-  "summary": "A swift and perceptive ranger at home in any terrain.",
-  "description": "Scouts move unseen through hostile lands, gathering intelligence and striking before the enemy knows they are there.",
+  "summary": "A disciplined combatant, trained to handle danger in all its forms.",
+  "description": "Fighters have honed their reflexes and capabilities into a reliable set of tools. They adapt their approach to whatever a confrontation demands, prepared for nearly anything.",
   "image": "fighter.png",
   "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [

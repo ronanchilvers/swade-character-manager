@@ -1,7 +1,7 @@
 {
   "name": "Psychic",
-  "summary": "Psychically gifted with the powers of the mind.",
-  "description": "Psychics have odd mental powers, able to manipulate minds, the world around, sometimes even timae itself.",
+  "summary": "What others cannot sense, they feel. What others cannot move, they shift.",
+  "description": "Psychics possess an innate connection to forces beyond ordinary perception. Whether they call it talent, training, or something stranger, their mind reaches where no hand can.",
   "image": "psychic.png",
   "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [

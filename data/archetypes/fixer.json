@@ -1,7 +1,7 @@
 {
   "name": "Fixer",
-  "summary": "A swift and perceptive ranger at home in any terrain.",
-  "description": "Scouts move unseen through hostile lands, gathering intelligence and striking before the enemy knows they are there.",
+  "summary": "When something is broken — a deal, a plan, a situation — the Fixer makes it right.",
+  "description": "Fixers move through back-channels and social networks, calling in favours and solving problems before they become crises. They know people, and those people know them.",
   "image": "fixer2.png",
   "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [

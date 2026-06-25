@@ -1,7 +1,7 @@
 {
   "name": "Scout",
-  "summary": "Swift and perceptive, you see trouble before it sees you.",
-  "description": "Scouts move unseen through hostile places, gathering intelligence and watching for danger.",
+  "summary": "Swift and perceptive, the Scout sees trouble before it sees them.",
+  "description": "Scouts move unseen through hostile places, gathering intelligence and watching for danger before it can strike.",
   "image": "scout2.png",
   "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [
