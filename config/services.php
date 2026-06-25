@@ -19,6 +19,7 @@ use App\Entity\Factory\Weapon;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
+use App\Service\Archetype\Applier;
 use App\Service\Data\Archetypes;
 use App\Service\Data\Edges;
 use App\Service\Data\Hindrances;
@@ -137,3 +138,4 @@ $container->singleton(
 );
 
 $container->singleton(Sheet::class, Sheet::class);
+$container->singleton(Applier::class, Applier::class);
