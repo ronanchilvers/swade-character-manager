@@ -19,6 +19,7 @@ use App\Entity\Factory\Weapon;
 use App\Http\Session;
 use App\Http\Session\CookieStorage;
 use App\Http\Session\StorageInterface;
+use App\Service\Data\Archetypes;
 use App\Service\Data\Edges;
 use App\Service\Data\Hindrances;
 use App\Service\Data\Skills;
@@ -119,6 +120,7 @@ $container->singleton(
             __DIR__ . '/../data',
             $container->get(SimplePdo::class),
         );
+        $manager->addType(Archetypes::class);
         $manager->addType(Edges::class);
         $manager->addType(Hindrances::class);
         $manager->addType(Skills::class);
