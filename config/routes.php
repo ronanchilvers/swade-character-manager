@@ -7,6 +7,7 @@ use App\Controller\Admin\Campaigns as AdminCampaigns;
 use App\Controller\Admin\Users as AdminUsers;
 use App\Controller\Auth;
 use App\Controller\Campaigns;
+use App\Controller\Character\Archetypes;
 use App\Controller\Character\Base;
 use App\Controller\Character\Hindrances;
 use App\Controller\Character\Attributes;
@@ -87,6 +88,10 @@ Flight::group('/campaigns', function () {
 
 // Characters
 Flight::group('/characters', function () {
+    Flight::route('GET /new', [Archetypes::class, 'index'])
+        ->setAlias('characters_new');
+    Flight::route('POST /new', [Archetypes::class, 'create'])
+        ->setAlias('characters_new_apply');
     Flight::route('GET|POST /create', [Settings::class, 'create'])
         ->setAlias('characters_create');
     Flight::route('POST /delete/@hash:[a-z0-9]{32}', [Base::class, 'delete'])
