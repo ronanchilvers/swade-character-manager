@@ -3,6 +3,7 @@
   "summary": "What others cannot sense, they feel. What others cannot move, they shift.",
   "description": "Psychics possess an innate connection to forces beyond ordinary perception. Whether they call it talent, training, or something stranger, their mind reaches where no hand can.",
   "image": "psychic.png",
+  "active": false,
   "attributes": { "agility": 6, "smarts": 8, "spirit": 10, "strength": 4, "vigor": 4 },
   "skills": [
     { "key": "focus", "die": 8 },
