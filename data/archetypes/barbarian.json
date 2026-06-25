@@ -2,6 +2,7 @@
   "name": "Barbarian",
   "summary": "A fierce warrior from the wild lands, strong and unrelenting.",
   "description": "Barbarians rely on raw power and instinct over training.",
+  "image": "fighter.png",
   "attributes": { "agility": 6, "smarts": 4, "spirit": 6, "strength": 8, "vigor": 8 },
   "skills": [
     { "key": "fighting", "die": 8 },

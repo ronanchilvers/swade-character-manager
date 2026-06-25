@@ -2,6 +2,7 @@
   "name": "Scholar",
   "summary": "A learned sage who solves problems with knowledge rather than brawn.",
   "description": "Scholars research ancient lore, heal the sick, and find cunning solutions to dangerous problems.",
+  "image": "scholar.png",
   "attributes": { "agility": 4, "smarts": 10, "spirit": 6, "strength": 4, "vigor": 4 },
   "skills": [
     { "key": "academics", "die": 8 },

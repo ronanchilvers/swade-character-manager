@@ -4,25 +4,25 @@
 <section id="wrapper__inner" class="archetypes-view">
     <h2>{{ page_title }}</h2>
     <p class="archetypes-view__intro">Pick an archetype to start with a pre-built character, or create one from scratch.</p>
-    <div class="cards cards--uniform">
+    <div class="cards cards--uniform cards--archetypes">
         {% for archetype in archetypes %}
         <div class="card card--archetype">
             <div class="card__inner">
                 {% if archetype.image %}
                 <div class="archetype-card__image" style="background-image: url('/images/archetypes/{{ archetype.image|e }}')"></div>
                 {% endif %}
-                <div class="card__title">{{ archetype.name }}</div>
-                <div class="card__content">
+                <div class="archetype-card__overlay">
+                    <div class="card__title">{{ archetype.name }}</div>
                     <p class="archetype-card__summary">{{ archetype.summary }}</p>
                     {% if archetype.description %}
                     <p class="archetype-card__description">{{ archetype.description }}</p>
                     {% endif %}
-                </div>
-                <div class="card__footer">
-                    <form method="post" action="{{ get_url('characters_new_apply') }}">
-                        <input type="hidden" name="archetype" value="{{ archetype.id }}">
-                        <button class="button button--primary button--full" type="submit">Choose</button>
-                    </form>
+                    <div class="archetype-card__actions">
+                        <form method="post" action="{{ get_url('characters_new_apply') }}">
+                            <input type="hidden" name="archetype" value="{{ archetype.id }}">
+                            <button class="button button--primary button--full" type="submit">Choose</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

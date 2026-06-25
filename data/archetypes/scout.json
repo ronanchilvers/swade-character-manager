@@ -2,6 +2,7 @@
   "name": "Scout",
   "summary": "A swift and perceptive ranger at home in any terrain.",
   "description": "Scouts move unseen through hostile lands, gathering intelligence and striking before the enemy knows they are there.",
+  "image": "scout.png",
   "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [
     { "key": "stealth", "die": 8 },
