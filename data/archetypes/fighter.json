@@ -1,8 +1,8 @@
 {
-  "name": "Scout",
-  "summary": "Swift and perceptive, you see trouble before it sees you.",
-  "description": "Scouts move unseen through hostile places, gathering intelligence and watching for danger.",
-  "image": "scout2.png",
+  "name": "Fighter",
+  "summary": "A swift and perceptive ranger at home in any terrain.",
+  "description": "Scouts move unseen through hostile lands, gathering intelligence and striking before the enemy knows they are there.",
+  "image": "fighter.png",
   "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [
     { "key": "stealth", "die": 8 },

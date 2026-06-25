@@ -1,8 +1,8 @@
 {
-  "name": "Barbarian",
-  "summary": "A fierce warrior from the wild lands, strong and unrelenting.",
-  "description": "Barbarians rely on raw power and instinct over training.",
-  "image": "fighter.png",
+  "name": "Brawler",
+  "summary": "A street fighter from the back streets, strong and unrelenting.",
+  "description": "Brawlers are big, tough and powerful. When there's a fight, they're in front. What they lack in brain power they make up for in muscle.",
+  "image": "brawler.png",
   "attributes": { "agility": 6, "smarts": 4, "spirit": 6, "strength": 8, "vigor": 8 },
   "skills": [
     { "key": "fighting", "die": 8 },

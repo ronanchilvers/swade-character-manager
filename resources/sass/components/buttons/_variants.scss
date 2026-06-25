@@ -15,6 +15,9 @@
         border-style: solid;
         color: color.$danger;
     }
+    &.button--filled {
+        background: color.$overlay-danger-10;
+    }
 }
 
 .button--danger {
@@ -28,6 +31,9 @@
         border-color: color.$sheet-rail-item-border-active;
         border-style: solid;
         color: color.$white;
+    }
+    &.button--filled {
+        background: color.$sheet-rail-item-active;
     }
 }
 

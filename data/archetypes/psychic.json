@@ -1,8 +1,8 @@
 {
-  "name": "Scout",
-  "summary": "Swift and perceptive, you see trouble before it sees you.",
-  "description": "Scouts move unseen through hostile places, gathering intelligence and watching for danger.",
-  "image": "scout2.png",
+  "name": "Psychic",
+  "summary": "Psychically gifted with the powers of the mind.",
+  "description": "Psychics have odd mental powers, able to manipulate minds, the world around, sometimes even timae itself.",
+  "image": "psychic.png",
   "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
   "skills": [
     { "key": "stealth", "die": 8 },
