@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
     character_wounds        TINYINT UNSIGNED NOT NULL DEFAULT 0,
     character_fatigue       TINYINT UNSIGNED NOT NULL DEFAULT 0,
     character_incapacitated TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    character_shaken        TINYINT UNSIGNED NOT NULL DEFAULT 0,
     character_bennies       TINYINT UNSIGNED NOT NULL DEFAULT 3,
     character_notes         TEXT NULL,
     character_created    DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),

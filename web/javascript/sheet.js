@@ -143,6 +143,7 @@
   wireRail('wounds');
   wireRail('fatigue');
   wireBooleanRailItem('incapacitated');
+  wireBooleanRailItem('shaken');
 
   // ---- Help dialogs --------------------------------------------------------
 

@@ -302,6 +302,7 @@ class SheetControllerTest extends ControllerTestCase
             ->with(self::callback(fn (Entity $entity): bool => 0 === $entity->wounds
                 && 2 === $entity->fatigue
                 && 1 === $entity->incapacitated
+                && 1 === $entity->shaken
                 && 3 === $entity->bennies
                 && !isset($entity->ignored)))
             ->willReturn(new Result());
@@ -312,6 +313,7 @@ class SheetControllerTest extends ControllerTestCase
             'wounds' => -2,
             'fatigue' => 2,
             'incapacitated' => 1,
+            'shaken' => 1,
             'bennies' => 3,
             'ignored' => 99,
         ]));

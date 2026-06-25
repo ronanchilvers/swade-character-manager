@@ -51,6 +51,7 @@ class Sheet
             'wounds'        => max(0, (int) ($character->wounds ?? 0)),
             'fatigue'       => max(0, (int) ($character->fatigue ?? 0)),
             'incapacitated' => ((int) ($character->incapacitated ?? 0)) > 0,
+            'shaken'        => ((int) ($character->shaken ?? 0)) > 0,
             'bennies'       => max(0, (int) ($character->bennies ?? 0)),
             'notes'         => (string) ($character->notes ?? ''),
         ];

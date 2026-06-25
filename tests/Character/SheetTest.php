@@ -48,6 +48,18 @@ class SheetTest extends TestCase
         self::assertNull($result['identity']['toughness']);
     }
 
+    public function testStateExposesShakenAsBoolean(): void
+    {
+        $set = $this->build(character: new Entity(['name' => 'Mara', 'shaken' => 1]));
+        self::assertTrue($set['state']['shaken']);
+
+        $unset = $this->build(character: new Entity(['name' => 'Mara']));
+        self::assertFalse($unset['state']['shaken']);
+
+        $zero = $this->build(character: new Entity(['name' => 'Mara', 'shaken' => 0]));
+        self::assertFalse($zero['state']['shaken']);
+    }
+
     public function testAttributesAreReturnedInCanonicalOrderWithLabels(): void
     {
         $result = $this->build(
