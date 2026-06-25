@@ -1,0 +1,56 @@
+@use "variables" as card;
+@use "../../settings/colors" as color;
+
+.card {
+    &--archetype {
+        .card__inner {
+            background: card.$card-background;
+            border-color: card.$card-selected-border;
+        }
+    }
+}
+
+.archetype-card {
+    &__attributes {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0.75rem 0 0;
+        padding: 0;
+    }
+
+    &__attr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: color.$card-control-background;
+        border: card.$card-border;
+        border-radius: 4px;
+        padding: 0.25rem 0.5rem;
+        min-width: 3rem;
+
+        dt {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: card.$card-text-color;
+            opacity: 0.7;
+        }
+
+        dd {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 0;
+            color: color.$sheet-heading;
+        }
+    }
+}
+
+.archetypes-view {
+    &__intro {
+        margin-bottom: 1.5rem;
+        color: card.$card-text-color;
+    }
+}

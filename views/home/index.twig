@@ -64,7 +64,7 @@
                 Create a new character and set off on a new adventure!
             </div>
             <div class="card__footer">
-                <a class="button button--primary button--full" href="{{ get_url('characters_create') }}">Create a Character</a>
+                <a class="button button--primary button--full" href="{{ get_url('characters_new') }}">Create a Character</a>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
     <div class="home__empty">
         <h2 class="home__empty__title">No characters yet</h2>
         <p class="home__empty__body">Your roster is empty. Roll up your first hero to get started.</p>
-        <a class="button button--primary" href="{{ get_url('characters_create') }}">Create one now</a>
+        <a class="button button--primary" href="{{ get_url('characters_new') }}">Create one now</a>
     </div>
 {% endif %}
 {% endblock %}

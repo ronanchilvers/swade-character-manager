@@ -1,0 +1,54 @@
+{% extends 'layouts/default.twig' %}
+
+{% block content %}
+<section id="wrapper__inner" class="archetypes-view">
+    <h2>{{ page_title }}</h2>
+    <p class="archetypes-view__intro">Pick an archetype to start with a pre-built character, or create one from scratch.</p>
+    <div class="cards cards--uniform">
+        {% for archetype in archetypes %}
+        <div class="card card--archetype">
+            <div class="card__inner">
+                <div class="card__title">{{ archetype.name }}</div>
+                <div class="card__content">
+                    <p>{{ archetype.summary }}</p>
+                    <dl class="archetype-card__attributes">
+                        <div class="archetype-card__attr">
+                            <dt>AGI</dt><dd>d{{ archetype.attributes.agility ?? 4 }}</dd>
+                        </div>
+                        <div class="archetype-card__attr">
+                            <dt>SMT</dt><dd>d{{ archetype.attributes.smarts ?? 4 }}</dd>
+                        </div>
+                        <div class="archetype-card__attr">
+                            <dt>SPI</dt><dd>d{{ archetype.attributes.spirit ?? 4 }}</dd>
+                        </div>
+                        <div class="archetype-card__attr">
+                            <dt>STR</dt><dd>d{{ archetype.attributes.strength ?? 4 }}</dd>
+                        </div>
+                        <div class="archetype-card__attr">
+                            <dt>VIG</dt><dd>d{{ archetype.attributes.vigor ?? 4 }}</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="card__footer">
+                    <form method="post" action="{{ get_url('characters_new_apply') }}">
+                        <input type="hidden" name="archetype" value="{{ archetype.id }}">
+                        <button class="button button--primary button--full" type="submit">Choose</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="card">
+            <div class="card__inner">
+                <div class="card__title">From Scratch</div>
+                <div class="card__content">
+                    <p>Build your character from the ground up with no pre-filled choices.</p>
+                </div>
+                <div class="card__footer">
+                    <a class="button button--full" href="{{ get_url('characters_create') }}">Create from scratch</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
