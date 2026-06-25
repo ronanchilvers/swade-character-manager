@@ -1,0 +1,20 @@
+{
+  "name": "Barbarian",
+  "summary": "A fierce warrior from the wild lands, strong and unrelenting.",
+  "description": "Barbarians rely on raw power and instinct over training.",
+  "attributes": { "agility": 6, "smarts": 4, "spirit": 6, "strength": 8, "vigor": 8 },
+  "skills": [
+    { "key": "fighting", "die": 8 },
+    { "key": "athletics", "die": 6 },
+    { "key": "intimidation", "die": 6 },
+    { "key": "survival", "die": 6 }
+  ],
+  "hindrances": [
+    { "key": "loyal", "level": "minor" },
+    { "key": "overconfident", "level": "major" }
+  ],
+  "edges": [
+    { "key": "brawny" }
+  ],
+  "names": ["Brak", "Conan", "Kull", "Thalia", "Vanya"]
+}

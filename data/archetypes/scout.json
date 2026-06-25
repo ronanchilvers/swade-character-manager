@@ -1,0 +1,21 @@
+{
+  "name": "Scout",
+  "summary": "A swift and perceptive ranger at home in any terrain.",
+  "description": "Scouts move unseen through hostile lands, gathering intelligence and striking before the enemy knows they are there.",
+  "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
+  "skills": [
+    { "key": "stealth", "die": 8 },
+    { "key": "notice", "die": 8 },
+    { "key": "shooting", "die": 6 },
+    { "key": "athletics", "die": 6 },
+    { "key": "survival", "die": 6 }
+  ],
+  "hindrances": [
+    { "key": "outsider", "level": "minor" },
+    { "key": "poverty", "level": "minor" }
+  ],
+  "edges": [
+    { "key": "woodsman" }
+  ],
+  "names": ["Kira", "Sable", "Talon", "Vex", "Wren"]
+}
