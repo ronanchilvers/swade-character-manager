@@ -1,0 +1,57 @@
+{
+  "name": "Medic",
+  "summary": "A steady hand when the team is hurting and every second matters.",
+  "description": "Medics keep allies alive under pressure, combining practical training with calm judgment. Whether patching wounds in the field or diagnosing danger before it spreads, they turn crisis into another problem to solve.",
+  "image": "medic.jpg",
+  "attributes": {
+    "agility": 6,
+    "smarts": 8,
+    "spirit": 6,
+    "strength": 4,
+    "vigor": 6
+  },
+  "skills": [
+    {
+      "key": "healing",
+      "die": 8
+    },
+    {
+      "key": "notice",
+      "die": 6
+    },
+    {
+      "key": "science",
+      "die": 6
+    },
+    {
+      "key": "research",
+      "die": 6
+    },
+    {
+      "key": "persuasion",
+      "die": 6
+    }
+  ],
+  "hindrances": [
+    {
+      "key": "heroic",
+      "level": "major"
+    },
+    {
+      "key": "cautious",
+      "level": "minor"
+    }
+  ],
+  "edges": [
+    {
+      "key": "healer"
+    }
+  ],
+  "names": [
+    "Ada",
+    "Elena",
+    "Jonas",
+    "Mira",
+    "Samir"
+  ]
+}

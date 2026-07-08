@@ -1,0 +1,57 @@
+{
+  "name": "Performer",
+  "summary": "Every crowd is a stage, every conversation a chance to steal the scene.",
+  "description": "Performers live by timing, presence, and nerve. They read the room, hold attention, and turn charm or ridicule into leverage when raw force will not do.",
+  "image":   "performer.jpg",
+  "attributes": {
+    "agility": 6,
+    "smarts": 6,
+    "spirit": 8,
+    "strength": 4,
+    "vigor": 6
+  },
+  "skills": [
+    {
+      "key": "performance",
+      "die": 8
+    },
+    {
+      "key": "persuasion",
+      "die": 8
+    },
+    {
+      "key": "taunt",
+      "die": 6
+    },
+    {
+      "key": "notice",
+      "die": 6
+    },
+    {
+      "key": "athletics",
+      "die": 6
+    }
+  ],
+  "hindrances": [
+    {
+      "key": "big_mouth",
+      "level": "minor"
+    },
+    {
+      "key": "curious",
+      "level": "major"
+    }
+  ],
+  "edges": [
+    {
+      "key": "attractive"
+    }
+  ],
+  "names": [
+    "Cassia",
+    "Dante",
+    "Liora",
+    "Nico",
+    "Seren"
+  ]
+}
