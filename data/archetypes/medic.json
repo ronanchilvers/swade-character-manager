@@ -2,7 +2,7 @@
   "name": "Medic",
   "summary": "A steady hand when the team is hurting and every second matters.",
   "description": "Medics keep allies alive under pressure, combining practical training with calm judgment. Whether patching wounds in the field or diagnosing danger before it spreads, they turn crisis into another problem to solve.",
-  "image": null,
+  "image": "medic.jpg",
   "attributes": {
     "agility": 6,
     "smarts": 8,
