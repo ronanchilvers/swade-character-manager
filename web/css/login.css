@@ -1,1 +1,71 @@
-.login-form .panel{clip-path:polygon(0 6px, 3% 0, 8% 5px, 14% 1px, 22% 4px, 30% 0, 38% 5px, 46% 2px, 54% 5px, 62% 0, 70% 4px, 78% 1px, 86% 5px, 94% 0, 100% 6px, 100% calc(100% - 6px), 94% 100%, 86% calc(100% - 5px), 78% calc(100% - 1px), 70% calc(100% - 4px), 62% 100%, 54% calc(100% - 5px), 46% calc(100% - 2px), 38% calc(100% - 5px), 30% 100%, 22% calc(100% - 4px), 14% calc(100% - 1px), 8% calc(100% - 5px), 3% 100%, 0 calc(100% - 6px))}.login-form{width:100%;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2rem;padding:3rem 1.5rem}.login-form__hero{width:min(100%,760px);display:flex;align-items:center;justify-content:center}.login-form__panel{width:min(100%,460px)}.login-form__header,.login-form__content{width:100%}.login-form__header{text-align:center}.login-form__content{padding:1rem}.login-form__characters{width:min(100%,500px);object-fit:contain}.login-form .panel{background:#f6ecd5 url(/images/backgrounds/paper-tileable.png) repeat top left;border:1px dashed #555;border-top:none;border-bottom:none;box-shadow:0 8px 18px rgba(0,0,0,.22);padding:1rem;margin-bottom:0}@media(max-width: 479px){.login-form .panel{padding:2rem 1.5rem}}
+/** Login Stylesheet **/
+/** Loaded alongside styles.css; only login-specific rules live here. */
+/**
+ * Sass-only tokens for the sheet theme.
+ *
+ * Importing this module emits no CSS unless %sheet-heading is
+ * @extend-ed, so partials can pull in the scalar values without
+ * dragging unwanted rules into every compiled stylesheet. The matching
+ * Colour values live in _colors.scss so compiled stylesheets do not
+ * depend on runtime CSS custom properties for theme colours.
+ */
+/**
+ * Jagged "torn paper" outline applied via clip-path. Shared by the
+ * login panel, the character sheet's torn panel variant, and the
+ * sheet help dialog.
+ *
+ * Defined as a placeholder so multiple selectors in the same compiled
+ * stylesheet collapse into a single rule.
+ */
+.login-form .panel {
+  clip-path: polygon(0 6px, 3% 0, 8% 5px, 14% 1px, 22% 4px, 30% 0, 38% 5px, 46% 2px, 54% 5px, 62% 0, 70% 4px, 78% 1px, 86% 5px, 94% 0, 100% 6px, 100% calc(100% - 6px), 94% 100%, 86% calc(100% - 5px), 78% calc(100% - 1px), 70% calc(100% - 4px), 62% 100%, 54% calc(100% - 5px), 46% calc(100% - 2px), 38% calc(100% - 5px), 30% 100%, 22% calc(100% - 4px), 14% calc(100% - 1px), 8% calc(100% - 5px), 3% 100%, 0 calc(100% - 6px));
+}
+
+.login-form {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 3rem 1.5rem;
+}
+.login-form__hero {
+  width: min(100%, 760px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-form__panel {
+  width: min(100%, 460px);
+}
+.login-form__header, .login-form__content {
+  width: 100%;
+}
+.login-form__header {
+  text-align: center;
+}
+.login-form__content {
+  padding: 1rem;
+}
+.login-form__characters {
+  width: min(100%, 500px);
+  object-fit: contain;
+}
+.login-form .panel {
+  background: #f6ecd5 url(/images/backgrounds/paper-tileable.png) repeat top left;
+  border: 1px dashed #555555;
+  border-top: none;
+  border-bottom: none;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  padding: 1rem;
+  margin-bottom: 0;
+}
+@media (max-width: 479px) {
+  .login-form .panel {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=login.css.map */

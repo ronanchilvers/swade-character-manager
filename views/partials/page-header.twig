@@ -1,0 +1,10 @@
+<header class="page-header">
+    <h2 class="page-header__title">{{ title }}</h2>
+{% if actions is defined and actions|length > 0 %}
+    <div class="page-header__actions">
+    {% for action in actions %}
+        <a class="button {{ action.class|default('') }}" href="{{ action.href }}">{{ action.label }}</a>
+    {% endfor %}
+    </div>
+{% endif %}
+</header>

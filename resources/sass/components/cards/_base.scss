@@ -13,6 +13,10 @@
     margin-bottom: 1.5rem;
     align-items: flex-start;
 
+    &.cards--single-column {
+        grid-template-columns: 1fr;
+    }
+
     @include breakpoints.at(laptop) {
         grid-template-columns: 1fr 1fr;
     }

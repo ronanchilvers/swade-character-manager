@@ -1,44 +1,53 @@
 {% extends 'layouts/default.twig' %}
 
 {% block content %}
-<section id="wrapper__inner" class="campaigns-view">
-    <h2>Campaigns</h2>
-    {% if campaigns|length > 0 %}
-    <div class="cards cards--uniform">
-    {% for campaign in campaigns %}
-        <div class="card card--selected">
-            <div class="card__inner">
-                <div class="card__title">{{ campaign.name }}</div>
-                <div class="card__content{% if campaign.description|length == 0 %} card__content--empty{% endif %}">
-                    {% if campaign.description|length > 0 %}{{ campaign.description }}{% else %}No description yet{% endif %}
-                </div>
-                <div class="card__footer">
-                    <a class="button" href="{{ get_url('campaigns_view', {hash: campaign.hash}) }}">Open</a>
-                {% if campaign.user == session.user.id %}
-                    <a class="button" href="{{ get_url('campaigns_edit', { hash: campaign.hash })}}">Edit Campaign</a>
-                {% endif %}
-                </div>
+{% include 'partials/page-header.twig' with {
+    title: 'Campaigns',
+    actions: [
+        {
+            href: get_url('campaigns_create'),
+            label: 'Create A Campaign',
+            class: 'button--primary button--large button--filled',
+        },
+    ],
+} only %}
+{% if campaigns|length > 0 %}
+<div class="cards cards--uniform">
+{% for campaign in campaigns %}
+    <div class="card card--selected">
+        <div class="card__inner">
+            <div class="card__title">{{ campaign.name }}</div>
+            <div class="card__content{% if campaign.description|length == 0 %} card__content--empty{% endif %}">
+                {% if campaign.description|length > 0 %}{{ campaign.description }}{% else %}No description yet{% endif %}
             </div>
-        </div>
-    {% endfor %}
-        <div class="card">
-            <div class="card__inner">
-                <div class="card__title">Create a Campaign</div>
-                <div class="card__content">
-                    Create a new campaign and invite your friends to join you on your adventures
-                </div>
-                <div class="card__footer">
-                    <a class="button button--primary button--full" href="{{ get_url('campaigns_create') }}">Create a Campaign</a>
-                </div>
+            <div class="card__footer">
+                <a class="button" href="{{ get_url('campaigns_view', {hash: campaign.hash}) }}">Open</a>
+            {% if campaign.user == session.user.id %}
+                <a class="button" href="{{ get_url('campaigns_edit', { hash: campaign.hash })}}">Edit Campaign</a>
+            {% endif %}
             </div>
         </div>
     </div>
-    {% else %}
-    <div class="home__empty">
-        <h2 class="home__empty__title">No campaigns yet</h2>
-        <p class="home__empty__body">Create a campaign or use an invite link from another player.</p>
-        <a class="button button--primary" href="{{ get_url('campaigns_create') }}">Create one now</a>
+{% endfor %}
+    {#
+    <div class="card">
+        <div class="card__inner">
+            <div class="card__title">Create a Campaign</div>
+            <div class="card__content">
+                Create a new campaign and invite your friends to join you on your adventures
+            </div>
+            <div class="card__footer">
+                <a class="button button--primary button--full" href="{{ get_url('campaigns_create') }}">Create a Campaign</a>
+            </div>
+        </div>
     </div>
-    {% endif %}
-</section>
+    #}
+</div>
+{% else %}
+<div class="home__empty">
+    <h2 class="home__empty__title">No campaigns yet</h2>
+    <p class="home__empty__body">Create a campaign or use an invite link from another player.</p>
+    <a class="button button--primary" href="{{ get_url('campaigns_create') }}">Create one now</a>
+</div>
+{% endif %}
 {% endblock %}

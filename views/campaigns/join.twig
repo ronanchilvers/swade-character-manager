@@ -1,23 +1,21 @@
 {% extends 'layouts/default.twig' %}
 
 {% block content %}
-<section id="wrapper__inner" class="campaigns-view">
-    <h2>Join {{ campaign.name }}</h2>
-    {% if owner %}
-    <p>Hosted by {{ owner.firstname }} {{ owner.lastname }}.</p>
-    {% endif %}
-    {% if campaign.description|length > 0 %}
-    <p>{{ campaign.description }}</p>
-    {% endif %}
+<h2>Join {{ campaign.name }}</h2>
+{% if owner %}
+<p>Hosted by {{ owner.firstname }} {{ owner.lastname }}.</p>
+{% endif %}
+{% if campaign.description|length > 0 %}
+<p>{{ campaign.description }}</p>
+{% endif %}
 
-    {% if is_member %}
-    <p>You are already a member of this campaign.</p>
-    <a class="button button--primary" href="{{ get_url('campaigns_view', {hash: campaign.hash}) }}">Open Campaign</a>
-    {% else %}
-    <form method="post" action="{{ get_url('campaigns_join', {hash: campaign.hash}) }}">
-        <button class="button button--primary" type="submit">Join Campaign</button>
-        <a class="button" href="{{ get_url('campaigns_index') }}">Cancel</a>
-    </form>
-    {% endif %}
-</section>
+{% if is_member %}
+<p>You are already a member of this campaign.</p>
+<a class="button button--primary" href="{{ get_url('campaigns_view', {hash: campaign.hash}) }}">Open Campaign</a>
+{% else %}
+<form method="post" action="{{ get_url('campaigns_join', {hash: campaign.hash}) }}">
+    <button class="button button--primary" type="submit">Join Campaign</button>
+    <a class="button" href="{{ get_url('campaigns_index') }}">Cancel</a>
+</form>
+{% endif %}
 {% endblock %}

@@ -20,7 +20,7 @@
         {% if session.has('user') %}
             {% include "partials/topbar.twig" %}
         {% endif %}
-        <main>
+        <main{% if main_class is defined %} class="{{ main_class }}"{% endif %}>
             {% block wrapper %}{% endblock %}
         </main>
         {% include "partials/toast.twig" %}

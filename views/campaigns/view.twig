@@ -4,23 +4,36 @@
 {% do add_script('/javascript/campaign-invite.js') %}
 
 {% block content %}
-<section id="wrapper__inner" class="campaigns-view">
+<section>
     <div class="section__header">
         <h2>{{ campaign.name }}</h2>
+        <h3>GM: {{ owner.firstname }} {{ owner.lastname }}</h3>
     </div>
 
     {% if campaign.description|length > 0 %}
     <p>{{ campaign.description }}</p>
     {% endif %}
 
-    <hr />
+    <aside class="invite-link">
+        <div class="invite-link__panel">
+            <p class="small">Send this link to players to invite them to join your campaign</p>
+            <p class="invite-link__url js-invite-link">{{ invite_url }}</p>
+        </div>
+        <div class="invite-link__panel invite-link__panel--links">
+            <a href="#" class="js-copy-invite-link button button--ghost">Copy Link</a>
+            <a href="{{ get_url('campaigns_reset', { hash: campaign.hash })}}" class="button button--ghost">Reset Link</a>
+        </div>
+    </aside>
 
+    {#
     <div class="roster-header">
         <div class="roster-header__panel">
             <h3>{{ owner.firstname }} {{ owner.lastname }}</h3>
-            <p class="small1">Game Master</p>
         </div>
-        {% if is_owner or is_superuser %}
+        <div class="roster-header__panel">
+            <p>Game Master</p>
+        </div>
+        {% if false and (is_owner or is_superuser) %}
         <div class="roster-header__panel">
             <aside class="invite-link">
                 <div class="invite-link__panel">
@@ -35,10 +48,12 @@
         </div>
         {% endif %}
     </div>
+    #}
 
-{% if roster_characters|length > 0 %}
-    <h3>Active Characters in the Campaign</h3>
-    <div class="cards cards--character">
+<h3>Active Characters in the Campaign</h3>
+{% set character_count = roster_characters|length %}
+<div class="cards{% if character_count < 1 %} cards--single-column{% endif %}">
+{% if  character_count > 0 %}
     {% for row in roster_characters %}
         {% set character = row.character %}
         <div class="card card--selected">
@@ -65,15 +80,22 @@
             </div>
         </div>
     {% endfor %}
-    </div>
 {% elseif roster|length > 0 %}
-    <p>No linked characters</p>
+    <div class="card card--dotted">
+        <div class="card__inner">
+            <div class="card__title">No characters yet!</div>
+            <div class="card__content">
+            <p>No characters are in this campaign yet. Shown below are characters you can add to get things up and running!</p>
+            </div>
+        </div>
+    </div>
 {% else %}
     <p>No members yet.</p>
 {% endif %}
+</div>
 
 {% if is_member %}
-    <hr />
+    <!--<hr />-->
     <h3>Characters that can be added to the campaign</h3>
     {% if available_characters|length > 0 %}
     <div class="cards cards--character">
@@ -98,7 +120,7 @@
     <p>You have no unassigned characters available.</p>
     {% endif %}
 
-    <hr />
+    <!--<hr />-->
 
     <div class="panel panel--danger panel--collapsible panel--collapsed">
         <div class="panel__title">

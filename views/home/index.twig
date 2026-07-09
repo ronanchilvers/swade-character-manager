@@ -3,7 +3,16 @@
 {% do add_script('/javascript/character-delete.js') %}
 
 {% block content %}
-<h2>Characters</h2>
+{% include 'partials/page-header.twig' with {
+    title: 'Characters',
+    actions: [
+        {
+            href: get_url('characters_new'),
+            label: 'Create A Character',
+            class: 'button--primary button--large button--filled',
+        },
+    ],
+} only %}
 {% if characters|length > 0 %}
 <div class="cards cards--uniform cards--character">
 {% for character in characters %}
@@ -57,6 +66,7 @@
     </dialog>
     {% endif %}
 {% endfor %}
+    {#
     <div class="card">
         <div class="card__inner">
             <div class="card__title">Create a character</div>
@@ -68,6 +78,7 @@
             </div>
         </div>
     </div>
+    #}
 </div>
 {% else %}
     <div class="home__empty">

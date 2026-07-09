@@ -1,1 +1,138 @@
-.character-tabs{display:flex;flex-direction:row;justify-content:space-between;margin-bottom:.75rem;width:100%}.character-tabs__link{font-family:"Staatliches","Courier New",monospace;color:#666;display:flex;justify-content:center;padding:.2rem .5rem;margin-right:.5rem;width:8rem;text-decoration:none;text-align:center;border-radius:4px;background-color:#ddd;border:1px solid rgba(0,0,0,.25);white-space:nowrap;cursor:pointer}.character-tabs__link img{width:24px;height:24px;margin-right:.2rem;opacity:.8}@media(max-width: 999px){.character-tabs__link{min-width:3rem}.character-tabs__link span{display:none}}.character-tabs__link:first-child{margin-left:.5rem}.character-tabs__link:hover{text-decoration:none}.character-tabs__link--disabled{color:#999;cursor:auto}.character-tabs__link--disabled img{opacity:.4}.character-tabs__link--active{background-color:#fff;color:#333;box-shadow:0 0 4px rgba(0,0,0,.25);border-color:rgba(0,0,0,.5)}.field--builder-text{box-sizing:border-box;margin-bottom:1.5rem;padding:1rem;width:100%;border:1px solid #e8d9b0;border-left:.35rem solid #871c16;border-radius:3px;background:linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35)),#fbf6ea;box-shadow:0 2px 4px rgba(0,0,0,.08),inset 0 0 0 1px hsla(0,0%,100%,.48)}.field--builder-text .field__label{display:block;margin-bottom:.45rem;color:#871c16;font-family:"Staatliches","Courier New",monospace;font-size:1.1rem;line-height:1.1}.field--builder-text .field__inner{box-sizing:border-box;position:relative;width:100%}.field--builder-text .field__input{box-sizing:border-box;display:block;max-width:100%;background:hsla(0,0%,100%,.7);border-color:rgba(34,34,34,.25);color:#1d1208;box-shadow:inset 0 1px 2px rgba(0,0,0,.08);transition:background 120ms ease,border-color 120ms ease,box-shadow 120ms ease}.field--builder-text .field__input:focus{outline:none;background:#fff;border-color:#871c16;box-shadow:0 0 0 3px rgba(166,30,30,.06),inset 0 1px 2px rgba(0,0,0,.08)}.field--builder-text textarea.field__input{min-height:9rem;line-height:1.5;resize:vertical}.field--builder-text.field--error{border-left-color:#a00;background:linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35)),rgba(255,220,220,.25)}.field--builder-text.field--error .field__label{color:#a00}.field--builder-text.field--error .field__input{border-color:#a00}@media(max-width: 479px){.field--builder-text{padding:.85rem}}.field--builder-name .field__input{padding:.7rem .75rem .55rem;color:#871c16;font-family:"Staatliches","Courier New",monospace;font-size:1.45rem;line-height:1.1}
+/** Character Builder Stylesheet **/
+/** Loaded alongside styles.css; only builder-specific rules live here. */
+/**
+ * Sass-only tokens for the sheet theme.
+ *
+ * Importing this module emits no CSS unless %sheet-heading is
+ * @extend-ed, so partials can pull in the scalar values without
+ * dragging unwanted rules into every compiled stylesheet. The matching
+ * Colour values live in _colors.scss so compiled stylesheets do not
+ * depend on runtime CSS custom properties for theme colours.
+ */
+.character-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+.character-tabs__link {
+  font-family: "Staatliches", "Courier New", monospace;
+  color: #666666;
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.5rem;
+  width: 8rem;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #dddddd;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.character-tabs__link img {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.2rem;
+  opacity: 0.8;
+}
+@media (max-width: 999px) {
+  .character-tabs__link {
+    min-width: 3rem;
+  }
+  .character-tabs__link span {
+    display: none;
+  }
+}
+.character-tabs__link:first-child {
+  margin-left: 0.5rem;
+}
+.character-tabs__link:hover {
+  text-decoration: none;
+}
+.character-tabs__link--disabled {
+  color: #999999;
+  cursor: auto;
+}
+.character-tabs__link--disabled img {
+  opacity: 0.4;
+}
+.character-tabs__link--active {
+  background-color: #ffffff;
+  color: #333333;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.field--builder-text {
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid #e8d9b0;
+  border-left: 0.35rem solid rgb(135, 28, 22);
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35)), #fbf6ea;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.48);
+}
+.field--builder-text .field__label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: rgb(135, 28, 22);
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+.field--builder-text .field__inner {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+}
+.field--builder-text .field__input {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(34, 34, 34, 0.25);
+  color: #1d1208;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+.field--builder-text .field__input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: rgb(135, 28, 22);
+  box-shadow: 0 0 0 3px rgba(166, 30, 30, 0.06), inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+.field--builder-text textarea.field__input {
+  min-height: 9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+.field--builder-text.field--error {
+  border-left-color: #aa0000;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35)), rgba(255, 220, 220, 0.25);
+}
+.field--builder-text.field--error .field__label {
+  color: #aa0000;
+}
+.field--builder-text.field--error .field__input {
+  border-color: #aa0000;
+}
+@media (max-width: 479px) {
+  .field--builder-text {
+    padding: 0.85rem;
+  }
+}
+
+.field--builder-name .field__input {
+  padding: 0.7rem 0.75rem 0.55rem;
+  color: rgb(135, 28, 22);
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+/*# sourceMappingURL=builder.css.map */

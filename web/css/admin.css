@@ -1,1 +1,273 @@
-.admin-character__title,.admin-group__title,.admin-users__table th,.admin-view__title{font-family:"Staatliches","Courier New",monospace;color:#871c16;font-weight:400;text-transform:uppercase}.admin-view{margin-top:2rem;padding:1.5rem;background:#f6ecd5;border:1px solid #e8d9b0;border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.08);color:#1d1208}.admin-view__title{margin:0 0 1rem;font-size:1.5rem;letter-spacing:.08em}.admin-view__intro{margin:0 0 1.25rem;font-family:"Roboto",sans-serif;font-size:1rem;color:rgba(29,18,8,.8)}.admin-view__back{margin-bottom:1rem}.admin-users{overflow-x:auto}.admin-users__table{width:100%;border-collapse:collapse;font-family:"Roboto",sans-serif;font-size:.95rem;background:hsla(0,0%,100%,.45)}.admin-users__table th,.admin-users__table td{padding:.85rem 1rem;text-align:left;vertical-align:middle;border-bottom:1px solid rgba(34,34,34,.12)}.admin-users__table th{font-size:.95rem;letter-spacing:.08em;background:hsla(0,0%,100%,.55)}.admin-users__table tbody tr:nth-child(even){background:hsla(0,0%,100%,.22)}.admin-users__table tbody tr:hover{background:hsla(0,0%,100%,.38)}.admin-users__name{font-weight:600}.admin-users__meta{display:block;margin-top:.25rem;font-size:.82rem;color:#8b7a5b}.admin-users__actions{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:flex-start}.admin-users__actions .button{margin-right:0}.admin-users__actions form{margin:0}.admin-users__current{font-family:"Staatliches","Courier New",monospace;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:#8b7a5b}.admin-users__empty{margin:0;font-family:"Roboto",sans-serif}@media(max-width: 999px){.admin-users__table,.admin-users__table thead,.admin-users__table tbody,.admin-users__table tr,.admin-users__table th,.admin-users__table td{display:block}.admin-users__table thead{display:none}.admin-users__table tbody{display:grid;gap:.75rem}.admin-users__table tr{padding:.25rem 0;border:1px solid rgba(34,34,34,.12);border-radius:3px;background:hsla(0,0%,100%,.42)}.admin-users__table td{border-bottom:0;padding:.45rem .9rem}.admin-users__table td::before{content:attr(data-label);display:block;margin-bottom:.2rem;font-family:"Staatliches","Courier New",monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#8b7a5b}}.admin-pill{display:inline-block;padding:.3rem .55rem .2rem;border-radius:999px;border:1px solid rgba(34,34,34,.18);font-family:"Staatliches","Courier New",monospace;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;line-height:1}.admin-pill--status-active,.admin-pill--superuser{background:rgba(72,132,84,.14);color:#305f39;border-color:rgba(72,132,84,.3)}.admin-pill--status-inactive,.admin-pill--standard{background:rgba(34,34,34,.08);color:rgba(29,18,8,.72);border-color:rgba(34,34,34,.14)}.admin-groups{display:grid;gap:1rem}.admin-group{padding:1rem;border:1px solid rgba(34,34,34,.12);border-radius:3px;background:hsla(0,0%,100%,.32)}.admin-group__header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1rem}.admin-group__title{margin:0;font-size:1.2rem;letter-spacing:.06em}.admin-group__meta,.admin-group__empty{margin:.25rem 0 0;font-family:"Roboto",sans-serif;font-size:.95rem;color:#8b7a5b}.admin-group__summary{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.5rem;align-items:center}.admin-group__count{font-family:"Staatliches","Courier New",monospace;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:#8b7a5b}.admin-characters{display:grid;gap:.85rem}.admin-character{padding:1rem;border-radius:3px;background:hsla(0,0%,100%,.48);border:1px solid rgba(34,34,34,.08)}.admin-character__header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.admin-character__title{margin:0;font-size:1.05rem;letter-spacing:.05em}.admin-character__meta,.admin-character__concept{margin:.25rem 0 0;font-family:"Roboto",sans-serif;font-size:.95rem;color:rgba(29,18,8,.8)}.admin-character__concept{margin-top:.75rem}.admin-character__stats{display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:.65rem;margin-top:.9rem}.admin-character__stat{padding:.55rem .65rem;border-radius:3px;background:hsla(0,0%,100%,.55);border:1px solid rgba(34,34,34,.08)}.admin-character__stat dt{margin:0 0 .2rem;font-family:"Staatliches","Courier New",monospace;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:#8b7a5b}.admin-character__stat dd{margin:0;font-family:"Roboto",sans-serif;font-size:1rem;font-weight:600;color:#1d1208}@media(max-width: 999px){.admin-group__header{flex-direction:column}.admin-group__summary{justify-content:flex-start}.admin-character__stats{grid-template-columns:repeat(2, minmax(0, 1fr))}}
+/** Admin Stylesheet **/
+/** Loaded alongside styles.css; only admin-specific rules live here. */
+/**
+ * Sass-only tokens for the sheet theme.
+ *
+ * Importing this module emits no CSS unless %sheet-heading is
+ * @extend-ed, so partials can pull in the scalar values without
+ * dragging unwanted rules into every compiled stylesheet. The matching
+ * Colour values live in _colors.scss so compiled stylesheets do not
+ * depend on runtime CSS custom properties for theme colours.
+ */
+.admin-character__title, .admin-group__title, .admin-users__table th, .admin-view__title {
+  font-family: "Staatliches", "Courier New", monospace;
+  color: rgb(135, 28, 22);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.admin-view {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f6ecd5;
+  border: 1px solid #e8d9b0;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  color: #1d1208;
+}
+.admin-view__title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+}
+.admin-view__intro {
+  margin: 0 0 1.25rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  color: rgba(29, 18, 8, 0.8);
+}
+.admin-view__back {
+  margin-bottom: 1rem;
+}
+
+.admin-users {
+  overflow-x: auto;
+}
+.admin-users__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.45);
+}
+.admin-users__table th, .admin-users__table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(34, 34, 34, 0.12);
+}
+.admin-users__table th {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  background: rgba(255, 255, 255, 0.55);
+}
+.admin-users__table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.22);
+}
+.admin-users__table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+.admin-users__name {
+  font-weight: 600;
+}
+.admin-users__meta {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+  color: #8b7a5b;
+}
+.admin-users__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+.admin-users__actions .button {
+  margin-right: 0;
+}
+.admin-users__actions form {
+  margin: 0;
+}
+.admin-users__current {
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8b7a5b;
+}
+.admin-users__empty {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+@media (max-width: 999px) {
+  .admin-users__table, .admin-users__table thead, .admin-users__table tbody, .admin-users__table tr, .admin-users__table th, .admin-users__table td {
+    display: block;
+  }
+  .admin-users__table thead {
+    display: none;
+  }
+  .admin-users__table tbody {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .admin-users__table tr {
+    padding: 0.25rem 0;
+    border: 1px solid rgba(34, 34, 34, 0.12);
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.42);
+  }
+  .admin-users__table td {
+    border-bottom: 0;
+    padding: 0.45rem 0.9rem;
+  }
+  .admin-users__table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.2rem;
+    font-family: "Staatliches", "Courier New", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8b7a5b;
+  }
+}
+
+.admin-pill {
+  display: inline-block;
+  padding: 0.3rem 0.55rem 0.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 34, 34, 0.18);
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.admin-pill--status-active, .admin-pill--superuser {
+  background: rgba(72, 132, 84, 0.14);
+  color: #305f39;
+  border-color: rgba(72, 132, 84, 0.3);
+}
+.admin-pill--status-inactive, .admin-pill--standard {
+  background: rgba(34, 34, 34, 0.08);
+  color: rgba(29, 18, 8, 0.72);
+  border-color: rgba(34, 34, 34, 0.14);
+}
+
+.admin-groups {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-group {
+  padding: 1rem;
+  border: 1px solid rgba(34, 34, 34, 0.12);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.32);
+}
+.admin-group__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.admin-group__title {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+}
+.admin-group__meta, .admin-group__empty {
+  margin: 0.25rem 0 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
+  color: #8b7a5b;
+}
+.admin-group__summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  align-items: center;
+}
+.admin-group__count {
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8b7a5b;
+}
+
+.admin-characters {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.admin-character {
+  padding: 1rem;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(34, 34, 34, 0.08);
+}
+.admin-character__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.admin-character__title {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+.admin-character__meta, .admin-character__concept {
+  margin: 0.25rem 0 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
+  color: rgba(29, 18, 8, 0.8);
+}
+.admin-character__concept {
+  margin-top: 0.75rem;
+}
+.admin-character__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+}
+.admin-character__stat {
+  padding: 0.55rem 0.65rem;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(34, 34, 34, 0.08);
+}
+.admin-character__stat dt {
+  margin: 0 0 0.2rem;
+  font-family: "Staatliches", "Courier New", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8b7a5b;
+}
+.admin-character__stat dd {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1d1208;
+}
+
+@media (max-width: 999px) {
+  .admin-group__header {
+    flex-direction: column;
+  }
+  .admin-group__summary {
+    justify-content: flex-start;
+  }
+  .admin-character__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/*# sourceMappingURL=admin.css.map */

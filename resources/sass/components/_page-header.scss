@@ -1,0 +1,43 @@
+@use "../settings/colors" as color;
+@use "../tools/breakpoints";
+
+.page-header {
+    /* outline: 1px dotted red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    background: color.$transparent;
+    /* border-top: 1px solid color.$overlay-border-18; */
+    border-bottom: 1px solid color.$overlay-border-18;
+
+    @include breakpoints.at(phablet) {
+        align-items: center;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+.page-header__title {
+    flex: 1 1 auto;
+    line-height: 1;
+}
+
+.page-header__actions {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+
+    @include breakpoints.at(phablet) {
+        justify-content: center;
+    }
+
+    .button {
+        margin-right: 0;
+    }
+}
