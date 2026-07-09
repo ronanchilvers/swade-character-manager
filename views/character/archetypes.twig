@@ -19,7 +19,7 @@
                     <div class="archetype-card__actions">
                         <form method="post" action="{{ get_url('characters_new_apply') }}">
                             <input type="hidden" name="archetype" value="{{ archetype.id }}">
-                            <button class="button button--filled button--large button--primary button--full" type="submit">Choose</button>
+                            <button class="button button--filled button--large button--primary button--full" type="submit">Create a {{ archetype.name }}</button>
                         </form>
                     </div>
                 </div>
@@ -31,10 +31,9 @@
                 <div class="archetype-card__image" style="background-image: url('/images/archetypes/scratch.png')"></div>
                 <div class="archetype-card__overlay">
                     <div class="card__title">From Scratch</div>
-                    <div class="card__content">
-                        <p class="archetype-card__summary">Build your character from the ground up with no pre-filled choices.</p>
-                    </div>
-                    <div class="card__footer">
+                    <p class="archetype-card__summary">Build your character from the ground up with no pre-filled choices.</p>
+                    <p class="archetype-card__description">If you have a crystal clear idea of who your new character is, this is the way to go. Make every decision to ensure your character is exactly right.</p>
+                    <div class="archetype-card__actions">
                         <a class="button button--filled button--large button--full" href="{{ get_url('characters_create') }}">Create from scratch</a>
                     </div>
                 </div>
