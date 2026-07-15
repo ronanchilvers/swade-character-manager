@@ -8,7 +8,7 @@
   "skills": [
     { "key": "psionics", "die": 8 },
     { "key": "notice", "die": 8 },
-    { "key": "intimidation", "die": 6 },
+    { "key": "survival", "die": 6 },
     { "key": "persuasion", "die": 6 }
   ],
   "hindrances": [
