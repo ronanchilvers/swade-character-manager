@@ -26,9 +26,12 @@ class Home
         foreach ($characters as $character) {
             $campaignIds[(int) $character->campaign] = (int) $character->campaign;
         }
-        $campaigns = $this->campaignFactory->namesForIds(
-            $campaignIds
-        );
+        $campaigns = [];
+        if (!empty($campaignIds)) {
+            $campaigns = $this->campaignFactory->namesForIds(
+                $campaignIds
+            );
+        }
 
         Flight::render('home/index.twig', [
             'page_title' => 'Characters',
