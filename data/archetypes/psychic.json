@@ -1,22 +1,53 @@
 {
-  "name": "Psychic",
-  "summary": "What others cannot sense, they feel. What others cannot move, they shift.",
-  "description": "Psychics possess an innate connection to forces beyond ordinary perception. Whether they call it talent, training, or something stranger, their mind reaches where no hand can.",
-  "image": "psychic.png",
-  "active": true,
-  "attributes": { "agility": 6, "smarts": 8, "spirit": 6, "strength": 4, "vigor": 4 },
-  "skills": [
-    { "key": "psionics", "die": 8 },
-    { "key": "notice", "die": 8 },
-    { "key": "survival", "die": 6 },
-    { "key": "persuasion", "die": 6 }
-  ],
-  "hindrances": [
-    { "key": "outsider", "level": "major" },
-    { "key": "delusional", "level": "minor" }
-  ],
-  "edges": [
-    { "key": "arcane_background" }
-  ],
-  "names": ["Asha", "Dorian", "Lyra", "Silas", "Vesper"]
+    "name": "Psychic",
+    "summary": "What others cannot sense, they feel. What others cannot move, they shift.",
+    "description": "Psychics possess an innate connection to forces beyond ordinary perception. Whether they call it talent, training, or something stranger, their mind reaches where no hand can.",
+    "image": "psychic.png",
+    "active": true,
+    "attributes": {
+        "agility": 6,
+        "smarts": 8,
+        "spirit": 6,
+        "strength": 4,
+        "vigor": 4
+    },
+    "skills": [
+        {
+            "key": "psionics",
+            "die": 8
+        },
+        {
+            "key": "research",
+            "die": 6
+        },
+        {
+            "key": "occult",
+            "die": 4
+        }
+    ],
+    "hindrances": [
+        {
+            "key": "outsider",
+            "level": "major"
+        },
+        {
+            "key": "delusional",
+            "level": "minor"
+        }
+    ],
+    "edges": [
+        {
+            "key": "alertness"
+        },
+        {
+            "key": "arcane_background"
+        }
+    ],
+    "names": [
+        "Asha",
+        "Dorian",
+        "Lyra",
+        "Silas",
+        "Vesper"
+    ]
 }

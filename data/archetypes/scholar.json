@@ -1,22 +1,52 @@
 {
-  "name": "Scholar",
-  "summary": "Knowledge is the Scholar's armour, weapon, and map.",
-  "description": "Scholars accumulate expertise across many fields, bringing careful analysis to situations that would defeat a less curious mind. Rarely the strongest in the room — but they rarely need to be.",
-  "image": "scholar.png",
-  "attributes": { "agility": 4, "smarts": 10, "spirit": 6, "strength": 4, "vigor": 4 },
-  "skills": [
-    { "key": "academics", "die": 8 },
-    { "key": "research", "die": 8 },
-    { "key": "notice", "die": 6 },
-    { "key": "healing", "die": 6 },
-    { "key": "persuasion", "die": 6 }
-  ],
-  "hindrances": [
-    { "key": "cautious", "level": "minor" },
-    { "key": "stubborn", "level": "minor" }
-  ],
-  "edges": [
-    { "key": "scholar" }
-  ],
-  "names": ["Aldric", "Celeste", "Maren", "Thorvald", "Vivienne"]
+    "name": "Scholar",
+    "summary": "Knowledge is the Scholar's armour, weapon, and map.",
+    "description": "Scholars accumulate expertise across many fields, bringing careful analysis to situations that would defeat a less curious mind. Rarely the strongest in the room — but they rarely need to be.",
+    "image": "scholar.png",
+    "attributes": {
+        "agility": 6,
+        "smarts": 8,
+        "spirit": 6,
+        "strength": 4,
+        "vigor": 4
+    },
+    "skills": [
+        {
+            "key": "academics",
+            "die": 8
+        },
+        {
+            "key": "research",
+            "die": 6
+        },
+        {
+            "key": "healing",
+            "die": 4
+        }
+    ],
+    "hindrances": [
+        {
+            "key": "cautious",
+            "level": "minor"
+        },
+        {
+            "key": "stubborn",
+            "level": "minor"
+        }
+    ],
+    "edges": [
+        {
+            "key": "luck"
+        },
+        {
+            "key": "scholar"
+        }
+    ],
+    "names": [
+        "Aldric",
+        "Celeste",
+        "Maren",
+        "Thorvald",
+        "Vivienne"
+    ]
 }

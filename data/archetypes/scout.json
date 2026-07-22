@@ -1,22 +1,52 @@
 {
-  "name": "Scout",
-  "summary": "Swift and perceptive, the Scout sees trouble before it sees them.",
-  "description": "Scouts move unseen through hostile places, gathering intelligence and watching for danger before it can strike.",
-  "image": "scout2.png",
-  "attributes": { "agility": 8, "smarts": 6, "spirit": 6, "strength": 6, "vigor": 6 },
-  "skills": [
-    { "key": "stealth", "die": 8 },
-    { "key": "notice", "die": 8 },
-    { "key": "shooting", "die": 6 },
-    { "key": "athletics", "die": 6 },
-    { "key": "survival", "die": 6 }
-  ],
-  "hindrances": [
-    { "key": "outsider", "level": "minor" },
-    { "key": "poverty", "level": "minor" }
-  ],
-  "edges": [
-    { "key": "woodsman" }
-  ],
-  "names": ["Kira", "Sable", "Talon", "Vex", "Wren"]
+    "name": "Scout",
+    "summary": "Swift and perceptive, the Scout sees trouble before it sees them.",
+    "description": "Scouts move unseen through hostile places, gathering intelligence and watching for danger before it can strike.",
+    "image": "scout2.png",
+    "attributes": {
+        "agility": 8,
+        "smarts": 6,
+        "spirit": 6,
+        "strength": 4,
+        "vigor": 4
+    },
+    "skills": [
+        {
+            "key": "shooting",
+            "die": 6
+        },
+        {
+            "key": "survival",
+            "die": 8
+        },
+        {
+            "key": "fighting",
+            "die": 4
+        }
+    ],
+    "hindrances": [
+        {
+            "key": "outsider",
+            "level": "minor"
+        },
+        {
+            "key": "poverty",
+            "level": "minor"
+        }
+    ],
+    "edges": [
+        {
+            "key": "quick"
+        },
+        {
+            "key": "woodsman"
+        }
+    ],
+    "names": [
+        "Kira",
+        "Sable",
+        "Talon",
+        "Vex",
+        "Wren"
+    ]
 }

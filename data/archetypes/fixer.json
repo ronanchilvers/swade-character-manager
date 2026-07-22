@@ -1,22 +1,52 @@
 {
-  "name": "Fixer",
-  "summary": "When something is broken — a deal, a plan, a situation — the Fixer makes it right.",
-  "description": "Fixers move through back-channels and social networks, calling in favours and solving problems before they become crises. They know people, and those people know them.",
-  "image": "fixer2.png",
-  "attributes": { "agility": 6, "smarts": 8, "spirit": 8, "strength": 4, "vigor": 6 },
-  "skills": [
-    { "key": "persuasion", "die": 8 },
-    { "key": "notice", "die": 8 },
-    { "key": "taunt", "die": 6 },
-    { "key": "stealth", "die": 6 },
-    { "key": "thievery", "die": 6 }
-  ],
-  "hindrances": [
-    { "key": "big_mouth", "level": "minor" },
-    { "key": "wanted", "level": "minor" }
-  ],
-  "edges": [
-    { "key": "connections" }
-  ],
-  "names": ["Anya", "Felix", "Jade", "Marcos", "Remi"]
+    "name": "Fixer",
+    "summary": "When something is broken — a deal, a plan, a situation — the Fixer makes it right.",
+    "description": "Fixers move through back-channels and social networks, calling in favours and solving problems before they become crises. They know people, and those people know them.",
+    "image": "fixer2.png",
+    "attributes": {
+        "agility": 6,
+        "smarts": 8,
+        "spirit": 6,
+        "strength": 4,
+        "vigor": 4
+    },
+    "skills": [
+        {
+            "key": "taunt",
+            "die": 8
+        },
+        {
+            "key": "fighting",
+            "die": 6
+        },
+        {
+            "key": "gambling",
+            "die": 4
+        }
+    ],
+    "hindrances": [
+        {
+            "key": "big_mouth",
+            "level": "minor"
+        },
+        {
+            "key": "wanted",
+            "level": "minor"
+        }
+    ],
+    "edges": [
+        {
+            "key": "alertness"
+        },
+        {
+            "key": "connections"
+        }
+    ],
+    "names": [
+        "Anya",
+        "Felix",
+        "Jade",
+        "Marcos",
+        "Remi"
+    ]
 }

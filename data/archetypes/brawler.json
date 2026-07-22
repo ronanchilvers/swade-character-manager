@@ -1,21 +1,52 @@
 {
-  "name": "Brawler",
-  "summary": "Built to take punishment and dish it back — when the fight starts, they're already in front.",
-  "description": "Brawlers rely on toughness and raw strength over finesse. Where others hesitate, they act — meeting danger head-on and trusting their body to see them through.",
-  "image": "brawler.png",
-  "attributes": { "agility": 6, "smarts": 4, "spirit": 6, "strength": 8, "vigor": 8 },
-  "skills": [
-    { "key": "fighting", "die": 8 },
-    { "key": "athletics", "die": 6 },
-    { "key": "intimidation", "die": 6 },
-    { "key": "survival", "die": 6 }
-  ],
-  "hindrances": [
-    { "key": "loyal", "level": "minor" },
-    { "key": "overconfident", "level": "major" }
-  ],
-  "edges": [
-    { "key": "brawny" }
-  ],
-  "names": ["Brak", "Conan", "Kull", "Thalia", "Vanya"]
+    "name": "Brawler",
+    "summary": "Built to take punishment and dish it back — when the fight starts, they're already in front.",
+    "description": "Brawlers rely on toughness and raw strength over finesse. Where others hesitate, they act — meeting danger head-on and trusting their body to see them through.",
+    "image": "brawler.png",
+    "attributes": {
+        "agility": 6,
+        "smarts": 4,
+        "spirit": 4,
+        "strength": 6,
+        "vigor": 8
+    },
+    "skills": [
+        {
+            "key": "fighting",
+            "die": 8
+        },
+        {
+            "key": "intimidation",
+            "die": 6
+        },
+        {
+            "key": "survival",
+            "die": 4
+        }
+    ],
+    "hindrances": [
+        {
+            "key": "loyal",
+            "level": "minor"
+        },
+        {
+            "key": "overconfident",
+            "level": "major"
+        }
+    ],
+    "edges": [
+        {
+            "key": "brawny"
+        },
+        {
+            "key": "fast_healer"
+        }
+    ],
+    "names": [
+        "Brak",
+        "Conan",
+        "Kull",
+        "Thalia",
+        "Vanya"
+    ]
 }
